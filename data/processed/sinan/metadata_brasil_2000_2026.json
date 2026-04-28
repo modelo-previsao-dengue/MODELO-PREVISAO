@@ -1,0 +1,298 @@
+{
+  "scope_slug": "brasil_2000_2026",
+  "scope_type": "full_brazil",
+  "chunks": [
+    "brasil_2000_2010",
+    "brasil_2011_2016",
+    "brasil_2017_2021",
+    "brasil_2022_2026"
+  ],
+  "years": [
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "total_records": 33482123,
+  "valid_week_records": 33466213,
+  "invalid_week_records": 15910,
+  "epidemiological_weeks": 1375,
+  "total_records_by_year": {
+    "2000": 172855,
+    "2001": 488590,
+    "2002": 897093,
+    "2003": 416609,
+    "2004": 136867,
+    "2005": 261501,
+    "2006": 411022,
+    "2007": 717097,
+    "2008": 919324,
+    "2009": 600658,
+    "2010": 1381254,
+    "2011": 1150011,
+    "2012": 950180,
+    "2013": 2035119,
+    "2014": 966619,
+    "2015": 2398060,
+    "2016": 2298020,
+    "2017": 518483,
+    "2018": 478880,
+    "2019": 2261956,
+    "2020": 1495117,
+    "2021": 1010359,
+    "2022": 1405095,
+    "2023": 1645956,
+    "2024": 6564924,
+    "2025": 1646533,
+    "2026": 253941
+  },
+  "valid_week_records_by_year": {
+    "2000": 172855,
+    "2001": 488579,
+    "2002": 897051,
+    "2003": 416607,
+    "2004": 136866,
+    "2005": 261499,
+    "2006": 410084,
+    "2007": 716867,
+    "2008": 919324,
+    "2009": 600658,
+    "2010": 1381251,
+    "2011": 1147996,
+    "2012": 947291,
+    "2013": 2025587,
+    "2014": 966375,
+    "2015": 2398059,
+    "2016": 2298020,
+    "2017": 518483,
+    "2018": 478880,
+    "2019": 2261956,
+    "2020": 1495117,
+    "2021": 1010359,
+    "2022": 1405095,
+    "2023": 1645956,
+    "2024": 6564924,
+    "2025": 1646533,
+    "2026": 253941
+  },
+  "invalid_week_records_by_year": {
+    "2000": 0,
+    "2001": 11,
+    "2002": 42,
+    "2003": 2,
+    "2004": 1,
+    "2005": 2,
+    "2006": 938,
+    "2007": 230,
+    "2008": 0,
+    "2009": 0,
+    "2010": 3,
+    "2011": 2015,
+    "2012": 2889,
+    "2013": 9532,
+    "2014": 244,
+    "2015": 1,
+    "2016": 0,
+    "2017": 0,
+    "2018": 0,
+    "2019": 0,
+    "2020": 0,
+    "2021": 0,
+    "2022": 0,
+    "2023": 0,
+    "2024": 0,
+    "2025": 0,
+    "2026": 0
+  },
+  "source_files": [
+    {
+      "year": 2000,
+      "file_name": "DENGBR00.json.zip",
+      "file_size_bytes": 5986502,
+      "json_member": "DENGBR00.json"
+    },
+    {
+      "year": 2001,
+      "file_name": "DENGBR01.json.zip",
+      "file_size_bytes": 18111973,
+      "json_member": "DENGBR01.json"
+    },
+    {
+      "year": 2002,
+      "file_name": "DENGBR02.json.zip",
+      "file_size_bytes": 37256549,
+      "json_member": "DENGBR02.json"
+    },
+    {
+      "year": 2003,
+      "file_name": "DENGBR03.json.zip",
+      "file_size_bytes": 21342295,
+      "json_member": "DENGBR03.json"
+    },
+    {
+      "year": 2004,
+      "file_name": "DENGBR04.json.zip",
+      "file_size_bytes": 8086501,
+      "json_member": "DENGBR04.json"
+    },
+    {
+      "year": 2005,
+      "file_name": "DENGBR05.json.zip",
+      "file_size_bytes": 14588288,
+      "json_member": "DENGBR05.json"
+    },
+    {
+      "year": 2006,
+      "file_name": "DENGBR06.json.zip",
+      "file_size_bytes": 23215047,
+      "json_member": "DENGBR06.json"
+    },
+    {
+      "year": 2007,
+      "file_name": "DENGBR07.json.zip",
+      "file_size_bytes": 22083758,
+      "json_member": "DENGBR07.json"
+    },
+    {
+      "year": 2008,
+      "file_name": "DENGBR08.json.zip",
+      "file_size_bytes": 25430020,
+      "json_member": "DENGBR08.json"
+    },
+    {
+      "year": 2009,
+      "file_name": "DENGBR09.json.zip",
+      "file_size_bytes": 18196698,
+      "json_member": "DENGBR09.json"
+    },
+    {
+      "year": 2010,
+      "file_name": "DENGBR10.json.zip",
+      "file_size_bytes": 39741203,
+      "json_member": "DENGBR10.json"
+    },
+    {
+      "year": 2011,
+      "file_name": "DENGBR11.json.zip",
+      "file_size_bytes": 76729963,
+      "json_member": "DENGBR11.json"
+    },
+    {
+      "year": 2012,
+      "file_name": "DENGBR12.json.zip",
+      "file_size_bytes": 39884090,
+      "json_member": "DENGBR12.json"
+    },
+    {
+      "year": 2013,
+      "file_name": "DENGBR13.json.zip",
+      "file_size_bytes": 81836824,
+      "json_member": "DENGBR13.json"
+    },
+    {
+      "year": 2014,
+      "file_name": "DENGBR14.json.zip",
+      "file_size_bytes": 63123074,
+      "json_member": "DENGBR14.json"
+    },
+    {
+      "year": 2015,
+      "file_name": "DENGBR15.json.zip",
+      "file_size_bytes": 161431480,
+      "json_member": "DENGBR15.json"
+    },
+    {
+      "year": 2016,
+      "file_name": "DENGBR16.json.zip",
+      "file_size_bytes": 150021251,
+      "json_member": "DENGBR16.json"
+    },
+    {
+      "year": 2017,
+      "file_name": "DENGBR17.json.zip",
+      "file_size_bytes": 34268598,
+      "json_member": "DENGBR17.json"
+    },
+    {
+      "year": 2018,
+      "file_name": "DENGBR18.json.zip",
+      "file_size_bytes": 32164630,
+      "json_member": "DENGBR18.json"
+    },
+    {
+      "year": 2019,
+      "file_name": "DENGBR19.json.zip",
+      "file_size_bytes": 162069080,
+      "json_member": "DENGBR19.json"
+    },
+    {
+      "year": 2020,
+      "file_name": "DENGBR20.json.zip",
+      "file_size_bytes": 102262716,
+      "json_member": "DENGBR20.json"
+    },
+    {
+      "year": 2021,
+      "file_name": "DENGBR21.json.zip",
+      "file_size_bytes": 63090488,
+      "json_member": "DENGBR21.json"
+    },
+    {
+      "year": 2022,
+      "file_name": "DENGBR22.json.zip",
+      "file_size_bytes": 95506531,
+      "json_member": "DENGBR22.json"
+    },
+    {
+      "year": 2023,
+      "file_name": "DENGBR23.json.zip",
+      "file_size_bytes": 94990914,
+      "json_member": "DENGBR23.json"
+    },
+    {
+      "year": 2024,
+      "file_name": "DENGBR24.json.zip",
+      "file_size_bytes": 424450616,
+      "json_member": "DENGBR24.json"
+    },
+    {
+      "year": 2025,
+      "file_name": "DENGBR25.json.zip",
+      "file_size_bytes": 115021952,
+      "json_member": "DENGBR25.json"
+    },
+    {
+      "year": 2026,
+      "file_name": "DENGBR26.json.zip",
+      "file_size_bytes": 14656156,
+      "json_member": "DENGBR26.json"
+    }
+  ],
+  "merge_diagnostics": {
+    "dropped_invalid_ano_semana_rows": 9682,
+    "dropped_invalid_ano_semana_notifications": 48442
+  }
+}

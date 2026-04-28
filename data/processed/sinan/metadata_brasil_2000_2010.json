@@ -1,0 +1,128 @@
+{
+  "scope_slug": "brasil_2000_2010",
+  "scope_type": "full_brazil",
+  "years": [
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010
+  ],
+  "total_records_by_year": {
+    "2000": 172855,
+    "2001": 488590,
+    "2002": 897093,
+    "2003": 416609,
+    "2004": 136867,
+    "2005": 261501,
+    "2006": 411022,
+    "2007": 717097,
+    "2008": 919324,
+    "2009": 600658,
+    "2010": 1381254
+  },
+  "valid_week_records_by_year": {
+    "2000": 172855,
+    "2001": 488579,
+    "2002": 897051,
+    "2003": 416607,
+    "2004": 136866,
+    "2005": 261499,
+    "2006": 410084,
+    "2007": 716867,
+    "2008": 919324,
+    "2009": 600658,
+    "2010": 1381251
+  },
+  "invalid_week_records_by_year": {
+    "2000": 0,
+    "2001": 11,
+    "2002": 42,
+    "2003": 2,
+    "2004": 1,
+    "2005": 2,
+    "2006": 938,
+    "2007": 230,
+    "2008": 0,
+    "2009": 0,
+    "2010": 3
+  },
+  "total_records": 6402870,
+  "valid_week_records": 6401641,
+  "invalid_week_records": 1229,
+  "epidemiological_weeks": 4903,
+  "source_files": [
+    {
+      "year": 2000,
+      "file_name": "DENGBR00.json.zip",
+      "file_size_bytes": 5986502,
+      "json_member": "DENGBR00.json"
+    },
+    {
+      "year": 2001,
+      "file_name": "DENGBR01.json.zip",
+      "file_size_bytes": 18111973,
+      "json_member": "DENGBR01.json"
+    },
+    {
+      "year": 2002,
+      "file_name": "DENGBR02.json.zip",
+      "file_size_bytes": 37256549,
+      "json_member": "DENGBR02.json"
+    },
+    {
+      "year": 2003,
+      "file_name": "DENGBR03.json.zip",
+      "file_size_bytes": 21342295,
+      "json_member": "DENGBR03.json"
+    },
+    {
+      "year": 2004,
+      "file_name": "DENGBR04.json.zip",
+      "file_size_bytes": 8086501,
+      "json_member": "DENGBR04.json"
+    },
+    {
+      "year": 2005,
+      "file_name": "DENGBR05.json.zip",
+      "file_size_bytes": 14588288,
+      "json_member": "DENGBR05.json"
+    },
+    {
+      "year": 2006,
+      "file_name": "DENGBR06.json.zip",
+      "file_size_bytes": 23215047,
+      "json_member": "DENGBR06.json"
+    },
+    {
+      "year": 2007,
+      "file_name": "DENGBR07.json.zip",
+      "file_size_bytes": 22083758,
+      "json_member": "DENGBR07.json"
+    },
+    {
+      "year": 2008,
+      "file_name": "DENGBR08.json.zip",
+      "file_size_bytes": 25430020,
+      "json_member": "DENGBR08.json"
+    },
+    {
+      "year": 2009,
+      "file_name": "DENGBR09.json.zip",
+      "file_size_bytes": 18196698,
+      "json_member": "DENGBR09.json"
+    },
+    {
+      "year": 2010,
+      "file_name": "DENGBR10.json.zip",
+      "file_size_bytes": 39741203,
+      "json_member": "DENGBR10.json"
+    }
+  ]
+}

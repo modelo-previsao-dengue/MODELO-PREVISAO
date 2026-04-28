@@ -1,0 +1,50 @@
+feature,grupo,dtype,missing_pct,descricao
+ANO_EPI,identificacao,int64,0.0,Atributo derivado para modelagem e analise temporal.
+ANO_SEMANA,identificacao,int64,0.0,Atributo derivado para modelagem e analise temporal.
+SEMANA_EPI,identificacao,int64,0.0,Atributo derivado para modelagem e analise temporal.
+ano,identificacao,Int64,0.0,Atributo derivado para modelagem e analise temporal.
+semana,identificacao,Int64,0.0,Atributo derivado para modelagem e analise temporal.
+week_start,identificacao,datetime64[ns],0.0,Atributo derivado para modelagem e analise temporal.
+notificacoes_desvio_movel_12,janela_movel,float64,0.1455,Atributo derivado para modelagem e analise temporal.
+notificacoes_desvio_movel_3,janela_movel,float64,0.1455,Atributo derivado para modelagem e analise temporal.
+notificacoes_desvio_movel_4,janela_movel,float64,0.1455,Atributo derivado para modelagem e analise temporal.
+notificacoes_desvio_movel_8,janela_movel,float64,0.1455,Atributo derivado para modelagem e analise temporal.
+notificacoes_max_movel_12,janela_movel,float64,0.0727,Atributo derivado para modelagem e analise temporal.
+notificacoes_max_movel_3,janela_movel,float64,0.0727,Atributo derivado para modelagem e analise temporal.
+notificacoes_max_movel_4,janela_movel,float64,0.0727,Atributo derivado para modelagem e analise temporal.
+notificacoes_max_movel_8,janela_movel,float64,0.0727,Atributo derivado para modelagem e analise temporal.
+notificacoes_media_movel_12,janela_movel,float64,0.0727,Atributo derivado para modelagem e analise temporal.
+notificacoes_media_movel_3,janela_movel,float64,0.0727,Atributo derivado para modelagem e analise temporal.
+notificacoes_media_movel_4,janela_movel,float64,0.0727,Atributo derivado para modelagem e analise temporal.
+notificacoes_media_movel_8,janela_movel,float64,0.0727,Atributo derivado para modelagem e analise temporal.
+notificacoes_min_movel_12,janela_movel,float64,0.0727,Atributo derivado para modelagem e analise temporal.
+notificacoes_min_movel_3,janela_movel,float64,0.0727,Atributo derivado para modelagem e analise temporal.
+notificacoes_min_movel_4,janela_movel,float64,0.0727,Atributo derivado para modelagem e analise temporal.
+notificacoes_min_movel_8,janela_movel,float64,0.0727,Atributo derivado para modelagem e analise temporal.
+indice_alarme,perfil_clinico,float64,54.1091,Media semanal dos sinais de alarme.
+indice_carga_clinica,perfil_clinico,float64,0.0727,Indicador composto do perfil clinico semanal.
+indice_comorbidades,perfil_clinico,float64,1.6,Media semanal das comorbidades notificadas.
+indice_confirmacao,perfil_clinico,float64,0.2182,Diferenca entre proporcao de casos confirmados/provaveis e inconclusivos.
+indice_desfecho_severo,perfil_clinico,float64,0.0727,"Indicador composto de hospitalizacao, alarme, gravidade e obito por agravo."
+indice_gravidade,perfil_clinico,float64,58.0364,Media semanal dos marcadores de dengue grave.
+indice_hemorragico,perfil_clinico,float64,28.6545,Media semanal dos marcadores hemorragicos.
+indice_sintomas,perfil_clinico,float64,0.7273,Media semanal das flags de sintomas classicos de dengue.
+semana_cos,sazonalidade,float64,0.0,Componente cossenoidal para representar sazonalidade anual.
+semana_sin,sazonalidade,float64,0.0,Componente senoidal para representar sazonalidade anual.
+alerta_crescimento,targets_auxiliares,int64,0.0,Rotulo auxiliar para semanas com crescimento semanal elevado.
+alerta_notificacoes_q75,targets_auxiliares,int64,0.0,Rotulo auxiliar para semanas no quartil superior de notificacoes.
+alerta_notificacoes_q90,targets_auxiliares,int64,0.0,Rotulo auxiliar para semanas no decil superior de notificacoes.
+notificacoes_aceleracao_1,variacao,float64,0.1455,Aceleracao semanal do crescimento das notificacoes.
+notificacoes_diff_1,variacao,float64,0.0727,Variacao absoluta semanal das notificacoes.
+notificacoes_diff_4,variacao,float64,0.2909,Variacao absoluta em relacao a quatro semanas antes.
+notificacoes_pct_change_1,variacao,float64,0.0727,Variacao percentual semanal das notificacoes.
+notificacoes_pct_change_4,variacao,float64,0.2909,Variacao percentual em relacao a quatro semanas antes.
+notificacoes_razao_media_4,variacao,float64,0.0727,Razao entre a semana corrente e a media movel das quatro semanas anteriores.
+notificacoes_razao_media_8,variacao,float64,0.0727,Razao entre a semana corrente e a media movel das oito semanas anteriores.
+NOTIFICACOES,volume,int64,0.0,Contagem semanal de notificacoes no recorte do SINAN.
+notificacoes_lag_1,volume,float64,0.0727,Volume de notificacoes na semana epidemiologica imediatamente anterior.
+notificacoes_lag_12,volume,float64,0.8727,Volume de notificacoes observado doze semanas antes.
+notificacoes_lag_2,volume,float64,0.1455,Volume de notificacoes observado duas semanas antes.
+notificacoes_lag_3,volume,float64,0.2182,Volume de notificacoes observado tres semanas antes.
+notificacoes_lag_4,volume,float64,0.2909,Volume de notificacoes observado quatro semanas antes.
+notificacoes_lag_8,volume,float64,0.5818,Volume de notificacoes observado oito semanas antes.

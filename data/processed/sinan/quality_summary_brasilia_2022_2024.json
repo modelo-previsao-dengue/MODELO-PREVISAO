@@ -1,0 +1,65 @@
+{
+  "scope": {
+    "municipality_name": "Brasilia",
+    "municipality_code": "5300108",
+    "uf": "DF",
+    "years": [
+      2022,
+      2023,
+      2024
+    ]
+  },
+  "record_counts": {
+    "normalized_recorte_rows": 399094,
+    "weekly_rows": 156,
+    "source_year_rows": {
+      "2022": 73245,
+      "2023": 43127,
+      "2024": 283712
+    }
+  },
+  "temporal_coverage": {
+    "min_dt_notific": "2022-01-02",
+    "max_dt_notific": "2024-12-28",
+    "min_ano_semana": "202201",
+    "max_ano_semana": "202452"
+  },
+  "data_integrity": {
+    "duplicated_rows_normalized": 0,
+    "duplicated_weeks": 0,
+    "key_missingness_pct": {
+      "DT_NOTIFIC": 0.0,
+      "DT_SIN_PRI": 0.0,
+      "SEM_PRI": 0.0,
+      "CS_SEXO": 0.0,
+      "CS_RACA": 0.0,
+      "CLASSI_FIN": 0.0,
+      "CRITERIO": 0.0,
+      "HOSPITALIZ": 0.0,
+      "EVOLUCAO": 0.0
+    }
+  },
+  "distribution_checks": {
+    "classi_fin_top20": {
+      "10": 278950,
+      "8": 103963,
+      "11": 14547,
+      "": 960,
+      "12": 666,
+      "0": 8
+    },
+    "criterio_top20": {
+      "2": 154492,
+      "1": 134633,
+      "": 102650,
+      "3": 7311,
+      "0": 8
+    }
+  },
+  "analysis_summary": {
+    "intensity_best_k": 2,
+    "intensity_best_silhouette": 0.125845,
+    "profile_best_k": 6,
+    "profile_best_silhouette": 0.106929
+  }
+}
