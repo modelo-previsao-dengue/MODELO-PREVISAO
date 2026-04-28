@@ -142,6 +142,63 @@ Toda a documentação detalhada está disponível na pasta [`docs/`](./docs/):
 - [Metodologia](./docs/04-metodologia.md)
 - [Plano de Trabalho](./docs/05-plano-de-trabalho.md)
 
+## 🧪 Pipeline SINAN do TCC2
+
+Para a etapa de coleta e processamento do SINAN no TCC2, foi adicionada uma pipeline específica em:
+
+`scripts/sinan_pipeline.py`
+
+Ela executa:
+
+- download dos microdados anuais oficiais do SINAN
+- extração do recorte comparável ao TCC1
+- geração de atributos semanais
+- clusterização
+- seleção de atributos
+
+Resumo metodológico:
+
+- [Pipeline SINAN - TCC2](./docs/sinan_tcc2.md)
+- [Resultados SINAN - Brasília/DF (2022-2024)](./docs/sinan_results_brasilia_2022_2024.md)
+
+Para processar a série oficial completa de dengue do SINAN em escala Brasil:
+
+```bash
+python3 scripts/sinan_pipeline.py --full-dengue-series --full-brazil
+```
+
+Para gerar um inventário anual leve e auditável da série nacional completa:
+
+```bash
+python3 scripts/sinan_full_series_inventory.py --download-missing
+```
+
+## 📊 Fase 3 do TCC2: Engenharia de Atributos e EDA - SINAN
+
+Para a etapa `Análise de Dados`, a base semanal produzida pela pipeline SINAN pode ser expandida com atributos temporais e analisada de forma exploratória via:
+
+`scripts/sinan_feature_engineering_eda.py`
+
+Ela executa:
+
+- geração de lags e janelas móveis de notificações
+- cálculo de atributos sazonais por semana epidemiológica
+- construção de índices clínicos compostos
+- geração de rótulos auxiliares para semanas de alta transmissão
+- análise exploratória estatística com correlações, picos e resumo anual
+
+Resumo metodológico:
+
+- [Engenharia de Atributos e EDA - SINAN](./docs/sinan_feature_engineering_eda.md)
+- [Task Concluída - Engenharia de Atributos e EDA - SINAN](./docs/task_engenharia_atributos_eda_sinan.md)
+
+Artefatos nacionais completos já gerados com dados reais do portal:
+
+- `data/processed/sinan/weekly_features_brasil_2000_2026.csv`
+- `data/processed/sinan/weekly_model_features_brasil_2000_2026.csv`
+- `data/processed/sinan/relatorio_sinan_brasil_2000_2026.md`
+- `data/processed/sinan/relatorio_eda_brasil_2000_2026.md`
+
 ## 👨‍💻 Autor
 
 **Pedro Lucas e Thiago**
@@ -159,4 +216,3 @@ Este é um projeto acadêmico, mas sugestões e feedback são sempre bem-vindos!
 ---
 
 ⚠️ **Nota**: Os dados brutos não são versionados no repositório devido ao tamanho. Utilize os scripts na pasta `scripts/data/` para fazer o download das fontes oficiais.
-

@@ -1,0 +1,477 @@
+{
+  "scope_slug": "brasil_2000_2026",
+  "weeks": 1375,
+  "period": {
+    "start_week": "200001",
+    "end_week": "202615",
+    "start_date": "2000-01-03",
+    "end_date": "2026-04-06"
+  },
+  "notifications": {
+    "total": 33417771,
+    "mean": 24303.8335,
+    "median": 9397.0,
+    "std": 43998.4073,
+    "cv": 1.8103,
+    "q75_threshold": 23230.5,
+    "q90_threshold": 59630.4
+  },
+  "peak_week": {
+    "ano_semana": "202412",
+    "week_start": "2024-03-18 00:00:00",
+    "notificacoes": 433513
+  },
+  "top_correlations": [
+    {
+      "feature": "notificacoes_lag_1",
+      "pearson_corr_notificacoes": 0.9856968992028813,
+      "abs_corr": 0.9856968992028813
+    },
+    {
+      "feature": "notificacoes_media_movel_3",
+      "pearson_corr_notificacoes": 0.9588658483501857,
+      "abs_corr": 0.9588658483501857
+    },
+    {
+      "feature": "notificacoes_max_movel_3",
+      "pearson_corr_notificacoes": 0.9569041641470016,
+      "abs_corr": 0.9569041641470016
+    },
+    {
+      "feature": "notificacoes_lag_2",
+      "pearson_corr_notificacoes": 0.9551637723565986,
+      "abs_corr": 0.9551637723565986
+    },
+    {
+      "feature": "notificacoes_min_movel_3",
+      "pearson_corr_notificacoes": 0.953973340075631,
+      "abs_corr": 0.953973340075631
+    },
+    {
+      "feature": "notificacoes_media_movel_4",
+      "pearson_corr_notificacoes": 0.9406555586634449,
+      "abs_corr": 0.9406555586634449
+    },
+    {
+      "feature": "notificacoes_max_movel_4",
+      "pearson_corr_notificacoes": 0.9389283981080923,
+      "abs_corr": 0.9389283981080923
+    },
+    {
+      "feature": "notificacoes_min_movel_4",
+      "pearson_corr_notificacoes": 0.9295026502014051,
+      "abs_corr": 0.9295026502014051
+    },
+    {
+      "feature": "notificacoes_lag_3",
+      "pearson_corr_notificacoes": 0.9121721483752978,
+      "abs_corr": 0.9121721483752978
+    },
+    {
+      "feature": "notificacoes_lag_4",
+      "pearson_corr_notificacoes": 0.857372724786396,
+      "abs_corr": 0.857372724786396
+    },
+    {
+      "feature": "notificacoes_max_movel_8",
+      "pearson_corr_notificacoes": 0.8461565379643683,
+      "abs_corr": 0.8461565379643683
+    },
+    {
+      "feature": "notificacoes_media_movel_8",
+      "pearson_corr_notificacoes": 0.8400674980724672,
+      "abs_corr": 0.8400674980724672
+    },
+    {
+      "feature": "notificacoes_min_movel_8",
+      "pearson_corr_notificacoes": 0.7769018964315649,
+      "abs_corr": 0.7769018964315649
+    },
+    {
+      "feature": "notificacoes_max_movel_12",
+      "pearson_corr_notificacoes": 0.7531205125875701,
+      "abs_corr": 0.7531205125875701
+    },
+    {
+      "feature": "alerta_notificacoes_q90",
+      "pearson_corr_notificacoes": 0.7422490190625879,
+      "abs_corr": 0.7422490190625879
+    },
+    {
+      "feature": "notificacoes_desvio_movel_4",
+      "pearson_corr_notificacoes": 0.7293862693699363,
+      "abs_corr": 0.7293862693699363
+    },
+    {
+      "feature": "notificacoes_desvio_movel_3",
+      "pearson_corr_notificacoes": 0.7288208877003955,
+      "abs_corr": 0.7288208877003955
+    },
+    {
+      "feature": "notificacoes_media_movel_12",
+      "pearson_corr_notificacoes": 0.7179287834657941,
+      "abs_corr": 0.7179287834657941
+    },
+    {
+      "feature": "notificacoes_desvio_movel_8",
+      "pearson_corr_notificacoes": 0.716540098117398,
+      "abs_corr": 0.716540098117398
+    },
+    {
+      "feature": "notificacoes_desvio_movel_12",
+      "pearson_corr_notificacoes": 0.6979305052186519,
+      "abs_corr": 0.6979305052186519
+    },
+    {
+      "feature": "alerta_notificacoes_q75",
+      "pearson_corr_notificacoes": 0.6294764472485364,
+      "abs_corr": 0.6294764472485364
+    },
+    {
+      "feature": "notificacoes_min_movel_12",
+      "pearson_corr_notificacoes": 0.5803345014684552,
+      "abs_corr": 0.5803345014684552
+    },
+    {
+      "feature": "notificacoes_lag_8",
+      "pearson_corr_notificacoes": 0.5517236788139351,
+      "abs_corr": 0.5517236788139351
+    },
+    {
+      "feature": "semana_sin",
+      "pearson_corr_notificacoes": 0.4592481128574718,
+      "abs_corr": 0.4592481128574718
+    },
+    {
+      "feature": "indice_confirmacao",
+      "pearson_corr_notificacoes": 0.40879879416377174,
+      "abs_corr": 0.40879879416377174
+    }
+  ],
+  "yearly_summary": [
+    {
+      "ANO": 2000,
+      "semanas": 53,
+      "notificacoes_total": 174643,
+      "notificacoes_media": 3295.1509433962265,
+      "notificacoes_mediana": 2078.0,
+      "notificacoes_pico": 7991,
+      "sintomas_medios": 0.4015246068309328,
+      "alarme_medio": 0.12962962962962962,
+      "gravidade_media": NaN,
+      "atraso_medio": 43.54093659851718
+    },
+    {
+      "ANO": 2001,
+      "semanas": 53,
+      "notificacoes_total": 473332,
+      "notificacoes_media": 8930.792452830188,
+      "notificacoes_mediana": 5137.0,
+      "notificacoes_pico": 25884,
+      "sintomas_medios": 0.3636119777710734,
+      "alarme_medio": 0.0,
+      "gravidade_media": NaN,
+      "atraso_medio": 64.3053986169188
+    },
+    {
+      "ANO": 2002,
+      "semanas": 52,
+      "notificacoes_total": 880232,
+      "notificacoes_media": 16927.53846153846,
+      "notificacoes_mediana": 4089.5,
+      "notificacoes_pico": 77839,
+      "sintomas_medios": 0.36036396871596094,
+      "alarme_medio": 0.2777777777777778,
+      "gravidade_media": NaN,
+      "atraso_medio": 42.37580394488172
+    },
+    {
+      "ANO": 2003,
+      "semanas": 53,
+      "notificacoes_total": 403566,
+      "notificacoes_media": 7614.452830188679,
+      "notificacoes_mediana": 3479.0,
+      "notificacoes_pico": 23848,
+      "sintomas_medios": 0.376625817117756,
+      "alarme_medio": 0.2222222222222222,
+      "gravidade_media": NaN,
+      "atraso_medio": 31.462965769599077
+    },
+    {
+      "ANO": 2004,
+      "semanas": 53,
+      "notificacoes_total": 133751,
+      "notificacoes_media": 2523.603773584906,
+      "notificacoes_mediana": 2121.0,
+      "notificacoes_pico": 6523,
+      "sintomas_medios": 0.37940047802429455,
+      "alarme_medio": 0.4444444444444444,
+      "gravidade_media": NaN,
+      "atraso_medio": 13838.820213557992
+    },
+    {
+      "ANO": 2005,
+      "semanas": 52,
+      "notificacoes_total": 250857,
+      "notificacoes_media": 4824.173076923077,
+      "notificacoes_mediana": 4235.0,
+      "notificacoes_pico": 9876,
+      "sintomas_medios": 0.3656265944119215,
+      "alarme_medio": 0.3333333333333333,
+      "gravidade_media": 0.0,
+      "atraso_medio": 33.76505805647035
+    },
+    {
+      "ANO": 2006,
+      "semanas": 52,
+      "notificacoes_total": 390424,
+      "notificacoes_media": 7508.153846153846,
+      "notificacoes_mediana": 4414.5,
+      "notificacoes_pico": 21156,
+      "sintomas_medios": 0.35570841529186326,
+      "alarme_medio": 0.3333333333333333,
+      "gravidade_media": 0.4,
+      "atraso_medio": 15.692557790955526
+    },
+    {
+      "ANO": 2007,
+      "semanas": 52,
+      "notificacoes_total": 718996,
+      "notificacoes_media": 13826.846153846154,
+      "notificacoes_mediana": 7512.5,
+      "notificacoes_pico": 39505,
+      "sintomas_medios": 0.26361554503189033,
+      "alarme_medio": 0.25,
+      "gravidade_media": NaN,
+      "atraso_medio": 9.907731260141418
+    },
+    {
+      "ANO": 2008,
+      "semanas": 53,
+      "notificacoes_total": 918957,
+      "notificacoes_media": 17338.811320754718,
+      "notificacoes_mediana": 5215.0,
+      "notificacoes_pico": 88454,
+      "sintomas_medios": 0.25403066378066375,
+      "alarme_medio": 0.16666666666666666,
+      "gravidade_media": NaN,
+      "atraso_medio": 10.678505483628676
+    },
+    {
+      "ANO": 2009,
+      "semanas": 52,
+      "notificacoes_total": 609750,
+      "notificacoes_media": 11725.961538461539,
+      "notificacoes_mediana": 9302.0,
+      "notificacoes_pico": 33357,
+      "sintomas_medios": 0.2657862579150173,
+      "alarme_medio": 0.2777777777777778,
+      "gravidade_media": NaN,
+      "atraso_medio": 8.82906354225167
+    },
+    {
+      "ANO": 2010,
+      "semanas": 52,
+      "notificacoes_total": 1374384,
+      "notificacoes_media": 26430.46153846154,
+      "notificacoes_mediana": 13726.0,
+      "notificacoes_pico": 67794,
+      "sintomas_medios": 0.24988633253213152,
+      "alarme_medio": 0.19444444444444442,
+      "gravidade_media": 0.0,
+      "atraso_medio": 7.848536745696634
+    },
+    {
+      "ANO": 2011,
+      "semanas": 52,
+      "notificacoes_total": 1142350,
+      "notificacoes_media": 21968.26923076923,
+      "notificacoes_mediana": 10527.0,
+      "notificacoes_pico": 63626,
+      "sintomas_medios": 0.2369537657584434,
+      "alarme_medio": 0.16666666666666666,
+      "gravidade_media": NaN,
+      "atraso_medio": 7.125560900174571
+    },
+    {
+      "ANO": 2012,
+      "semanas": 52,
+      "notificacoes_total": 948065,
+      "notificacoes_media": 18232.01923076923,
+      "notificacoes_mediana": 14585.5,
+      "notificacoes_pico": 47895,
+      "sintomas_medios": 0.2662798722675943,
+      "alarme_medio": 0.2222222222222222,
+      "gravidade_media": NaN,
+      "atraso_medio": 10.77029406928973
+    },
+    {
+      "ANO": 2013,
+      "semanas": 52,
+      "notificacoes_total": 2017154,
+      "notificacoes_media": 38791.42307692308,
+      "notificacoes_mediana": 12304.5,
+      "notificacoes_pico": 137522,
+      "sintomas_medios": 0.2342849642300809,
+      "alarme_medio": 0.2222222222222222,
+      "gravidade_media": 0.06666666666666667,
+      "atraso_medio": 5.963758130349485
+    },
+    {
+      "ANO": 2014,
+      "semanas": 53,
+      "notificacoes_total": 970810,
+      "notificacoes_media": 18317.169811320753,
+      "notificacoes_mediana": 10981.0,
+      "notificacoes_pico": 56012,
+      "sintomas_medios": 0.20248141928738508,
+      "alarme_medio": 0.1111111111111111,
+      "gravidade_media": 0.0,
+      "atraso_medio": 6.564948122862726
+    },
+    {
+      "ANO": 2015,
+      "semanas": 52,
+      "notificacoes_total": 2421177,
+      "notificacoes_media": 46561.096153846156,
+      "notificacoes_mediana": 31956.5,
+      "notificacoes_pico": 139437,
+      "sintomas_medios": 0.20948514048266142,
+      "alarme_medio": 0.1631490058204509,
+      "gravidade_media": 0.12691615046870988,
+      "atraso_medio": 6.251394069032035
+    },
+    {
+      "ANO": 2016,
+      "semanas": 52,
+      "notificacoes_total": 2259456,
+      "notificacoes_media": 43451.07692307692,
+      "notificacoes_mediana": 8732.5,
+      "notificacoes_pico": 154114,
+      "sintomas_medios": 0.23030284690778846,
+      "alarme_medio": 0.16588789368825935,
+      "gravidade_media": 0.1841341768244188,
+      "atraso_medio": 4.6218442717580865
+    },
+    {
+      "ANO": 2017,
+      "semanas": 52,
+      "notificacoes_total": 514769,
+      "notificacoes_media": 9899.403846153846,
+      "notificacoes_mediana": 6392.5,
+      "notificacoes_pico": 19011,
+      "sintomas_medios": 0.2811617867511641,
+      "alarme_medio": 0.21065547248874095,
+      "gravidade_media": 0.1758033021947049,
+      "atraso_medio": 6.387520691570748
+    },
+    {
+      "ANO": 2018,
+      "semanas": 52,
+      "notificacoes_total": 481391,
+      "notificacoes_media": 9257.51923076923,
+      "notificacoes_mediana": 8975.0,
+      "notificacoes_pico": 18941,
+      "sintomas_medios": 0.30013319187609117,
+      "alarme_medio": 0.23309658875633604,
+      "gravidade_media": 0.17872410707263686,
+      "atraso_medio": 8.434099891281182
+    },
+    {
+      "ANO": 2019,
+      "semanas": 52,
+      "notificacoes_total": 2258032,
+      "notificacoes_media": 43423.692307692305,
+      "notificacoes_mediana": 21096.5,
+      "notificacoes_pico": 142065,
+      "sintomas_medios": 0.31090095181438815,
+      "alarme_medio": 0.21026986379615253,
+      "gravidade_media": 0.19335066652227126,
+      "atraso_medio": 7.588082514675221
+    },
+    {
+      "ANO": 2020,
+      "semanas": 53,
+      "notificacoes_total": 1548867,
+      "notificacoes_media": 29223.905660377357,
+      "notificacoes_mediana": 17696.0,
+      "notificacoes_pico": 87353,
+      "sintomas_medios": 0.3008082934391186,
+      "alarme_medio": 0.21247981655484338,
+      "gravidade_media": 0.20446093423711204,
+      "atraso_medio": 6.161978339097489
+    },
+    {
+      "ANO": 2021,
+      "semanas": 52,
+      "notificacoes_total": 1010359,
+      "notificacoes_media": 19429.98076923077,
+      "notificacoes_mediana": 15795.0,
+      "notificacoes_pico": 44526,
+      "sintomas_medios": 0.28129197791294874,
+      "alarme_medio": 0.20847858883905734,
+      "gravidade_media": 0.18038914576814744,
+      "atraso_medio": 5.002116611765538
+    },
+    {
+      "ANO": 2022,
+      "semanas": 52,
+      "notificacoes_total": 1405095,
+      "notificacoes_media": 27021.05769230769,
+      "notificacoes_mediana": 12495.0,
+      "notificacoes_pico": 103841,
+      "sintomas_medios": 0.2937195389521751,
+      "alarme_medio": 0.10997084427623821,
+      "gravidade_media": 0.021284172114037273,
+      "atraso_medio": 4.96721099158976
+    },
+    {
+      "ANO": 2023,
+      "semanas": 52,
+      "notificacoes_total": 1645956,
+      "notificacoes_media": 31653.0,
+      "notificacoes_mediana": 16197.5,
+      "notificacoes_pico": 110655,
+      "sintomas_medios": 0.29602406009782345,
+      "alarme_medio": 0.03149670812794624,
+      "gravidade_media": 0.002245562270716827,
+      "atraso_medio": 4.432048518058412
+    },
+    {
+      "ANO": 2024,
+      "semanas": 52,
+      "notificacoes_total": 6564924,
+      "notificacoes_media": 126248.53846153847,
+      "notificacoes_mediana": 38209.5,
+      "notificacoes_pico": 433513,
+      "sintomas_medios": 0.3029382679626793,
+      "alarme_medio": 0.07743141473288147,
+      "gravidade_media": 0.008532555500955295,
+      "atraso_medio": 4.462527436035307
+    },
+    {
+      "ANO": 2025,
+      "semanas": 53,
+      "notificacoes_total": 1646533,
+      "notificacoes_media": 31066.66037735849,
+      "notificacoes_mediana": 9535.0,
+      "notificacoes_pico": 90350,
+      "sintomas_medios": 0.30186325896628613,
+      "alarme_medio": 0.08743435506443838,
+      "gravidade_media": 0.010920999485390938,
+      "atraso_medio": 4.496552943297534
+    },
+    {
+      "ANO": 2026,
+      "semanas": 15,
+      "notificacoes_total": 253941,
+      "notificacoes_media": 16929.4,
+      "notificacoes_mediana": 15030.0,
+      "notificacoes_pico": 26371,
+      "sintomas_medios": 0.30610052474389376,
+      "alarme_medio": 0.08585997590834249,
+      "gravidade_media": 0.008969949458136664,
+      "atraso_medio": 3.7752524716042846
+    }
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "scope_slug": "brasilia_2022_2024",
+  "weeks": 156,
+  "period": {
+    "start_week": "202201",
+    "end_week": "202452",
+    "start_date": "2022-01-03",
+    "end_date": "2024-12-23"
+  },
+  "notifications": {
+    "total": 399094,
+    "mean": 2558.2949,
+    "median": 721.0,
+    "std": 4923.9882,
+    "cv": 1.9247,
+    "q75_threshold": 1783.75,
+    "q90_threshold": 6614.5
+  },
+  "peak_week": {
+    "ano_semana": "202408",
+    "week_start": "2024-02-19 00:00:00",
+    "notificacoes": 23293
+  },
+  "top_correlations": [
+    {
+      "feature": "notificacoes_lag_1",
+      "pearson_corr_notificacoes": 0.9765841432278562,
+      "abs_corr": 0.9765841432278562
+    },
+    {
+      "feature": "notificacoes_max_movel_3",
+      "pearson_corr_notificacoes": 0.9519613609987002,
+      "abs_corr": 0.9519613609987002
+    },
+    {
+      "feature": "notificacoes_media_movel_3",
+      "pearson_corr_notificacoes": 0.9404629160052104,
+      "abs_corr": 0.9404629160052104
+    },
+    {
+      "feature": "notificacoes_lag_2",
+      "pearson_corr_notificacoes": 0.9345627706216816,
+      "abs_corr": 0.9345627706216816
+    },
+    {
+      "feature": "notificacoes_max_movel_4",
+      "pearson_corr_notificacoes": 0.9328501650140393,
+      "abs_corr": 0.9328501650140393
+    },
+    {
+      "feature": "notificacoes_media_movel_4",
+      "pearson_corr_notificacoes": 0.9137873796961974,
+      "abs_corr": 0.9137873796961974
+    },
+    {
+      "feature": "notificacoes_min_movel_3",
+      "pearson_corr_notificacoes": 0.9105905260592875,
+      "abs_corr": 0.9105905260592875
+    },
+    {
+      "feature": "alerta_notificacoes_q90",
+      "pearson_corr_notificacoes": 0.90366133292342,
+      "abs_corr": 0.90366133292342
+    },
+    {
+      "feature": "notificacoes_lag_3",
+      "pearson_corr_notificacoes": 0.8745436781647214,
+      "abs_corr": 0.8745436781647214
+    },
+    {
+      "feature": "notificacoes_desvio_movel_8",
+      "pearson_corr_notificacoes": 0.8647475892934439,
+      "abs_corr": 0.8647475892934439
+    },
+    {
+      "feature": "notificacoes_min_movel_4",
+      "pearson_corr_notificacoes": 0.857470408847405,
+      "abs_corr": 0.857470408847405
+    },
+    {
+      "feature": "notificacoes_max_movel_8",
+      "pearson_corr_notificacoes": 0.8405573683199586,
+      "abs_corr": 0.8405573683199586
+    },
+    {
+      "feature": "indice_sintomas",
+      "pearson_corr_notificacoes": 0.8349109942738863,
+      "abs_corr": 0.8349109942738863
+    },
+    {
+      "feature": "dor_costas_flag",
+      "pearson_corr_notificacoes": 0.8305047744446619,
+      "abs_corr": 0.8305047744446619
+    },
+    {
+      "feature": "artrite_flag",
+      "pearson_corr_notificacoes": 0.8212716648401669,
+      "abs_corr": 0.8212716648401669
+    },
+    {
+      "feature": "notificacoes_desvio_movel_4",
+      "pearson_corr_notificacoes": 0.8068020131806029,
+      "abs_corr": 0.8068020131806029
+    },
+    {
+      "feature": "notificacoes_desvio_movel_12",
+      "pearson_corr_notificacoes": 0.8015730613838506,
+      "abs_corr": 0.8015730613838506
+    },
+    {
+      "feature": "dor_retro_flag",
+      "pearson_corr_notificacoes": 0.7998176074666439,
+      "abs_corr": 0.7998176074666439
+    },
+    {
+      "feature": "notificacoes_lag_4",
+      "pearson_corr_notificacoes": 0.793325982630505,
+      "abs_corr": 0.793325982630505
+    },
+    {
+      "feature": "notificacoes_media_movel_8",
+      "pearson_corr_notificacoes": 0.7774626112118026,
+      "abs_corr": 0.7774626112118026
+    },
+    {
+      "feature": "notificacoes_desvio_movel_3",
+      "pearson_corr_notificacoes": 0.7577013487386781,
+      "abs_corr": 0.7577013487386781
+    },
+    {
+      "feature": "notificacoes_max_movel_12",
+      "pearson_corr_notificacoes": 0.7429445378362515,
+      "abs_corr": 0.7429445378362515
+    },
+    {
+      "feature": "febre_flag",
+      "pearson_corr_notificacoes": 0.7158993957189369,
+      "abs_corr": 0.7158993957189369
+    },
+    {
+      "feature": "laco_flag",
+      "pearson_corr_notificacoes": 0.7152068361650066,
+      "abs_corr": 0.7152068361650066
+    },
+    {
+      "feature": "cefaleia_flag",
+      "pearson_corr_notificacoes": 0.6962687383903586,
+      "abs_corr": 0.6962687383903586
+    }
+  ],
+  "yearly_summary": [
+    {
+      "ANO": 2022,
+      "semanas": 52,
+      "notificacoes_total": 73027,
+      "notificacoes_media": 1404.3653846153845,
+      "notificacoes_mediana": 749.0,
+      "notificacoes_pico": 4860,
+      "sintomas_medios": 0.21559695330130155,
+      "alarme_medio": 0.18214154252177114,
+      "gravidade_media": 0.20027986633249792,
+      "atraso_medio": 5.471194103369593
+    },
+    {
+      "ANO": 2023,
+      "semanas": 52,
+      "notificacoes_total": 43083,
+      "notificacoes_media": 828.5192307692307,
+      "notificacoes_mediana": 721.0,
+      "notificacoes_pico": 3279,
+      "sintomas_medios": 0.22301315500676017,
+      "alarme_medio": 0.19838996972949308,
+      "gravidade_media": 0.21992753623188407,
+      "atraso_medio": 5.49790102378732
+    },
+    {
+      "ANO": 2024,
+      "semanas": 52,
+      "notificacoes_total": 282984,
+      "notificacoes_media": 5442.0,
+      "notificacoes_mediana": 453.5,
+      "notificacoes_pico": 23293,
+      "sintomas_medios": 0.24933233602471924,
+      "alarme_medio": 0.18980304508153736,
+      "gravidade_media": 0.19729771976767846,
+      "atraso_medio": 8.226287382693014
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "scope": {
+    "municipality_name": "Brasilia",
+    "municipality_code": "5300108",
+    "uf": "DF",
+    "years": [
+      2022,
+      2023,
+      2024
+    ]
+  },
+  "generated_files": {
+    "cluster_assignments": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/processed/sinan/cluster_assignments_brasilia_2022_2024.csv",
+    "cluster_assignments_profile": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/processed/sinan/cluster_assignments_profile_brasilia_2022_2024.csv",
+    "cluster_evaluation": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/processed/sinan/cluster_evaluation_brasilia_2022_2024.csv",
+    "cluster_evaluation_profile": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/processed/sinan/cluster_evaluation_profile_brasilia_2022_2024.csv",
+    "feature_ranking": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/processed/sinan/feature_ranking_brasilia_2022_2024.csv",
+    "feature_ranking_profile": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/processed/sinan/feature_ranking_profile_brasilia_2022_2024.csv",
+    "metadata": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/processed/sinan/metadata_brasilia_2022_2024.json",
+    "quality_missingness": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/processed/sinan/quality_missingness_brasilia_2022_2024.csv",
+    "quality_summary": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/processed/sinan/quality_summary_brasilia_2022_2024.json",
+    "recorte_csv": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/processed/sinan/recorte_brasilia_2022_2024.csv",
+    "recorte_parquet": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/processed/sinan/recorte_brasilia_2022_2024.parquet",
+    "selected_features": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/processed/sinan/selected_features_brasilia_2022_2024.json",
+    "selected_features_profile": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/processed/sinan/selected_features_profile_brasilia_2022_2024.json",
+    "weekly_features": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/processed/sinan/weekly_features_brasilia_2022_2024.csv"
+  }
+}

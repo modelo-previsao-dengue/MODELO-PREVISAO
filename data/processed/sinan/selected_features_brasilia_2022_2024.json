@@ -1,0 +1,213 @@
+{
+  "scope": {
+    "years": [
+      2022,
+      2023,
+      2024
+    ],
+    "uf": "DF",
+    "municipality_code": "5300108",
+    "municipality_name": "Brasilia"
+  },
+  "selected_features": [
+    "NOTIFICACOES",
+    "dor_retro_flag",
+    "febre_flag",
+    "cefaleia_flag",
+    "criterio_clinico_epi",
+    "nausea_flag",
+    "artralgia_flag",
+    "criterio_lab",
+    "caso_dengue_alarme",
+    "laco_flag",
+    "dor_costas_flag",
+    "artrite_flag",
+    "alrm_hepat_flag",
+    "obito_agravo",
+    "grav_melen_flag",
+    "grav_ench_flag",
+    "grav_orgao_flag"
+  ],
+  "top_15_features": [
+    {
+      "feature": "NOTIFICACOES",
+      "anova_f": 351.48690732657104,
+      "anova_pvalue": 1.3759288061144512e-41,
+      "mutual_information": 0.32379838102503233,
+      "random_forest_importance": 0.1472120353035162,
+      "score_anova_norm": 1.0,
+      "score_mi_norm": 0.9229509818129342,
+      "score_rf_norm": 1.0,
+      "composite_score": 0.9743169939376447,
+      "selected": true
+    },
+    {
+      "feature": "dor_retro_flag",
+      "anova_f": 225.7817664061615,
+      "anova_pvalue": 5.413616663080306e-32,
+      "mutual_information": 0.34897103905383586,
+      "random_forest_importance": 0.14422703075093324,
+      "score_anova_norm": 0.6423617969173693,
+      "score_mi_norm": 1.0,
+      "score_rf_norm": 0.9796991065803522,
+      "composite_score": 0.8740203011659071,
+      "selected": true
+    },
+    {
+      "feature": "febre_flag",
+      "anova_f": 134.40230771690005,
+      "anova_pvalue": 9.75730234288083e-23,
+      "mutual_information": 0.31060764277188757,
+      "random_forest_importance": 0.10038260048565024,
+      "score_anova_norm": 0.3823820923086066,
+      "score_mi_norm": 0.882576483799874,
+      "score_rf_norm": 0.6815149362780013,
+      "composite_score": 0.6488245041288273,
+      "selected": true
+    },
+    {
+      "feature": "cefaleia_flag",
+      "anova_f": 114.9587292205727,
+      "anova_pvalue": 2.1963108878338524e-20,
+      "mutual_information": 0.2832152499656493,
+      "random_forest_importance": 0.07639944337648975,
+      "score_anova_norm": 0.32706401681855657,
+      "score_mi_norm": 0.7987332532161143,
+      "score_rf_norm": 0.518406469351734,
+      "composite_score": 0.5480679131288017,
+      "selected": true
+    },
+    {
+      "feature": "criterio_clinico_epi",
+      "anova_f": 139.76941367865368,
+      "anova_pvalue": 2.3353137941549942e-23,
+      "mutual_information": 0.269473335954423,
+      "random_forest_importance": 0.050010365316260186,
+      "score_anova_norm": 0.3976518109363512,
+      "score_mi_norm": 0.7566717044768216,
+      "score_rf_norm": 0.33893543280677463,
+      "composite_score": 0.4977529827399825,
+      "selected": true
+    },
+    {
+      "feature": "nausea_flag",
+      "anova_f": 124.85848712580403,
+      "anova_pvalue": 1.3277798358225274e-21,
+      "mutual_information": 0.2355457689140612,
+      "random_forest_importance": 0.06420057915590749,
+      "score_anova_norm": 0.35522938541252436,
+      "score_mi_norm": 0.6528254707201564,
+      "score_rf_norm": 0.4354424945837549,
+      "composite_score": 0.48116578357214523,
+      "selected": true
+    },
+    {
+      "feature": "artralgia_flag",
+      "anova_f": 78.34392713700883,
+      "anova_pvalue": 1.9284529605442307e-15,
+      "mutual_information": 0.24257805525700582,
+      "random_forest_importance": 0.05205806290207841,
+      "score_anova_norm": 0.2228928434877619,
+      "score_mi_norm": 0.674350045427929,
+      "score_rf_norm": 0.3528617400244285,
+      "composite_score": 0.4167015429800398,
+      "selected": true
+    },
+    {
+      "feature": "criterio_lab",
+      "anova_f": 100.68236167409596,
+      "anova_pvalue": 1.5206179170850169e-18,
+      "mutual_information": 0.220337136277172,
+      "random_forest_importance": 0.041222710890080234,
+      "score_anova_norm": 0.2864469473933541,
+      "score_mi_norm": 0.606274557769317,
+      "score_rf_norm": 0.2791709558111848,
+      "composite_score": 0.39063082032461866,
+      "selected": true
+    },
+    {
+      "feature": "caso_dengue_alarme",
+      "anova_f": 87.35776228975206,
+      "anova_pvalue": 9.943841239084831e-17,
+      "mutual_information": 0.23195730721280472,
+      "random_forest_importance": 0.03889403514098235,
+      "score_anova_norm": 0.24853771197369934,
+      "score_mi_norm": 0.6418418292402883,
+      "score_rf_norm": 0.26333372763997553,
+      "composite_score": 0.38457108961798775,
+      "selected": true
+    },
+    {
+      "feature": "laco_flag",
+      "anova_f": 117.55236849497544,
+      "anova_pvalue": 1.0425091874651463e-20,
+      "mutual_information": 0.20062296804983237,
+      "random_forest_importance": 0.020083232066483915,
+      "score_anova_norm": 0.33444306657539374,
+      "score_mi_norm": 0.5459330036691059,
+      "score_rf_norm": 0.13540222816439396,
+      "composite_score": 0.3385927661362979,
+      "selected": true
+    },
+    {
+      "feature": "dor_costas_flag",
+      "anova_f": 120.45688941284284,
+      "anova_pvalue": 4.5644963017745315e-21,
+      "mutual_information": 0.17971204547527586,
+      "random_forest_importance": 0.014272338134084503,
+      "score_anova_norm": 0.34270659211043697,
+      "score_mi_norm": 0.4819283978816769,
+      "score_rf_norm": 0.0958825770829774,
+      "composite_score": 0.30683918902503043,
+      "selected": true
+    },
+    {
+      "feature": "artrite_flag",
+      "anova_f": 107.9748363896536,
+      "anova_pvalue": 1.6949866298669442e-19,
+      "mutual_information": 0.18708546869860498,
+      "random_forest_importance": 0.012670951655608137,
+      "score_anova_norm": 0.3071944485233903,
+      "score_mi_norm": 0.5044971317589322,
+      "score_rf_norm": 0.08499161338408358,
+      "composite_score": 0.298894397888802,
+      "selected": true
+    },
+    {
+      "feature": "alrm_hepat_flag",
+      "anova_f": 0.30749055355097077,
+      "anova_pvalue": 0.5800285968398593,
+      "mutual_information": 0.25516834047392867,
+      "random_forest_importance": 0.016502584948580937,
+      "score_anova_norm": 0.0008747879784007742,
+      "score_mi_norm": 0.7128866637520266,
+      "score_rf_norm": 0.11105039411073478,
+      "composite_score": 0.2749372819470541,
+      "selected": true
+    },
+    {
+      "feature": "obito_agravo",
+      "anova_f": 4.635000747482679,
+      "anova_pvalue": 0.032883145172079464,
+      "mutual_information": 0.23245517558265893,
+      "random_forest_importance": 0.02288892676308872,
+      "score_anova_norm": 0.013186798117742824,
+      "score_mi_norm": 0.6433657155553437,
+      "score_rf_norm": 0.1544836426146864,
+      "composite_score": 0.2703453854292576,
+      "selected": true
+    },
+    {
+      "feature": "grav_melen_flag",
+      "anova_f": 0.16758198155516563,
+      "anova_pvalue": 0.682838583667496,
+      "mutual_information": 0.2460568907583962,
+      "random_forest_importance": 0.01642194109221176,
+      "score_anova_norm": 0.00047674021425946956,
+      "score_mi_norm": 0.6849981406552877,
+      "score_rf_norm": 0.11050193855421532,
+      "composite_score": 0.2653256064745875,
+      "selected": true
+    }
+  ]
+}

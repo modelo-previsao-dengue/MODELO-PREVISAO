@@ -1,0 +1,68 @@
+{
+  "scope_slug": "brasil_2017_2021",
+  "scope_type": "full_brazil",
+  "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021
+  ],
+  "total_records_by_year": {
+    "2017": 518483,
+    "2018": 478880,
+    "2019": 2261956,
+    "2020": 1495117,
+    "2021": 1010359
+  },
+  "valid_week_records_by_year": {
+    "2017": 518483,
+    "2018": 478880,
+    "2019": 2261956,
+    "2020": 1495117,
+    "2021": 1010359
+  },
+  "invalid_week_records_by_year": {
+    "2017": 0,
+    "2018": 0,
+    "2019": 0,
+    "2020": 0,
+    "2021": 0
+  },
+  "total_records": 5764795,
+  "valid_week_records": 5764795,
+  "invalid_week_records": 0,
+  "epidemiological_weeks": 3582,
+  "source_files": [
+    {
+      "year": 2017,
+      "file_name": "DENGBR17.json.zip",
+      "file_size_bytes": 34268598,
+      "json_member": "DENGBR17.json"
+    },
+    {
+      "year": 2018,
+      "file_name": "DENGBR18.json.zip",
+      "file_size_bytes": 32164630,
+      "json_member": "DENGBR18.json"
+    },
+    {
+      "year": 2019,
+      "file_name": "DENGBR19.json.zip",
+      "file_size_bytes": 162069080,
+      "json_member": "DENGBR19.json"
+    },
+    {
+      "year": 2020,
+      "file_name": "DENGBR20.json.zip",
+      "file_size_bytes": 102262716,
+      "json_member": "DENGBR20.json"
+    },
+    {
+      "year": 2021,
+      "file_name": "DENGBR21.json.zip",
+      "file_size_bytes": 63090488,
+      "json_member": "DENGBR21.json"
+    }
+  ]
+}

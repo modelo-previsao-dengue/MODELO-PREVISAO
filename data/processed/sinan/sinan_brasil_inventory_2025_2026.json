@@ -1,0 +1,20 @@
+[
+  {
+    "year": 2025,
+    "format": "json",
+    "records": 1646533,
+    "file_name": "DENGBR25.json.zip",
+    "file_size_bytes": 115021952,
+    "file_size_human": "109.7MB",
+    "status": "ok"
+  },
+  {
+    "year": 2026,
+    "format": "json",
+    "records": 253941,
+    "file_name": "DENGBR26.json.zip",
+    "file_size_bytes": 14656156,
+    "file_size_human": "14.0MB",
+    "status": "ok"
+  }
+]

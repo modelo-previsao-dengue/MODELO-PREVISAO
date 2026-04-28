@@ -1,0 +1,40 @@
+{
+  "source_repo": "/Users/filippoferrari/Documents/UnB/TCC/TCC1-DOCS",
+  "scope_inferred": {
+    "period": "2022-2024",
+    "municipality_code": "5300108",
+    "municipality_name": "Brasilia",
+    "uf": "DF",
+    "method": "InfoDengue aggregate series"
+  },
+  "notes": [
+    "TCC1 usou serie agregada da API InfoDengue, nao microdados brutos do SINAN.",
+    "A documentacao descreve Distrito Federal, mas o codigo efetivamente usa o geocode 5300108 (Brasilia)."
+  ],
+  "tcc1_info_dengue_rows": 156,
+  "tcc1_info_dengue_columns": [
+    "epiweek",
+    "week_start",
+    "cases",
+    "incidence",
+    "temp_est",
+    "humidity_est"
+  ],
+  "tcc1_total_cases": 463560,
+  "tcc1_peak_cases": 25714,
+  "tcc1_merged_rows": 52,
+  "tcc1_merged_columns": [
+    "date",
+    "municipio",
+    "uf",
+    "casos",
+    "tempmin",
+    "tempmed",
+    "tempmax",
+    "umidmed",
+    "UF",
+    "TEMP",
+    "UR",
+    "PRECIP"
+  ]
+}

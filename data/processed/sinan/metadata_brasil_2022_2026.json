@@ -1,0 +1,68 @@
+{
+  "scope_slug": "brasil_2022_2026",
+  "scope_type": "full_brazil",
+  "years": [
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "total_records_by_year": {
+    "2022": 1405095,
+    "2023": 1645956,
+    "2024": 6564924,
+    "2025": 1646533,
+    "2026": 253941
+  },
+  "valid_week_records_by_year": {
+    "2022": 1405095,
+    "2023": 1645956,
+    "2024": 6564924,
+    "2025": 1646533,
+    "2026": 253941
+  },
+  "invalid_week_records_by_year": {
+    "2022": 0,
+    "2023": 0,
+    "2024": 0,
+    "2025": 0,
+    "2026": 0
+  },
+  "total_records": 11516449,
+  "valid_week_records": 11516449,
+  "invalid_week_records": 0,
+  "epidemiological_weeks": 224,
+  "source_files": [
+    {
+      "year": 2022,
+      "file_name": "DENGBR22.json.zip",
+      "file_size_bytes": 95506531,
+      "json_member": "DENGBR22.json"
+    },
+    {
+      "year": 2023,
+      "file_name": "DENGBR23.json.zip",
+      "file_size_bytes": 94990914,
+      "json_member": "DENGBR23.json"
+    },
+    {
+      "year": 2024,
+      "file_name": "DENGBR24.json.zip",
+      "file_size_bytes": 424450616,
+      "json_member": "DENGBR24.json"
+    },
+    {
+      "year": 2025,
+      "file_name": "DENGBR25.json.zip",
+      "file_size_bytes": 115021952,
+      "json_member": "DENGBR25.json"
+    },
+    {
+      "year": 2026,
+      "file_name": "DENGBR26.json.zip",
+      "file_size_bytes": 14656156,
+      "json_member": "DENGBR26.json"
+    }
+  ]
+}
