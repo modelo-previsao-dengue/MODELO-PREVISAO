@@ -148,30 +148,50 @@ Para a etapa de coleta e processamento do SINAN no TCC2, foi adicionada uma pipe
 
 `scripts/sinan_pipeline.py`
 
+Observação importante:
+
+- `scripts/sinan_pipeline.py` continua útil para o recorte histórico de `Brasília/DF`
+- a trilha nacional oficial do TCC2 passou a ser `scripts/sinan_tcc2_pipeline.py`, com contrato `município-semana`, camadas `bronze/silver/gold`, governança e saída operacional pronta para publicação
+- a versão canônica consolidada da trilha é `sinan_tcc2_v2`
+- os artefatos em `data/processed/sinan/*brasil_2000_2026*` permanecem apenas como legado histórico, pois estão em `Brasil-semana`
+
+Documentação oficial da trilha consolidada:
+
+- [Contrato Oficial da Trilha SINAN TCC2](./docs/sinan_national_pipeline_tcc2.md)
+- [Alinhamento do LaTeX com a Execução Real](./docs/sinan_tcc2_latex_alignment.md)
+- [Snippet LaTeX Pronto para Escrita](./docs/sinan_tcc2_latex_snippets.tex)
+- [Runbook Operacional da Trilha SINAN TCC2](./docs/sinan_tcc2_runbook.md)
+
 Ela executa:
 
-- download dos microdados anuais oficiais do SINAN
-- extração do recorte comparável ao TCC1
-- geração de atributos semanais
-- clusterização
-- seleção de atributos
+- inventário e Bronze dos microdados anuais oficiais do SINAN
+- Silver nacional em `ibge_municipio + ano_semana`
+- Gold nacional densa para modelagem e alertas
+- governança com schema, lineage, missingness e quality summary
+- camada serving com contrato operacional e API-ready
 
 Resumo metodológico:
 
 - [Pipeline SINAN - TCC2](./docs/sinan_tcc2.md)
 - [Resultados SINAN - Brasília/DF (2022-2024)](./docs/sinan_results_brasilia_2022_2024.md)
 
-Para processar a série oficial completa de dengue do SINAN em escala Brasil:
+Para processar a trilha oficial completa do TCC2:
 
 ```bash
-python3 scripts/sinan_pipeline.py --full-dengue-series --full-brazil
+python3 scripts/sinan_tcc2_pipeline.py --start-year 2000 --end-year 2026 --version sinan_tcc2_v2
 ```
 
-Para gerar um inventário anual leve e auditável da série nacional completa:
+Para gerar os documentos finais a partir da versão oficial:
 
 ```bash
-python3 scripts/sinan_full_series_inventory.py --download-missing
+python3 scripts/sinan_tcc2_writeup.py --version sinan_tcc2_v2
 ```
+
+Automação disponível:
+
+- workflow manual em `.github/workflows/sinan_tcc2_pipeline.yml`
+- publicação em object storage via `python3 scripts/sinan_tcc2_publish_r2.py --version sinan_tcc2_v2 --dry-run`
+- publicação em PostgreSQL/Supabase via `python3 scripts/sinan_tcc2_publish_postgres.py --version sinan_tcc2_v2`
 
 ## 📊 Fase 3 do TCC2: Engenharia de Atributos e EDA - SINAN
 
@@ -192,12 +212,14 @@ Resumo metodológico:
 - [Engenharia de Atributos e EDA - SINAN](./docs/sinan_feature_engineering_eda.md)
 - [Task Concluída - Engenharia de Atributos e EDA - SINAN](./docs/task_engenharia_atributos_eda_sinan.md)
 
-Artefatos nacionais completos já gerados com dados reais do portal:
+Artefatos nacionais legados já gerados com dados reais do portal:
 
 - `data/processed/sinan/weekly_features_brasil_2000_2026.csv`
 - `data/processed/sinan/weekly_model_features_brasil_2000_2026.csv`
 - `data/processed/sinan/relatorio_sinan_brasil_2000_2026.md`
 - `data/processed/sinan/relatorio_eda_brasil_2000_2026.md`
+
+Esses arquivos nao sao a camada oficial final do TCC2, porque foram consolidados em `Brasil-semana`.
 
 ## 👨‍💻 Autor
 
