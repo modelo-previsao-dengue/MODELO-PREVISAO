@@ -1,0 +1,21 @@
+{
+  "sinan_only": {
+    "model": "SINAN-only",
+    "RMSE": 152.1489,
+    "MAE": 6.7183,
+    "R2": 0.4248,
+    "MAPE": 99.6
+  },
+  "sinan_inmet": {
+    "model": "SINAN+INMET",
+    "RMSE": 166.7197,
+    "MAE": 7.466,
+    "R2": 0.3093,
+    "MAPE": 88.81
+  },
+  "paired_ttest": {
+    "t_stat": -5.2239,
+    "p_value": 0.0
+  },
+  "significant_improvement": false
+}

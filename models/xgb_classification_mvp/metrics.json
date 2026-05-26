@@ -1,0 +1,16 @@
+{
+  "AUC_macro": 0.8408,
+  "F1_macro": 0.4804,
+  "precision_baixo": 0.8156,
+  "recall_baixo": 0.9516,
+  "f1_baixo": 0.8783,
+  "precision_medio": 0.3952,
+  "recall_medio": 0.1346,
+  "f1_medio": 0.2008,
+  "precision_alto": 0.3601,
+  "recall_alto": 0.1537,
+  "f1_alto": 0.2155,
+  "precision_surto": 0.6613,
+  "recall_surto": 0.5962,
+  "f1_surto": 0.627
+}
