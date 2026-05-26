@@ -1,0 +1,23 @@
+[
+  {
+    "year": 2026,
+    "file_name": "DENGBR26.json.zip",
+    "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR26.json.zip",
+    "file_size_bytes": 14656156,
+    "sha256": "542c9c5c5b24406083dab9ea33659c0a053e3059785c46874b161a31c8fe22c3",
+    "total_records": 253941,
+    "duplicate_records_removed": 221,
+    "invalid_week_records": 0,
+    "invalid_municipality_records": 0,
+    "valid_records": 253720,
+    "unique_municipio_semana_rows": 26151,
+    "municipality_resolution_counts": {
+      "prefix_6d_to_7d": 253720
+    },
+    "week_source_counts": {
+      "SEM_PRI": 253720
+    },
+    "json_member": "DENGBR26.json",
+    "silver_path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/silver/sinan_tcc2_test_2026/official_observed/year=2026/part-000.parquet"
+  }
+]

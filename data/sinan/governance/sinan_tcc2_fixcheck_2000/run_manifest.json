@@ -1,0 +1,29 @@
+{
+  "version": "sinan_tcc2_fixcheck_2000",
+  "schema_version": "1.0.0",
+  "script": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/scripts/sinan_tcc2_pipeline.py",
+  "started_at_utc": "2026-05-16T00:21:18.514835Z",
+  "ended_at_utc": "2026-05-16T00:22:13.333670Z",
+  "years": [
+    2000
+  ],
+  "official_outputs": {
+    "bronze_inventory": {
+      "csv": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/bronze/sinan_tcc2_fixcheck_2000/inventory/sinan_bronze_inventory.csv",
+      "json": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/bronze/sinan_tcc2_fixcheck_2000/inventory/sinan_bronze_inventory.json",
+      "markdown": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/bronze/sinan_tcc2_fixcheck_2000/inventory/sinan_bronze_inventory.md"
+    },
+    "silver_root": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/silver/sinan_tcc2_fixcheck_2000/official_observed",
+    "gold_root": null,
+    "feature_catalog": null,
+    "governance_root": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/governance/sinan_tcc2_fixcheck_2000",
+    "serving_root": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/serving/sinan_tcc2_fixcheck_2000"
+  },
+  "quality_outputs": {
+    "silver_quality": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/governance/sinan_tcc2_fixcheck_2000/quality_summary_silver.json",
+    "gold_quality": null
+  },
+  "analytics_outputs": [],
+  "eda_outputs": null,
+  "serving_outputs": {}
+}

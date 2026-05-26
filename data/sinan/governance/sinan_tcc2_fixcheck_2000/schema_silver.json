@@ -1,0 +1,511 @@
+{
+  "dataset_name": "silver_observed_municipio_semana",
+  "schema_version": "1.0.0",
+  "granularity": "municipio-semana observado",
+  "primary_key": [
+    "ibge_municipio",
+    "ano_semana"
+  ],
+  "columns": [
+    {
+      "name": "ibge_municipio",
+      "dtype": "object",
+      "nullable": false
+    },
+    {
+      "name": "municipio",
+      "dtype": "object",
+      "nullable": false
+    },
+    {
+      "name": "uf",
+      "dtype": "object",
+      "nullable": false
+    },
+    {
+      "name": "regiao",
+      "dtype": "object",
+      "nullable": false
+    },
+    {
+      "name": "ano_semana",
+      "dtype": "object",
+      "nullable": false
+    },
+    {
+      "name": "ano",
+      "dtype": "int64",
+      "nullable": false
+    },
+    {
+      "name": "semana_epidemiologica",
+      "dtype": "int64",
+      "nullable": false
+    },
+    {
+      "name": "week_start",
+      "dtype": "object",
+      "nullable": false
+    },
+    {
+      "name": "source_year",
+      "dtype": "int64",
+      "nullable": false
+    },
+    {
+      "name": "municipio_resolution",
+      "dtype": "object",
+      "nullable": false
+    },
+    {
+      "name": "municipio_source_field",
+      "dtype": "object",
+      "nullable": false
+    },
+    {
+      "name": "notificacoes",
+      "dtype": "int64",
+      "nullable": false
+    },
+    {
+      "name": "qt_hospitalizados",
+      "dtype": "int64",
+      "nullable": false
+    },
+    {
+      "name": "qt_obitos_agravo",
+      "dtype": "int64",
+      "nullable": false
+    },
+    {
+      "name": "qt_obitos_outras_causas",
+      "dtype": "int64",
+      "nullable": false
+    },
+    {
+      "name": "qt_confirmados_provaveis",
+      "dtype": "int64",
+      "nullable": false
+    },
+    {
+      "name": "qt_descartados",
+      "dtype": "int64",
+      "nullable": false
+    },
+    {
+      "name": "qt_inconclusivos",
+      "dtype": "int64",
+      "nullable": false
+    },
+    {
+      "name": "qt_dengue_alarme",
+      "dtype": "int64",
+      "nullable": false
+    },
+    {
+      "name": "qt_dengue_grave",
+      "dtype": "int64",
+      "nullable": false
+    },
+    {
+      "name": "qt_chikungunya",
+      "dtype": "int64",
+      "nullable": false
+    },
+    {
+      "name": "idade_media_anos",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "atraso_notificacao_medio_dias",
+      "dtype": "float64",
+      "nullable": false
+    },
+    {
+      "name": "prop_sexo_masc",
+      "dtype": "float64",
+      "nullable": false
+    },
+    {
+      "name": "prop_sexo_fem",
+      "dtype": "float64",
+      "nullable": false
+    },
+    {
+      "name": "prop_gestante",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_hospitalizado",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_obito_agravo",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_obito_outras_causas",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_criterio_lab",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_criterio_clinico_epi",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_criterio_clinico",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_confirmado_provavel",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_descartado",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_inconclusivo",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_dengue_alarme",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_dengue_grave",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_chikungunya",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_raca_branca",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_raca_preta",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_raca_amarela",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_raca_parda",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_raca_indigena",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_febre",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_mialgia",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_cefaleia",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_exantema",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_vomito",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_nausea",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_dor_costas",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_conjuntvit",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_artrite",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_artralgia",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_petequia_n",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_leucopenia",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_laco",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_dor_retro",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_diabetes",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_hematolog",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_hepatopat",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_renal",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_hipertensa",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_acido_pept",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_auto_imune",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_alrm_hipot",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_alrm_plaq",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_alrm_vom",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_alrm_sang",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_alrm_hemat",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_alrm_abdom",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_alrm_letar",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_alrm_hepat",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_alrm_liq",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_grav_pulso",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_grav_conv",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_grav_ench",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_grav_insuf",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_grav_taqui",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_grav_extre",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_grav_hipot",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_grav_hemat",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_grav_melen",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_grav_metro",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_grav_sang",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_grav_ast",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_grav_mioc",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_grav_consc",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_grav_orgao",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_mani_hemor",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_epistaxe",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_gengivo",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_metro",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_petequias",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_hematura",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_sangram",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_laco_n",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_plasmatico",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_evidencia",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_plaq_menor",
+      "dtype": "float64",
+      "nullable": true
+    },
+    {
+      "name": "prop_con_fhd",
+      "dtype": "float64",
+      "nullable": true
+    }
+  ]
+}

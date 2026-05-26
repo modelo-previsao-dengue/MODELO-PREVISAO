@@ -1,0 +1,202 @@
+{
+  "dataset": "silver_observed_municipio_semana",
+  "version": "sinan_tcc2_v2",
+  "sources": [
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2000,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR00.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR00.json.zip",
+      "sha256": "ba941c19f10b3f25db820435e17dfe898cbb8a1ab25ac887d4e61103c332164b"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2001,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR01.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR01.json.zip",
+      "sha256": "9d7c82dae0c3430ddb009ba7366b9ff3de2568d22c4bdd77275edc2a648640d1"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2002,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR02.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR02.json.zip",
+      "sha256": "bac33cab4640452cb5c024fda530a3dcd9212e3827a1c1b4cb7f8b410a1767ca"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2003,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR03.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR03.json.zip",
+      "sha256": "865561e713bfdb81a9800dc85fdbf3ecde9bc02b7df5a968bb18b09bd1c6e492"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2004,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR04.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR04.json.zip",
+      "sha256": "b8b0545397351e009e91e9979464a502d43f6c964cb1fa6f13a5aab71c11f98e"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2005,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR05.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR05.json.zip",
+      "sha256": "861819b1aaf8cfbe5701ff08fd56f4a58641f8b1886fce3c8f355d5588b1dc31"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2006,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR06.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR06.json.zip",
+      "sha256": "34099901adead9abe9c8e100cc6f062355d7a8c84607f9859d63d235952d7efa"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2007,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR07.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR07.json.zip",
+      "sha256": "86e938269fc825158122bbf8a7478a5509603a50951c6cd73d8b08539924a90e"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2008,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR08.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR08.json.zip",
+      "sha256": "bab80d4fc61b6b69f371a97e6bd770c04ed733092165fbd5cb169ba1a834864c"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2009,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR09.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR09.json.zip",
+      "sha256": "5822805ad9a16972e5b9dbf8d4c9ce5aeb1d251915e078ded70169f946dd5e91"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2010,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR10.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR10.json.zip",
+      "sha256": "b6bac8fc06c761803a4ebe1a9b7926b543f84a739df5b61c5aea99e049e26eb7"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2011,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR11.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR11.json.zip",
+      "sha256": "583f4e900a1a238f873ccae1a0af7f1189bf0488d3368f508e35a02f431fcbd6"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2012,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR12.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR12.json.zip",
+      "sha256": "bbae2741f1f95d277c1212dd99aa91ed4f30a971977811c3190e3d6a53740ee9"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2013,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR13.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR13.json.zip",
+      "sha256": "3b7ac12944c5380d47701845b21db9f9d98af596ce60aafdbd90d4c470a93cdf"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2014,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR14.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR14.json.zip",
+      "sha256": "5501c41c94977532b4e14ed69427e42e1839bcafa57f9f2bb9a030f2e2e9df22"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2015,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR15.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR15.json.zip",
+      "sha256": "0b838b235379dc0a36873eae8fc4cf91cd13fbd8d8a3c2f5a1269ed70c653074"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2016,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR16.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR16.json.zip",
+      "sha256": "087ee5e8f4948a19b7598d816c1fcee9467c76ecd22812f29eae6e1c9946c32b"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2017,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR17.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR17.json.zip",
+      "sha256": "56a17c3e2e93cea0d8a113a65500a2c8249d660aa6e4a25700c65cc0d9ddbbc0"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2018,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR18.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR18.json.zip",
+      "sha256": "b5a7706a5936d6e1ec6d7dddc8a1b938c81681349b26f313f1438b46bfb02c5a"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2019,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR19.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR19.json.zip",
+      "sha256": "1d689a77ff7ab5d5f079d4b6487afa8b479c3815312689aa035aa039c7f26a28"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2020,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR20.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR20.json.zip",
+      "sha256": "98e4ed0f8dca9158f13b41252fbd63970c6ac7a3b852097a0779b76b94c88584"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2021,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR21.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR21.json.zip",
+      "sha256": "07b5c4ad8113e84239901253b6b9bd8d4e81333eedd3c8e7d96c515b91275c02"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2022,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR22.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR22.json.zip",
+      "sha256": "60a883548b7795de357a2a2764f7d1fec40ac81b7f49e777409769ac72a36499"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2023,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR23.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR23.json.zip",
+      "sha256": "3488e47f974a628f13102772426d3efcd19988562a4839c98fa4be7f1bf4b4b4"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2024,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR24.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR24.json.zip",
+      "sha256": "423ecdb13a83c9fd17651e4dfca25e20b288399b7c86fc5890e21398143039cd"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2025,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR25.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR25.json.zip",
+      "sha256": "4fa893482897dc8e1891151b8c74931a2563358480f9740313eafc330fb18505"
+    },
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2026,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR26.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR26.json.zip",
+      "sha256": "542c9c5c5b24406083dab9ea33659c0a053e3059785c46874b161a31c8fe22c3"
+    }
+  ],
+  "transformations": [
+    "parsing incremental de arrays JSON oficiais",
+    "reconciliacao territorial com tabela oficial de municipios do IBGE",
+    "remocao de duplicidades exatas por assinatura canonica do registro",
+    "validacao e derivacao de semana epidemiologica",
+    "agregacao para municipio-semana observado"
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "version": "sinan_tcc2_v2",
+  "schema_version": "1.0.0",
+  "script": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/scripts/sinan_tcc2_pipeline.py",
+  "started_at_utc": "2026-05-16T18:44:02.861598Z",
+  "ended_at_utc": "2026-05-16T18:55:52.298304Z",
+  "years": [
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "official_outputs": {
+    "bronze_inventory": {
+      "csv": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/bronze/sinan_tcc2_v2/inventory/sinan_bronze_inventory.csv",
+      "json": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/bronze/sinan_tcc2_v2/inventory/sinan_bronze_inventory.json",
+      "markdown": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/bronze/sinan_tcc2_v2/inventory/sinan_bronze_inventory.md"
+    },
+    "silver_root": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/silver/sinan_tcc2_v2/official_observed",
+    "gold_root": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/official_dense",
+    "feature_catalog": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/feature_catalog.csv",
+    "governance_root": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/governance/sinan_tcc2_v2",
+    "serving_root": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/serving/sinan_tcc2_v2"
+  },
+  "quality_outputs": {
+    "silver_quality": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/governance/sinan_tcc2_v2/quality_summary_silver.json",
+    "gold_quality": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/governance/sinan_tcc2_v2/quality_summary_gold.json"
+  },
+  "analytics_outputs": [
+    {
+      "mode": "intensity",
+      "evaluation_path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/analytics/cluster_evaluation_intensity.csv",
+      "sample_assignments_path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/analytics/cluster_assignments_intensity_sample.csv",
+      "ranking_path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/analytics/feature_ranking_intensity.csv",
+      "selected_path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/analytics/selected_features_intensity.json",
+      "full_assignments_root": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/analytics/cluster_assignments_intensity_full",
+      "summary_path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/analytics/cluster_summary_intensity.csv"
+    },
+    {
+      "mode": "profile",
+      "evaluation_path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/analytics/cluster_evaluation_profile.csv",
+      "sample_assignments_path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/analytics/cluster_assignments_profile_sample.csv",
+      "ranking_path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/analytics/feature_ranking_profile.csv",
+      "selected_path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/analytics/selected_features_profile.json",
+      "full_assignments_root": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/analytics/cluster_assignments_profile_full",
+      "summary_path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/analytics/cluster_summary_profile.csv"
+    }
+  ],
+  "eda_outputs": {
+    "yearly_summary": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/analytics/eda_yearly_summary.csv",
+    "peak_weeks": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/analytics/eda_peak_weeks.csv",
+    "descriptive_stats": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/analytics/eda_descriptive_stats.csv",
+    "correlations": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/analytics/eda_correlations.csv",
+    "cluster_summary": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/analytics/eda_cluster_summary.csv",
+    "summary": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/analytics/eda_summary.json",
+    "report": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/analytics/relatorio_eda.md"
+  },
+  "serving_outputs": {
+    "sql_schema": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/serving/sinan_tcc2_v2/sql/sinan_gold_schema.sql",
+    "env_example": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/serving/sinan_tcc2_v2/.env.example",
+    "publish_doc": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/serving/sinan_tcc2_v2/docs/sinan_operational_publish.md",
+    "api_app": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/serving/sinan_tcc2_v2/api/sinan_api.py",
+    "load_script": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/serving/sinan_tcc2_v2/api/load_gold_to_postgres.py",
+    "api_contract": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/serving/sinan_tcc2_v2/docs/api_contract.json"
+  }
+}

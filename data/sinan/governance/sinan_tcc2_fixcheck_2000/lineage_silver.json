@@ -1,0 +1,20 @@
+{
+  "dataset": "silver_observed_municipio_semana",
+  "version": "sinan_tcc2_fixcheck_2000",
+  "sources": [
+    {
+      "type": "sinan_raw_json_zip",
+      "year": 2000,
+      "path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/raw/sinan/DENGBR00.json.zip",
+      "source_url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/json/DENGBR00.json.zip",
+      "sha256": "ba941c19f10b3f25db820435e17dfe898cbb8a1ab25ac887d4e61103c332164b"
+    }
+  ],
+  "transformations": [
+    "parsing incremental de arrays JSON oficiais",
+    "reconciliacao territorial com tabela oficial de municipios do IBGE",
+    "remocao de duplicidades exatas por assinatura canonica do registro",
+    "validacao e derivacao de semana epidemiologica",
+    "agregacao para municipio-semana observado"
+  ]
+}

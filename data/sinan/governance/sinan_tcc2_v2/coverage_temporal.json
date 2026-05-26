@@ -1,0 +1,226 @@
+[
+  {
+    "ano": 1999,
+    "municipio_semana_rows": 8,
+    "municipios_ativos": 8,
+    "notificacoes_total": 13,
+    "semana_min": "199952",
+    "semana_max": "199952"
+  },
+  {
+    "ano": 2000,
+    "municipio_semana_rows": 18834,
+    "municipios_ativos": 2087,
+    "notificacoes_total": 171654,
+    "semana_min": "200001",
+    "semana_max": "200053"
+  },
+  {
+    "ano": 2001,
+    "municipio_semana_rows": 42164,
+    "municipios_ativos": 3512,
+    "notificacoes_total": 485989,
+    "semana_min": "200101",
+    "semana_max": "200153"
+  },
+  {
+    "ano": 2002,
+    "municipio_semana_rows": 57006,
+    "municipios_ativos": 4303,
+    "notificacoes_total": 885534,
+    "semana_min": "200201",
+    "semana_max": "200252"
+  },
+  {
+    "ano": 2003,
+    "municipio_semana_rows": 47358,
+    "municipios_ativos": 3834,
+    "notificacoes_total": 416298,
+    "semana_min": "200301",
+    "semana_max": "200353"
+  },
+  {
+    "ano": 2004,
+    "municipio_semana_rows": 26375,
+    "municipios_ativos": 3079,
+    "notificacoes_total": 136524,
+    "semana_min": "200401",
+    "semana_max": "200452"
+  },
+  {
+    "ano": 2005,
+    "municipio_semana_rows": 36110,
+    "municipios_ativos": 3404,
+    "notificacoes_total": 260443,
+    "semana_min": "200501",
+    "semana_max": "200552"
+  },
+  {
+    "ano": 2006,
+    "municipio_semana_rows": 45269,
+    "municipios_ativos": 3788,
+    "notificacoes_total": 410039,
+    "semana_min": "200601",
+    "semana_max": "200652"
+  },
+  {
+    "ano": 2007,
+    "municipio_semana_rows": 62686,
+    "municipios_ativos": 4324,
+    "notificacoes_total": 714498,
+    "semana_min": "200701",
+    "semana_max": "200752"
+  },
+  {
+    "ano": 2008,
+    "municipio_semana_rows": 62057,
+    "municipios_ativos": 4414,
+    "notificacoes_total": 914831,
+    "semana_min": "200801",
+    "semana_max": "200853"
+  },
+  {
+    "ano": 2009,
+    "municipio_semana_rows": 52280,
+    "municipios_ativos": 3986,
+    "notificacoes_total": 599275,
+    "semana_min": "200901",
+    "semana_max": "200952"
+  },
+  {
+    "ano": 2010,
+    "municipio_semana_rows": 78074,
+    "municipios_ativos": 4572,
+    "notificacoes_total": 1371679,
+    "semana_min": "201001",
+    "semana_max": "201052"
+  },
+  {
+    "ano": 2011,
+    "municipio_semana_rows": 81581,
+    "municipios_ativos": 4724,
+    "notificacoes_total": 1144368,
+    "semana_min": "201101",
+    "semana_max": "201152"
+  },
+  {
+    "ano": 2012,
+    "municipio_semana_rows": 71431,
+    "municipios_ativos": 4410,
+    "notificacoes_total": 944889,
+    "semana_min": "201201",
+    "semana_max": "201252"
+  },
+  {
+    "ano": 2013,
+    "municipio_semana_rows": 90340,
+    "municipios_ativos": 4799,
+    "notificacoes_total": 2022238,
+    "semana_min": "201301",
+    "semana_max": "201352"
+  },
+  {
+    "ano": 2014,
+    "municipio_semana_rows": 73932,
+    "municipios_ativos": 4494,
+    "notificacoes_total": 966369,
+    "semana_min": "201401",
+    "semana_max": "201453"
+  },
+  {
+    "ano": 2015,
+    "municipio_semana_rows": 102686,
+    "municipios_ativos": 4951,
+    "notificacoes_total": 2397091,
+    "semana_min": "201501",
+    "semana_max": "201552"
+  },
+  {
+    "ano": 2016,
+    "municipio_semana_rows": 94407,
+    "municipios_ativos": 5132,
+    "notificacoes_total": 2296878,
+    "semana_min": "201601",
+    "semana_max": "201652"
+  },
+  {
+    "ano": 2017,
+    "municipio_semana_rows": 63208,
+    "municipios_ativos": 4495,
+    "notificacoes_total": 518345,
+    "semana_min": "201701",
+    "semana_max": "201752"
+  },
+  {
+    "ano": 2018,
+    "municipio_semana_rows": 59808,
+    "municipios_ativos": 4350,
+    "notificacoes_total": 478768,
+    "semana_min": "201801",
+    "semana_max": "201852"
+  },
+  {
+    "ano": 2019,
+    "municipio_semana_rows": 101774,
+    "municipios_ativos": 4991,
+    "notificacoes_total": 2261441,
+    "semana_min": "201901",
+    "semana_max": "201952"
+  },
+  {
+    "ano": 2020,
+    "municipio_semana_rows": 90286,
+    "municipios_ativos": 4721,
+    "notificacoes_total": 1494587,
+    "semana_min": "202001",
+    "semana_max": "202053"
+  },
+  {
+    "ano": 2021,
+    "municipio_semana_rows": 74830,
+    "municipios_ativos": 4477,
+    "notificacoes_total": 1009791,
+    "semana_min": "202101",
+    "semana_max": "202152"
+  },
+  {
+    "ano": 2022,
+    "municipio_semana_rows": 83267,
+    "municipios_ativos": 5018,
+    "notificacoes_total": 1404535,
+    "semana_min": "202201",
+    "semana_max": "202252"
+  },
+  {
+    "ano": 2023,
+    "municipio_semana_rows": 84257,
+    "municipios_ativos": 4992,
+    "notificacoes_total": 1644709,
+    "semana_min": "202301",
+    "semana_max": "202353"
+  },
+  {
+    "ano": 2024,
+    "municipio_semana_rows": 124071,
+    "municipios_ativos": 5485,
+    "notificacoes_total": 6560720,
+    "semana_min": "202401",
+    "semana_max": "202452"
+  },
+  {
+    "ano": 2025,
+    "municipio_semana_rows": 90638,
+    "municipios_ativos": 5156,
+    "notificacoes_total": 1642302,
+    "semana_min": "202501",
+    "semana_max": "202553"
+  },
+  {
+    "ano": 2026,
+    "municipio_semana_rows": 27238,
+    "municipios_ativos": 4388,
+    "notificacoes_total": 258079,
+    "semana_min": "202601",
+    "semana_max": "202616"
+  }
+]

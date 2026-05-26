@@ -1,0 +1,142 @@
+feature,group,dtype,description
+ano,identificacao,int64,Chaves e atributos de calendario da linha municipio-semana.
+ano_semana,identificacao,object,Chaves e atributos de calendario da linha municipio-semana.
+atraso_notificacao_medio_dias,identificacao,float64,Chaves e atributos de calendario da linha municipio-semana.
+ibge_municipio,identificacao,object,Chaves e atributos de calendario da linha municipio-semana.
+idade_media_anos,identificacao,float64,Chaves e atributos de calendario da linha municipio-semana.
+municipio,identificacao,object,Chaves e atributos de calendario da linha municipio-semana.
+municipio_resolution,identificacao,object,Chaves e atributos de calendario da linha municipio-semana.
+municipio_source_field,identificacao,object,Chaves e atributos de calendario da linha municipio-semana.
+regiao,identificacao,object,Chaves e atributos de calendario da linha municipio-semana.
+semana_epidemiologica,identificacao,int64,Chaves e atributos de calendario da linha municipio-semana.
+source_year,identificacao,int64,Chaves e atributos de calendario da linha municipio-semana.
+uf,identificacao,object,Chaves e atributos de calendario da linha municipio-semana.
+week_start,identificacao,datetime64[ns],Chaves e atributos de calendario da linha municipio-semana.
+indice_alarme,indice_composto,float64,Indices clinico-epidemiologicos compostos para modelagem.
+indice_carga_clinica,indice_composto,float64,Indices clinico-epidemiologicos compostos para modelagem.
+indice_comorbidades,indice_composto,float64,Indices clinico-epidemiologicos compostos para modelagem.
+indice_confirmacao,indice_composto,float64,Indices clinico-epidemiologicos compostos para modelagem.
+indice_desfecho_severo,indice_composto,float64,Indices clinico-epidemiologicos compostos para modelagem.
+indice_gravidade,indice_composto,float64,Indices clinico-epidemiologicos compostos para modelagem.
+indice_hemorragico,indice_composto,float64,Indices clinico-epidemiologicos compostos para modelagem.
+indice_sintomas,indice_composto,float64,Indices clinico-epidemiologicos compostos para modelagem.
+label_alerta_q75,label_auxiliar,int64,Rotulos auxiliares para alerta e analise exploratoria.
+label_alerta_q90,label_auxiliar,int64,Rotulos auxiliares para alerta e analise exploratoria.
+label_crescimento_acelerado,label_auxiliar,int64,Rotulos auxiliares para alerta e analise exploratoria.
+label_semana_critica,label_auxiliar,int64,Rotulos auxiliares para alerta e analise exploratoria.
+label_surto_local,label_auxiliar,int64,Rotulos auxiliares para alerta e analise exploratoria.
+prop_acido_pept,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_alrm_abdom,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_alrm_hemat,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_alrm_hepat,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_alrm_hipot,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_alrm_letar,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_alrm_liq,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_alrm_plaq,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_alrm_sang,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_alrm_vom,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_artralgia,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_artrite,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_auto_imune,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_cefaleia,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_chikungunya,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_con_fhd,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_confirmado_provavel,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_conjuntvit,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_criterio_clinico,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_criterio_clinico_epi,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_criterio_lab,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_dengue_alarme,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_dengue_grave,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_descartado,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_diabetes,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_dor_costas,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_dor_retro,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_epistaxe,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_evidencia,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_exantema,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_febre,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_gengivo,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_grav_ast,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_grav_consc,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_grav_conv,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_grav_ench,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_grav_extre,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_grav_hemat,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_grav_hipot,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_grav_insuf,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_grav_melen,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_grav_metro,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_grav_mioc,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_grav_orgao,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_grav_pulso,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_grav_sang,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_grav_taqui,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_hematolog,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_hematura,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_hepatopat,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_hipertensa,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_hospitalizado,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_inconclusivo,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_laco,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_laco_n,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_leucopenia,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_mani_hemor,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_metro,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_mialgia,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_nausea,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_obito_agravo,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_obito_outras_causas,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_petequia_n,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_petequias,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_plaq_menor,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_plasmatico,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_renal,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_sangram,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_vomito,proporcao_clinica,float64,"Proporcoes agregadas de sintomas, comorbidades, alarme e gravidade."
+prop_gestante,proporcao_demografica,float64,"Distribuicoes agregadas de sexo, raca e gestacao."
+prop_raca_amarela,proporcao_demografica,float64,"Distribuicoes agregadas de sexo, raca e gestacao."
+prop_raca_branca,proporcao_demografica,float64,"Distribuicoes agregadas de sexo, raca e gestacao."
+prop_raca_indigena,proporcao_demografica,float64,"Distribuicoes agregadas de sexo, raca e gestacao."
+prop_raca_parda,proporcao_demografica,float64,"Distribuicoes agregadas de sexo, raca e gestacao."
+prop_raca_preta,proporcao_demografica,float64,"Distribuicoes agregadas de sexo, raca e gestacao."
+prop_sexo_fem,proporcao_demografica,float64,"Distribuicoes agregadas de sexo, raca e gestacao."
+prop_sexo_masc,proporcao_demografica,float64,"Distribuicoes agregadas de sexo, raca e gestacao."
+is_zero_notification_week,temporal,int64,Features temporais derivadas por municipio.
+notificacoes_aceleracao_1,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_diff_1,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_diff_4,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_lag_1,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_lag_12,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_lag_2,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_lag_3,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_lag_4,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_lag_8,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_max_movel_12,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_max_movel_3,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_max_movel_4,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_max_movel_8,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_media_movel_12,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_media_movel_3,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_media_movel_4,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_media_movel_8,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_min_movel_12,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_min_movel_3,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_min_movel_4,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_min_movel_8,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_pct_change_1,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_pct_change_4,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_razao_media_4,temporal,float64,Features temporais derivadas por municipio.
+notificacoes_razao_media_8,temporal,float64,Features temporais derivadas por municipio.
+week_of_year_cos,temporal,float64,Features temporais derivadas por municipio.
+week_of_year_sin,temporal,float64,Features temporais derivadas por municipio.
+notificacoes,volume,float64,Medidas de volume de notificacoes e desfechos agregados.
+qt_chikungunya,volume,float64,Medidas de volume de notificacoes e desfechos agregados.
+qt_confirmados_provaveis,volume,float64,Medidas de volume de notificacoes e desfechos agregados.
+qt_dengue_alarme,volume,float64,Medidas de volume de notificacoes e desfechos agregados.
+qt_dengue_grave,volume,float64,Medidas de volume de notificacoes e desfechos agregados.
+qt_descartados,volume,float64,Medidas de volume de notificacoes e desfechos agregados.
+qt_hospitalizados,volume,float64,Medidas de volume de notificacoes e desfechos agregados.
+qt_inconclusivos,volume,float64,Medidas de volume de notificacoes e desfechos agregados.
+qt_obitos_agravo,volume,float64,Medidas de volume de notificacoes e desfechos agregados.
+qt_obitos_outras_causas,volume,float64,Medidas de volume de notificacoes e desfechos agregados.
