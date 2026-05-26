@@ -15,6 +15,10 @@ data/inmet/bronze/hourly/
 data/inmet/silver/
 data/inmet/gold/
 
+# Integrated and model-ready data (large)
+data/integrated/
+data/model_ready/*.parquet
+
 # Python
 __pycache__/
 *.pyc
