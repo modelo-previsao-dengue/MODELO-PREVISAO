@@ -1,2 +1,16 @@
 data/raw/
 data/processed/
+
+# SINAN pipeline - large data (parquet)
+data/sinan/silver/
+data/sinan/gold/*/official_dense/
+data/sinan/gold/*/analytics/cluster_assignments_intensity_full/
+data/sinan/gold/*/analytics/cluster_assignments_profile_full/
+
+# Old pipeline versions (large)
+data/sinan/gold/sinan_tcc2_v1/
+
+# Python
+__pycache__/
+*.pyc
+.env
