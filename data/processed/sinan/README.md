@@ -1,27 +1,30 @@
 # Entrega SINAN Processado
 
-Esta pasta contem os artefatos finais da task `Coleta e Processamento de Dados - SINAN`.
+Esta pasta preserva os artefatos historicos da frente SINAN anteriores a consolidacao oficial Bronze/Silver/Gold do TCC2.
 
-## Recorte
+## Status
 
-- Municipio de referencia: Brasilia/DF
-- Codigo de referencia: 5300108
-- Periodo: 2022-2024
-- Registros normalizados: 399.094
-- Semanas epidemiologicas: 156
+- conteudo desta pasta: `legado preservado`
+- camada oficial atual: `MODELO-PREVISAO/data/sinan`
+- pipeline oficial atual: `MODELO-PREVISAO/scripts/sinan_tcc2_pipeline.py`
 
-## Principais arquivos
+## O que existe aqui
 
-- `recorte_*.parquet/csv`: microdados filtrados e normalizados
-- `weekly_features_*.csv`: agregacao semanal pronta para modelagem
-- `cluster_*`: artefatos de clusterizacao por intensidade e por perfil clinico
-- `feature_ranking*` e `selected_features*`: selecao de atributos
-- `quality_*`: validacao e qualidade dos dados
-- `relatorio_sinan_*.md`: relatorio consolidado para a monografia
+- recortes `Brasilia/DF 2022-2024`
+- series nacionais legadas em `Brasil-semana`
+- artefatos de EDA, clusterizacao e selecao de atributos do legado
 
-## Reexecucao
+## Como interpretar
 
-```bash
-cd MODELO-PREVISAO
-python3 scripts/sinan_pipeline.py --skip-download
-```
+- recortes `Brasilia/DF`: validos como evidencia tecnica e historica
+- artefatos nacionais `brasil_2000_2026`: nao usar como camada oficial final do TCC2, porque nao seguem o contrato `municipio-semana`
+
+## Camada oficial do TCC2
+
+Os artefatos oficiais consolidados ficam em:
+
+- `MODELO-PREVISAO/data/sinan/bronze/sinan_tcc2_v2`
+- `MODELO-PREVISAO/data/sinan/silver/sinan_tcc2_v2`
+- `MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2`
+- `MODELO-PREVISAO/data/sinan/governance/sinan_tcc2_v2`
+- `MODELO-PREVISAO/data/sinan/serving/sinan_tcc2_v2`
