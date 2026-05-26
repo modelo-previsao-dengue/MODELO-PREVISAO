@@ -19,6 +19,10 @@ data/inmet/gold/
 data/integrated/
 data/model_ready/*.parquet
 
+# Model binaries (large JSON)
+models/*/model.json
+models/*/model_*.json
+
 # Python
 __pycache__/
 *.pyc
