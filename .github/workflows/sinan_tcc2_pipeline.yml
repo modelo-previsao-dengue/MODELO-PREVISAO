@@ -1,0 +1,95 @@
+name: sinan-tcc2-pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Versao oficial da trilha SINAN
+        required: true
+        default: sinan_tcc2_v2
+      start_year:
+        description: Ano inicial
+        required: true
+        default: "2000"
+      end_year:
+        description: Ano final
+        required: true
+        default: "2026"
+      publish_r2:
+        description: Publicar artefatos em R2
+        required: true
+        default: "false"
+      publish_postgres:
+        description: Publicar camada operacional em PostgreSQL/Supabase
+        required: true
+        default: "false"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: MODELO-PREVISAO
+    env:
+      PYTHONUNBUFFERED: "1"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas pyarrow numpy scikit-learn fastapi psycopg[binary] boto3
+
+      - name: Run official SINAN pipeline
+        run: |
+          python scripts/sinan_tcc2_pipeline.py \
+            --start-year "${{ inputs.start_year }}" \
+            --end-year "${{ inputs.end_year }}" \
+            --version "${{ inputs.version }}"
+
+      - name: Refresh governance coverage
+        run: |
+          python scripts/sinan_tcc2_governance_refresh.py --version "${{ inputs.version }}"
+
+      - name: Generate write-up package
+        run: |
+          python scripts/sinan_tcc2_writeup.py --version "${{ inputs.version }}"
+
+      - name: Publish to R2
+        if: ${{ inputs.publish_r2 == 'true' }}
+        env:
+          R2_ENDPOINT_URL: ${{ secrets.R2_ENDPOINT_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          R2_PREFIX: ${{ secrets.R2_PREFIX }}
+        run: |
+          python scripts/sinan_tcc2_publish_r2.py --version "${{ inputs.version }}"
+
+      - name: Publish to PostgreSQL
+        if: ${{ inputs.publish_postgres == 'true' }}
+        env:
+          SUPABASE_DB_HOST: ${{ secrets.SUPABASE_DB_HOST }}
+          SUPABASE_DB_PORT: ${{ secrets.SUPABASE_DB_PORT }}
+          SUPABASE_DB_NAME: ${{ secrets.SUPABASE_DB_NAME }}
+          SUPABASE_DB_USER: ${{ secrets.SUPABASE_DB_USER }}
+          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+        run: |
+          python scripts/sinan_tcc2_publish_postgres.py --version "${{ inputs.version }}"
+
+      - name: Upload governance artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: sinan-tcc2-${{ inputs.version }}-governance
+          path: |
+            MODELO-PREVISAO/data/sinan/governance/${{ inputs.version }}
+            MODELO-PREVISAO/docs/sinan_tcc2_writeup.md
+            MODELO-PREVISAO/docs/sinan_tcc2_results.md
+            MODELO-PREVISAO/docs/sinan_tcc2_texto_base.md
+            MODELO-PREVISAO/docs/sinan_tcc2_delivery_map.md
