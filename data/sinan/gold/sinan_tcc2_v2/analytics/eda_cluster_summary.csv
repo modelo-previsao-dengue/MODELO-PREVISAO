@@ -1,0 +1,6 @@
+mode,cluster_id,cluster_label,rows,media_notificacoes,mediana_notificacoes
+intensity,2,muito_baixa_transmissao,6383722,0.5025664247183441,0.0
+intensity,0,baixa_transmissao,1262767,17.434478016212356,2.6633935585231736
+intensity,1,transicao,18939,24.82885858143545,11.439662447257383
+profile,1,perfil_basal,6678174,1.5060436954611456,0.0144376899696048
+profile,0,perfil_leve,987254,52.92982998763426,38.49783080260303

@@ -1,0 +1,9 @@
+{
+  "version": "sinan_tcc2_v2",
+  "official_municipalities_ibge": 5571,
+  "municipalities_observed_in_silver": 5565,
+  "municipalities_without_valid_records": 6,
+  "municipal_coverage_pct": 99.8923,
+  "temporal_min_ano_semana": "199952",
+  "temporal_max_ano_semana": "202616"
+}

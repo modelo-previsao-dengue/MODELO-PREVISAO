@@ -1,0 +1,17 @@
+{
+  "version": "sinan_tcc2_v2",
+  "notificacoes_totais": 33411887,
+  "municipios_cobertos": 5565,
+  "periodo": {
+    "min_ano_semana": "199952",
+    "max_ano_semana": "202616"
+  },
+  "pico_nacional": [
+    {
+      "ano_semana": "202415",
+      "ano": 2024,
+      "semana_epidemiologica": 15,
+      "notificacoes_total": 420542
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+services:
+  sinan-api:
+    build:
+      context: ../../../..
+      dockerfile: data/sinan/serving/sinan_tcc2_v2/api/Dockerfile
+    container_name: sinan-tcc2-api
+    ports:
+      - "8000:8000"
+    environment:
+      SINAN_GOLD_ROOT: /app/data/sinan/gold/sinan_tcc2_v2/official_dense
+      SINAN_FEATURE_CATALOG: /app/data/sinan/gold/sinan_tcc2_v2/feature_catalog.csv
+    restart: unless-stopped

@@ -1,0 +1,51 @@
+{
+  "dataset": "silver_observed_municipio_semana",
+  "version": "sinan_tcc2_test_2026",
+  "schema_version": "1.0.0",
+  "record_counts": {
+    "rows": 26151,
+    "municipalities": 4350,
+    "years": [
+      2026
+    ],
+    "total_notifications": 253720
+  },
+  "coverage": {
+    "min_ano_semana": "202601",
+    "max_ano_semana": "202615",
+    "ufs": [
+      "AC",
+      "AL",
+      "AM",
+      "AP",
+      "BA",
+      "CE",
+      "DF",
+      "ES",
+      "GO",
+      "MA",
+      "MG",
+      "MS",
+      "MT",
+      "PA",
+      "PB",
+      "PE",
+      "PI",
+      "PR",
+      "RJ",
+      "RN",
+      "RO",
+      "RR",
+      "RS",
+      "SC",
+      "SE",
+      "SP",
+      "TO"
+    ]
+  },
+  "discard_summary": {
+    "invalid_week_records": 0,
+    "invalid_municipality_records": 0,
+    "duplicate_records_removed": 221
+  }
+}

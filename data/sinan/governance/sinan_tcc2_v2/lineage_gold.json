@@ -1,0 +1,12 @@
+{
+  "dataset": "gold_dense_municipio_semana",
+  "version": "sinan_tcc2_v2",
+  "upstream_dataset": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/silver/sinan_tcc2_v2/official_observed",
+  "transformations": [
+    "densificacao da serie municipio-semana sobre o calendario nacional observado",
+    "zero fill para semanas sem notificacoes por municipio",
+    "engenharia temporal por municipio",
+    "construcao de indices clinico-epidemiologicos compostos",
+    "geracao de labels auxiliares para alertas"
+  ]
+}

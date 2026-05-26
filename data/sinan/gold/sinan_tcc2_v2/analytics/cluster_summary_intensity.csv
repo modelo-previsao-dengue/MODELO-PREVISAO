@@ -1,0 +1,4 @@
+cluster_id,cluster_label,rows,media_notificacoes,mediana_notificacoes
+2,muito_baixa_transmissao,6383722,0.5025664247183441,0.0
+0,baixa_transmissao,1262767,17.434478016212356,2.6633935585231736
+1,transicao,18939,24.82885858143545,11.439662447257383

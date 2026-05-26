@@ -1,0 +1,36 @@
+{
+  "version": "sinan_tcc2_v2",
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/health",
+      "response": {
+        "status": "ok"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/series/{ibge_municipio}",
+      "params": {
+        "start": "YYYYWW",
+        "end": "YYYYWW"
+      },
+      "description": "Serie municipio-semana completa da camada gold."
+    },
+    {
+      "method": "GET",
+      "path": "/v1/features/catalog",
+      "description": "Catalogo oficial das features publicadas."
+    },
+    {
+      "method": "GET",
+      "path": "/v1/top-weeks",
+      "params": {
+        "year": "YYYY",
+        "limit": "1-100"
+      },
+      "description": "Semanas nacionais de maior volume."
+    }
+  ],
+  "feature_catalog_path": "/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/feature_catalog.csv"
+}
