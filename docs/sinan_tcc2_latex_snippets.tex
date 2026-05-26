@@ -1,0 +1,25 @@
+% Trecho gerado automaticamente pela trilha SINAN TCC2.
+% Versao oficial: sinan\_tcc2\_v2
+
+\subsection{Trilha epidemiologica nacional do TCC2}
+A frente epidemiologica do TCC2 foi consolidada como uma pipeline nacional reproduzivel e auditavel em nivel municipio-semana. O processamento partiu dos microdados anuais oficiais do SINAN/Dengue publicados no OpenDataSUS, preservados na camada Bronze, seguiu para uma Silver com reconciliacao territorial, normalizacao de tipos, remocao de duplicidades exatas e agregacao por \texttt{ibge\_municipio + ano\_semana}, e culminou em uma Gold densa pronta para modelagem e alertas.
+
+\subsection{Regra temporal e consolidacao territorial}
+A regra temporal oficial foi congelada sobre semana epidemiologica de notificacao. A derivacao priorizou \texttt{SEM\_NOT}, depois \texttt{DT\_NOTIFIC}, e utilizou \texttt{SEM\_PRI} ou \texttt{DT\_SIN\_PRI} apenas como fallback controlado, para evitar contaminar a serie oficial com semanas antigas, ambiguas ou semanticamente inadequadas para a contagem de notificacoes. Como o microdado nao chega sempre com o codigo municipal final do IBGE em formato consistente, a trilha executou reconciliacao territorial antes da agregacao municipio-semana.
+
+\subsection{Execucao real da trilha}
+Foram inventariados 27 arquivos anuais oficiais, cobrindo a janela operacional de 2000 a 2026. A camada Silver aproveitou 33.411.887 notificacoes validas, distribuidas em 1.841.975 linhas observadas de municipio-semana e 5.565 municipios unicos. A camada Gold produziu 7.665.428 linhas densas para consumo analitico e preditivo.
+
+\subsection{Resultados consolidados}
+O ano com maior volume agregado de notificacoes na serie foi 2024, com 6.560.720 notificacoes consolidadas na camada Gold.
+A maior semana nacional observada foi 202415, com 420.542 notificacoes somadas entre municipios.
+A analise exploratoria foi complementada por clusterizacao de semanas e selecao de atributos, produzindo regimes exploratorios e rankings reproduziveis para apoiar a etapa de modelagem preditiva.
+
+\subsection{Qualidade e governanca}
+A trilha oficial registrou 70.217 duplicatas exatas removidas na Silver, 0 descartes por semana invalida e 19 descartes por municipio invalido. A governanca final incluiu schema versionado, lineage, quality summaries, missingness, discard report e manifesto de execucao.
+
+\subsection{Limitacoes e ameacas a validade}
+A serie depende da qualidade e estabilidade dos microdados oficiais publicados pelo SINAN/OpenDataSUS. Anos recentes podem ser atualizados no portal oficial apos a execucao desta versao, parte das variaveis clinicas apresenta ausencias estruturais ou preenchimento heterogeneo entre anos, e a densificacao da Gold preserva semanas sem notificacao como zero, o que e adequado para modelagem temporal, mas exige interpretacao cuidadosa em municipios com baixa cobertura historica.
+
+\subsection{Contribuicao da frente SINAN}
+A principal contribuicao desta etapa foi congelar uma camada epidemiologica nacional oficial em \texttt{municipio-semana}, separada em Bronze, Silver, Gold, governanca e camada operacional, pronta para alimentar a modelagem preditiva, uma futura camada de alertas e integracao posterior com a trilha exogena.
