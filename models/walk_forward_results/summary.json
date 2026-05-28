@@ -1,0 +1,8 @@
+{
+  "n_folds": 9,
+  "mean_RMSE": 38.4697,
+  "std_RMSE": 27.303,
+  "cv_RMSE_pct": 70.97,
+  "mean_R2": 0.5557,
+  "stable": false
+}

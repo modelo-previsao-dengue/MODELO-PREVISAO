@@ -1,0 +1,11 @@
+{
+  "horizons": [1, 2, 4, 8],
+  "results": [
+    {"horizon": 1, "RMSE": 157.1959, "MAE": 5.2935, "R2": 0.3753, "MAPE": 63.23},
+    {"horizon": 2, "RMSE": 160.9485, "MAE": 5.8206, "R2": 0.3488, "MAPE": 71.45},
+    {"horizon": 4, "RMSE": 167.0739, "MAE": 7.0295, "R2": 0.3064, "MAPE": 91.71},
+    {"horizon": 8, "RMSE": 185.5397, "MAE": 9.521, "R2": 0.1639, "MAPE": 132.54}
+  ],
+  "rmse_t8_over_t1": 1.18,
+  "degradation_acceptable": true
+}

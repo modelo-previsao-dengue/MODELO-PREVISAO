@@ -1,0 +1,26 @@
+{
+  "model_source": "xgb_regression_tuned",
+  "sample_size": 50000,
+  "top5_climate_features": [
+    "rain_sum_mm_mm4",
+    "pressure_mean_mbar",
+    "humidity_mean_pct_mm4",
+    "temp_min_c",
+    "humidity_mean_pct"
+  ],
+  "climate_in_top20": [
+    "rain_sum_mm_mm4"
+  ],
+  "n_climate_in_top20": 1,
+  "lag_climate_ranks": {
+    "rain_sum_mm_lag_2": 143,
+    "rain_sum_mm_lag_4": 144,
+    "rain_sum_mm_lag_8": 145,
+    "temp_mean_c_lag_2": 147,
+    "temp_mean_c_lag_4": 148,
+    "temp_mean_c_lag_8": 149,
+    "humidity_mean_pct_lag_2": 151,
+    "humidity_mean_pct_lag_4": 152,
+    "humidity_mean_pct_lag_8": 153
+  }
+}
