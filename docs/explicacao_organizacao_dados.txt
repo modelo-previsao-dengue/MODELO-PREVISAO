@@ -1,0 +1,188 @@
+================================================================
+   ROTEIRO REUNIAO ORIENTADOR - TCC 2
+   Previsao de Surtos de Dengue - Pedro Lucas (UnB)
+================================================================
+
+
+1. INFRA E ARMAZENAMENTO
+----------------------------------------------------------------
+Organizei o projeto inteiro numa arquitetura Medallion, que eh um
+padrao de engenharia de dados com 3 camadas: Bronze (dado bruto),
+Silver (dado limpo e padronizado) e Gold (dado pronto pra usar).
+
+Tanto os dados do SINAN quanto do INMET passam por essas camadas.
+Tudo eh armazenado em formato Parquet, que eh colunar e comprimido,
+pra conseguir trabalhar com milhoes de linhas no meu notebook de
+16GB de RAM. Cada execucao da pipeline gera uma versao nomeada
+(ex: sinan_tcc2_v2), entao qualquer resultado pode ser reproduzido.
+
+A stack eh toda Python local: pandas, pyarrow, XGBoost, scikit-learn.
+Nao depende de nenhum servico cloud.
+
+Mostrar estrutura:
+  /Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/
+  /Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/inmet/
+
+
+2. COLETA E PROCESSAMENTO - SINAN
+----------------------------------------------------------------
+Os dados epidemiologicos vem dos microdados oficiais do SINAN pelo
+OpenDataSUS, de 2000 a 2026. A pipeline que eu construi baixa esses
+microdados e processa em todas as camadas ate chegar num dataset limpo
+com granularidade de municipio por semana epidemiologica.
+
+Sao 5.565 municipios brasileiros, 27 anos de dados. Alem das camadas
+Bronze/Silver/Gold, criei uma camada de Governance (schema, lineage,
+quality report) e uma de Serving (contrato operacional).
+
+Mostrar:
+  Pipeline:  /Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/scripts/sinan_tcc2_pipeline.py
+  Dados:     /Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/sinan/gold/sinan_tcc2_v2/
+  Doc:       /Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/docs/sinan_national_pipeline_tcc2.md
+
+
+3. COLETA E PROCESSAMENTO - INMET
+----------------------------------------------------------------
+Os dados climaticos vem do INMET, das estacoes meteorologicas
+automaticas (~700 estacoes no Brasil). Construi 4 scripts que
+formam a pipeline climatica:
+
+  1) Extracao e padronizacao dos dados horarios de cada estacao
+  2) Agregacao semanal (temperatura, chuva, umidade, pressao, vento)
+  3) Mapeamento de qual estacao atende cada municipio (por distancia)
+  4) Geracao das features climaticas no nivel municipal
+
+O resultado sao parquets anuais (2000-2026) com variaveis climaticas
+semanais para cada municipio.
+
+Mostrar:
+  Scripts:   /Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/scripts/inmet_extract_standardize.py
+             /Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/scripts/inmet_weekly_aggregate.py
+             /Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/scripts/inmet_station_municipality.py
+             /Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/scripts/inmet_municipal_features.py
+  Dados:     /Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/inmet/gold/
+
+
+4. INTEGRACAO E UNIFICACAO
+----------------------------------------------------------------
+Juntei os dois datasets (SINAN + INMET) pela chave
+(municipio, ano, semana epidemiologica) e fiz engenharia de features.
+
+O dataset final tem 164 features, incluindo:
+  - Lags temporais de notificacoes (1, 2, 4, 8, 12 semanas atras)
+  - Medias moveis e diferencas (tendencia recente)
+  - Sazonalidade (seno/cosseno da semana do ano)
+  - Features climaticas defasadas (chuva e temp de semanas atras)
+  - Proporcoes clinicas (taxa de hospitalizacao, confirmacao)
+
+O dataset final tem 7.6 milhoes de linhas, dividido temporalmente:
+  Train: < 2022  (5.8M linhas)
+  Val: 2022-2023 (873K linhas)
+  Test: 2024+    (947K linhas)
+
+Os targets sao: numero de notificacoes 4 semanas a frente (regressao)
+e nivel de risco de surto em 4 classes (classificacao).
+
+Porem, um problema importante: a cobertura do INMET eh irregular.
+Anos recentes (2017+) tem ~90% dos municipios cobertos, mas anos
+antigos (<2007) tem menos de 40%. A media geral eh so 51.4%.
+Isso vai impactar diretamente os resultados dos modelos.
+
+Mostrar:
+  Integracao:  /Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/scripts/integrate_sinan_inmet.py
+  Features:    /Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/scripts/prepare_model_dataset.py
+  Cobertura:   /Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/integrated/coverage_by_year.csv
+  Schema:      /Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/data/model_ready/feature_schema.csv
+
+
+5. TESTES COM XGBOOST
+----------------------------------------------------------------
+Treinei varios modelos XGBoost e os resultados mais importantes sao:
+
+REGRESSAO (prever quantidade de notificacoes 4 semanas a frente):
+  Modelo SINAN+INMET:  R2 = 0.31
+  Modelo so SINAN:     R2 = 0.42
+
+  Ou seja: tirar os dados climaticos MELHOROU o modelo. Isso acontece
+  porque a cobertura do INMET eh baixa (51.4%) e o modelo acaba
+  aprendendo ruido nos municipios sem dados climaticos.
+
+CLASSIFICACAO (prever nivel de risco de surto):
+  AUC = 0.84 (a meta que eu tinha definido era 0.70, entao superou)
+  O modelo consegue distinguir bem entre baixo risco e surto.
+
+MULTI-HORIZONTE (previsao em diferentes prazos):
+  1 semana:  R2 = 0.38
+  2 semanas: R2 = 0.35
+  4 semanas: R2 = 0.31
+  8 semanas: R2 = 0.16
+  A degradacao eh gradual e aceitavel (ratio t8/t1 = 1.18).
+
+INTERPRETABILIDADE (SHAP):
+  As features mais importantes sao todas epidemiologicas: lag de
+  notificacoes, media movel, diferenca semanal. So aparece 1 feature
+  climatica no top-20 (chuva acumulada 4 semanas, na posicao 20).
+  Ou seja, o SHAP confirma que clima contribui muito pouco.
+
+Mostrar:
+  Regressao:       /Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/models/xgb_regression_mvp/metrics.json
+  Classificacao:   /Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/models/xgb_classification_mvp/metrics.json
+  SINAN-only:      /Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/models/xgb_baseline_sinan_only/results.json
+  Multi-horizonte: /Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/models/multi_horizon/summary.json
+  SHAP report:     /Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/models/shap_analysis/shap_report.json
+  SHAP features:   /Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/models/shap_analysis/shap_feature_importance.csv
+
+
+6. ACHADOS PRINCIPAIS
+----------------------------------------------------------------
+Tres conclusoes importantes que valem discussao no TCC:
+
+1) DADOS CLIMATICOS DO INMET NAO MELHORAM A PREVISAO
+   Tanto a comparacao direta (R2 0.42 vs 0.31) quanto a analise
+   SHAP mostram que as features climaticas quase nao contribuem.
+   A cobertura irregular (51.4%) eh a causa principal. Esse eh um
+   resultado cientifico relevante: mostra uma limitacao real da
+   fonte INMET para modelagem nacional.
+
+2) O HISTORICO DE DENGUE EH O MELHOR PREDITOR
+   As notificacoes das semanas anteriores no proprio municipio sao,
+   de longe, as features mais preditivas. Isso eh consistente com
+   a literatura sobre autocorrelacao temporal de arboviroses.
+
+3) A CLASSIFICACAO DE RISCO EH O PONTO FORTE
+   Com AUC = 0.84, o modelo de classificacao tem utilidade pratica
+   real para alertas epidemiologicos, mesmo que a regressao pura
+   tenha R2 modesto.
+
+
+7. PROXIMOS PASSOS (para discutir com orientador)
+----------------------------------------------------------------
+- Usar fonte climatica com melhor cobertura? (ERA5 ou NASA POWER
+  tem cobertura global via satelite, sem depender de estacoes)
+- Focar na classificacao de risco como produto final do TCC?
+- Testar features espaciais (dados de municipios vizinhos)?
+- Como posicionar o achado sobre INMET no texto do TCC?
+
+
+GRAFICOS PARA ABRIR ANTES DA REUNIAO (Cmd+Click)
+----------------------------------------------------------------
+/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/models/shap_analysis/shap_summary_beeswarm.png
+  -> interpretabilidade: quais features mais importam
+
+/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/models/shap_analysis/shap_dependence_climate_top5.png
+  -> como as features climaticas se comportam
+
+/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/models/xgb_classification_mvp/confusion_matrix.png
+  -> matriz de confusao das 4 classes de risco
+
+/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/models/xgb_regression_mvp/plots.png
+  -> importancia de features e dispersao predicao vs real
+
+/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/models/walk_forward_results/walk_forward_degradation.png
+  -> estabilidade temporal do modelo (2004-2026)
+
+/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/models/multi_horizon/degradation_plot.png
+  -> degradacao por horizonte de previsao (t+1 a t+8)
+
+DOC COMPLETA:
+/Users/filippoferrari/Documents/UnB/TCC/MODELO-PREVISAO/docs/xgboost_pipeline_results.md
