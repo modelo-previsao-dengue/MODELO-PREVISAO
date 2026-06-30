@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 from huggingface_hub import HfApi
 
-REPO_ID = "thiagorfreitas/dengue-tcc2-data"
+REPO_ID = "pedrolucassantanaf/dengue-tcc2-data"
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 TOKEN = os.environ.get("HF_TOKEN")
