@@ -5,16 +5,17 @@ Usage:
     export HF_TOKEN=hf_xxx
     python scripts/upload_data_to_hf.py
 
-Uploads Bronze/Silver/Gold layers for SINAN and INMET,
-plus integrated and model_ready data.
+Uses upload_large_folder to batch everything in minimal commits.
 """
 import os
 import sys
+import shutil
 from pathlib import Path
 from huggingface_hub import HfApi
 
 REPO_ID = "pedrolucassantanaf/dengue-tcc2-data"
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+STAGING = Path(__file__).resolve().parent.parent / "_hf_staging"
 
 TOKEN = os.environ.get("HF_TOKEN")
 if not TOKEN:
@@ -23,69 +24,45 @@ if not TOKEN:
 
 api = HfApi(token=TOKEN)
 
-FILES_TO_UPLOAD = []
+if STAGING.exists():
+    shutil.rmtree(STAGING)
 
-# --- SINAN Silver (partitioned by year) ---
-sinan_silver = DATA_DIR / "sinan" / "silver" / "sinan_tcc2_v2" / "official_observed"
-for year_dir in sorted(sinan_silver.glob("year=*")):
-    for parquet in year_dir.glob("*.parquet"):
-        rel = parquet.relative_to(DATA_DIR)
-        FILES_TO_UPLOAD.append((parquet, f"data/{rel}"))
+STAGING.mkdir()
+data_out = STAGING / "data"
 
-# --- SINAN Gold (partitioned by year, multi-part) ---
-sinan_gold = DATA_DIR / "sinan" / "gold" / "sinan_tcc2_v2" / "official_dense"
-for year_dir in sorted(sinan_gold.glob("year=*")):
-    for parquet in year_dir.glob("*.parquet"):
-        rel = parquet.relative_to(DATA_DIR)
-        FILES_TO_UPLOAD.append((parquet, f"data/{rel}"))
+layers = [
+    ("sinan/silver/sinan_tcc2_v2/official_observed", "**/*.parquet"),
+    ("sinan/gold/sinan_tcc2_v2/official_dense", "**/*.parquet"),
+    ("inmet/bronze/hourly", "**/*.parquet"),
+    ("inmet/silver", "*.parquet"),
+    ("inmet/gold", "*.parquet"),
+    ("integrated", "*.parquet"),
+    ("model_ready", "*"),
+]
 
-# --- INMET Bronze (hourly, partitioned by year) ---
-inmet_bronze = DATA_DIR / "inmet" / "bronze" / "hourly"
-for year_dir in sorted(inmet_bronze.glob("year=*")):
-    for parquet in year_dir.glob("*.parquet"):
-        rel = parquet.relative_to(DATA_DIR)
-        FILES_TO_UPLOAD.append((parquet, f"data/{rel}"))
+count = 0
+for subdir, pattern in layers:
+    src = DATA_DIR / subdir
+    if not src.exists():
+        print(f"SKIP (not found): {subdir}")
+        continue
+    for f in src.glob(pattern):
+        if f.is_file():
+            rel = f.relative_to(DATA_DIR)
+            dest = data_out / rel
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            os.symlink(f, dest)
+            count += 1
 
-# --- INMET Silver (one file per year) ---
-inmet_silver = DATA_DIR / "inmet" / "silver"
-for parquet in sorted(inmet_silver.glob("*.parquet")):
-    rel = parquet.relative_to(DATA_DIR)
-    FILES_TO_UPLOAD.append((parquet, f"data/{rel}"))
+total_mb = sum(f.stat().st_size for f in data_out.rglob("*") if f.is_file()) / 1024**2
+print(f"Staged {count} files ({total_mb:.0f} MB) for upload to {REPO_ID}")
+print("Uploading (single batch)...")
 
-# --- INMET Gold (one file per year) ---
-inmet_gold = DATA_DIR / "inmet" / "gold"
-for parquet in sorted(inmet_gold.glob("*.parquet")):
-    rel = parquet.relative_to(DATA_DIR)
-    FILES_TO_UPLOAD.append((parquet, f"data/{rel}"))
+api.upload_large_folder(
+    folder_path=str(STAGING),
+    repo_id=REPO_ID,
+    repo_type="dataset",
+)
 
-# --- Integrated ---
-integrated = DATA_DIR / "integrated" / "sinan_inmet_municipal_weekly.parquet"
-if integrated.exists():
-    FILES_TO_UPLOAD.append((integrated, "data/integrated/sinan_inmet_municipal_weekly.parquet"))
-
-# --- Model Ready ---
-for name in ["train.parquet", "val.parquet", "test.parquet", "feature_schema.csv"]:
-    f = DATA_DIR / "model_ready" / name
-    if f.exists():
-        FILES_TO_UPLOAD.append((f, f"data/model_ready/{name}"))
-
-print(f"Found {len(FILES_TO_UPLOAD)} files to upload to {REPO_ID}")
-total_size = sum(f[0].stat().st_size for f in FILES_TO_UPLOAD)
-print(f"Total size: {total_size / 1024**2:.1f} MB")
-print()
-
-for i, (local_path, repo_path) in enumerate(FILES_TO_UPLOAD, 1):
-    size_mb = local_path.stat().st_size / 1024**2
-    print(f"[{i}/{len(FILES_TO_UPLOAD)}] {repo_path} ({size_mb:.1f} MB) ...", end=" ", flush=True)
-    try:
-        api.upload_file(
-            path_or_fileobj=str(local_path),
-            path_in_repo=repo_path,
-            repo_id=REPO_ID,
-            repo_type="dataset",
-        )
-        print("OK")
-    except Exception as e:
-        print(f"FAIL: {e}")
-
-print("\nDone.")
+shutil.rmtree(STAGING)
+print("Done.")
