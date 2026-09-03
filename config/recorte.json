@@ -13,10 +13,13 @@
     "test": [2023]
   },
   "split_e2": {
-    "descricao": "Referencia de producao SINAN-only sobre o historico completo",
-    "train": "<=2020",
+    "descricao": "Referencia de producao SINAN-only sobre o historico completo. O ano de teste e o mesmo do E1 para que a diferenca entre os dois nao misture efeito de recorte com efeito de periodo de teste.",
+    "ano_inicio": 2000,
+    "train_ate": 2020,
     "val": [2021, 2022],
     "test": [2023]
   },
-  "fallback_limiares": "uf"
+  "fallback_limiares": "uf",
+  "incluir_notificacoes_atual": true,
+  "_nota_incluir_notificacoes_atual": "notificacoes na semana t e conhecida quando se preve t+4, e e exatamente o que o baseline de persistencia usa. A versao anterior a excluia das features mas mantinha notificacoes_lag_1, o que handicapava o modelo contra o proprio baseline."
 }

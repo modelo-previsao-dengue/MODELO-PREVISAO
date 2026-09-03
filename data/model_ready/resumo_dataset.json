@@ -1,0 +1,30 @@
+{
+  "modo": "e1",
+  "config": {
+    "ufs": [
+      "DF",
+      "ES",
+      "GO",
+      "RJ",
+      "MG",
+      "SP"
+    ],
+    "ano_inicio": 2019,
+    "ano_fim": 2023,
+    "cobertura_municipal_minima": 0.8,
+    "incluir_notificacoes_atual": true
+  },
+  "linhas": {
+    "train": 214933,
+    "val": 71211,
+    "test": 72557
+  },
+  "municipios": {
+    "train": 1369,
+    "val": 1369,
+    "test": 1369
+  },
+  "n_features": 178,
+  "n_features_inmet": 49,
+  "rotulos_alterados_sem_vazamento": 27836
+}
