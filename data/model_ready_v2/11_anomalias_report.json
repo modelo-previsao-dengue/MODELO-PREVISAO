@@ -1,0 +1,480 @@
+{
+  "n_new_features": 24,
+  "dataset_rows": 1224164,
+  "dataset_cols": 315,
+  "correlacoes_bruto_vs_anomalia": [
+    {
+      "feature_base": "rain_sum_mm",
+      "type": "bruto",
+      "col_name": "rain_sum_mm",
+      "spearman_r": 0.035123,
+      "abs_r": 0.035123,
+      "p_value": 3.0514762681015314e-300,
+      "n_valid": 1111222
+    },
+    {
+      "feature_base": "rain_sum_mm",
+      "type": "anomalia",
+      "col_name": "rain_sum_mm_anomalia",
+      "spearman_r": 0.000189,
+      "abs_r": 0.000189,
+      "p_value": 0.8422273354887938,
+      "n_valid": 1111222
+    },
+    {
+      "feature_base": "rain_sum_mm",
+      "type": "z-score",
+      "col_name": "rain_sum_mm_anomalia_std",
+      "spearman_r": 0.008179,
+      "abs_r": 0.008179,
+      "p_value": 1.7115690130256113e-16,
+      "n_valid": 1015092
+    },
+    {
+      "feature_base": "rain_mean_mm",
+      "type": "bruto",
+      "col_name": "rain_mean_mm",
+      "spearman_r": 0.009046,
+      "abs_r": 0.009046,
+      "p_value": 1.0935099034884407e-16,
+      "n_valid": 840617
+    },
+    {
+      "feature_base": "rain_mean_mm",
+      "type": "anomalia",
+      "col_name": "rain_mean_mm_anomalia",
+      "spearman_r": 0.00027,
+      "abs_r": 0.00027,
+      "p_value": 0.8045589883200744,
+      "n_valid": 840617
+    },
+    {
+      "feature_base": "rain_mean_mm",
+      "type": "z-score",
+      "col_name": "rain_mean_mm_anomalia_std",
+      "spearman_r": 0.002755,
+      "abs_r": 0.002755,
+      "p_value": 0.015044074590377316,
+      "n_valid": 778621
+    },
+    {
+      "feature_base": "rain_days",
+      "type": "bruto",
+      "col_name": "rain_days",
+      "spearman_r": 0.038772,
+      "abs_r": 0.038772,
+      "p_value": 0.0,
+      "n_valid": 1111222
+    },
+    {
+      "feature_base": "rain_days",
+      "type": "anomalia",
+      "col_name": "rain_days_anomalia",
+      "spearman_r": 0.010669,
+      "abs_r": 0.010669,
+      "p_value": 2.4084069622797398e-29,
+      "n_valid": 1111222
+    },
+    {
+      "feature_base": "rain_days",
+      "type": "z-score",
+      "col_name": "rain_days_anomalia_std",
+      "spearman_r": 0.011153,
+      "abs_r": 0.011153,
+      "p_value": 2.7867882902591106e-29,
+      "n_valid": 1014389
+    },
+    {
+      "feature_base": "rain_heavy_days",
+      "type": "bruto",
+      "col_name": "rain_heavy_days",
+      "spearman_r": 0.02527,
+      "abs_r": 0.02527,
+      "p_value": 2.1932422768681108e-156,
+      "n_valid": 1111222
+    },
+    {
+      "feature_base": "rain_heavy_days",
+      "type": "anomalia",
+      "col_name": "rain_heavy_days_anomalia",
+      "spearman_r": -0.002471,
+      "abs_r": 0.002471,
+      "p_value": 0.009202446836293555,
+      "n_valid": 1111222
+    },
+    {
+      "feature_base": "rain_heavy_days",
+      "type": "z-score",
+      "col_name": "rain_heavy_days_anomalia_std",
+      "spearman_r": 0.007767,
+      "abs_r": 0.007767,
+      "p_value": 7.45102150173548e-12,
+      "n_valid": 777561
+    },
+    {
+      "feature_base": "temp_mean_c",
+      "type": "bruto",
+      "col_name": "temp_mean_c",
+      "spearman_r": -0.019025,
+      "abs_r": 0.019025,
+      "p_value": 1.3078747008271927e-74,
+      "n_valid": 922505
+    },
+    {
+      "feature_base": "temp_mean_c",
+      "type": "anomalia",
+      "col_name": "temp_mean_c_anomalia",
+      "spearman_r": 0.044241,
+      "abs_r": 0.044241,
+      "p_value": 0.0,
+      "n_valid": 922505
+    },
+    {
+      "feature_base": "temp_mean_c",
+      "type": "z-score",
+      "col_name": "temp_mean_c_anomalia_std",
+      "spearman_r": 0.047333,
+      "abs_r": 0.047333,
+      "p_value": 0.0,
+      "n_valid": 909274
+    },
+    {
+      "feature_base": "temp_min_c",
+      "type": "bruto",
+      "col_name": "temp_min_c",
+      "spearman_r": -0.002599,
+      "abs_r": 0.002599,
+      "p_value": 0.012573224322183385,
+      "n_valid": 921864
+    },
+    {
+      "feature_base": "temp_min_c",
+      "type": "anomalia",
+      "col_name": "temp_min_c_anomalia",
+      "spearman_r": 0.043432,
+      "abs_r": 0.043432,
+      "p_value": 0.0,
+      "n_valid": 921864
+    },
+    {
+      "feature_base": "temp_min_c",
+      "type": "z-score",
+      "col_name": "temp_min_c_anomalia_std",
+      "spearman_r": 0.042286,
+      "abs_r": 0.042286,
+      "p_value": 0.0,
+      "n_valid": 907901
+    },
+    {
+      "feature_base": "temp_max_c",
+      "type": "bruto",
+      "col_name": "temp_max_c",
+      "spearman_r": 0.033071,
+      "abs_r": 0.033071,
+      "p_value": 7.818015162747215e-215,
+      "n_valid": 894311
+    },
+    {
+      "feature_base": "temp_max_c",
+      "type": "anomalia",
+      "col_name": "temp_max_c_anomalia",
+      "spearman_r": 0.048673,
+      "abs_r": 0.048673,
+      "p_value": 0.0,
+      "n_valid": 894311
+    },
+    {
+      "feature_base": "temp_max_c",
+      "type": "z-score",
+      "col_name": "temp_max_c_anomalia_std",
+      "spearman_r": 0.048101,
+      "abs_r": 0.048101,
+      "p_value": 0.0,
+      "n_valid": 877375
+    },
+    {
+      "feature_base": "temp_range_c",
+      "type": "bruto",
+      "col_name": "temp_range_c",
+      "spearman_r": 0.000921,
+      "abs_r": 0.000921,
+      "p_value": 0.3841476953458063,
+      "n_valid": 893494
+    },
+    {
+      "feature_base": "temp_range_c",
+      "type": "anomalia",
+      "col_name": "temp_range_c_anomalia",
+      "spearman_r": -0.004035,
+      "abs_r": 0.004035,
+      "p_value": 0.00013694475717251748,
+      "n_valid": 893494
+    },
+    {
+      "feature_base": "temp_range_c",
+      "type": "z-score",
+      "col_name": "temp_range_c_anomalia_std",
+      "spearman_r": -0.001596,
+      "abs_r": 0.001596,
+      "p_value": 0.13495120395452664,
+      "n_valid": 877023
+    },
+    {
+      "feature_base": "humidity_mean_pct",
+      "type": "bruto",
+      "col_name": "humidity_mean_pct",
+      "spearman_r": 0.054866,
+      "abs_r": 0.054866,
+      "p_value": 0.0,
+      "n_valid": 893523
+    },
+    {
+      "feature_base": "humidity_mean_pct",
+      "type": "anomalia",
+      "col_name": "humidity_mean_pct_anomalia",
+      "spearman_r": 0.053028,
+      "abs_r": 0.053028,
+      "p_value": 0.0,
+      "n_valid": 893523
+    },
+    {
+      "feature_base": "humidity_mean_pct",
+      "type": "z-score",
+      "col_name": "humidity_mean_pct_anomalia_std",
+      "spearman_r": 0.052156,
+      "abs_r": 0.052156,
+      "p_value": 0.0,
+      "n_valid": 877446
+    },
+    {
+      "feature_base": "pressure_mean_mbar",
+      "type": "bruto",
+      "col_name": "pressure_mean_mbar",
+      "spearman_r": -0.028362,
+      "abs_r": 0.028362,
+      "p_value": 1.2803244412808087e-164,
+      "n_valid": 929114
+    },
+    {
+      "feature_base": "pressure_mean_mbar",
+      "type": "anomalia",
+      "col_name": "pressure_mean_mbar_anomalia",
+      "spearman_r": 0.011174,
+      "abs_r": 0.011174,
+      "p_value": 4.740939033158192e-27,
+      "n_valid": 929114
+    },
+    {
+      "feature_base": "pressure_mean_mbar",
+      "type": "z-score",
+      "col_name": "pressure_mean_mbar_anomalia_std",
+      "spearman_r": 0.011697,
+      "abs_r": 0.011697,
+      "p_value": 4.348124191761546e-29,
+      "n_valid": 915877
+    },
+    {
+      "feature_base": "wind_speed_mean_ms",
+      "type": "bruto",
+      "col_name": "wind_speed_mean_ms",
+      "spearman_r": -0.130019,
+      "abs_r": 0.130019,
+      "p_value": 0.0,
+      "n_valid": 879965
+    },
+    {
+      "feature_base": "wind_speed_mean_ms",
+      "type": "anomalia",
+      "col_name": "wind_speed_mean_ms_anomalia",
+      "spearman_r": -0.000816,
+      "abs_r": 0.000816,
+      "p_value": 0.4439923166291573,
+      "n_valid": 879965
+    },
+    {
+      "feature_base": "wind_speed_mean_ms",
+      "type": "z-score",
+      "col_name": "wind_speed_mean_ms_anomalia_std",
+      "spearman_r": -0.00094,
+      "abs_r": 0.00094,
+      "p_value": 0.3819686704045475,
+      "n_valid": 864141
+    },
+    {
+      "feature_base": "radiation_mean_kj",
+      "type": "bruto",
+      "col_name": "radiation_mean_kj",
+      "spearman_r": -0.037944,
+      "abs_r": 0.037944,
+      "p_value": 3.1854468451031085e-287,
+      "n_valid": 910438
+    },
+    {
+      "feature_base": "radiation_mean_kj",
+      "type": "anomalia",
+      "col_name": "radiation_mean_kj_anomalia",
+      "spearman_r": -0.009455,
+      "abs_r": 0.009455,
+      "p_value": 1.8517265467219022e-19,
+      "n_valid": 910438
+    },
+    {
+      "feature_base": "radiation_mean_kj",
+      "type": "z-score",
+      "col_name": "radiation_mean_kj_anomalia_std",
+      "spearman_r": -0.008726,
+      "abs_r": 0.008726,
+      "p_value": 1.4153626674882849e-16,
+      "n_valid": 896725
+    }
+  ],
+  "correlacoes_surto_t4": [
+    {
+      "feature_base": "rain_sum_mm",
+      "type": "anomalia",
+      "spearman_r_t4": -0.005038,
+      "p_value": 1.3579270033948384e-07
+    },
+    {
+      "feature_base": "rain_sum_mm",
+      "type": "z-score",
+      "spearman_r_t4": 0.012124,
+      "p_value": 8.132929206410023e-34
+    },
+    {
+      "feature_base": "rain_mean_mm",
+      "type": "anomalia",
+      "spearman_r_t4": -0.001114,
+      "p_value": 0.31022893212162717
+    },
+    {
+      "feature_base": "rain_mean_mm",
+      "type": "z-score",
+      "spearman_r_t4": 0.007615,
+      "p_value": 2.4238935225228276e-11
+    },
+    {
+      "feature_base": "rain_days",
+      "type": "anomalia",
+      "spearman_r_t4": 0.015848,
+      "p_value": 9.805154470461234e-62
+    },
+    {
+      "feature_base": "rain_days",
+      "type": "z-score",
+      "spearman_r_t4": 0.016702,
+      "p_value": 1.4517166261747092e-62
+    },
+    {
+      "feature_base": "rain_heavy_days",
+      "type": "anomalia",
+      "spearman_r_t4": -0.006148,
+      "p_value": 1.2612097983698317e-10
+    },
+    {
+      "feature_base": "rain_heavy_days",
+      "type": "z-score",
+      "spearman_r_t4": 0.015789,
+      "p_value": 2.626905755298724e-43
+    },
+    {
+      "feature_base": "temp_mean_c",
+      "type": "anomalia",
+      "spearman_r_t4": 0.042368,
+      "p_value": 0.0
+    },
+    {
+      "feature_base": "temp_mean_c",
+      "type": "z-score",
+      "spearman_r_t4": 0.045287,
+      "p_value": 0.0
+    },
+    {
+      "feature_base": "temp_min_c",
+      "type": "anomalia",
+      "spearman_r_t4": 0.046692,
+      "p_value": 0.0
+    },
+    {
+      "feature_base": "temp_min_c",
+      "type": "z-score",
+      "spearman_r_t4": 0.044998,
+      "p_value": 0.0
+    },
+    {
+      "feature_base": "temp_max_c",
+      "type": "anomalia",
+      "spearman_r_t4": 0.055063,
+      "p_value": 0.0
+    },
+    {
+      "feature_base": "temp_max_c",
+      "type": "z-score",
+      "spearman_r_t4": 0.055895,
+      "p_value": 0.0
+    },
+    {
+      "feature_base": "temp_range_c",
+      "type": "anomalia",
+      "spearman_r_t4": -0.000495,
+      "p_value": 0.6419313720616443
+    },
+    {
+      "feature_base": "temp_range_c",
+      "type": "z-score",
+      "spearman_r_t4": 0.001096,
+      "p_value": 0.3076739518393867
+    },
+    {
+      "feature_base": "humidity_mean_pct",
+      "type": "anomalia",
+      "spearman_r_t4": 0.062908,
+      "p_value": 0.0
+    },
+    {
+      "feature_base": "humidity_mean_pct",
+      "type": "z-score",
+      "spearman_r_t4": 0.062817,
+      "p_value": 0.0
+    },
+    {
+      "feature_base": "pressure_mean_mbar",
+      "type": "anomalia",
+      "spearman_r_t4": 0.018129,
+      "p_value": 1.5879520017279633e-67
+    },
+    {
+      "feature_base": "pressure_mean_mbar",
+      "type": "z-score",
+      "spearman_r_t4": 0.020465,
+      "p_value": 2.0768009877789566e-84
+    },
+    {
+      "feature_base": "wind_speed_mean_ms",
+      "type": "anomalia",
+      "spearman_r_t4": -0.006116,
+      "p_value": 1.1909054121717579e-08
+    },
+    {
+      "feature_base": "wind_speed_mean_ms",
+      "type": "z-score",
+      "spearman_r_t4": -0.007629,
+      "p_value": 1.7871637364595881e-12
+    },
+    {
+      "feature_base": "radiation_mean_kj",
+      "type": "anomalia",
+      "spearman_r_t4": -0.014598,
+      "p_value": 1.4186093985726567e-43
+    },
+    {
+      "feature_base": "radiation_mean_kj",
+      "type": "z-score",
+      "spearman_r_t4": -0.013211,
+      "p_value": 1.6739839344487198e-35
+    }
+  ],
+  "anomalia_melhor_que_bruto": 4,
+  "total_features_comparadas": 12,
+  "resumo": "Anomalia melhor que bruto em 4/12 features"
+}

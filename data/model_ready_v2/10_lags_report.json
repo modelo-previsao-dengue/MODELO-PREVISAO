@@ -1,0 +1,66 @@
+{
+  "n_base_features": 12,
+  "n_lags": 8,
+  "n_new_lag_features": 96,
+  "n_new_mm_features": 24,
+  "n_total_new": 120,
+  "dataset_rows": 1224164,
+  "dataset_cols": 291,
+  "lag_otimo": {
+    "humidity_mean_pct": {
+      "lag": 8,
+      "spearman_r": 0.185034
+    },
+    "temp_max_c": {
+      "lag": 8,
+      "spearman_r": 0.160408
+    },
+    "wind_speed_mean_ms": {
+      "lag": 1,
+      "spearman_r": -0.129176
+    },
+    "temp_min_c": {
+      "lag": 8,
+      "spearman_r": 0.11733
+    },
+    "rain_mean_mm": {
+      "lag": 8,
+      "spearman_r": 0.110821
+    },
+    "rain_sum_mm": {
+      "lag": 8,
+      "spearman_r": 0.101195
+    },
+    "rain_heavy_days": {
+      "lag": 8,
+      "spearman_r": 0.093013
+    },
+    "rain_days": {
+      "lag": 8,
+      "spearman_r": 0.091098
+    },
+    "temp_mean_c": {
+      "lag": 8,
+      "spearman_r": 0.090664
+    },
+    "temp_range_c": {
+      "lag": 8,
+      "spearman_r": -0.053599
+    },
+    "pressure_mean_mbar": {
+      "lag": 8,
+      "spearman_r": -0.038678
+    },
+    "radiation_mean_kj": {
+      "lag": 1,
+      "spearman_r": -0.031177
+    }
+  },
+  "correlacoes_resumo": {
+    "media_abs_r_lags": 0.071,
+    "max_abs_r_lags": 0.185,
+    "media_abs_r_mm": 0.0794,
+    "features_r_above_010": 23,
+    "features_r_above_015": 6
+  }
+}

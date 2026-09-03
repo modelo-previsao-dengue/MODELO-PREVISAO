@@ -1,0 +1,13 @@
+feature,best_lag,r,p_value,method
+rain_sum_mm,8,0.101195,0.0,spearman
+rain_mean_mm,8,0.110821,0.0,spearman
+rain_days,8,0.091098,0.0,spearman
+rain_heavy_days,8,0.093013,0.0,spearman
+temp_mean_c,8,0.090664,0.0,spearman
+temp_min_c,8,0.11733,0.0,spearman
+temp_max_c,8,0.160408,0.0,spearman
+temp_range_c,8,-0.053599,0.0,spearman
+humidity_mean_pct,8,0.185034,0.0,spearman
+pressure_mean_mbar,8,-0.038678,1.2025916726963071e-296,spearman
+wind_speed_mean_ms,0,-0.130019,0.0,spearman
+radiation_mean_kj,0,-0.037944,3.1854468451031085e-287,spearman

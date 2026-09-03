@@ -1,0 +1,64 @@
+{
+  "decision": "GO",
+  "n_features_significant": 6,
+  "significant_features": {
+    "humidity_mean_pct": 0.185034,
+    "temp_max_c": 0.160408,
+    "wind_speed_mean_ms": 0.130019,
+    "temp_min_c": 0.11733,
+    "rain_mean_mm": 0.110821,
+    "rain_sum_mm": 0.101195
+  },
+  "pearson_computed": 60,
+  "spearman_computed": 60,
+  "lag_otimo": {
+    "rain_sum_mm": {
+      "lag": 8,
+      "r": 0.101195
+    },
+    "rain_mean_mm": {
+      "lag": 8,
+      "r": 0.110821
+    },
+    "rain_days": {
+      "lag": 8,
+      "r": 0.091098
+    },
+    "rain_heavy_days": {
+      "lag": 8,
+      "r": 0.093013
+    },
+    "temp_mean_c": {
+      "lag": 8,
+      "r": 0.090664
+    },
+    "temp_min_c": {
+      "lag": 8,
+      "r": 0.11733
+    },
+    "temp_max_c": {
+      "lag": 8,
+      "r": 0.160408
+    },
+    "temp_range_c": {
+      "lag": 8,
+      "r": -0.053599
+    },
+    "humidity_mean_pct": {
+      "lag": 8,
+      "r": 0.185034
+    },
+    "pressure_mean_mbar": {
+      "lag": 8,
+      "r": -0.038678
+    },
+    "wind_speed_mean_ms": {
+      "lag": 0,
+      "r": -0.130019
+    },
+    "radiation_mean_kj": {
+      "lag": 0,
+      "r": -0.037944
+    }
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "modelo_analisado": "B_inmet_bruto",
+  "sample_size": 50000,
+  "n_features": 159,
+  "climate_in_top_10": 0,
+  "climate_in_top_20": 3,
+  "climate_in_top_30": 5,
+  "best_climate_feature": "pressure_mean_mbar",
+  "best_climate_rank": 17,
+  "best_climate_shap": 0.0162,
+  "mean_shap_inmet": 0.0049,
+  "mean_shap_sinan": 0.009,
+  "thresholds": [
+    {
+      "feature": "pressure_mean_mbar",
+      "rank": 17,
+      "threshold": 974.06,
+      "direction": "negativo",
+      "mean_shap_above": -0.0241,
+      "mean_shap_below": 0.0178
+    },
+    {
+      "feature": "humidity_mean_pct_mm4",
+      "rank": 19,
+      "threshold": 16.57,
+      "direction": "positivo",
+      "mean_shap_above": 0.0165,
+      "mean_shap_below": -0.0204
+    },
+    {
+      "feature": "rain_sum_mm_mm4",
+      "rank": 20,
+      "threshold": 12.67,
+      "direction": "positivo",
+      "mean_shap_above": 0.0187,
+      "mean_shap_below": -0.01
+    },
+    {
+      "feature": "temp_mean_c_lag_8",
+      "rank": 22,
+      "threshold": 25.71,
+      "direction": "positivo",
+      "mean_shap_above": 0.0196,
+      "mean_shap_below": -0.0085
+    },
+    {
+      "feature": "rain_mean_mm",
+      "rank": 25,
+      "threshold": 0.09,
+      "direction": "positivo",
+      "mean_shap_above": 0.0061,
+      "mean_shap_below": -0.0091
+    }
+  ],
+  "comparison_phases": {
+    "fase_1": {
+      "climate_in_top_10": 3,
+      "climate_in_top_20": 3,
+      "best_climate_feature": "pressure_mean_mbar",
+      "best_climate_rank": 17
+    },
+    "fase_2": {
+      "climate_in_top_10": 0,
+      "climate_in_top_20": 3,
+      "climate_in_top_30": 5,
+      "best_climate_feature": "pressure_mean_mbar",
+      "best_climate_rank": 17
+    }
+  },
+  "enriched_features_analysis": {
+    "anomalias_in_top_30": 0,
+    "lags_bio_in_top_30": 0,
+    "mm_bio_in_top_30": 0
+  },
+  "top_10": [
+    {
+      "rank": 1,
+      "feature": "notificacoes_lag_1",
+      "mean_abs_shap": 0.32598158717155457,
+      "is_inmet": false
+    },
+    {
+      "rank": 2,
+      "feature": "notificacoes_razao_media_4",
+      "mean_abs_shap": 0.10131038725376129,
+      "is_inmet": false
+    },
+    {
+      "rank": 3,
+      "feature": "notificacoes_media_movel_3",
+      "mean_abs_shap": 0.0984003022313118,
+      "is_inmet": false
+    },
+    {
+      "rank": 4,
+      "feature": "week_of_year_cos",
+      "mean_abs_shap": 0.06224513053894043,
+      "is_inmet": false
+    },
+    {
+      "rank": 5,
+      "feature": "week_of_year_sin",
+      "mean_abs_shap": 0.05712961032986641,
+      "is_inmet": false
+    },
+    {
+      "rank": 6,
+      "feature": "notificacoes_media_movel_4",
+      "mean_abs_shap": 0.043911341577768326,
+      "is_inmet": false
+    },
+    {
+      "rank": 7,
+      "feature": "notificacoes_razao_media_8",
+      "mean_abs_shap": 0.0367279015481472,
+      "is_inmet": false
+    },
+    {
+      "rank": 8,
+      "feature": "label_alerta_q90",
+      "mean_abs_shap": 0.031599901616573334,
+      "is_inmet": false
+    },
+    {
+      "rank": 9,
+      "feature": "notificacoes_diff_1",
+      "mean_abs_shap": 0.031524382531642914,
+      "is_inmet": false
+    },
+    {
+      "rank": 10,
+      "feature": "notificacoes_media_movel_8",
+      "mean_abs_shap": 0.029227616265416145,
+      "is_inmet": false
+    }
+  ]
+}

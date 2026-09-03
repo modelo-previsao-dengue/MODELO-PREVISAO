@@ -1,0 +1,82 @@
+uf,regiao,modelo,R2_log,RMSE,n
+AC,Norte,A: SINAN-only,0.5899,16.03,1538
+AL,Nordeste,A: SINAN-only,0.6018,6.94,11010
+AM,Norte,A: SINAN-only,0.6405,5.33,4109
+AP,Norte,A: SINAN-only,0.7391,16.97,937
+BA,Nordeste,A: SINAN-only,0.6439,36.84,36665
+CE,Nordeste,A: SINAN-only,0.515,5.0,15810
+DF,Centro-Oeste,A: SINAN-only,0.4156,5121.47,127
+ES,Sudeste,A: SINAN-only,0.7336,66.48,9299
+GO,Centro-Oeste,A: SINAN-only,0.7651,83.5,18263
+MA,Nordeste,A: SINAN-only,0.4098,4.56,11592
+MG,Sudeste,A: SINAN-only,0.7552,196.38,77073
+MS,Centro-Oeste,A: SINAN-only,0.5737,9.85,8554
+MT,Centro-Oeste,A: SINAN-only,0.6154,16.09,11876
+PA,Norte,A: SINAN-only,0.5574,7.05,10917
+PB,Nordeste,A: SINAN-only,0.4657,5.06,22121
+PE,Nordeste,A: SINAN-only,0.5979,7.19,18070
+PI,Nordeste,A: SINAN-only,0.5735,6.77,18733
+PR,Sul,A: SINAN-only,0.7781,43.21,35950
+RJ,Sudeste,A: SINAN-only,0.7868,245.72,10789
+RN,Nordeste,A: SINAN-only,0.5884,8.1,14287
+RO,Norte,A: SINAN-only,0.4629,8.2,1995
+RR,Norte,A: SINAN-only,0.4501,1.9,938
+RS,Sul,A: SINAN-only,0.7434,49.72,57589
+SC,Sul,A: SINAN-only,0.7932,113.45,33827
+SE,Nordeste,A: SINAN-only,0.3875,1.39,8078
+SP,Sudeste,A: SINAN-only,0.7902,565.26,66928
+TO,Norte,A: SINAN-only,0.578,11.53,8689
+AC,Norte,B: INMET bruto,0.5868,16.95,1538
+AL,Nordeste,B: INMET bruto,0.6079,7.07,11010
+AM,Norte,B: INMET bruto,0.6211,5.98,4109
+AP,Norte,B: INMET bruto,0.7422,17.21,937
+BA,Nordeste,B: INMET bruto,0.6397,37.57,36665
+CE,Nordeste,B: INMET bruto,0.5112,4.97,15810
+DF,Centro-Oeste,B: INMET bruto,0.4657,4987.77,127
+ES,Sudeste,B: INMET bruto,0.7321,67.29,9299
+GO,Centro-Oeste,B: INMET bruto,0.7741,75.03,18263
+MA,Nordeste,B: INMET bruto,0.398,4.6,11592
+MG,Sudeste,B: INMET bruto,0.7611,177.84,77073
+MS,Centro-Oeste,B: INMET bruto,0.575,9.81,8554
+MT,Centro-Oeste,B: INMET bruto,0.615,15.74,11876
+PA,Norte,B: INMET bruto,0.5559,7.58,10917
+PB,Nordeste,B: INMET bruto,0.4464,5.46,22121
+PE,Nordeste,B: INMET bruto,0.5965,7.41,18070
+PI,Nordeste,B: INMET bruto,0.5713,6.79,18733
+PR,Sul,B: INMET bruto,0.7795,43.05,35950
+RJ,Sudeste,B: INMET bruto,0.7853,239.47,10789
+RN,Nordeste,B: INMET bruto,0.5794,8.0,14287
+RO,Norte,B: INMET bruto,0.4503,8.44,1995
+RR,Norte,B: INMET bruto,0.4715,1.83,938
+RS,Sul,B: INMET bruto,0.737,54.32,57589
+SC,Sul,B: INMET bruto,0.7915,110.5,33827
+SE,Nordeste,B: INMET bruto,0.3163,1.54,8078
+SP,Sudeste,B: INMET bruto,0.7957,562.24,66928
+TO,Norte,B: INMET bruto,0.5742,11.57,8689
+AC,Norte,C: INMET enriquecido,0.5978,16.97,1538
+AL,Nordeste,C: INMET enriquecido,0.6103,6.95,11010
+AM,Norte,C: INMET enriquecido,0.6291,5.88,4109
+AP,Norte,C: INMET enriquecido,0.7398,16.81,937
+BA,Nordeste,C: INMET enriquecido,0.6395,39.48,36665
+CE,Nordeste,C: INMET enriquecido,0.5159,5.14,15810
+DF,Centro-Oeste,C: INMET enriquecido,0.4694,4993.8,127
+ES,Sudeste,C: INMET enriquecido,0.7335,65.36,9299
+GO,Centro-Oeste,C: INMET enriquecido,0.7723,77.86,18263
+MA,Nordeste,C: INMET enriquecido,0.404,4.55,11592
+MG,Sudeste,C: INMET enriquecido,0.7576,180.69,77073
+MS,Centro-Oeste,C: INMET enriquecido,0.5745,10.0,8554
+MT,Centro-Oeste,C: INMET enriquecido,0.6131,16.33,11876
+PA,Norte,C: INMET enriquecido,0.5617,7.39,10917
+PB,Nordeste,C: INMET enriquecido,0.4452,5.09,22121
+PE,Nordeste,C: INMET enriquecido,0.5951,7.17,18070
+PI,Nordeste,C: INMET enriquecido,0.5749,6.7,18733
+PR,Sul,C: INMET enriquecido,0.7773,43.04,35950
+RJ,Sudeste,C: INMET enriquecido,0.7824,248.47,10789
+RN,Nordeste,C: INMET enriquecido,0.5817,7.96,14287
+RO,Norte,C: INMET enriquecido,0.4478,8.44,1995
+RR,Norte,C: INMET enriquecido,0.4608,1.9,938
+RS,Sul,C: INMET enriquecido,0.7332,56.88,57589
+SC,Sul,C: INMET enriquecido,0.791,116.92,33827
+SE,Nordeste,C: INMET enriquecido,0.3225,1.5,8078
+SP,Sudeste,C: INMET enriquecido,0.7942,559.93,66928
+TO,Norte,C: INMET enriquecido,0.5744,11.84,8689

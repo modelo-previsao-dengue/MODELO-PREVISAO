@@ -1,0 +1,61 @@
+{
+  "sinan_only": {
+    "RMSE": 237.9967,
+    "MAE": 9.0222,
+    "R2": 0.1708,
+    "RMSE_log": 0.6081,
+    "R2_log": 0.762
+  },
+  "sinan_inmet": {
+    "RMSE": 233.9535,
+    "MAE": 8.8426,
+    "R2": 0.1987,
+    "RMSE_log": 0.606,
+    "R2_log": 0.7636
+  },
+  "delta_R2_log": 0.0016,
+  "paired_ttest": {
+    "t_stat": 8.8166,
+    "p_value": 1.1830617920782718e-18
+  },
+  "inmet_significant_improvement": true,
+  "ufs_inmet_better": 9,
+  "ufs_total": 27,
+  "region_metrics": [
+    {
+      "regiao": "Norte",
+      "R2_log_sinan": 0.6098,
+      "R2_log_full": 0.6058,
+      "delta": -0.004,
+      "n": 29123
+    },
+    {
+      "regiao": "Nordeste",
+      "R2_log_sinan": 0.6014,
+      "R2_log_full": 0.5959,
+      "delta": -0.0055,
+      "n": 156366
+    },
+    {
+      "regiao": "Centro-Oeste",
+      "R2_log_sinan": 0.7196,
+      "R2_log_full": 0.7253,
+      "delta": 0.0057,
+      "n": 38820
+    },
+    {
+      "regiao": "Sudeste",
+      "R2_log_sinan": 0.7773,
+      "R2_log_full": 0.782,
+      "delta": 0.0047,
+      "n": 164089
+    },
+    {
+      "regiao": "Sul",
+      "R2_log_sinan": 0.7817,
+      "R2_log_full": 0.7801,
+      "delta": -0.0016,
+      "n": 127366
+    }
+  ]
+}

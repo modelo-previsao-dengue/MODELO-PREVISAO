@@ -1,0 +1,31 @@
+{
+  "total_rows_with_target": 1206564,
+  "train_years": [
+    2019,
+    2021
+  ],
+  "val_years": [
+    2023
+  ],
+  "test_years": [
+    2024,
+    2025,
+    2026
+  ],
+  "train_rows": 457600,
+  "val_rows": 233200,
+  "test_rows": 515764,
+  "n_features": 159,
+  "risk_distribution": {
+    "baixo": 883689,
+    "medio": 114703,
+    "alto": 109280,
+    "surto": 98892
+  },
+  "climate_coverage_per_split": {
+    "train": 91.8,
+    "val": 90.5,
+    "test": 89.8
+  },
+  "dropped_columns": 8
+}

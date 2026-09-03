@@ -1,0 +1,26 @@
+{
+  "source": "data/integrated/sinan_inmet_municipal_weekly.parquet",
+  "original_rows": 7665428,
+  "filtered_rows": 1224164,
+  "reduction_pct": 84.0,
+  "municipios": 4400,
+  "years": [
+    2019,
+    2021,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "columns": 172,
+  "climate_coverage_pct": 90.8,
+  "coverage_by_year": {
+    "2019": 91.5,
+    "2021": 92.1,
+    "2023": 90.5,
+    "2024": 89.8,
+    "2025": 88.8,
+    "2026": 94.9
+  },
+  "coverage_target_85pct": true
+}

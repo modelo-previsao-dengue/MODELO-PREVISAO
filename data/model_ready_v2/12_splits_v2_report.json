@@ -1,0 +1,42 @@
+{
+  "train": {
+    "rows": 457600,
+    "municipios": 4400,
+    "anos": [
+      2019,
+      2021
+    ],
+    "cobertura_inmet": 0.7834
+  },
+  "val": {
+    "rows": 233200,
+    "municipios": 4400,
+    "anos": [
+      2023
+    ],
+    "cobertura_inmet": 0.8168
+  },
+  "test": {
+    "rows": 515764,
+    "municipios": 4400,
+    "anos": [
+      2024,
+      2025,
+      2026
+    ],
+    "cobertura_inmet": 0.7304
+  },
+  "n_features": 303,
+  "n_sinan_features": 129,
+  "n_inmet_total": 174,
+  "n_inmet_bruto": 30,
+  "n_inmet_lags_bio": 96,
+  "n_inmet_mm_bio": 24,
+  "n_inmet_anomalias": 24,
+  "classes": {
+    "0": 0.7323,
+    "1": 0.0955,
+    "2": 0.0905,
+    "3": 0.0817
+  }
+}

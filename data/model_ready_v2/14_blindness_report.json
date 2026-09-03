@@ -1,0 +1,110 @@
+{
+  "cenarios": {
+    "Full (referência)": {
+      "com_inmet": {
+        "label": "Full (referência) + INMET",
+        "n_features": 303,
+        "R2_log": 0.7622,
+        "R2": 0.1977,
+        "RMSE": 234.11,
+        "MAE": 8.8827
+      },
+      "sem_inmet": {
+        "label": "Full (referência) sem INMET",
+        "n_features": 129,
+        "R2_log": 0.762,
+        "R2": 0.1708,
+        "RMSE": 238.0,
+        "MAE": 9.0222
+      },
+      "delta_R2_log": 0.0002,
+      "ttest": {
+        "t_stat": 1.2318,
+        "p_value": 0.21802558448293047
+      },
+      "n_masked": 0,
+      "inmet_ajuda": true
+    },
+    "Blind-4w": {
+      "com_inmet": {
+        "label": "Blind-4w + INMET",
+        "n_features": 303,
+        "R2_log": 0.7582,
+        "R2": 0.1768,
+        "RMSE": 237.13,
+        "MAE": 9.0507
+      },
+      "sem_inmet": {
+        "label": "Blind-4w sem INMET",
+        "n_features": 129,
+        "R2_log": 0.7577,
+        "R2": 0.157,
+        "RMSE": 239.97,
+        "MAE": 9.1025
+      },
+      "delta_R2_log": 0.0005,
+      "ttest": {
+        "t_stat": 2.2585,
+        "p_value": 0.0239173964352646
+      },
+      "n_masked": 16,
+      "inmet_ajuda": true
+    },
+    "Blind-8w": {
+      "com_inmet": {
+        "label": "Blind-8w + INMET",
+        "n_features": 303,
+        "R2_log": 0.7522,
+        "R2": 0.1769,
+        "RMSE": 237.12,
+        "MAE": 9.2015
+      },
+      "sem_inmet": {
+        "label": "Blind-8w sem INMET",
+        "n_features": 129,
+        "R2_log": 0.7544,
+        "R2": 0.127,
+        "RMSE": 244.2,
+        "MAE": 9.3985
+      },
+      "delta_R2_log": -0.0022,
+      "ttest": {
+        "t_stat": -8.4926,
+        "p_value": 2.025052334859782e-17
+      },
+      "n_masked": 21,
+      "inmet_ajuda": false
+    },
+    "INMET-only": {
+      "com_inmet": {
+        "label": "INMET-only + INMET",
+        "n_features": 303,
+        "R2_log": 0.1265,
+        "R2": -0.0009,
+        "RMSE": 261.48,
+        "MAE": 13.7523
+      },
+      "sem_inmet": {
+        "label": "INMET-only sem INMET",
+        "n_features": 129,
+        "R2_log": 0.0083,
+        "R2": -0.0025,
+        "RMSE": 261.68,
+        "MAE": 13.8369
+      },
+      "delta_R2_log": 0.1182,
+      "ttest": {
+        "t_stat": 101.7234,
+        "p_value": 0.0
+      },
+      "n_masked": 126,
+      "inmet_ajuda": true
+    }
+  },
+  "conclusao": {
+    "cenario_inmet_mais_ajuda": "INMET-only",
+    "delta_maximo": 0.1182,
+    "inmet_compensa_atraso_4w": true,
+    "inmet_compensa_atraso_8w": false
+  }
+}

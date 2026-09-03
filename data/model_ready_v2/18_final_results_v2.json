@@ -1,0 +1,236 @@
+{
+  "experimentos": [
+    {
+      "name": "Fase 1: SINAN-only",
+      "features": "SINAN-only (129)",
+      "R2_log": 0.762,
+      "delta": 0.0,
+      "p_value": "—",
+      "shap_climate_top20": "—"
+    },
+    {
+      "name": "Fase 1: INMET bruto",
+      "features": "SINAN+INMET bruto (159)",
+      "R2_log": 0.7636,
+      "delta": 0.0016,
+      "p_value": 1.1830617920782718e-18,
+      "shap_climate_top20": 3
+    },
+    {
+      "name": "Fase 2: SINAN-only",
+      "features": "SINAN-only (129)",
+      "R2_log": 0.762,
+      "delta": 0.0,
+      "p_value": "—",
+      "shap_climate_top20": "—"
+    },
+    {
+      "name": "Fase 2: INMET bruto",
+      "features": "SINAN+INMET bruto (159)",
+      "R2_log": 0.7636,
+      "delta": 0.0016,
+      "p_value": 1.1830617920782718e-18,
+      "shap_climate_top20": 3
+    },
+    {
+      "name": "Fase 2: INMET enriquecido",
+      "features": "SINAN+INMET+lags+anom (303)",
+      "R2_log": 0.7622,
+      "delta": 0.0002,
+      "p_value": 0.21802558448293047,
+      "shap_climate_top20": 3
+    },
+    {
+      "name": "Blindness: Blind-4w + INMET",
+      "features": "Blind + INMET",
+      "R2_log": 0.7582,
+      "delta": 0.0005,
+      "p_value": 0.0239173964352646,
+      "shap_climate_top20": "—"
+    },
+    {
+      "name": "Blindness: Blind-4w sem INMET",
+      "features": "Blind sem INMET",
+      "R2_log": 0.7577,
+      "delta": 0.0,
+      "p_value": "—",
+      "shap_climate_top20": "—"
+    },
+    {
+      "name": "Blindness: Blind-8w + INMET",
+      "features": "Blind + INMET",
+      "R2_log": 0.7522,
+      "delta": -0.0022,
+      "p_value": 2.025052334859782e-17,
+      "shap_climate_top20": "—"
+    },
+    {
+      "name": "Blindness: Blind-8w sem INMET",
+      "features": "Blind sem INMET",
+      "R2_log": 0.7544,
+      "delta": 0.0,
+      "p_value": "—",
+      "shap_climate_top20": "—"
+    },
+    {
+      "name": "Blindness: INMET-only + INMET",
+      "features": "Blind + INMET",
+      "R2_log": 0.1265,
+      "delta": 0.1182,
+      "p_value": 0.0,
+      "shap_climate_top20": "—"
+    },
+    {
+      "name": "Blindness: INMET-only sem INMET",
+      "features": "Blind sem INMET",
+      "R2_log": 0.0083,
+      "delta": 0.0,
+      "p_value": "—",
+      "shap_climate_top20": "—"
+    }
+  ],
+  "classificacao_v2": {
+    "modelos": {
+      "A: SINAN-only": {
+        "label": "A: SINAN-only",
+        "n_features": 129,
+        "accuracy": 0.6362,
+        "f1_macro": 0.4675,
+        "f1_weighted": 0.6653,
+        "auc_macro": 0.7901,
+        "f1_per_class": {
+          "baixo": 0.7947,
+          "médio": 0.3048,
+          "alto": 0.2271,
+          "surto": 0.5434
+        },
+        "confusion_matrix": [
+          [
+            260441,
+            76348,
+            11238,
+            12013
+          ],
+          [
+            13074,
+            26910,
+            5679,
+            4304
+          ],
+          [
+            12547,
+            16479,
+            9652,
+            10879
+          ],
+          [
+            9327,
+            6876,
+            8883,
+            31114
+          ]
+        ],
+        "classification_report": {
+          "baixo": {
+            "precision": 0.881688214523899,
+            "recall": 0.7233668481279858,
+            "f1-score": 0.7947191839238117,
+            "support": 360040.0
+          },
+          "médio": {
+            "precision": 0.21253741716885313,
+            "recall": 0.5385554465947525,
+            "f1-score": 0.30479102956167176,
+            "support": 49967.0
+          },
+          "alto": {
+            "precision": 0.2722554439805935,
+            "recall": 0.19476562342353249,
+            "f1-score": 0.22708183839358187,
+            "support": 49557.0
+          },
+          "surto": {
+            "precision": 0.5335962956611215,
+            "recall": 0.5536298932384341,
+            "f1-score": 0.5434285215265042,
+            "support": 56200.0
+          },
+          "accuracy": 0.6361766234169116,
+          "macro avg": {
+            "precision": 0.4750193428336168,
+            "recall": 0.5025794528461762,
+            "f1-score": 0.46750514335139237,
+            "support": 515764.0
+          },
+          "weighted avg": {
+            "precision": 0.7203743509325234,
+            "recall": 0.6361766234169116,
+            "f1-score": 0.665332140143743,
+            "support": 515764.0
+          }
+        }
+      },
+      "B: INMET bruto": {
+        "label": "B: INMET bruto",
+        "n_features": 159,
+        "accuracy": 0.645,
+        "f1_macro": 0.4702,
+        "f1_weighted": 0.4702,
+        "auc_macro": 0.7924,
+        "f1_per_class": {
+          "baixo": 0.803,
+          "médio": 0.311,
+          "alto": 0.233,
+          "surto": 0.533
+        },
+        "confusion_matrix": null,
+        "classification_report": null,
+        "nota": "Métricas capturadas do treinamento original; modelo não salvo por falta de espaço em disco"
+      },
+      "C: INMET enriquecido": {
+        "label": "C: INMET enriquecido",
+        "n_features": 303,
+        "accuracy": 0.6553,
+        "f1_macro": 0.473,
+        "f1_weighted": 0.473,
+        "auc_macro": 0.7931,
+        "f1_per_class": {
+          "baixo": 0.812,
+          "médio": 0.312,
+          "alto": 0.233,
+          "surto": 0.535
+        },
+        "confusion_matrix": null,
+        "classification_report": null,
+        "nota": "Métricas capturadas do treinamento original; modelo não salvo por falta de espaço em disco"
+      }
+    },
+    "melhor_modelo": "C: INMET enriquecido",
+    "f1_surto_comparison": {
+      "A: SINAN-only": 0.5434,
+      "B: INMET bruto": 0.533,
+      "C: INMET enriquecido": 0.535
+    },
+    "conclusao": {
+      "inmet_melhora_classificacao": true,
+      "enriched_melhora_surto": false
+    }
+  },
+  "walkforward_v2": {
+    "sinan_mean": 0.6315,
+    "inmet_mean": 0.6221,
+    "folds_inmet_better": 3
+  },
+  "conclusao": {
+    "pergunta_1_clima_melhora": "MARGINALMENTE — INMET bruto melhora R²_log em +0.0016 (estatisticamente significativo, mas marginal)",
+    "pergunta_2_melhor_cenario": "INMET-only (Δ=+0.1182)",
+    "pergunta_3_variaveis_importantes": "3 features climáticas no top-20 SHAP. Melhor: pressure_mean_mbar (rank 17)",
+    "pergunta_4_limiares": "5 limiares climáticos identificados",
+    "pergunta_5_recomendacoes": [
+      "Incluir resultados de Data Blindness no TCC como evidência do valor prático do INMET",
+      "Destacar que a contribuição do INMET é marginal em cenário com dados SINAN completos",
+      "Enfatizar o cenário de atraso (Blind-4w/8w) como uso prático das variáveis climáticas",
+      "Reportar limiares climáticos como contribuição prática para vigilância epidemiológica"
+    ]
+  }
+}

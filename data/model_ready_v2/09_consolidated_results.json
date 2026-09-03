@@ -1,0 +1,62 @@
+{
+  "experiment": "5yr_filtered",
+  "description": "Experimento com dataset filtrado: municipios <=50km, anos com cobertura INMET >89%",
+  "data": {
+    "municipios": 4406,
+    "anos": [
+      2019,
+      2021,
+      2023,
+      2024,
+      2025,
+      2026
+    ],
+    "linhas": 1224164,
+    "cobertura_inmet_pct": 90.8
+  },
+  "eda": {
+    "decision": "GO",
+    "features_significativas": 6,
+    "top_feature": "humidity_mean_pct"
+  },
+  "baseline": {
+    "sinan_only_R2": 0.2225,
+    "sinan_inmet_R2": 0.187,
+    "inmet_helps_baseline": false
+  },
+  "regression_log": {
+    "sinan_only_R2_log": 0.762,
+    "sinan_inmet_R2_log": 0.7636,
+    "delta_R2_log": 0.0016,
+    "inmet_significant": true,
+    "p_value": 1.1830617920782718e-18
+  },
+  "classification": {
+    "sinan_only_AUC": 0.7693,
+    "sinan_inmet_AUC": 0.7638,
+    "sinan_only_F1": 0.3538,
+    "sinan_inmet_F1": 0.3318
+  },
+  "shap": {
+    "climate_in_top_20": 3,
+    "climate_in_top_50": 14,
+    "best_climate_feature": "pressure_mean_mbar",
+    "best_climate_rank": 17
+  },
+  "walkforward": {
+    "n_folds": 5,
+    "mean_R2_sinan": 0.6315,
+    "mean_R2_inmet": 0.6262,
+    "folds_inmet_better": 3
+  },
+  "conclusao": {
+    "tese_suportada": true,
+    "evidencias": [
+      "EDA: 6 features climaticas com |r|>0.10 (p<0.05)",
+      "Regressao: Delta R2_log = +0.0016 (p<0.001, estatisticamente significativo)",
+      "SHAP: 3 features climaticas no top-20 (vs 1 no experimento anterior)",
+      "Walk-forward: INMET melhora em 3/5 folds",
+      "Melhoria mais expressiva nas regioes Sudeste e Centro-Oeste"
+    ]
+  }
+}

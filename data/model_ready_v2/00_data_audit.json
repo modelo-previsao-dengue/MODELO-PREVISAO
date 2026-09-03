@@ -1,0 +1,217 @@
+{
+  "total_municipios": 5571,
+  "municipios_50km": 4406,
+  "municipios_excluidos": 1165,
+  "pct_incluidos": 79.1,
+  "max_distance_km": 50,
+  "inmet_gold_years_available": [
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "valid_years_for_experiment": [
+    2019,
+    2021,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "missing_years": [],
+  "uf_coverage": [
+    {
+      "uf": "AC",
+      "total": 22,
+      "included_50km": 13,
+      "pct": 59.1
+    },
+    {
+      "uf": "AL",
+      "total": 102,
+      "included_50km": 94,
+      "pct": 92.2
+    },
+    {
+      "uf": "AM",
+      "total": 62,
+      "included_50km": 35,
+      "pct": 56.5
+    },
+    {
+      "uf": "AP",
+      "total": 16,
+      "included_50km": 8,
+      "pct": 50.0
+    },
+    {
+      "uf": "BA",
+      "total": 417,
+      "included_50km": 313,
+      "pct": 75.1
+    },
+    {
+      "uf": "CE",
+      "total": 184,
+      "included_50km": 135,
+      "pct": 73.4
+    },
+    {
+      "uf": "DF",
+      "total": 1,
+      "included_50km": 1,
+      "pct": 100.0
+    },
+    {
+      "uf": "ES",
+      "total": 78,
+      "included_50km": 78,
+      "pct": 100.0
+    },
+    {
+      "uf": "GO",
+      "total": 246,
+      "included_50km": 155,
+      "pct": 63.0
+    },
+    {
+      "uf": "MA",
+      "total": 217,
+      "included_50km": 99,
+      "pct": 45.6
+    },
+    {
+      "uf": "MG",
+      "total": 853,
+      "included_50km": 657,
+      "pct": 77.0
+    },
+    {
+      "uf": "MS",
+      "total": 79,
+      "included_50km": 73,
+      "pct": 92.4
+    },
+    {
+      "uf": "MT",
+      "total": 142,
+      "included_50km": 101,
+      "pct": 71.1
+    },
+    {
+      "uf": "PA",
+      "total": 144,
+      "included_50km": 93,
+      "pct": 64.6
+    },
+    {
+      "uf": "PB",
+      "total": 223,
+      "included_50km": 189,
+      "pct": 84.8
+    },
+    {
+      "uf": "PE",
+      "total": 185,
+      "included_50km": 154,
+      "pct": 83.2
+    },
+    {
+      "uf": "PI",
+      "total": 224,
+      "included_50km": 160,
+      "pct": 71.4
+    },
+    {
+      "uf": "PR",
+      "total": 399,
+      "included_50km": 307,
+      "pct": 76.9
+    },
+    {
+      "uf": "RJ",
+      "total": 92,
+      "included_50km": 92,
+      "pct": 100.0
+    },
+    {
+      "uf": "RN",
+      "total": 167,
+      "included_50km": 122,
+      "pct": 73.1
+    },
+    {
+      "uf": "RO",
+      "total": 52,
+      "included_50km": 17,
+      "pct": 32.7
+    },
+    {
+      "uf": "RR",
+      "total": 15,
+      "included_50km": 8,
+      "pct": 53.3
+    },
+    {
+      "uf": "RS",
+      "total": 497,
+      "included_50km": 496,
+      "pct": 99.8
+    },
+    {
+      "uf": "SC",
+      "total": 295,
+      "included_50km": 291,
+      "pct": 98.6
+    },
+    {
+      "uf": "SE",
+      "total": 75,
+      "included_50km": 69,
+      "pct": 92.0
+    },
+    {
+      "uf": "SP",
+      "total": 645,
+      "included_50km": 572,
+      "pct": 88.7
+    },
+    {
+      "uf": "TO",
+      "total": 139,
+      "included_50km": 74,
+      "pct": 53.2
+    }
+  ],
+  "estimated_filtered_rows": 1374672,
+  "coverage_by_valid_year": {
+    "2019": 91.9,
+    "2021": 92.5,
+    "2023": 91.1,
+    "2024": 90.5,
+    "2025": 89.4,
+    "2026": 94.9
+  }
+}

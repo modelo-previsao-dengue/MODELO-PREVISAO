@@ -1,0 +1,31 @@
+{
+  "sinan_only": {
+    "model": "SINAN-only",
+    "RMSE": 230.4567,
+    "MAE": 9.7076,
+    "R2": 0.2225,
+    "MAPE": 122.65,
+    "n_features": 129,
+    "best_iteration": 91
+  },
+  "sinan_inmet": {
+    "model": "SINAN+INMET",
+    "RMSE": 235.6648,
+    "MAE": 10.4493,
+    "R2": 0.187,
+    "MAPE": 130.91,
+    "n_features": 159,
+    "best_iteration": 12
+  },
+  "delta_R2": -0.0355,
+  "delta_RMSE_pct": 2.26,
+  "paired_ttest": {
+    "t_stat": -2.7144,
+    "p_value": 0.00663978
+  },
+  "inmet_significant_improvement": false,
+  "n_sinan_features": 129,
+  "n_inmet_features": 30,
+  "train_rows": 457600,
+  "test_rows": 515764
+}
