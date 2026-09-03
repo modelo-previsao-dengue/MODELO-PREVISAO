@@ -1,0 +1,22 @@
+{
+  "descricao": "Recorte espaco-temporal do retreino. Nenhum script assume janela ou UFs fixas (FR-1).",
+  "ufs": ["DF", "ES", "GO", "RJ", "MG", "SP"],
+  "ano_inicio": 2019,
+  "ano_fim": 2023,
+  "warmup_ano": 2018,
+  "cooldown_ano": 2024,
+  "cobertura_municipal_minima": 0.80,
+  "variaveis_cobertura": ["rain_sum_mm", "temp_mean_c", "humidity_mean_pct"],
+  "split": {
+    "train": [2019, 2020, 2021],
+    "val": [2022],
+    "test": [2023]
+  },
+  "split_e2": {
+    "descricao": "Referencia de producao SINAN-only sobre o historico completo",
+    "train": "<=2020",
+    "val": [2021, 2022],
+    "test": [2023]
+  },
+  "fallback_limiares": "uf"
+}
