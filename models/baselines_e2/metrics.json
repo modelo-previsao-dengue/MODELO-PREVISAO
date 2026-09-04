@@ -1,0 +1,92 @@
+{
+  "dataset": "data/model_ready/e2",
+  "baselines": {
+    "persistencia": {
+      "regressao": {
+        "alvo": "notificacoes_t4",
+        "n": 294945,
+        "MAE_orig": 4.6535,
+        "RMSE_orig": 53.3568,
+        "R2_orig": 0.4352,
+        "MAE_log": 0.3387,
+        "RMSE_log": 0.6743,
+        "R2_log": 0.5845,
+        "MAPE_pct_positivos": 117.39,
+        "n_positivos": 87071,
+        "media_y_true": 6.2608,
+        "cobertura_teste_pct": 100.0
+      },
+      "classificacao": {
+        "alvo": "risco_surto_t4",
+        "n": 294945,
+        "acuracia": 0.7476,
+        "F1_macro": 0.4969,
+        "F1_weighted": 0.7458,
+        "distribuicao_real": {
+          "0": 215362,
+          "1": 16633,
+          "2": 23737,
+          "3": 39213
+        }
+      }
+    },
+    "sazonal": {
+      "regressao": {
+        "alvo": "notificacoes_t4",
+        "n": 289380,
+        "MAE_orig": 7.6971,
+        "RMSE_orig": 63.8967,
+        "R2_orig": -0.0186,
+        "MAE_log": 0.5505,
+        "RMSE_log": 1.0419,
+        "R2_log": -0.0118,
+        "MAPE_pct_positivos": 249.15,
+        "n_positivos": 84662,
+        "media_y_true": 6.0106,
+        "cobertura_teste_pct": 98.11
+      },
+      "classificacao": {
+        "alvo": "risco_surto_t4",
+        "n": 289380,
+        "acuracia": 0.6585,
+        "F1_macro": 0.3714,
+        "F1_weighted": 0.6573,
+        "distribuicao_real": {
+          "0": 212118,
+          "1": 16338,
+          "2": 23218,
+          "3": 37706
+        }
+      }
+    },
+    "media_movel_4": {
+      "regressao": {
+        "alvo": "notificacoes_t4",
+        "n": 294945,
+        "MAE_orig": 5.3826,
+        "RMSE_orig": 58.2606,
+        "R2_orig": 0.3266,
+        "MAE_log": 0.3676,
+        "RMSE_log": 0.6715,
+        "R2_log": 0.588,
+        "MAPE_pct_positivos": 131.34,
+        "n_positivos": 87071,
+        "media_y_true": 6.2608,
+        "cobertura_teste_pct": 100.0
+      },
+      "classificacao": {
+        "alvo": "risco_surto_t4",
+        "n": 294945,
+        "acuracia": 0.6558,
+        "F1_macro": 0.4773,
+        "F1_weighted": 0.6901,
+        "distribuicao_real": {
+          "0": 215362,
+          "1": 16633,
+          "2": 23737,
+          "3": 39213
+        }
+      }
+    }
+  }
+}
