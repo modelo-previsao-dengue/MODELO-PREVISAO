@@ -37,7 +37,10 @@ layers = [
     ("inmet/silver", "*.parquet"),
     ("inmet/gold", "*.parquet"),
     ("integrated", "*.parquet"),
-    ("model_ready", "*"),
+    # "**/*" e nao "*": o recorte criou data/model_ready/{e2,mesorregiao,uf},
+    # e com o padrao antigo os subdiretorios eram silenciosamente ignorados —
+    # o notebook do Kaggle baixaria so o E1.
+    ("model_ready", "**/*"),
 ]
 
 count = 0
