@@ -16,7 +16,7 @@
   },
   "linhas": {
     "train": 214933,
-    "val": 71211,
+    "val": 71188,
     "test": 72557
   },
   "municipios": {
@@ -26,5 +26,5 @@
   },
   "n_features": 178,
   "n_features_inmet": 49,
-  "rotulos_alterados_sem_vazamento": 27836
+  "rotulos_alterados_sem_vazamento": 27842
 }
