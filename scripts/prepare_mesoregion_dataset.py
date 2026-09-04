@@ -32,6 +32,7 @@ Uso:
     python3 scripts/prepare_mesoregion_dataset.py
 """
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -46,9 +47,12 @@ import recorte_config
 BASE_DIR = Path(__file__).resolve().parent.parent
 IBGE_JSON = BASE_DIR / "data" / "reference" / "ibge_municipios_api.json"
 MAPPING = BASE_DIR / "data" / "inmet" / "bronze" / "municipio_estacao_mapping.csv"
-OUT_DIR = BASE_DIR / "data" / "model_ready" / "mesorregiao"
-
-CHAVE = ["mesorregiao", "ano", "semana_epidemiologica"]
+# A US-009 pede a comparacao das tres granularidades. Municipio e o dataset
+# do E1; mesorregiao e UF saem daqui, com as mesmas regras de agregacao.
+NIVEIS = {
+    "mesorregiao": {"coluna": "mesorregiao", "saida": "mesorregiao"},
+    "uf": {"coluna": "uf_nivel", "saida": "uf"},
+}
 LAGS = [1, 2, 3, 4, 8, 12]
 JANELAS = [3, 4, 8, 12]
 
@@ -128,8 +132,9 @@ def recalcular_derivadas(df):
     w semanas ANTERIORES, sem incluir a atual, e as razoes e variacoes
     percentuais valem zero quando o denominador e zero.
     """
+    grupo = CHAVE[0]
     df = df.sort_values(CHAVE)
-    g = df.groupby("mesorregiao", sort=False)["notificacoes"]
+    g = df.groupby(grupo, sort=False)["notificacoes"]
     novas = {}
 
     for k in LAGS:
@@ -137,7 +142,7 @@ def recalcular_derivadas(df):
 
     anterior = g.shift(1)
     for w in JANELAS:
-        r = anterior.groupby(df["mesorregiao"], sort=False).rolling(w, min_periods=1)
+        r = anterior.groupby(df[grupo], sort=False).rolling(w, min_periods=1)
         novas[f"notificacoes_media_movel_{w}"] = r.mean().reset_index(level=0, drop=True)
         novas[f"notificacoes_min_movel_{w}"] = r.min().reset_index(level=0, drop=True)
         novas[f"notificacoes_max_movel_{w}"] = r.max().reset_index(level=0, drop=True)
@@ -150,7 +155,7 @@ def recalcular_derivadas(df):
             lag.to_numpy() > 0, (x - lag) / lag.replace(0, np.nan), 0.0)
 
     d1 = pd.Series(novas["notificacoes_diff_1"], index=df.index)
-    novas["notificacoes_aceleracao_1"] = d1 - d1.groupby(df["mesorregiao"]).shift(1)
+    novas["notificacoes_aceleracao_1"] = d1 - d1.groupby(df[grupo]).shift(1)
 
     for w in (4, 8):
         mm = pd.Series(novas[f"notificacoes_media_movel_{w}"], index=df.index)
@@ -164,6 +169,15 @@ def recalcular_derivadas(df):
 
 
 def main():
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--nivel", choices=list(NIVEIS), default="mesorregiao")
+    args = ap.parse_args()
+
+    global CHAVE, OUT_DIR
+    nivel = NIVEIS[args.nivel]
+    CHAVE = [nivel["coluna"], "ano", "semana_epidemiologica"]
+    OUT_DIR = BASE_DIR / "data" / "model_ready" / nivel["saida"]
+
     cfg = recorte_config.load()
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     pmd.DOCS_DIR.mkdir(parents=True, exist_ok=True)
@@ -187,10 +201,12 @@ def main():
                   on="ibge_municipio", how="left")
     df = df.merge(est[["ibge_municipio", "codigo_wmo"]].drop_duplicates(),
                   on="ibge_municipio", how="left")
-    sem_meso = int(df["mesorregiao"].isna().sum())
-    if sem_meso:
-        print(f"  aviso: {sem_meso:,} linhas sem mesorregiao no cadastro IBGE")
-        df = df[df["mesorregiao"].notna()]
+    df["uf_nivel"] = df["uf"]
+    grupo = CHAVE[0]
+    sem_grupo = int(df[grupo].isna().sum())
+    if sem_grupo:
+        print(f"  aviso: {sem_grupo:,} linhas sem {grupo} no cadastro IBGE")
+        df = df[df[grupo].notna()]
 
     clima, derivadas, soma, ponderada = classificar_colunas(df)
     print(f"  colunas: {len(soma)} somadas, {len(ponderada)} ponderadas, "
@@ -198,9 +214,11 @@ def main():
 
     print("\nAgregando...")
     agg = agregar(df, clima, soma, ponderada)
-    nomes = df[["mesorregiao", "mesorregiao_nome", "uf"]].drop_duplicates("mesorregiao")
-    agg = agg.merge(nomes, on="mesorregiao", how="left")
-    print(f"  {len(agg):,} linhas, {agg['mesorregiao'].nunique()} mesorregioes")
+    colunas_nome = [c for c in (grupo, "mesorregiao_nome", "uf")
+                    if c in df.columns]
+    nomes = df[list(dict.fromkeys(colunas_nome))].drop_duplicates(grupo)
+    agg = agg.merge(nomes, on=grupo, how="left")
+    print(f"  {len(agg):,} linhas, {agg[grupo].nunique()} unidades de {grupo}")
 
     print("Recalculando as derivadas sobre a serie agregada...")
     agg = recalcular_derivadas(agg)
@@ -208,7 +226,7 @@ def main():
     # A partir daqui e o mesmo caminho do E1, so que a chave de municipio
     # passa a ser a mesorregiao, para reaproveitar alvo, split e limiares.
     agg = agg.rename(columns={"ibge_municipio": "_descartado"})
-    agg["ibge_municipio"] = agg["mesorregiao"]
+    agg["ibge_municipio"] = agg[grupo]
 
     agg = pmd.add_target(agg)
     agg = agg[agg["ano"].isin(cfg["anos_recorte"])].dropna(subset=[pmd.TARGET])
@@ -239,8 +257,8 @@ def main():
 
     feature_cols, _ = pmd.select_feature_cols(partes["train"], cfg)
     feature_cols = [c for c in feature_cols
-                    if c not in ("mesorregiao", "mesorregiao_nome", "_descartado",
-                                 "codigo_wmo", "n_estacoes")]
+                    if c not in ("mesorregiao", "mesorregiao_nome", "uf_nivel",
+                                 "_descartado", "codigo_wmo", "n_estacoes")]
     keep = feature_cols + [pmd.TARGET, pmd.CLASS_TARGET, pmd.CLASS_TARGET_LEAKY,
                            "threshold_source"] + pmd.ID_COLS
     for nome, parte in partes.items():
@@ -257,15 +275,15 @@ def main():
     }).to_csv(OUT_DIR / "feature_schema.csv", index=False)
 
     resumo = {
-        "granularidade": "mesorregiao",
+        "granularidade": args.nivel,
         "linhas": {n: int(len(p)) for n, p in partes.items()},
-        "mesorregioes": int(agg["mesorregiao"].nunique()),
+        "unidades": int(agg[grupo].nunique()),
         "municipios_de_origem": int(df["ibge_municipio"].nunique()),
         "n_features": len(feature_cols),
         "n_features_inmet": sum(1 for c in feature_cols
                                 if c.startswith(pmd.INMET_PREFIXES)),
-        "estacoes_por_mesorregiao_mediana": float(
-            agg.groupby("mesorregiao")["n_estacoes"].max().median()),
+        "estacoes_por_unidade_mediana": float(
+            agg.groupby(grupo)["n_estacoes"].max().median()),
     }
     with open(OUT_DIR / "resumo_dataset.json", "w", encoding="utf-8") as f:
         json.dump(resumo, f, indent=2, ensure_ascii=False)

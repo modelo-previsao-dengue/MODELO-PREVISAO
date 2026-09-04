@@ -62,6 +62,11 @@ ARMS = {
                          "origens": ["sinan"]},
     "meso_sinan_inmet": {"dataset": "data/model_ready/mesorregiao",
                          "origens": ["sinan", "inmet"]},
+    # Terceira granularidade pedida pela US-009. Sao 6 series e 942 linhas de
+    # treino: o resultado vale como ponto extremo da curva, nao como modelo.
+    "uf_sinan":       {"dataset": "data/model_ready/uf", "origens": ["sinan"]},
+    "uf_sinan_inmet": {"dataset": "data/model_ready/uf",
+                       "origens": ["sinan", "inmet"]},
 }
 
 # Espaco de busca. Faixas amplas de proposito: com 178 features e alvo de
@@ -95,6 +100,44 @@ def fixos_para(n_linhas):
     if n_linhas < 100_000:
         fixos["n_jobs"] = 4
     return fixos
+
+
+def procedencia():
+    """Tudo que a FR-5 exige para reproduzir uma execucao.
+
+    O metrics.json anterior guardava os hiperparametros e mais nada, entao um
+    numero na tabela do TCC nao dizia de que codigo nem de que versao de
+    biblioteca tinha saido.
+    """
+    import platform
+    import subprocess
+
+    def versao(mod):
+        try:
+            return __import__(mod).__version__
+        except Exception:
+            return None
+
+    try:
+        commit = subprocess.run(
+            ["git", "-C", str(BASE_DIR), "rev-parse", "HEAD"],
+            capture_output=True, text=True, check=True).stdout.strip()
+        sujo = bool(subprocess.run(
+            ["git", "-C", str(BASE_DIR), "status", "--porcelain", "scripts"],
+            capture_output=True, text=True).stdout.strip())
+    except Exception:
+        commit, sujo = None, None
+
+    return {
+        "commit": commit,
+        "scripts_com_alteracao_nao_commitada": sujo,
+        "python": platform.python_version(),
+        "xgboost": versao("xgboost"),
+        "optuna": versao("optuna"),
+        "sklearn": versao("sklearn"),
+        "pandas": versao("pandas"),
+        "numpy": versao("numpy"),
+    }
 
 
 def carregar(arm):
@@ -258,6 +301,7 @@ def main():
         "classificacao_com_vazamento": m_clf_l,
         "inflacao_do_vazamento": inflacao,
         "segundos": round(time.time() - t0, 1),
+        "procedencia": procedencia(),
     }
     with open(saida / "metrics.json", "w", encoding="utf-8") as f:
         json.dump(resultado, f, indent=2, ensure_ascii=False)

@@ -155,9 +155,12 @@ numeros diferentes e o relatorio anterior dizia so "R2".
    em que a correlacao existe. Ver
    [`docs/GUIA_TECNICO_RETREINO.md`](docs/GUIA_TECNICO_RETREINO.md).
 
-2. **A escala espacial importa mais que o modelo.** O ganho do clima vai de
-   +0,029 de R2_orig no municipio para +0,106 na mesorregiao. Trocar a
-   granularidade rendeu mais que qualquer ajuste de hiperparametro.
+2. **A escala espacial importa mais que o modelo, e tem um otimo.** O ganho
+   do clima vai de +0,029 de R2_orig no municipio para +0,106 na mesorregiao,
+   e **inverte para -0,097 na UF**. Agregar demais destroi o sinal: na UF sao
+   17 estacoes numa media so, e a media resultante nao descreve o clima de
+   lugar nenhum. Existe uma granularidade otima, e neste recorte ela e a
+   mesorregiao — o que e contribuicao de metodo, nao resultado negativo.
 
 3. **No recorte, o XGBoost nao bate a persistencia em R2_orig** (0,390
    contra 0,400). Ele ganha em MAE, ou seja, acerta melhor a semana tipica, e

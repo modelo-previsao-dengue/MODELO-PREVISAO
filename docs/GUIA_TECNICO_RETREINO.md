@@ -440,6 +440,42 @@ número.
 Na classificação a mesorregião também não bate o baseline, pelo mesmo motivo
 da seção anterior.
 
+#### A terceira granularidade: UF
+
+| Modelo | MAE (casos) | R²_orig | R²_log | F1_macro | AUC |
+|---|---|---|---|---|---|
+| baseline: persistência | 1.650,92 | 0,4544 | −0,1518 | **0,5719** | — |
+| baseline: média móvel 4 | 2.020,87 | 0,3278 | 0,3348 | 0,5244 | — |
+| XGBoost SINAN-only | **1.204,40** | **0,6245** | **0,0872** | 0,3013 | 0,6827 |
+| XGBoost SINAN+INMET | 1.305,99 | 0,5279 | 0,0754 | 0,2932 | **0,7180** |
+
+**A curva não é monotônica.** Agregar mais nem sempre é melhor:
+
+| Granularidade | Séries | Linhas de treino | Δ R²_orig do clima |
+|---|---|---|---|
+| Município | 1.369 | 214.933 | +0,029 |
+| **Mesorregião** | **43** | **6.751** | **+0,106** |
+| UF | 6 | 942 | **−0,097** |
+
+O ganho do clima cresce do município para a mesorregião e **inverte** na UF.
+A leitura mais provável: a mesorregião é grande o bastante para o ruído de
+contagem sumir e ainda pequena o bastante para uma média climática significar
+algo. Na UF, a mediana é de 17 estações agregadas numa média só — o que sobra
+não descreve o clima de lugar nenhum. E com 942 linhas de treino, 49 features
+climáticas a mais são convite a decorar.
+
+**Trate o nível de UF como ponto extremo da curva, não como modelo.** São 318
+linhas de teste e o R²_log fica perto de zero nos dois braços, ou seja, o
+modelo mal explica a variação em escala log. O R²_orig alto vem de acertar a
+ordem de grandeza de seis séries grandes, não de prever bem. A inflação do
+vazamento também explode aqui (+0,107 de F1_macro contra +0,033 no
+município), porque limiares tirados de 942 linhas são instáveis.
+
+**A conclusão metodológica é que existe uma granularidade ótima**, e neste
+recorte ela é a mesorregião. Isso é contribuição de método, não resultado
+negativo: diz que a pergunta "o clima ajuda a prever dengue?" não tem
+resposta independente da escala espacial em que se pergunta.
+
 ### 7.3 E2 — histórico completo 2000-2023, SINAN-only, teste em 2023
 
 Mesmo ano de teste do E1, para que a diferença não misture efeito de recorte
@@ -533,8 +569,10 @@ Não é enorme, mas era ganho de graça que o modelo não teria em produção �
 
 1. **O clima contribui, ao contrário do que o trabalho anterior concluiu.** A
    conclusão anterior era artefato de dados quebrados, não um achado.
-2. **A escala espacial importa mais que o modelo.** Trocar município por
-   mesorregião rendeu mais que qualquer ajuste de hiperparâmetro.
+2. **A escala espacial importa mais que o modelo, e tem um ótimo.** Trocar
+   município por mesorregião rendeu mais que qualquer ajuste de
+   hiperparâmetro, mas continuar agregando até a UF inverte o sinal. A
+   pergunta "o clima ajuda?" não tem resposta independente da escala.
 3. **No recorte, o XGBoost não justifica sua complexidade contra a
    persistência em R²_orig** (0,390 contra 0,400). É um resultado negativo
    legítimo e publicável; escondê-lo seria repetir o erro que o retreino veio

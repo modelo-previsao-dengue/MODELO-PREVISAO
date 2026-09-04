@@ -25,7 +25,7 @@ contagem, `_log` e sobre log1p, que e o que o treino otimiza.
 | XGBoost: e2_sinan       |    294945 |     3.7435 |     50.7186 |    0.4897 |    0.3174 |   0.7335 |     0.4514 |          0.8402 |
 
 
-## US-009 — mesmo recorte agregado por mesorregiao, teste 2023
+## US-009 — mesmo recorte agregado por mesorregiao (43 series), teste 2023
 
 | modelo                    |   n_teste |   MAE_orig |   RMSE_orig |   R2_orig |   MAE_log |   R2_log |   F1_macro |   AUC_macro_ovr |
 |:--------------------------|----------:|-----------:|------------:|----------:|----------:|---------:|-----------:|----------------:|
@@ -34,6 +34,17 @@ contagem, `_log` e sobre log1p, que e o que o treino otimiza.
 | baseline: media_movel_4   |      2279 |    304.649 |     786.807 |    0.311  |    0.8833 |   0.6294 |     0.5069 |        nan      |
 | XGBoost: meso_sinan       |      2279 |    224.024 |     745.502 |    0.3814 |    0.6812 |   0.6924 |     0.4092 |          0.7244 |
 | XGBoost: meso_sinan_inmet |      2279 |    195.654 |     678.653 |    0.4874 |    0.6461 |   0.7031 |     0.4336 |          0.7553 |
+
+
+## US-009 — mesmo recorte agregado por UF (6 series), teste 2023
+
+| modelo                  |   n_teste |   MAE_orig |   RMSE_orig |   R2_orig |   MAE_log |   R2_log |   F1_macro |   AUC_macro_ovr |
+|:------------------------|----------:|-----------:|------------:|----------:|----------:|---------:|-----------:|----------------:|
+| baseline: persistencia  |       318 |    1650.92 |     3501.23 |    0.4544 |    0.7063 |  -0.1518 |     0.5719 |        nan      |
+| baseline: sazonal       |       312 |    2361.27 |     4069.1  |    0.1303 |    1.3033 |  -0.4169 |     0.2091 |        nan      |
+| baseline: media_movel_4 |       318 |    2020.87 |     3886.46 |    0.3278 |    0.728  |   0.3348 |     0.5244 |        nan      |
+| XGBoost: uf_sinan       |       318 |    1204.4  |     2904.63 |    0.6245 |    0.5723 |   0.0872 |     0.3013 |          0.6827 |
+| XGBoost: uf_sinan_inmet |       318 |    1305.99 |     3256.91 |    0.5279 |    0.5686 |   0.0754 |     0.2932 |          0.718  |
 
 
 ## Inflacao das metricas pelo vazamento no rotulo (US-002)
@@ -49,4 +60,6 @@ sobre o treino.
 | e2_sinan         |                   0.4514 |                   0.4558 |              0.0044 |              0.8402 |              0.8414 |         0.0012 |
 | meso_sinan       |                   0.4092 |                   0.4503 |              0.0411 |              0.7244 |              0.7585 |         0.0341 |
 | meso_sinan_inmet |                   0.4336 |                   0.4779 |              0.0443 |              0.7553 |              0.7895 |         0.0342 |
+| uf_sinan         |                   0.3013 |                   0.3139 |              0.0126 |              0.6827 |              0.7347 |         0.052  |
+| uf_sinan_inmet   |                   0.2932 |                   0.4001 |              0.1069 |              0.718  |              0.7918 |         0.0738 |
 

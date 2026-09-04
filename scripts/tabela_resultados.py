@@ -29,9 +29,13 @@ GRUPOS = {
         "baselines": "models/baselines_e2/metrics.json",
         "bracos": ["e2_sinan"],
     },
-    "US-009 — mesmo recorte agregado por mesorregiao, teste 2023": {
+    "US-009 — mesmo recorte agregado por mesorregiao (43 series), teste 2023": {
         "baselines": "models/baselines_meso/metrics.json",
         "bracos": ["meso_sinan", "meso_sinan_inmet"],
+    },
+    "US-009 — mesmo recorte agregado por UF (6 series), teste 2023": {
+        "baselines": "models/baselines_uf/metrics.json",
+        "bracos": ["uf_sinan", "uf_sinan_inmet"],
     },
 }
 
