@@ -66,13 +66,50 @@ Os dados passam por uma arquitetura **Medallion** (Bronze -> Silver -> Gold):
 - **Silver**: dados limpos, padronizados, com granularidade municipio x semana
 - **Gold**: dados enriquecidos com features prontas para modelagem
 
-O dataset final integrado tem **7.6 milhoes de linhas** e **164 features**, dividido temporalmente:
+### Recorte espaco-temporal (branch `feat/retreino-recorte-2019-2023`)
+
+O dataset de modelagem deixou de ser o Brasil inteiro de 2000 a 2024. O clima
+so existe onde ha estacao automatica do INMET funcionando, e a cobertura real
+so ficou visivel depois de corrigir os zeros falsos de chuva. O recorte troca
+abrangencia por qualidade, e o preco esta dito por extenso abaixo.
+
+**E1 — recorte principal**, 6 UFs (DF, ES, GO, MG, RJ, SP) x 2019-2023, so
+municipios com pelo menos 80% das semanas com as tres variaveis climaticas
+presentes:
 
 | Split | Periodo | Linhas |
 |-------|---------|--------|
-| Train | < 2022 | 5.822.243 |
-| Val | 2022-2023 | 873.731 |
-| Test | 2024+ | 947.194 |
+| Train | 2019-2021 | 214.933 |
+| Val | 2022 | 71.188 |
+| Test | 2023 | 72.557 |
+
+1.369 municipios, 178 features, cobertura climatica de 94,26%. Ha ainda uma
+janela de warm-up (2018) e cool-down (2024) que e processada mas nao
+entregue, para que os lags de 12 semanas e o alvo t+4 das bordas existam.
+
+**E2 — referencia de producao**, SINAN-only sobre 2000-2023, com o **mesmo ano
+de teste (2023)**: treino ate 2020, validacao 2021-2022, 6.110.370 linhas de
+treino.
+
+**O custo, dito com todas as letras:** o recorte troca 19 anos de historico
+epidemiologico por cobertura climatica. Isso penaliza o braco SINAN-only da
+ablacao, que teria muito mais dados se pudesse usar o historico inteiro. O E2
+existe justamente para medir esse efeito separadamente, e por isso usa o mesmo
+ano de teste do E1 — assim a diferenca entre os dois nao mistura efeito de
+recorte com efeito de periodo de teste.
+
+### Features climaticas
+
+As features do INMET passaram a espelhar as epidemiologicas do SINAN: lags de
+1, 2, 4, 8 e 12 semanas e medias moveis de 4, 8 e 12, sobre chuva,
+temperatura, umidade relativa e ponto de orvalho. Antes iam so ate 8 semanas,
+mas o pico da correlacao clima-casos esta em 9-12 semanas em 11 de 12 UFs
+auditadas — o modelo anterior nunca viu a janela relevante. Foram de 27 para
+49 features climaticas.
+
+Os lags sao calculados sobre uma grade semanal completa: sem isso,
+`shift(12)` em uma serie com buracos anda 12 linhas e nao 12 semanas, e o
+"lag de 12 semanas" podia ser de 15.
 
 ## Resultados Principais
 

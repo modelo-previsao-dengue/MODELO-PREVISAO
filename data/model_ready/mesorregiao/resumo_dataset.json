@@ -1,0 +1,13 @@
+{
+  "granularidade": "mesorregiao",
+  "linhas": {
+    "train": 6751,
+    "val": 2236,
+    "test": 2279
+  },
+  "mesorregioes": 43,
+  "municipios_de_origem": 1369,
+  "n_features": 163,
+  "n_features_inmet": 49,
+  "estacoes_por_mesorregiao_mediana": 2.5
+}
