@@ -113,15 +113,55 @@ Os lags sao calculados sobre uma grade semanal completa: sem isso,
 
 ## Resultados Principais
 
-| Experimento | Metrica | Valor |
-|-------------|---------|-------|
-| Regressao SINAN+INMET | R2 | 0.31 |
-| Regressao SINAN-only | R2 | **0.42** |
-| Classificacao de risco (4 classes) | AUC | **0.84** |
-| Multi-horizonte t+1 | R2 | 0.38 |
-| Multi-horizonte t+8 | R2 | 0.16 |
+Tabela completa em
+[`docs/resultados_modelos_e_baselines.md`](docs/resultados_modelos_e_baselines.md).
+Nenhum numero de XGBoost e reportado sem a linha de baseline ao lado.
 
-Achado principal: o modelo **sem dados climaticos** (SINAN-only) supera o modelo com clima (SINAN+INMET), devido a cobertura irregular do INMET (media 51.4%). A analise SHAP confirma que features epidemiologicas (lags de notificacoes) dominam a previsao.
+MAE em casos por municipio-semana. `R2_orig` e sobre a contagem, `R2_log`
+sobre log1p, que e o que o treino otimiza — os dois sao publicados porque sao
+numeros diferentes e o relatorio anterior dizia so "R2".
+
+### E1 — recorte 2019-2023, 1.369 municipios, teste em 2023
+
+| Modelo | MAE | R2_orig | R2_log | F1_macro | AUC |
+|---|---|---|---|---|---|
+| baseline: persistencia | 9,449 | **0,4003** | 0,5700 | **0,4842** | — |
+| baseline: media movel 4 | 10,891 | 0,3817 | 0,5689 | 0,4583 | — |
+| baseline: sazonal | 14,046 | -0,1038 | 0,0473 | 0,3236 | — |
+| XGBoost SINAN-only | 8,060 | 0,3611 | 0,7057 | 0,4011 | 0,7775 |
+| XGBoost SINAN+INMET | **7,935** | 0,3900 | **0,7068** | 0,3992 | **0,7859** |
+
+### US-009 — o mesmo recorte agregado por mesorregiao (43 series)
+
+| Modelo | MAE | R2_orig | R2_log | F1_macro | AUC |
+|---|---|---|---|---|---|
+| baseline: persistencia | 252,10 | 0,3971 | 0,5322 | **0,5675** | — |
+| XGBoost SINAN-only | 224,02 | 0,3814 | 0,6924 | 0,4092 | 0,7244 |
+| XGBoost SINAN+INMET | **195,65** | **0,4874** | **0,7031** | 0,4336 | **0,7553** |
+
+### Achados
+
+1. **O clima contribui.** O braco SINAN+INMET supera o SINAN-only em todas as
+   metricas. Isso **inverte a conclusao anterior deste repositorio**, de que o
+   clima nao ajudava: aquele resultado se apoiava em ponto de orvalho rotulado
+   como umidade, chuva ausente virando zero e lags que paravam antes da janela
+   em que a correlacao existe. Ver
+   [`docs/GUIA_TECNICO_RETREINO.md`](docs/GUIA_TECNICO_RETREINO.md).
+
+2. **A escala espacial importa mais que o modelo.** O ganho do clima vai de
+   +0,029 de R2_orig no municipio para +0,106 na mesorregiao. Trocar a
+   granularidade rendeu mais que qualquer ajuste de hiperparametro.
+
+3. **No nivel municipal o XGBoost ainda nao bate a persistencia em R2_orig**
+   (0,390 contra 0,400). Ele ganha em MAE, ou seja, acerta melhor a semana
+   tipica, e perde nos picos, que e o que domina o R2 — e o pico e justamente
+   o que a vigilancia precisa prever. So na mesorregiao o modelo supera o
+   baseline com folga (0,487 contra 0,397).
+
+4. **A classificacao ainda perde para o baseline em F1_macro.** O XGBoost
+   minimiza logloss e, sem tratamento de desbalanceamento, escorrega para a
+   classe majoritaria. Correcao conhecida e ainda nao aplicada, para nao
+   misturar o efeito com o da ablacao.
 
 ## Como Reproduzir
 

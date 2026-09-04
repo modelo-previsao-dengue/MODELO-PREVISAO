@@ -374,7 +374,98 @@ JSON e rodar de novo, não caçar constantes em cinco arquivos.
 
 ## 7. Resultados
 
-_(preenchido ao fim da seção 8 — os três braços da ablação)_
+Tabela completa e sempre atualizada em
+[`docs/resultados_modelos_e_baselines.md`](resultados_modelos_e_baselines.md),
+gerada por `scripts/tabela_resultados.py`. Nenhum número de XGBoost aparece
+sem a linha de baseline ao lado (FR-4).
+
+### 7.1 E1 — recorte 2019-2023, 1.369 municípios, teste em 2023
+
+| Modelo | MAE (casos) | RMSE | R²_orig | R²_log | F1_macro | AUC |
+|---|---|---|---|---|---|---|
+| baseline: persistência | 9,449 | 83,31 | **0,4003** | 0,5700 | **0,4842** | — |
+| baseline: média móvel 4 | 10,891 | 84,59 | 0,3817 | 0,5689 | 0,4583 | — |
+| baseline: sazonal | 14,046 | 91,61 | −0,1038 | 0,0473 | 0,3236 | — |
+| XGBoost SINAN-only | 8,060 | 85,99 | 0,3611 | 0,7057 | 0,4011 | 0,7775 |
+| XGBoost SINAN+INMET | **7,935** | **84,02** | 0,3900 | **0,7068** | 0,3992 | **0,7859** |
+
+**O clima ajuda.** Com os dados corrigidos, o braço com INMET supera o
+SINAN-only em MAE (7,935 contra 8,060), R²_orig (0,390 contra 0,361), R²_log
+e AUC. Isso **inverte a conclusão anterior do TCC**, que dizia que o clima não
+contribuía — conclusão que se apoiava em ponto de orvalho rotulado como
+umidade, chuva ausente virando zero e *lags* que paravam antes da janela em
+que a correlação existe.
+
+**Mas o modelo não bate a persistência em R²_orig.** 0,390 contra 0,400. Ele
+ganha em MAE, ou seja, acerta melhor a semana típica, e perde nos picos, que
+é o que domina o R². Para vigilância epidemiológica, errar no pico é
+exatamente o erro que importa. Este é o resultado honesto e precisa entrar no
+TCC como tal.
+
+**E o baseline vence a classificação.** F1_macro 0,4842 contra 0,3992. Isso
+não é um paradoxo: o baseline "classifica" passando o valor atual pelos
+limiares do município, o que espalha as previsões pelas quatro faixas; o
+XGBoost minimiza *logloss* e, sem tratamento de desbalanceamento, escorrega
+para a classe majoritária. É um problema com correção conhecida — pesar as
+amostras, [seção 8.4](#84-ajustes-práticos-em-ordem-de-retorno) item 4 — e
+não foi aplicada aqui para não misturar o efeito com o da ablação.
+
+### 7.2 US-009 — o mesmo recorte agregado por mesorregião
+
+43 mesorregiões em vez de 1.369 municípios, 11.266 linhas em vez de 358.678.
+
+| Modelo | MAE (casos) | RMSE | R²_orig | R²_log | F1_macro | AUC |
+|---|---|---|---|---|---|---|
+| baseline: persistência | 252,10 | 736,00 | 0,3971 | 0,5322 | **0,5675** | — |
+| baseline: média móvel 4 | 304,65 | 786,81 | 0,3110 | 0,6294 | 0,5069 | — |
+| baseline: sazonal | 377,74 | 891,72 | −0,1959 | 0,2166 | 0,3699 | — |
+| XGBoost SINAN-only | 224,02 | 745,50 | 0,3814 | 0,6924 | 0,4092 | 0,7244 |
+| XGBoost SINAN+INMET | **195,65** | **678,65** | **0,4874** | **0,7031** | 0,4336 | **0,7553** |
+
+**A hipótese da granularidade se confirma.** O ganho do clima salta de
+**+0,029** de R²_orig no município para **+0,106** na mesorregião — mais que
+o triplo. E é só aqui que o modelo **supera a persistência com folga** em
+R²_orig (0,487 contra 0,397), o que não acontecia no nível municipal.
+
+A explicação é direta: mais de um terço das linhas municipais tem zero caso,
+e uma estação a 80 km representa mal o microclima de um município pequeno.
+Agregar aumenta a razão sinal-ruído e aproxima a escala espacial dos casos da
+escala em que o clima foi de fato medido — a mediana é de 2,5 estações por
+mesorregião.
+
+A ressalva: são só 2.279 linhas de teste, contra 72.557 no municipal. O
+intervalo de confiança é bem mais largo, e vale reportar isso junto do
+número.
+
+Na classificação a mesorregião também não bate o baseline, pelo mesmo motivo
+da seção anterior.
+
+### 7.3 Inflação causada pelo vazamento (US-002)
+
+Quanto a classificação *parecia* melhor quando os limiares de risco saíam do
+dataset inteiro em vez de só do treino:
+
+| Braço | F1_macro sem vazamento | com vazamento | inflação |
+|---|---|---|---|
+| e1_sinan | 0,4011 | 0,4284 | +0,0273 |
+| e1_sinan_inmet | 0,3992 | 0,4325 | +0,0333 |
+| meso_sinan | 0,4092 | 0,4503 | +0,0411 |
+| meso_sinan_inmet | 0,4336 | 0,4779 | +0,0443 |
+
+Não é enorme, mas era ganho de graça que o modelo não teria em produção — e
+7,76% dos rótulos mudam quando o vazamento sai.
+
+### 7.4 O que isso significa para o TCC
+
+1. **O clima contribui, ao contrário do que o trabalho anterior concluiu.** A
+   conclusão anterior era artefato de dados quebrados, não um achado.
+2. **A escala espacial importa mais que o modelo.** Trocar município por
+   mesorregião rendeu mais que qualquer ajuste de hiperparâmetro.
+3. **No nível municipal, o XGBoost ainda não justifica sua complexidade
+   contra a persistência.** É um resultado negativo legítimo e publicável;
+   escondê-lo seria repetir o erro que o retreino veio corrigir.
+4. **O classificador precisa de tratamento de desbalanceamento** antes de ser
+   comparado de forma justa ao baseline.
 
 ---
 
