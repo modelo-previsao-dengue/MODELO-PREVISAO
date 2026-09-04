@@ -28,6 +28,7 @@ Uso:
 """
 
 import argparse
+import gc
 import json
 import sys
 import time
@@ -35,6 +36,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import pyarrow.parquet as pq
 import xgboost as xgb
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -104,11 +106,34 @@ def carregar(arm):
 
     partes = {}
     for nome in ("train", "val", "test"):
-        cols = feats + [c for c in NAO_FEATURE]
-        d = pd.read_parquet(dataset / f"{nome}.parquet",
-                            columns=[c for c in dict.fromkeys(cols)])
-        partes[nome] = d
+        caminho = dataset / f"{nome}.parquet"
+        partes[nome] = {
+            "X": _ler_matriz(caminho, feats),
+            "meta": pd.read_parquet(caminho, columns=NAO_FEATURE),
+        }
+    gc.collect()
     return partes, feats, dataset
+
+
+def _ler_matriz(caminho, feats):
+    """Le as features direto para um float32 contiguo, sem DataFrame no meio.
+
+    A API sklearn do XGBoost converte o DataFrame para numpy antes de montar
+    a DMatrix, entao um read_parquet seguido de to_numpy mantem as duas
+    copias vivas ao mesmo tempo. No braco E2, com 6,1 milhoes de linhas por
+    129 colunas, sao 3,1 GB cada, e o processo era morto antes do primeiro
+    trial. Preenchendo um array ja alocado, lote a lote, o pico e o array
+    final mais um lote.
+    """
+    arquivo = pq.ParquetFile(caminho)
+    X = np.empty((arquivo.metadata.num_rows, len(feats)), dtype=np.float32)
+    i = 0
+    for lote in arquivo.iter_batches(batch_size=200_000, columns=feats):
+        for j in range(len(feats)):
+            X[i:i + lote.num_rows, j] = lote.column(j).to_numpy(
+                zero_copy_only=False)
+        i += lote.num_rows
+    return X
 
 
 def tune_regressao(partes, feats, trials, semente=42):
@@ -121,8 +146,8 @@ def tune_regressao(partes, feats, trials, semente=42):
     import optuna
     optuna.logging.set_verbosity(optuna.logging.WARNING)
 
-    Xtr, ytr = partes["train"][feats], np.log1p(partes["train"][TARGET])
-    Xva, yva = partes["val"][feats], np.log1p(partes["val"][TARGET])
+    Xtr, ytr = partes["train"]["X"], np.log1p(partes["train"]["meta"][TARGET])
+    Xva, yva = partes["val"]["X"], np.log1p(partes["val"]["meta"][TARGET])
 
     fixos = fixos_para(len(Xtr))
 
@@ -148,22 +173,22 @@ def tune_regressao(partes, feats, trials, semente=42):
 
 
 def treinar_regressao(partes, feats, params):
-    Xtr, ytr = partes["train"][feats], np.log1p(partes["train"][TARGET])
-    Xva, yva = partes["val"][feats], np.log1p(partes["val"][TARGET])
+    Xtr, ytr = partes["train"]["X"], np.log1p(partes["train"]["meta"][TARGET])
+    Xva, yva = partes["val"]["X"], np.log1p(partes["val"]["meta"][TARGET])
     modelo = xgb.XGBRegressor(**params, **fixos_para(len(Xtr)))
     modelo.fit(Xtr, ytr, eval_set=[(Xva, yva)], verbose=False)
     return modelo
 
 
 def treinar_classificacao(partes, feats, params, rotulo):
-    Xtr = partes["train"][feats]
-    Xva = partes["val"][feats]
+    Xtr = partes["train"]["X"]
+    Xva = partes["val"]["X"]
     p = {k: v for k, v in params.items()}
     modelo = xgb.XGBClassifier(objective="multi:softprob", num_class=4,
                                eval_metric="mlogloss", **p,
                                **fixos_para(len(Xtr)))
-    modelo.fit(Xtr, partes["train"][rotulo],
-               eval_set=[(Xva, partes["val"][rotulo])], verbose=False)
+    modelo.fit(Xtr, partes["train"]["meta"][rotulo],
+               eval_set=[(Xva, partes["val"]["meta"][rotulo])], verbose=False)
     return modelo
 
 
@@ -179,16 +204,18 @@ def main():
 
     print(f"Braco: {args.arm}")
     partes, feats, dataset = carregar(args.arm)
-    print(f"  features: {len(feats)} | train {len(partes['train']):,} | "
-          f"val {len(partes['val']):,} | test {len(partes['test']):,}")
+    n = {k: len(v["meta"]) for k, v in partes.items()}
+    print(f"  features: {len(feats)} | train {n['train']:,} | "
+          f"val {n['val']:,} | test {n['test']:,}")
 
     print(f"\nOptuna, {args.trials} trials, treino inteiro (sem subamostragem)...")
     melhores, melhor_val = tune_regressao(partes, feats, args.trials)
 
     print("\nModelo final de regressao...")
     reg = treinar_regressao(partes, feats, melhores)
-    pred = np.expm1(reg.predict(partes["test"][feats]))
-    m_reg = metrics_common.regression_metrics(partes["test"][TARGET], pred)
+    pred = np.expm1(reg.predict(partes["test"]["X"]))
+    m_reg = metrics_common.regression_metrics(
+        partes["test"]["meta"][TARGET], pred)
     m_reg["melhor_rmse_log_val"] = round(melhor_val, 4)
     m_reg["n_arvores_usadas"] = int(reg.best_iteration + 1)
     print(f"  MAE  {m_reg['MAE_orig']:>10.3f} casos | log {m_reg['MAE_log']:.4f}")
@@ -196,17 +223,17 @@ def main():
 
     print("\nClassificacao, rotulo sem vazamento...")
     clf = treinar_classificacao(partes, feats, melhores, CLASS_TARGET)
-    proba = clf.predict_proba(partes["test"][feats])
+    proba = clf.predict_proba(partes["test"]["X"])
     m_clf = metrics_common.classification_metrics(
-        partes["test"][CLASS_TARGET], proba.argmax(axis=1), proba)
+        partes["test"]["meta"][CLASS_TARGET], proba.argmax(axis=1), proba)
     print(f"  F1_macro {m_clf['F1_macro']:.4f} | AUC {m_clf.get('AUC_macro_ovr')}")
 
     print("Classificacao, rotulo com vazamento, so para medir a inflacao...")
     clf_l = treinar_classificacao(partes, feats, melhores, CLASS_TARGET_LEAKY)
-    proba_l = clf_l.predict_proba(partes["test"][feats])
+    proba_l = clf_l.predict_proba(partes["test"]["X"])
     m_clf_l = metrics_common.classification_metrics(
-        partes["test"][CLASS_TARGET_LEAKY], proba_l.argmax(axis=1), proba_l,
-        alvo=CLASS_TARGET_LEAKY)
+        partes["test"]["meta"][CLASS_TARGET_LEAKY], proba_l.argmax(axis=1),
+        proba_l, alvo=CLASS_TARGET_LEAKY)
     print(f"  F1_macro {m_clf_l['F1_macro']:.4f} | AUC {m_clf_l.get('AUC_macro_ovr')}")
 
     inflacao = {
@@ -223,7 +250,7 @@ def main():
         "braco": args.arm,
         "dataset": ARMS[args.arm]["dataset"],
         "n_features": len(feats),
-        "n_treino": int(len(partes["train"])),
+        "n_treino": int(len(partes["train"]["meta"])),
         "melhores_params": melhores,
         "n_trials": args.trials,
         "regressao": m_reg,

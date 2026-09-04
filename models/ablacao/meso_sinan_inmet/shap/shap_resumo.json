@@ -1,0 +1,110 @@
+{
+  "braco": "meso_sinan_inmet",
+  "n_linhas_explicadas": 2279,
+  "n_features": 163,
+  "peso_relativo_clima": 0.1703,
+  "top_15": [
+    {
+      "feature": "notificacoes",
+      "shap_medio_abs": 0.621271014213562,
+      "origem": "sinan"
+    },
+    {
+      "feature": "notificacoes_lag_1",
+      "shap_medio_abs": 0.2681807577610016,
+      "origem": "sinan"
+    },
+    {
+      "feature": "notificacoes_min_movel_3",
+      "shap_medio_abs": 0.09722945094108582,
+      "origem": "sinan"
+    },
+    {
+      "feature": "qt_confirmados_provaveis",
+      "shap_medio_abs": 0.08735135942697525,
+      "origem": "sinan"
+    },
+    {
+      "feature": "notificacoes_media_movel_3",
+      "shap_medio_abs": 0.0847250372171402,
+      "origem": "sinan"
+    },
+    {
+      "feature": "notificacoes_max_movel_3",
+      "shap_medio_abs": 0.07575103640556335,
+      "origem": "sinan"
+    },
+    {
+      "feature": "notificacoes_diff_4",
+      "shap_medio_abs": 0.06624487042427063,
+      "origem": "sinan"
+    },
+    {
+      "feature": "notificacoes_razao_media_8",
+      "shap_medio_abs": 0.054867662489414215,
+      "origem": "sinan"
+    },
+    {
+      "feature": "notificacoes_lag_2",
+      "shap_medio_abs": 0.0506540909409523,
+      "origem": "sinan"
+    },
+    {
+      "feature": "qt_hospitalizados",
+      "shap_medio_abs": 0.04324113950133324,
+      "origem": "sinan"
+    },
+    {
+      "feature": "notificacoes_media_movel_4",
+      "shap_medio_abs": 0.03963639214634895,
+      "origem": "sinan"
+    },
+    {
+      "feature": "rain_sum_mm_mm4",
+      "shap_medio_abs": 0.03744906932115555,
+      "origem": "inmet"
+    },
+    {
+      "feature": "notificacoes_razao_media_4",
+      "shap_medio_abs": 0.03730477765202522,
+      "origem": "sinan"
+    },
+    {
+      "feature": "notificacoes_pct_change_4",
+      "shap_medio_abs": 0.03594961762428284,
+      "origem": "sinan"
+    },
+    {
+      "feature": "prop_confirmado_provavel",
+      "shap_medio_abs": 0.03073118068277836,
+      "origem": "sinan"
+    }
+  ],
+  "top_5_clima": [
+    {
+      "feature": "rain_sum_mm_mm4",
+      "shap_medio_abs": 0.03744906932115555,
+      "origem": "inmet"
+    },
+    {
+      "feature": "rain_sum_mm_mm8",
+      "shap_medio_abs": 0.024218512699007988,
+      "origem": "inmet"
+    },
+    {
+      "feature": "temp_min_c",
+      "shap_medio_abs": 0.023580843582749367,
+      "origem": "inmet"
+    },
+    {
+      "feature": "dewpoint_mean_c_lag_12",
+      "shap_medio_abs": 0.019786428660154343,
+      "origem": "inmet"
+    },
+    {
+      "feature": "rain_sum_mm_mm12",
+      "shap_medio_abs": 0.015289974398911,
+      "origem": "inmet"
+    }
+  ]
+}

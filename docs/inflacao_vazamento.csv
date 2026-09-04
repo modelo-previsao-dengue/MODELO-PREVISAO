@@ -1,5 +1,6 @@
 braco,F1_macro_sem_vazamento,F1_macro_com_vazamento,inflacao_F1_macro,AUC_sem_vazamento,AUC_com_vazamento,inflacao_AUC
 e1_sinan,0.4011,0.4284,0.0273,0.7775,0.7978,0.0203
 e1_sinan_inmet,0.3992,0.4325,0.0333,0.7859,0.8004,0.0145
+e2_sinan,0.4514,0.4558,0.0044,0.8402,0.8414,0.0012
 meso_sinan,0.4092,0.4503,0.0411,0.7244,0.7585,0.0341
 meso_sinan_inmet,0.4336,0.4779,0.0443,0.7553,0.7895,0.0342

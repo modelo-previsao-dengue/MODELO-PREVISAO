@@ -440,7 +440,80 @@ número.
 Na classificação a mesorregião também não bate o baseline, pelo mesmo motivo
 da seção anterior.
 
-### 7.3 Inflação causada pelo vazamento (US-002)
+### 7.3 E2 — histórico completo 2000-2023, SINAN-only, teste em 2023
+
+Mesmo ano de teste do E1, para que a diferença não misture efeito de recorte
+com efeito de período.
+
+| Modelo | MAE (casos) | RMSE | R²_orig | R²_log | F1_macro | AUC |
+|---|---|---|---|---|---|---|
+| baseline: persistência | 4,654 | 53,36 | 0,4352 | 0,5845 | **0,4969** | — |
+| baseline: média móvel 4 | 5,383 | 58,26 | 0,3266 | 0,5880 | 0,4773 | — |
+| baseline: sazonal | 7,697 | 63,90 | −0,0186 | −0,0118 | 0,3714 | — |
+| XGBoost SINAN-only | **3,744** | **50,72** | **0,4897** | **0,7335** | 0,4514 | **0,8402** |
+
+**Os 21 anos de histórico valem mais que o clima no nível municipal.** O E2
+supera a persistência com folga (R²_orig 0,490 contra 0,435), o que nenhum
+braço do E1 conseguiu, e chega a AUC 0,840 contra 0,786 do melhor braço do
+E1. A conta é direta: 6,1 milhões de linhas de treino contra 215 mil.
+
+Isso não contradiz a seção 7.1 — confirma o preço que o recorte cobra e que
+está declarado no README. O recorte trocou 19 anos de histórico por cobertura
+climática, e no nível municipal essa troca sai cara. Só na mesorregião o
+clima recupera a diferença.
+
+**A inflação do vazamento quase some aqui** (+0,0044 de F1_macro contra
++0,0333 no E1). Faz sentido: limiares calculados sobre 21 anos de treino são
+estáveis, e ver ou não o ano de teste muda pouco. Quanto menor o histórico,
+mais o vazamento importa.
+
+### 7.4 Um aviso sobre o que a busca otimiza
+
+O E2 foi rodado duas vezes, com 1 e com 20 trials. O resultado é instrutivo:
+
+| | RMSE_log val | R²_log teste | R²_orig teste |
+|---|---|---|---|
+| 1 trial | 0,5179 | 0,7327 | **0,5331** |
+| 20 trials | **0,5172** | **0,7335** | 0,4897 |
+
+**A busca melhorou exatamente aquilo que ela otimiza — RMSE na escala log — e
+piorou o R² na escala de contagem.** Não é ruído nem erro: é o comportamento
+esperado de otimizar uma métrica e reportar outra. Se o objetivo do TCC é
+explicar contagens de casos, o objetivo da busca deveria ser o erro em
+contagem, e não o erro em log.
+
+Isso está descrito como ajuste prático na
+[seção 8.4](#84-ajustes-práticos-em-ordem-de-retorno), item 2, e é
+provavelmente o ajuste de maior retorno que sobrou por fazer.
+
+### 7.5 SHAP: de onde vem a previsão
+
+Calculado sobre o conjunto de teste **inteiro**, não sobre uma amostra. A
+versão anterior explicava 50 mil linhas sorteadas de um modelo treinado em
+milhões, então a importância relatada não era a do modelo entregue.
+
+| Braço | Peso relativo do clima | Climáticas mais fortes |
+|---|---|---|
+| e1_sinan_inmet | 17,99% | `dewpoint_mean_c_mm4`, `pressure_mean_mbar`, `rain_sum_mm_mm8`, `dewpoint_mean_c_mm8`, `dewpoint_mean_c` |
+| meso_sinan_inmet | 17,03% | `rain_sum_mm_mm4`, `rain_sum_mm_mm8`, `temp_min_c`, `dewpoint_mean_c_lag_12`, `rain_sum_mm_mm12` |
+
+Nos dois casos o topo absoluto é epidemiológico — `notificacoes` e
+`notificacoes_lag_1` sozinhas respondem por boa parte —, o que é esperado num
+alvo com autocorrelação alta e é a mesma razão de a persistência ser um
+baseline forte.
+
+Duas leituras que só são possíveis depois das correções:
+
+- **O ponto de orvalho aparece entre as climáticas mais fortes no recorte
+  municipal.** Antes da US-000 essa variável estava rotulada como
+  `temp_max_c`, então qualquer análise anterior que a mencionasse estava
+  falando de outra coisa.
+- **Na mesorregião, `dewpoint_mean_c_lag_12` e `rain_sum_mm_mm12` entram no
+  top 5.** São features de 12 semanas, que **não existiam** antes da US-003 —
+  os lags paravam em 8. O modelo antigo não tinha como enxergar essa janela,
+  que é exatamente onde a auditoria dizia estar o pico da correlação.
+
+### 7.6 Inflação causada pelo vazamento (US-002)
 
 Quanto a classificação *parecia* melhor quando os limiares de risco saíam do
 dataset inteiro em vez de só do treino:
@@ -451,21 +524,29 @@ dataset inteiro em vez de só do treino:
 | e1_sinan_inmet | 0,3992 | 0,4325 | +0,0333 |
 | meso_sinan | 0,4092 | 0,4503 | +0,0411 |
 | meso_sinan_inmet | 0,4336 | 0,4779 | +0,0443 |
+| e2_sinan | 0,4514 | 0,4558 | +0,0044 |
 
 Não é enorme, mas era ganho de graça que o modelo não teria em produção — e
 7,76% dos rótulos mudam quando o vazamento sai.
 
-### 7.4 O que isso significa para o TCC
+### 7.7 O que isso significa para o TCC
 
 1. **O clima contribui, ao contrário do que o trabalho anterior concluiu.** A
    conclusão anterior era artefato de dados quebrados, não um achado.
 2. **A escala espacial importa mais que o modelo.** Trocar município por
    mesorregião rendeu mais que qualquer ajuste de hiperparâmetro.
-3. **No nível municipal, o XGBoost ainda não justifica sua complexidade
-   contra a persistência.** É um resultado negativo legítimo e publicável;
-   escondê-lo seria repetir o erro que o retreino veio corrigir.
-4. **O classificador precisa de tratamento de desbalanceamento** antes de ser
-   comparado de forma justa ao baseline.
+3. **No recorte, o XGBoost não justifica sua complexidade contra a
+   persistência em R²_orig** (0,390 contra 0,400). É um resultado negativo
+   legítimo e publicável; escondê-lo seria repetir o erro que o retreino veio
+   corrigir. Fora do recorte, com o histórico inteiro, o modelo bate a
+   persistência com folga (0,490 contra 0,435) — o problema é o tamanho do
+   treino, não o algoritmo.
+4. **O recorte cobra um preço mensurável.** 215 mil linhas de treino contra
+   6,1 milhões. Só ao agregar por mesorregião o clima recupera a diferença.
+5. **O classificador precisa de tratamento de desbalanceamento** antes de ser
+   comparado de forma justa ao baseline: perde em F1_macro nos cinco braços.
+6. **A busca está otimizando a métrica errada** para a pergunta do TCC. Ver
+   [seção 7.4](#74-um-aviso-sobre-o-que-a-busca-otimiza).
 
 ---
 
@@ -638,8 +719,31 @@ scripts/rodar_com_teto.sh -m 9G -- python3 scripts/baselines_naive.py \
 # 5. Ablação
 scripts/rodar_com_teto.sh -m 9G -- .venv/bin/python3 scripts/train_ablation.py --arm e1_sinan
 scripts/rodar_com_teto.sh -m 9G -- .venv/bin/python3 scripts/train_ablation.py --arm e1_sinan_inmet
-scripts/rodar_com_teto.sh -m 9G -- .venv/bin/python3 scripts/train_ablation.py --arm e2_sinan
+scripts/rodar_com_teto.sh -m 9G -- .venv/bin/python3 scripts/train_ablation.py --arm meso_sinan
+scripts/rodar_com_teto.sh -m 9G -- .venv/bin/python3 scripts/train_ablation.py --arm meso_sinan_inmet
+scripts/rodar_com_teto.sh -m 9G -- .venv/bin/python3 scripts/train_ablation.py --arm e2_sinan --trials 20
+
+# 6. Explicabilidade (conjunto de teste inteiro) e tabela final
+scripts/rodar_com_teto.sh -m 6G -- .venv/bin/python3 scripts/explain_shap.py --arm e1_sinan_inmet
+scripts/rodar_com_teto.sh -m 6G -- .venv/bin/python3 scripts/explain_shap.py --arm meso_sinan_inmet
+python3 scripts/tabela_resultados.py
 ```
+
+**Tetos de memória medidos** (pico real, com `/usr/bin/time -v`):
+
+| Etapa | Pico |
+|---|---|
+| `prepare_model_dataset --modo e2` | 3,0 GB |
+| `prepare_model_dataset --modo e1` | 5,2 GB |
+| `prepare_mesoregion_dataset` | 5,3 GB |
+| `train_ablation --arm e1_*` | 3,0 GB |
+| `train_ablation --arm meso_*` | 0,5 GB |
+| `train_ablation --arm e2_sinan` | **9,0 GB** |
+| `explain_shap` | 2,5 GB |
+| `baselines_naive` (E2) | 1,9 GB |
+
+O braço E2 é o único que exige teto alto. Dar menos que 8 GB a ele faz o
+cgroup matar o processo no meio da busca.
 
 O Optuna e o SHAP vivem no `.venv`; o resto roda no Python do sistema.
 

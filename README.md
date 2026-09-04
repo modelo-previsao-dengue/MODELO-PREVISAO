@@ -131,6 +131,13 @@ numeros diferentes e o relatorio anterior dizia so "R2".
 | XGBoost SINAN-only | 8,060 | 0,3611 | 0,7057 | 0,4011 | 0,7775 |
 | XGBoost SINAN+INMET | **7,935** | 0,3900 | **0,7068** | 0,3992 | **0,7859** |
 
+### E2 — historico completo 2000-2023, SINAN-only, mesmo teste (2023)
+
+| Modelo | MAE | R2_orig | R2_log | F1_macro | AUC |
+|---|---|---|---|---|---|
+| baseline: persistencia | 4,654 | 0,4352 | 0,5845 | **0,4969** | — |
+| XGBoost SINAN-only | **3,744** | **0,4897** | **0,7335** | 0,4514 | **0,8402** |
+
 ### US-009 — o mesmo recorte agregado por mesorregiao (43 series)
 
 | Modelo | MAE | R2_orig | R2_log | F1_macro | AUC |
@@ -152,11 +159,13 @@ numeros diferentes e o relatorio anterior dizia so "R2".
    +0,029 de R2_orig no municipio para +0,106 na mesorregiao. Trocar a
    granularidade rendeu mais que qualquer ajuste de hiperparametro.
 
-3. **No nivel municipal o XGBoost ainda nao bate a persistencia em R2_orig**
-   (0,390 contra 0,400). Ele ganha em MAE, ou seja, acerta melhor a semana
-   tipica, e perde nos picos, que e o que domina o R2 — e o pico e justamente
-   o que a vigilancia precisa prever. So na mesorregiao o modelo supera o
-   baseline com folga (0,487 contra 0,397).
+3. **No recorte, o XGBoost nao bate a persistencia em R2_orig** (0,390
+   contra 0,400). Ele ganha em MAE, ou seja, acerta melhor a semana tipica, e
+   perde nos picos, que e o que domina o R2 — e o pico e justamente o que a
+   vigilancia precisa prever. Com o historico inteiro (E2) o modelo supera a
+   persistencia com folga, 0,490 contra 0,435, e na mesorregiao tambem, 0,487
+   contra 0,397. O limitante e o tamanho do treino que o recorte deixa: 215
+   mil linhas contra 6,1 milhoes.
 
 4. **A classificacao ainda perde para o baseline em F1_macro.** O XGBoost
    minimiza logloss e, sem tratamento de desbalanceamento, escorrega para a
