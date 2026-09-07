@@ -353,3 +353,127 @@ df_train = df_train[df_train["ibge_municipio"] == DF_CODE]
 | `data/model_ready/e2/*` | E2 — histórico completo, SINAN-only |
 | `data/model_ready/mesorregiao/*` | US-009 — 43 mesorregiões |
 | `data/model_ready/uf/*` | US-009 — 6 UFs |
+
+---
+
+## 8. Análise do notebook atual — três bloqueadores
+
+Auditoria do notebook `Treino XGBoost — Dengue TCC2` contra o dataset novo.
+Um notebook corrigido está em
+[`kaggle/notebook_retreino.py`](../kaggle/notebook_retreino.py); cole-o no
+Kaggle no lugar do atual.
+
+### 8.1 O dataset no HuggingFace ainda é o antigo
+
+`thiagorfreitas/dengue-tcc2-data`, pasta `data/model_ready/`:
+
+| | No HF hoje | Depois do retreino |
+|---|---|---|
+| `train.parquet` | 249 MB (3 meses atrás) | 23 MB |
+| `val.parquet` | 51,7 MB | 6,2 MB |
+| `test.parquet` | 66,4 MB | 7,2 MB |
+| `feature_schema.csv` | **ausente** | presente |
+| `risk_thresholds.csv` | **ausente** | presente |
+| `resumo_dataset.json` | **ausente** | presente |
+| `e2/`, `mesorregiao/`, `uf/` | **ausentes** | presentes |
+
+O arquivo grande é o dataset nacional 2000-2026 anterior ao recorte. Rodar o
+notebook contra ele reproduz os resultados antigos, com os cinco defeitos
+dentro.
+
+O script de upload aponta para outro repositório. Ele passou a aceitar
+variável de ambiente:
+
+```bash
+export HF_TOKEN=hf_xxxxxxxxxxxx
+export HF_REPO_ID=thiagorfreitas/dengue-tcc2-data
+python3 scripts/upload_data_to_hf.py
+```
+
+### 8.2 Vazamento do alvo — o mais grave
+
+O notebook monta as features assim:
+
+```python
+META_COLS = ["ibge_municipio", "ano", "semana_epidemiologica"]
+DROP_COLS = [c for c in (META_COLS + [CLASS_TARGET]) if c in df_train.columns]
+X = df.drop(columns=DROP_COLS + [TARGET], errors="ignore")
+```
+
+Isso remove cinco colunas e **deixa passar duas** que o dataset novo
+introduziu:
+
+| Coluna que sobra | O que é | Efeito |
+|---|---|---|
+| `risco_surto_t4_com_vazamento` | O próprio alvo binado em quatro faixas. Spearman de **0,863** com `notificacoes_t4` | O modelo recebe a resposta |
+| `threshold_source` | Texto (`municipio` / `uf_fallback`) | `ValueError` no `fit` |
+
+Distribuição real do alvo dentro de cada faixa dessa coluna, no teste:
+
+| `risco_surto_t4_com_vazamento` | Linhas | Média de `notificacoes_t4` |
+|---|---|---|
+| 0 | 45.017 | 1,0 |
+| 1 | 7.456 | 10,6 |
+| 2 | 9.036 | 19,9 |
+| 3 | 11.048 | 61,3 |
+
+Essa coluna existe **só** para medir de quanto era a inflação do vazamento
+temporal (US-002). Ela nunca é feature nem alvo de produção.
+
+> **O que salva o notebook de publicar um resultado falso é um acidente:**
+> `threshold_source` é texto, então o XGBoost lança `ValueError` antes de
+> treinar. Se você "resolver" isso com um `select_dtypes(include=np.number)`,
+> a coluna de texto some, o vazamento fica, e o modelo passa a entregar
+> métricas excelentes e sem sentido. Use uma lista de exclusão explícita.
+
+A correção:
+
+```python
+NUNCA_FEATURE = [
+    "notificacoes_t4",               # o alvo
+    "risco_surto_t4",                # alvo da classificação
+    "risco_surto_t4_com_vazamento",  # o alvo binado
+    "threshold_source",              # texto de auditoria
+    "ibge_municipio", "ano", "semana_epidemiologica",
+]
+```
+
+### 8.3 O walk-forward não roda, e falha em silêncio
+
+A última célula tem três defeitos:
+
+| Linha | Problema |
+|---|---|
+| `xgb.XGBRegressor(**study.best_params, ...)` | `study` nunca é definido — a célula do Optuna foi substituída por `KNOWN_BEST`. `NameError` |
+| `TRAIN_MIN_ANOS = 5` | O recorte tem **4 anos** em train+val (2019-2022). Nenhum fold é gerado, `cv_df` sai vazio e a média vira `NaN` — **sem erro nenhum** |
+| `m.fit(..., early_stopping_rounds=20)` | Removido do `fit()` no XGBoost 2.0+; é parâmetro do construtor. `TypeError` |
+
+No notebook corrigido o mínimo de anos vem do dado
+(`max(1, min(3, len(anos) - 1))`) em vez de ser fixo.
+
+### 8.4 Problemas menores, mas que mudam os números
+
+| Ponto | Por quê |
+|---|---|
+| Treina em contagem crua, sem `log1p` | Um município com 3.000 casos numa semana domina o treino. O pipeline local treina em `log1p` e volta com `expm1` — os números do notebook não são comparáveis às tabelas do TCC |
+| `KNOWN_BEST` com MAE 2,795 | Veio do dataset antigo, com outro conjunto de features. Como referência não vale mais. Os hiperparâmetros reais do braço `e1_sinan_inmet` estão no notebook corrigido |
+| Nenhum baseline | Sem a linha de persistência não há como afirmar que o modelo aprendeu algo. No recorte a persistência dá R²_orig 0,400 contra 0,390 do melhor XGBoost |
+| Não usa `feature_schema.csv` | Sem ele não dá para separar `sinan` de `sinan+inmet`, que é a pergunta central do trabalho |
+| `load_dataset(...).to_pandas()` | Converte via Arrow mantendo as duas cópias vivas. No E2, com 6,1 milhões de linhas, isso dobra a memória. `hf_hub_download` + `read_parquet` é mais enxuto |
+| `device="cuda"` fixo | Válido no XGBoost 2.0+, e bom para o E1. Mas a sessão de GPU do Kaggle tem menos RAM que a de CPU, e o E2 teve pico medido de 9 GB — para ele, prefira CPU |
+
+### 8.5 Ordem recomendada
+
+1. Rodar a [etapa 1](#2-passos-anteriores-só-se-precisar-reconstruir-os-dados) local, se ainda não rodou
+2. Subir com `HF_REPO_ID=thiagorfreitas/dengue-tcc2-data`
+3. Conferir no HF que `feature_schema.csv` e as pastas `e2/`, `mesorregiao/` e `uf/` apareceram
+4. Substituir o notebook por `kaggle/notebook_retreino.py`
+5. Rodar com `EXPERIMENTO = ""` primeiro; a célula de checagem de vazamento
+   deve imprimir `Checagem de vazamento: OK`
+6. Conferir que a persistência aparece na tabela antes de qualquer número de
+   XGBoost
+
+**Referência para saber se deu certo** — braço `e1_sinan_inmet`, teste 2023:
+MAE 7,935 · R²_orig 0,390 · R²_log 0,707. Diferenças pequenas são esperadas
+(GPU vs CPU muda a ordem de soma em ponto flutuante). Um MAE muito **menor**
+que isso é sinal de vazamento, não de sucesso.

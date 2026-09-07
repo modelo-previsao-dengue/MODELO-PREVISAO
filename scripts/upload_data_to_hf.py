@@ -3,6 +3,7 @@ Upload all data layers to HuggingFace for Kaggle notebooks.
 
 Usage:
     export HF_TOKEN=hf_xxx
+    export HF_REPO_ID=seu-usuario/dengue-tcc2-data   # opcional
     python scripts/upload_data_to_hf.py
 
 Uses upload_large_folder to batch everything in minimal commits.
@@ -13,7 +14,9 @@ import shutil
 from pathlib import Path
 from huggingface_hub import HfApi
 
-REPO_ID = "pedrolucassantanaf/dengue-tcc2-data"
+# O repositorio de destino e configuravel: o projeto tem mais de um autor e
+# cada um sobe para o proprio dataset.
+REPO_ID = os.environ.get("HF_REPO_ID", "pedrolucassantanaf/dengue-tcc2-data")
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 STAGING = Path(__file__).resolve().parent.parent / "_hf_staging"
 
