@@ -1,0 +1,319 @@
+{
+  "n_folds": 5,
+  "n_val_weeks": 10,
+  "modelos": {
+    "A_sinan_only": {
+      "mean_R2_log": 0.7759,
+      "std_R2_log": 0.1136,
+      "folds": [
+        {
+          "label": "A: SINAN-only",
+          "train_years": [
+            2019
+          ],
+          "test_years": [
+            2021
+          ],
+          "RMSE": 192.23,
+          "MAE": 67.0818,
+          "R2": 0.6957,
+          "R2_log": 0.8207,
+          "train_rows": 5754,
+          "val_rows": 1370,
+          "test_rows": 7124,
+          "best_iteration": 102
+        },
+        {
+          "label": "A: SINAN-only",
+          "train_years": [
+            2019,
+            2021
+          ],
+          "test_years": [
+            2023
+          ],
+          "RMSE": 609.0,
+          "MAE": 143.6043,
+          "R2": 0.4045,
+          "R2_log": 0.7645,
+          "train_rows": 12878,
+          "val_rows": 1370,
+          "test_rows": 7261,
+          "best_iteration": 37
+        },
+        {
+          "label": "A: SINAN-only",
+          "train_years": [
+            2019,
+            2021,
+            2023
+          ],
+          "test_years": [
+            2024
+          ],
+          "RMSE": 3670.85,
+          "MAE": 679.0153,
+          "R2": 0.1089,
+          "R2_log": 0.8508,
+          "train_rows": 20139,
+          "val_rows": 1370,
+          "test_rows": 7124,
+          "best_iteration": 33
+        },
+        {
+          "label": "A: SINAN-only",
+          "train_years": [
+            2019,
+            2021,
+            2023,
+            2024
+          ],
+          "test_years": [
+            2025
+          ],
+          "RMSE": 323.79,
+          "MAE": 70.8911,
+          "R2": 0.8312,
+          "R2_log": 0.8813,
+          "train_rows": 27263,
+          "val_rows": 1370,
+          "test_rows": 7261,
+          "best_iteration": 48
+        },
+        {
+          "label": "A: SINAN-only",
+          "train_years": [
+            2019,
+            2021,
+            2023,
+            2024,
+            2025
+          ],
+          "test_years": [
+            2026
+          ],
+          "RMSE": 161.43,
+          "MAE": 64.0866,
+          "R2": 0.7372,
+          "R2_log": 0.5622,
+          "train_rows": 34524,
+          "val_rows": 1370,
+          "test_rows": 1644,
+          "best_iteration": 65
+        }
+      ]
+    },
+    "B_inmet_bruto": {
+      "mean_R2_log": 0.7864,
+      "std_R2_log": 0.1231,
+      "folds": [
+        {
+          "label": "B: INMET bruto",
+          "train_years": [
+            2019
+          ],
+          "test_years": [
+            2021
+          ],
+          "RMSE": 182.83,
+          "MAE": 65.378,
+          "R2": 0.7247,
+          "R2_log": 0.8257,
+          "train_rows": 5754,
+          "val_rows": 1370,
+          "test_rows": 7124,
+          "best_iteration": 132
+        },
+        {
+          "label": "B: INMET bruto",
+          "train_years": [
+            2019,
+            2021
+          ],
+          "test_years": [
+            2023
+          ],
+          "RMSE": 605.26,
+          "MAE": 141.7419,
+          "R2": 0.4118,
+          "R2_log": 0.7729,
+          "train_rows": 12878,
+          "val_rows": 1370,
+          "test_rows": 7261,
+          "best_iteration": 39
+        },
+        {
+          "label": "B: INMET bruto",
+          "train_years": [
+            2019,
+            2021,
+            2023
+          ],
+          "test_years": [
+            2024
+          ],
+          "RMSE": 3386.25,
+          "MAE": 559.7149,
+          "R2": 0.2417,
+          "R2_log": 0.8899,
+          "train_rows": 20139,
+          "val_rows": 1370,
+          "test_rows": 7124,
+          "best_iteration": 56
+        },
+        {
+          "label": "B: INMET bruto",
+          "train_years": [
+            2019,
+            2021,
+            2023,
+            2024
+          ],
+          "test_years": [
+            2025
+          ],
+          "RMSE": 286.94,
+          "MAE": 69.7666,
+          "R2": 0.8674,
+          "R2_log": 0.8876,
+          "train_rows": 27263,
+          "val_rows": 1370,
+          "test_rows": 7261,
+          "best_iteration": 71
+        },
+        {
+          "label": "B: INMET bruto",
+          "train_years": [
+            2019,
+            2021,
+            2023,
+            2024,
+            2025
+          ],
+          "test_years": [
+            2026
+          ],
+          "RMSE": 163.16,
+          "MAE": 64.3735,
+          "R2": 0.7316,
+          "R2_log": 0.5559,
+          "train_rows": 34524,
+          "val_rows": 1370,
+          "test_rows": 1644,
+          "best_iteration": 57
+        }
+      ]
+    },
+    "C_inmet_enriquecido": {
+      "mean_R2_log": 0.7875,
+      "std_R2_log": 0.1206,
+      "folds": [
+        {
+          "label": "C: INMET enriquecido",
+          "train_years": [
+            2019
+          ],
+          "test_years": [
+            2021
+          ],
+          "RMSE": 181.54,
+          "MAE": 64.6313,
+          "R2": 0.7286,
+          "R2_log": 0.8196,
+          "train_rows": 5754,
+          "val_rows": 1370,
+          "test_rows": 7124,
+          "best_iteration": 91
+        },
+        {
+          "label": "C: INMET enriquecido",
+          "train_years": [
+            2019,
+            2021
+          ],
+          "test_years": [
+            2023
+          ],
+          "RMSE": 551.74,
+          "MAE": 127.9545,
+          "R2": 0.5112,
+          "R2_log": 0.7901,
+          "train_rows": 12878,
+          "val_rows": 1370,
+          "test_rows": 7261,
+          "best_iteration": 52
+        },
+        {
+          "label": "C: INMET enriquecido",
+          "train_years": [
+            2019,
+            2021,
+            2023
+          ],
+          "test_years": [
+            2024
+          ],
+          "RMSE": 3482.38,
+          "MAE": 600.5921,
+          "R2": 0.1981,
+          "R2_log": 0.8776,
+          "train_rows": 20139,
+          "val_rows": 1370,
+          "test_rows": 7124,
+          "best_iteration": 47
+        },
+        {
+          "label": "C: INMET enriquecido",
+          "train_years": [
+            2019,
+            2021,
+            2023,
+            2024
+          ],
+          "test_years": [
+            2025
+          ],
+          "RMSE": 280.36,
+          "MAE": 68.3029,
+          "R2": 0.8734,
+          "R2_log": 0.8922,
+          "train_rows": 27263,
+          "val_rows": 1370,
+          "test_rows": 7261,
+          "best_iteration": 72
+        },
+        {
+          "label": "C: INMET enriquecido",
+          "train_years": [
+            2019,
+            2021,
+            2023,
+            2024,
+            2025
+          ],
+          "test_years": [
+            2026
+          ],
+          "RMSE": 165.32,
+          "MAE": 64.1317,
+          "R2": 0.7244,
+          "R2_log": 0.5582,
+          "train_rows": 34524,
+          "val_rows": 1370,
+          "test_rows": 1644,
+          "best_iteration": 68
+        }
+      ]
+    }
+  },
+  "deltas_mean": {
+    "B_vs_A": 0.0105,
+    "C_vs_A": 0.0116,
+    "C_vs_B": 0.0011
+  },
+  "folds_c_better_than_a": 3,
+  "conclusao": {
+    "estavel_ao_longo_do_tempo": false,
+    "inmet_enriquecido_ajuda_na_maioria_dos_folds": true
+  }
+}
