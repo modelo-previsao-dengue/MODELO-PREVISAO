@@ -42,11 +42,30 @@ OUT_DIR = Path("/kaggle/working")
 # "" = E1 (recorte 6 UFs) | "e2/" | "mesorregiao/" | "uf/"
 EXPERIMENTO = ""
 
-# GPU acelera, mas a sessao de GPU do Kaggle tem menos RAM que a de CPU.
-# Para o E2, com 6,1 milhoes de linhas e pico medido de 9 GB, prefira CPU.
-DEVICE = "cuda" if EXPERIMENTO != "e2/" else "cpu"
+def escolher_device():
+    """Detecta a GPU em vez de assumir que ela existe.
 
-print("Token HF:", bool(HF_TOKEN), "| experimento:", EXPERIMENTO or "e1", "| device:", DEVICE)
+    device="cuda" com o acelerador desligado faz o XGBoost 2.0+ abortar, e
+    esquecer de liga-lo em Settings e o jeito mais facil de um Run All morrer
+    na primeira celula de treino. O E2 fica em CPU de proposito: sao 6,1
+    milhoes de linhas com pico medido de 9 GB, e a sessao de GPU do Kaggle
+    tem menos RAM que a de CPU.
+    """
+    if EXPERIMENTO == "e2/":
+        return "cpu"
+    try:
+        import subprocess
+        subprocess.run(["nvidia-smi"], capture_output=True, check=True)
+        return "cuda"
+    except Exception:
+        print("  GPU nao encontrada (Settings > Accelerator). Seguindo em CPU.")
+        return "cpu"
+
+
+DEVICE = escolher_device()
+
+print("Token HF:", bool(HF_TOKEN), "| experimento:", EXPERIMENTO or "e1",
+      "| device:", DEVICE)
 
 # %% [code]
 # hf_hub_download + read_parquet em vez de load_dataset: o datasets converte
@@ -84,10 +103,12 @@ NUNCA_FEATURE = [
 ]
 
 # Os bracos da ablacao saem do feature_schema.csv, nao de nome de coluna.
-FEATS = {
-    "sinan": schema.loc[schema.origem == "sinan", "feature"].tolist(),
-    "sinan_inmet": schema["feature"].tolist(),
-}
+FEATS = {"sinan": schema.loc[schema.origem == "sinan", "feature"].tolist()}
+# No E2 nao existe feature climatica, entao um segundo braco seria o mesmo
+# modelo treinado duas vezes e um "ganho do clima" de zero que nao significa
+# nada. So cria o braco com clima quando ha clima.
+if (schema.origem == "inmet").any():
+    FEATS["sinan_inmet"] = schema["feature"].tolist()
 for nome, fs in FEATS.items():
     FEATS[nome] = [f for f in fs if f not in NUNCA_FEATURE and f in df_train.columns]
     print(f"{nome}: {len(FEATS[nome])} features")
@@ -273,9 +294,10 @@ else:
 import shap
 import matplotlib.pyplot as plt
 
-modelo = modelos.get("sinan_inmet") or next(iter(modelos.values()))
-feats = FEATS["sinan_inmet"] if "sinan_inmet" in modelos else FEATS["sinan"]
+braco = "sinan_inmet" if "sinan_inmet" in modelos else "sinan"
+modelo, feats = modelos[braco], FEATS[braco]
 X = df_test[feats]
+print(f"Explicando o braco {braco}: {len(X):,} linhas, {len(feats)} features")
 
 valores = shap.TreeExplainer(modelo).shap_values(X)
 media_abs = np.abs(valores).mean(axis=0)
@@ -289,11 +311,13 @@ ranking = pd.DataFrame({
 ranking.to_csv(OUT_DIR / "shap_ranking.csv", index=False)
 
 peso_clima = ranking.loc[ranking.origem == "inmet", "shap_medio_abs"].sum()
-print(f"Peso relativo do clima: {peso_clima / ranking.shap_medio_abs.sum():.2%}")
+total = ranking.shap_medio_abs.sum()
+if peso_clima:
+    print(f"Peso relativo do clima: {peso_clima / total:.2%}")
 print(ranking.head(15).to_string(index=False))
 
 plt.figure(figsize=(11, 9))
-shap.summary_plot(valores, X, show=False, max_display=25)
+shap.summary_plot(valores, X, show=False, max_display=25, plot_size=None)
 plt.tight_layout()
 plt.savefig(OUT_DIR / "shap_beeswarm.png", dpi=150, bbox_inches="tight")
 plt.show()
