@@ -128,6 +128,36 @@ de ponto de orvalho e de chuva em janelas de 8 a 12 semanas.
 
 ---
 
+## 3b. Verificação independente no Kaggle
+
+O E1 foi reexecutado no Kaggle, em GPU, a partir do dataset publicado no
+HuggingFace. Detalhes e leitura de cada número em
+[`models/kaggle_e1/LEIA-ME.md`](../models/kaggle_e1/LEIA-ME.md).
+
+| Modelo | MAE (Kaggle) | R²_orig (Kaggle) | R²_orig (local) |
+|---|---|---|---|
+| baseline persistência | 9,449 | 0,4003 | 0,4003 |
+| baseline sazonal | 14,046 | −0,1038 | −0,1038 |
+| XGBoost SINAN-only | 7,958 | 0,3809 | 0,3611 |
+| XGBoost SINAN+INMET | **7,919** | 0,3925 | 0,3900 |
+
+Os baselines saíram **idênticos até a quarta casa**, o que prova que o
+parquet publicado é o mesmo do disco. O braço com clima reproduziu (0,3925
+contra 0,3900).
+
+O braço sem clima ficou melhor no Kaggle, e a causa não é a GPU: localmente
+cada braço teve a própria busca de hiperparâmetros, e o notebook usa os
+parâmetros do braço com clima para os dois. O SINAN-only rodando melhor com
+parâmetros que não eram dele indica que a busca local dele havia
+superajustado a validação de 2022.
+
+**Consequência para o texto do TCC:** o ganho do clima em R²_orig deve ser
+reportado como um intervalo, **+0,012 a +0,029**, e não como um número único.
+A variação é informação: no nível municipal o efeito do clima é da ordem do
+ruído de tunagem. É na mesorregião que ele fica inequívoco (+0,106).
+
+---
+
 ## 4. O que dá e o que não dá para comparar
 
 **Não compare os números diretamente.** Os conjuntos de teste são diferentes:

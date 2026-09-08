@@ -1,0 +1,2 @@
+modelo,n,MAE_orig,RMSE_orig,R2_orig,MAE_log,R2_log
+fold 2022,71188,4.4509,39.098,0.7159,0.3544,0.7455
