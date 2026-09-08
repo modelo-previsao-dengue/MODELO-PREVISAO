@@ -1,0 +1,14 @@
+{
+  "municipios_mapeados": 5570,
+  "mesorregioes": 137,
+  "ufs": 27,
+  "grandes_regioes": 5,
+  "estacoes_mapeadas": 687,
+  "mesorregioes_com_estacao": 137,
+  "estacoes_por_mesorregiao": {
+    "min": 1,
+    "max": 26,
+    "media": 5.0,
+    "mediana": 4.0
+  }
+}
