@@ -1,0 +1,42 @@
+{
+  "train": {
+    "rows": 14248,
+    "mesorregioes": 137,
+    "anos": [
+      2019,
+      2021
+    ],
+    "cobertura_inmet": 0.9582
+  },
+  "val": {
+    "rows": 7261,
+    "mesorregioes": 137,
+    "anos": [
+      2023
+    ],
+    "cobertura_inmet": 0.9691
+  },
+  "test": {
+    "rows": 16029,
+    "mesorregioes": 137,
+    "anos": [
+      2024,
+      2025,
+      2026
+    ],
+    "cobertura_inmet": 0.9474
+  },
+  "n_features": 266,
+  "n_sinan_features": 110,
+  "n_inmet_total": 156,
+  "n_inmet_bruto": 12,
+  "n_inmet_lags_bio": 96,
+  "n_inmet_mm_bio": 24,
+  "n_inmet_anomalias": 24,
+  "classes": {
+    "0": 0.5046,
+    "1": 0.2098,
+    "2": 0.1303,
+    "3": 0.1554
+  }
+}

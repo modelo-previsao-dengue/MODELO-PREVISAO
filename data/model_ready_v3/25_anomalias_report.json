@@ -1,0 +1,6 @@
+{
+  "n_new_features": 24,
+  "n_base_climate_features": 12,
+  "dataset_rows": 38086,
+  "dataset_cols": 276
+}
