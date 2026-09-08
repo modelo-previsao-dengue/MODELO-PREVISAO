@@ -151,6 +151,28 @@ parâmetros do braço com clima para os dois. O SINAN-only rodando melhor com
 parâmetros que não eram dele indica que a busca local dele havia
 superajustado a validação de 2022.
 
+### Mesorregião, também verificada no Kaggle
+
+| Modelo | R²_orig (Kaggle) | R²_orig (local) |
+|---|---|---|
+| baseline persistência | 0,3971 | 0,3971 |
+| XGBoost SINAN-only | 0,3763 | 0,3814 |
+| XGBoost SINAN+INMET | **0,4546** | **0,4874** |
+
+Detalhes em [`models/kaggle_mesorregiao/LEIA-ME.md`](../models/kaggle_mesorregiao/LEIA-ME.md).
+
+| Granularidade | Ganho do clima no Kaggle | Ganho local |
+|---|---|---|
+| Município | +0,0116 | +0,0289 |
+| **Mesorregião** | **+0,0783** | **+0,1060** |
+| Razão | **6,7×** | 3,7× |
+
+As duas máquinas discordam na magnitude e concordam no que importa: o efeito
+do clima na mesorregião é de outra ordem de grandeza, e é a única
+configuração do recorte em que o modelo supera a persistência (0,4546 contra
+0,3971). O braço SINAN-only continua perdendo para o baseline mesmo agregado
+— não é a agregação que salva o modelo, é a agregação **com clima**.
+
 **Consequência para o texto do TCC:** o ganho do clima em R²_orig deve ser
 reportado como um intervalo, **+0,012 a +0,029**, e não como um número único.
 A variação é informação: no nível municipal o efeito do clima é da ordem do

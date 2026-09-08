@@ -1,0 +1,18 @@
+{
+  "repo_hf": "thiagorfreitas/dengue-tcc2-data",
+  "experimento": "mesorregiao/",
+  "ambiente": "Kaggle Notebooks, GPU T4",
+  "n_features": {"sinan": 114, "sinan_inmet": 163},
+  "linhas": {"train": 6751, "val": 2236, "test": 2279},
+  "params": {
+    "max_depth": 11, "learning_rate": 0.015594054205343648,
+    "subsample": 0.5607784504928788, "colsample_bytree": 0.36459603466129137,
+    "min_child_weight": 93, "reg_alpha": 2.0511456764725984,
+    "reg_lambda": 0.017135281765880774, "gamma": 0.5788413262117456
+  },
+  "xgboost": "3.2.0",
+  "_nota_params": "Hiperparametros do braco e1_sinan_inmet, nao retunados para a mesorregiao. O resultado seria provavelmente melhor com busca propria.",
+  "shap_top_climaticas": ["rain_sum_mm_mm4", "pressure_mean_mbar",
+                          "dewpoint_mean_c_lag_12", "rain_sum_mm_mm8", "temp_min_c"],
+  "data_execucao": "2026-09-08"
+}
