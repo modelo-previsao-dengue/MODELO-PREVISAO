@@ -39,9 +39,18 @@ tailwind.config = {
 .card-hover { transition: all .25s cubic-bezier(.22,1,.36,1) }
 .card-hover:hover { transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,0,0,.1) }
 .dark .card-hover:hover { box-shadow:0 8px 25px rgba(0,0,0,.3) }
-.tab-btn { transition: all .25s cubic-bezier(.22,1,.36,1) }
-.tab-btn:hover { transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08) }
-.tab-btn.active { box-shadow:0 4px 14px rgba(59,130,246,.35) }
+.nav-tab { position:relative;transition:all .25s cubic-bezier(.22,1,.36,1);overflow:hidden }
+.nav-tab::before { content:'';position:absolute;bottom:0;left:50%;width:0;height:2px;background:linear-gradient(90deg,#3b82f6,#2563eb);transition:all .3s cubic-bezier(.22,1,.36,1);transform:translateX(-50%);border-radius:2px }
+.nav-tab:hover { color:#2563eb }
+.dark .nav-tab:hover { color:#60a5fa }
+.nav-tab:hover::before { width:60% }
+.nav-tab.active { color:#2563eb;font-weight:600 }
+.dark .nav-tab.active { color:#60a5fa }
+.nav-tab.active::before { width:100%;height:2.5px }
+.nav-icon { transition:transform .25s cubic-bezier(.22,1,.36,1) }
+.nav-tab:hover .nav-icon { transform:translateY(-1px) }
+.header-glow { box-shadow:0 1px 3px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.03) }
+.dark .header-glow { box-shadow:0 1px 3px rgba(0,0,0,.2),0 8px 24px rgba(0,0,0,.15) }
 tr { transition: all .2s ease }
 tr:hover td { transform:translateX(2px) }
 td { transition: transform .2s ease }
@@ -59,36 +68,60 @@ td { transition: transform .2s ease }
 </head>
 <body class="bg-gray-50 dark:bg-slate-900 text-gray-900 dark:text-gray-100 min-h-screen transition-colors duration-300">
 
-<header class="sticky top-0 z-50 glass border-b border-gray-200 dark:border-slate-700">
-  <div class="h-1 bg-gradient-to-r from-risk-crit via-risk-high via-risk-med to-risk-low"></div>
-  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-brand-600 to-brand-900 flex items-center justify-center text-white font-bold text-sm shadow-md">DC</div>
-      <div>
-        <h1 class="text-lg font-bold tracking-tight leading-none">DengueCast</h1>
-        <p class="text-xs text-gray-500 dark:text-gray-400">Sistema Preditivo de Surtos · XGBoost + SINAN + INMET</p>
-      </div>
-    </div>
-    <div class="flex items-center gap-3">
-      <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border border-green-200 dark:border-green-800/50 card-hover cursor-help" title="Coeficiente de determinação: quanto maior (máx 1.0), melhor o modelo prevê">
-        <svg width="36" height="36" viewBox="0 0 36 36" class="float-anim">
-          <circle cx="18" cy="18" r="14" fill="none" stroke="currentColor" stroke-width="3" opacity=".1"/>
-          <circle id="r2-ring" cx="18" cy="18" r="14" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round"
-            stroke-dasharray="88" stroke-dashoffset="88" transform="rotate(-90 18 18)" class="r2-ring"/>
-        </svg>
-        <div class="leading-tight">
-          <div class="text-xs text-green-600 dark:text-green-400 font-semibold">R² = <span id="r2-badge" class="text-sm"></span></div>
-          <div class="text-[10px] text-green-500/70 dark:text-green-500/50" id="r2-explain"></div>
+<header class="sticky top-0 z-50 glass header-glow border-b border-gray-200/60 dark:border-slate-700/60">
+  <div class="h-[3px] bg-gradient-to-r from-risk-crit via-risk-high via-60% via-risk-med to-risk-low opacity-80"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-3">
+        <div class="relative group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 via-brand-600 to-brand-900 flex items-center justify-center shadow-lg shadow-brand-600/20 group-hover:shadow-brand-600/40 transition-shadow duration-300">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+          </div>
+          <div class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-400 border-2 border-white dark:border-slate-800 animate-pulse"></div>
+        </div>
+        <div>
+          <h1 class="text-lg font-bold tracking-tight leading-none bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">DengueCast</h1>
+          <p class="text-[11px] text-gray-400 dark:text-gray-500 tracking-wide mt-0.5">Previsão de Surtos · XGBoost</p>
         </div>
       </div>
-      <span class="hidden sm:inline text-xs text-gray-400" id="last-update"></span>
-      <button onclick="toggleDark()" class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors" title="Alternar tema">
-        <svg class="w-4 h-4 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-        <svg class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-      </button>
+
+      <nav class="hidden md:flex items-center gap-1" id="tabs"></nav>
+
+      <div class="flex items-center gap-2">
+        <div class="hidden sm:flex items-center gap-2 pl-3 pr-3.5 py-1.5 rounded-full bg-green-500/10 dark:bg-green-400/10 border border-green-500/20 dark:border-green-400/15 cursor-help transition-all duration-300 hover:bg-green-500/15 hover:border-green-500/30" title="Coeficiente de determinação: quanto maior (máx 1.0), melhor o modelo prevê">
+          <svg width="28" height="28" viewBox="0 0 28 28" class="flex-shrink-0">
+            <circle cx="14" cy="14" r="10" fill="none" stroke="currentColor" stroke-width="2.5" opacity=".08"/>
+            <circle id="r2-ring" cx="14" cy="14" r="10" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"
+              stroke-dasharray="63" stroke-dashoffset="63" transform="rotate(-90 14 14)" class="r2-ring"/>
+          </svg>
+          <div class="leading-none">
+            <span class="text-xs font-bold text-green-600 dark:text-green-400">R² <span id="r2-badge" class="text-sm"></span></span>
+            <div class="text-[9px] text-green-600/50 dark:text-green-400/40 mt-0.5 font-medium" id="r2-explain"></div>
+          </div>
+        </div>
+
+        <div class="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-gray-100 dark:bg-slate-800 text-[10px] text-gray-400 dark:text-gray-500 font-mono">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <span id="last-update"></span>
+        </div>
+
+        <button onclick="toggleDark()" class="w-9 h-9 rounded-xl flex items-center justify-center hover:bg-gray-100 dark:hover:bg-slate-800 transition-all duration-200 hover:scale-105 active:scale-95" title="Alternar tema">
+          <svg class="w-[18px] h-[18px] dark:hidden text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+          <svg class="w-[18px] h-[18px] hidden dark:block text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+        </button>
+
+        <button onclick="toggleMobileNav()" class="md:hidden w-9 h-9 rounded-xl flex items-center justify-center hover:bg-gray-100 dark:hover:bg-slate-800 transition-all" id="mobile-menu-btn">
+          <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="hidden md:hidden pb-3 border-t border-gray-100 dark:border-slate-800 mt-1 pt-2" id="mobile-nav">
+      <div class="flex flex-wrap gap-1.5" id="tabs-mobile"></div>
     </div>
   </div>
-  <div class="max-w-7xl mx-auto px-4 pb-2 flex gap-2 overflow-x-auto" id="tabs"></div>
 </header>
 
 <main class="max-w-7xl mx-auto px-4 py-6" id="main"></main>
@@ -168,15 +201,40 @@ function mkChart(el,cfg){
 
 function merge(t,s){for(let k in s){if(s[k]&&typeof s[k]==='object'&&!Array.isArray(s[k])){t[k]=t[k]||{};merge(t[k],s[k])}else{t[k]=s[k]}}return t}
 
+const TAB_ICONS={
+  alertas:'<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>',
+  nacional:'<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>',
+  regional:'<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>',
+  series:'<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>',
+  clima:'<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>',
+  modelo:'<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>'
+};
 const TABS=[['alertas','Alertas'],['nacional','Nacional'],['regional','Regional'],['series','Séries'],['clima','Clima'],['modelo','Modelo']];
 
-function renderTabs(){
-  document.getElementById('tabs').innerHTML=TABS.map(([id,l])=>
-    `<button class="tab-btn px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap ${id===curTab?'bg-brand-600 text-white active shadow-md':'text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-slate-700'}" onclick="switchTab('${id}')">${l}</button>`
-  ).join('');
+function tabHTML(id,l,mobile){
+  const icon=`<svg class="nav-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor">${TAB_ICONS[id]}</svg>`;
+  if(mobile) return `<button class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${id===curTab?'bg-brand-600 text-white shadow-md':'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-800'}" onclick="switchTab('${id}')">${icon} ${l}</button>`;
+  return `<button class="nav-tab flex items-center gap-1.5 px-3 py-3.5 text-[13px] whitespace-nowrap text-gray-500 dark:text-gray-400 ${id===curTab?'active':''}" onclick="switchTab('${id}')">${icon} ${l}</button>`;
 }
 
-function switchTab(id){curTab=id;renderTabs();Object.values(charts).forEach(c=>{if(c&&c.destroy)c.destroy()});charts={};renderTab(id)}
+function renderTabs(){
+  document.getElementById('tabs').innerHTML=TABS.map(([id,l])=>tabHTML(id,l,false)).join('');
+  const mob=document.getElementById('tabs-mobile');
+  if(mob) mob.innerHTML=TABS.map(([id,l])=>tabHTML(id,l,true)).join('');
+}
+
+function toggleMobileNav(){
+  const nav=document.getElementById('mobile-nav');
+  nav.classList.toggle('hidden');
+}
+
+function switchTab(id){
+  curTab=id;renderTabs();
+  Object.values(charts).forEach(c=>{if(c&&c.destroy)c.destroy()});charts={};
+  renderTab(id);
+  const mob=document.getElementById('mobile-nav');
+  if(mob&&!mob.classList.contains('hidden'))mob.classList.add('hidden');
+}
 
 function renderTab(id){
   const m=document.getElementById('main');m.innerHTML='';m.className='max-w-7xl mx-auto px-4 py-6 fade-in';
@@ -498,7 +556,7 @@ const _r2=parseFloat(D.m.r2);
 document.getElementById('r2-badge').textContent=D.m.r2;
 document.getElementById('r2-explain').textContent='Acerta '+Math.round(_r2*100)+'% da variação';
 const _ring=document.getElementById('r2-ring');
-setTimeout(()=>{_ring.style.strokeDashoffset=88*(1-_r2)},200);
+setTimeout(()=>{_ring.style.strokeDashoffset=63*(1-_r2)},200);
 const _la=D.a[0];document.getElementById('last-update').textContent=_la.a+'-S'+String(_la.s).padStart(2,'0');
 renderTabs();renderTab('alertas');
 </script>
