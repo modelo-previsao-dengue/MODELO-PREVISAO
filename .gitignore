@@ -19,11 +19,15 @@ data/inmet/gold/
 data/integrated/
 data/model_ready/*.parquet
 data/model_ready_v2/*.parquet
+data/model_ready_v3/*.parquet
 
-# Model binaries (large JSON)
+# Model binaries (large JSON/UBJ)
 models/*/model.json
 models/*/model_*.json
 models/nacional/*.ubj
+models/regression_v3/*.ubj
+models/blindness_v3/*.ubj
+models/classification_v3/*.ubj
 
 # Python
 __pycache__/
