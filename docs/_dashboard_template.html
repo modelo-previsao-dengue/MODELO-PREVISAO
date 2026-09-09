@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DengueCast</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        risk: { low:'#22c55e', med:'#eab308', high:'#f97316', crit:'#ef4444' },
+        brand: { 50:'#eff6ff',100:'#dbeafe',500:'#3b82f6',600:'#2563eb',700:'#1d4ed8',900:'#1e3a5f' }
+      }
+    }
+  }
+}
+</script>
+<style>
+@keyframes fadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+@keyframes slideIn { from{opacity:0;transform:translateX(-16px)} to{opacity:1;transform:translateX(0)} }
+@keyframes pulseRisk { 0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.5)} 50%{box-shadow:0 0 0 10px rgba(239,68,68,0)} }
+@keyframes barGrow { from{width:0} }
+@keyframes scaleIn { from{opacity:0;transform:scale(.92)} to{opacity:1;transform:scale(1)} }
+@keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+@keyframes ringPulse { 0%{stroke-dashoffset:251} }
+.fade-in { animation: fadeIn .5s cubic-bezier(.22,1,.36,1) both }
+.slide-in { animation: slideIn .4s cubic-bezier(.22,1,.36,1) both }
+.scale-in { animation: scaleIn .4s cubic-bezier(.22,1,.36,1) both }
+.pulse-crit { animation: pulseRisk 2s ease-in-out infinite }
+.bar-grow { animation: barGrow .8s cubic-bezier(.22,1,.36,1) both }
+.float-anim { animation: float 3s ease-in-out infinite }
+.glass { background:rgba(255,255,255,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px) }
+.dark .glass { background:rgba(30,41,59,.72) }
+.card-hover { transition: all .25s cubic-bezier(.22,1,.36,1) }
+.card-hover:hover { transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,0,0,.1) }
+.dark .card-hover:hover { box-shadow:0 8px 25px rgba(0,0,0,.3) }
+.tab-btn { transition: all .25s cubic-bezier(.22,1,.36,1) }
+.tab-btn:hover { transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08) }
+.tab-btn.active { box-shadow:0 4px 14px rgba(59,130,246,.35) }
+tr { transition: all .2s ease }
+tr:hover td { transform:translateX(2px) }
+td { transition: transform .2s ease }
+.info-tip { position:relative;cursor:help;border-bottom:1px dashed currentColor }
+.info-tip:hover::after { content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);
+  padding:6px 10px;border-radius:6px;font-size:.75rem;white-space:nowrap;z-index:20;
+  background:rgba(30,41,59,.92);color:#e5e7eb;box-shadow:0 4px 12px rgba(0,0,0,.2);pointer-events:none }
+.dark .info-tip:hover::after { background:rgba(255,255,255,.92);color:#1e293b }
+.r2-ring { transition: stroke-dashoffset 1.2s cubic-bezier(.22,1,.36,1) }
+* { scrollbar-width:thin;scrollbar-color:#cbd5e1 transparent }
+::-webkit-scrollbar { width:6px;height:6px }
+::-webkit-scrollbar-thumb { background:#94a3b8;border-radius:3px }
+.dark ::-webkit-scrollbar-thumb { background:#475569 }
+</style>
+</head>
+<body class="bg-gray-50 dark:bg-slate-900 text-gray-900 dark:text-gray-100 min-h-screen transition-colors duration-300">
+
+<header class="sticky top-0 z-50 glass border-b border-gray-200 dark:border-slate-700">
+  <div class="h-1 bg-gradient-to-r from-risk-crit via-risk-high via-risk-med to-risk-low"></div>
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-brand-600 to-brand-900 flex items-center justify-center text-white font-bold text-sm shadow-md">DC</div>
+      <div>
+        <h1 class="text-lg font-bold tracking-tight leading-none">DengueCast</h1>
+        <p class="text-xs text-gray-500 dark:text-gray-400">Sistema Preditivo de Surtos · XGBoost + SINAN + INMET</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border border-green-200 dark:border-green-800/50 card-hover cursor-help" title="Coeficiente de determinação: quanto maior (máx 1.0), melhor o modelo prevê">
+        <svg width="36" height="36" viewBox="0 0 36 36" class="float-anim">
+          <circle cx="18" cy="18" r="14" fill="none" stroke="currentColor" stroke-width="3" opacity=".1"/>
+          <circle id="r2-ring" cx="18" cy="18" r="14" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round"
+            stroke-dasharray="88" stroke-dashoffset="88" transform="rotate(-90 18 18)" class="r2-ring"/>
+        </svg>
+        <div class="leading-tight">
+          <div class="text-xs text-green-600 dark:text-green-400 font-semibold">R² = <span id="r2-badge" class="text-sm"></span></div>
+          <div class="text-[10px] text-green-500/70 dark:text-green-500/50" id="r2-explain"></div>
+        </div>
+      </div>
+      <span class="hidden sm:inline text-xs text-gray-400" id="last-update"></span>
+      <button onclick="toggleDark()" class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors" title="Alternar tema">
+        <svg class="w-4 h-4 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        <svg class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-4 pb-2 flex gap-2 overflow-x-auto" id="tabs"></div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 py-6" id="main"></main>
+
+<footer class="max-w-7xl mx-auto px-4 py-6 text-center text-xs text-gray-400 dark:text-gray-600 border-t border-gray-200 dark:border-slate-800">
+  DengueCast · TCC Engenharia de Software · Universidade de Brasília · Dados: SINAN (Ministério da Saúde) + INMET
+</footer>
+
+<script>
+const D=/*__DATA__*/"placeholder";
+
+const RC=['#22c55e','#eab308','#f97316','#ef4444'];
+const RBG=['rgba(34,197,94,.12)','rgba(234,179,8,.12)','rgba(249,115,22,.12)','rgba(239,68,68,.12)'];
+const RL=['Baixo','Moderado','Alto','Muito Alto'];
+const RTW=['bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
+  'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400',
+  'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400',
+  'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'];
+
+const UF_REG={AC:'Norte',AM:'Norte',AP:'Norte',PA:'Norte',RO:'Norte',RR:'Norte',TO:'Norte',
+  AL:'Nordeste',BA:'Nordeste',CE:'Nordeste',MA:'Nordeste',PB:'Nordeste',PE:'Nordeste',PI:'Nordeste',RN:'Nordeste',SE:'Nordeste',
+  DF:'Centro-Oeste',GO:'Centro-Oeste',MS:'Centro-Oeste',MT:'Centro-Oeste',
+  ES:'Sudeste',MG:'Sudeste',RJ:'Sudeste',SP:'Sudeste',
+  PR:'Sul',RS:'Sul',SC:'Sul'};
+
+let curTab='alertas', charts={}, sortCol=-1, sortAsc=false;
+
+function toggleDark(){document.documentElement.classList.toggle('dark');Object.values(charts).forEach(c=>{if(c&&c.destroy)c.destroy()});charts={};renderTab(curTab)}
+function isDark(){return document.documentElement.classList.contains('dark')}
+function fmt(n){return n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?(n/1e3).toFixed(1)+'K':String(Math.round(n))}
+function pct(n){return(n*100).toFixed(1)+'%'}
+
+function animateCount(el,target){
+  const start=performance.now(),dur=800;
+  (function tick(now){
+    const p=Math.min((now-start)/dur,1);
+    el.textContent=fmt(Math.round(p*(1-(1-p)*(1-p))*target+(1-p*(1-(1-p)*(1-p)))*0));
+    if(p<1)requestAnimationFrame(tick);
+    else el.textContent=fmt(target);
+  })(performance.now());
+}
+
+function kpi(label,value,sub,color){
+  return `<div class="glass rounded-xl border border-gray-200 dark:border-slate-700 p-4 fade-in shadow-sm card-hover cursor-default">
+    <div class="text-2xl font-bold" style="color:${color||'inherit'}" data-count="${value}">${fmt(value)}</div>
+    <div class="text-xs text-gray-500 dark:text-gray-400 mt-1 uppercase tracking-wider font-medium">${label}</div>
+    ${sub?`<div class="text-xs mt-1 text-gray-400">${sub}</div>`:''}
+  </div>`;
+}
+
+function badge(r){
+  return `<span class="inline-flex px-2 py-0.5 rounded-full text-xs font-semibold ${r===3?RTW[r]+' pulse-crit':RTW[r]}">${RL[r]}</span>`;
+}
+
+function probBar(prob,color){
+  return `<div class="flex items-center gap-2 min-w-[100px]">
+    <div class="flex-1 h-2 bg-gray-200 dark:bg-slate-700 rounded-full overflow-hidden">
+      <div class="h-full rounded-full bar-grow" style="width:${(prob*100).toFixed(1)}%;background:${color}"></div>
+    </div>
+    <span class="text-xs font-mono w-12 text-right">${pct(prob)}</span>
+  </div>`;
+}
+
+function cc(){return isDark()?{grid:'rgba(255,255,255,.06)',text:'#9ca3af'}:{grid:'rgba(0,0,0,.06)',text:'#6b7280'}}
+
+function mkChart(el,cfg){
+  const canvas=document.createElement('canvas');
+  el.innerHTML='';el.appendChild(canvas);
+  const c=cc();
+  const defs={responsive:true,maintainAspectRatio:false,animation:{duration:800,easing:'easeOutQuart'},
+    plugins:{legend:{labels:{color:c.text,font:{size:11}}}},
+    scales:{x:{grid:{color:c.grid},ticks:{color:c.text,font:{size:10},maxRotation:45}},
+      y:{grid:{color:c.grid},ticks:{color:c.text,font:{size:10}}}}};
+  cfg.options=merge(defs,cfg.options||{});
+  return new Chart(canvas,cfg);
+}
+
+function merge(t,s){for(let k in s){if(s[k]&&typeof s[k]==='object'&&!Array.isArray(s[k])){t[k]=t[k]||{};merge(t[k],s[k])}else{t[k]=s[k]}}return t}
+
+const TABS=[['alertas','Alertas'],['nacional','Nacional'],['regional','Regional'],['series','Séries'],['clima','Clima'],['modelo','Modelo']];
+
+function renderTabs(){
+  document.getElementById('tabs').innerHTML=TABS.map(([id,l])=>
+    `<button class="tab-btn px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap ${id===curTab?'bg-brand-600 text-white active shadow-md':'text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-slate-700'}" onclick="switchTab('${id}')">${l}</button>`
+  ).join('');
+}
+
+function switchTab(id){curTab=id;renderTabs();Object.values(charts).forEach(c=>{if(c&&c.destroy)c.destroy()});charts={};renderTab(id)}
+
+function renderTab(id){
+  const m=document.getElementById('main');m.innerHTML='';m.className='max-w-7xl mx-auto px-4 py-6 fade-in';
+  ({alertas:rAlertas,nacional:rNacional,regional:rRegional,series:rSeries,clima:rClima,modelo:rModelo})[id](m);
+  setTimeout(()=>{
+    document.querySelectorAll('[data-count]').forEach(el=>animateCount(el,parseInt(el.dataset.count)));
+    const bigRing=document.getElementById('r2-ring-big');
+    if(bigRing)bigRing.style.strokeDashoffset=314*(1-_r2);
+  },200);
+}
+
+// ===== ALERTAS =====
+function rAlertas(el){
+  const a=D.a, surto=a.filter(x=>x.r===3).length, alto=a.filter(x=>x.r>=2).length;
+  const lastW=D.w[D.w.length-1], pred=a.reduce((s,x)=>s+x.p,0);
+  el.innerHTML=`
+    <div class="mb-6"><h2 class="text-2xl font-bold mb-1">Painel de Alertas</h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400">Previsão de risco para as próximas 4 semanas · 137 mesorregiões</p></div>
+    <div class="mb-5 p-4 rounded-xl bg-blue-50 dark:bg-blue-900/15 border border-blue-200 dark:border-blue-800/40 text-sm text-blue-800 dark:text-blue-300 fade-in">
+      <span class="font-semibold">Como funciona:</span> O modelo XGBoost analisa dados climáticos (INMET) e epidemiológicos (SINAN) de cada mesorregião para prever o número de notificações de dengue <span class="info-tip" data-tip="t+4 = previsão 4 semanas à frente">4 semanas à frente (t+4)</span>.
+      O risco é classificado em 4 níveis com base nos <span class="info-tip" data-tip="Percentis p50, p75 e p90 calculados no conjunto de treino">percentis históricos</span> de notificações.
+    </div>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+      ${kpi('Em surto',surto,'mesorregiões risco muito alto','#ef4444')}
+      ${kpi('Risco elevado',alto,'alto + muito alto','#f97316')}
+      ${kpi('Notificações',lastW.o,lastW.s+' (observado)')}
+      ${kpi('Previsão t+4',pred,'total nacional','#3b82f6')}
+    </div>
+    <div class="glass rounded-xl border border-gray-200 dark:border-slate-700 p-4 shadow-sm">
+      <div class="flex flex-wrap gap-2 mb-4 items-center">
+        <input type="text" id="sq" placeholder="Buscar mesorregião..." oninput="filt()" class="px-3 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-brand-500 outline-none w-48">
+        <select id="fu" onchange="filt()" class="px-3 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800">
+          <option value="">Todos UFs</option>${[...new Set(a.map(x=>x.u))].sort().map(u=>`<option>${u}</option>`).join('')}
+        </select>
+        <select id="fr" onchange="filt()" class="px-3 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800">
+          <option value="">Todos riscos</option><option value="3">Muito Alto</option><option value="2">Alto</option><option value="1">Moderado</option><option value="0">Baixo</option>
+        </select>
+        <select id="fg" onchange="filt()" class="px-3 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800">
+          <option value="">Todas regiões</option><option>Norte</option><option>Nordeste</option><option>Centro-Oeste</option><option>Sudeste</option><option>Sul</option>
+        </select>
+        <span class="text-xs text-gray-400 ml-auto" id="cnt"></span>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm"><thead>
+          <tr class="text-left text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-slate-700">
+            <th class="pb-2 pr-3 cursor-pointer hover:text-gray-700" onclick="srt(0)">Mesorregião</th>
+            <th class="pb-2 pr-3 cursor-pointer hover:text-gray-700 w-12" onclick="srt(1)">UF</th>
+            <th class="pb-2 pr-3 cursor-pointer hover:text-gray-700 text-right" onclick="srt(2)">Atual</th>
+            <th class="pb-2 pr-3 cursor-pointer hover:text-gray-700 text-right" onclick="srt(3)">Prev. t+4</th>
+            <th class="pb-2 pr-3 cursor-pointer hover:text-gray-700" onclick="srt(4)">Risco</th>
+            <th class="pb-2 pr-3 cursor-pointer hover:text-gray-700" onclick="srt(5)">P(Surto)</th>
+          </tr>
+        </thead><tbody id="ab"></tbody></table>
+      </div>
+    </div>`;
+  renderRows(a);document.getElementById('cnt').textContent=a.length+' mesorregiões';
+}
+
+function srt(c){if(sortCol===c)sortAsc=!sortAsc;else{sortCol=c;sortAsc=c<=1}filt()}
+
+function filt(){
+  const q=(document.getElementById('sq')?.value||'').toLowerCase(),
+    uf=document.getElementById('fu')?.value||'',
+    rk=document.getElementById('fr')?.value||'',
+    rg=document.getElementById('fg')?.value||'';
+  let rows=D.a.filter(x=>{
+    if(q&&!x.n.toLowerCase().includes(q))return false;
+    if(uf&&x.u!==uf)return false;
+    if(rk!==''&&x.r!==parseInt(rk))return false;
+    if(rg&&x.g!==rg)return false;
+    return true;
+  });
+  if(sortCol>=0){
+    const keys=[x=>x.n,x=>x.u,x=>x.o,x=>x.p,x=>x.r,x=>x.ps];
+    rows.sort((a,b)=>{const va=keys[sortCol](a),vb=keys[sortCol](b);return sortAsc?(va>vb?1:-1):(va<vb?1:-1)});
+  }
+  renderRows(rows);document.getElementById('cnt').textContent=rows.length+' mesorregiões';
+}
+
+function renderRows(rows){
+  document.getElementById('ab').innerHTML=rows.map((x,i)=>`
+    <tr class="border-b border-gray-100 dark:border-slate-800 hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors slide-in" style="animation-delay:${Math.min(i*15,300)}ms">
+      <td class="py-2.5 pr-3 font-medium">${x.n}</td>
+      <td class="py-2.5 pr-3 text-gray-500">${x.u}</td>
+      <td class="py-2.5 pr-3 text-right font-mono">${fmt(x.o)}</td>
+      <td class="py-2.5 pr-3 text-right font-mono font-semibold">${fmt(x.p)}</td>
+      <td class="py-2.5 pr-3">${badge(x.r)}</td>
+      <td class="py-2.5">${probBar(x.ps,RC[x.r])}</td>
+    </tr>`).join('');
+}
+
+// ===== NACIONAL =====
+function rNacional(el){
+  const w=D.w;
+  el.innerHTML=`
+    <div class="mb-6"><h2 class="text-2xl font-bold mb-1">Panorama Nacional</h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400">Observado vs previsto · ${w[0].s} a ${w[w.length-1].s}</p></div>
+    <div class="mb-5 p-4 rounded-xl bg-indigo-50 dark:bg-indigo-900/15 border border-indigo-200 dark:border-indigo-800/40 text-sm text-indigo-800 dark:text-indigo-300 fade-in">
+      <span class="font-semibold">O que este gráfico mostra:</span> A linha <span class="text-blue-600 dark:text-blue-400 font-semibold">azul</span> são as notificações reais registradas pelo SINAN. A linha <span class="text-orange-600 dark:text-orange-400 font-semibold">laranja tracejada</span> é o que o modelo previu 4 semanas antes. Quanto mais próximas, melhor a previsão.
+    </div>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+      ${kpi('Total observado',w.reduce((s,x)=>s+x.o,0),'período de teste')}
+      ${kpi('Total previsto',w.reduce((s,x)=>s+x.p,0),'modelo C','#3b82f6')}
+      ${kpi('Pico semanal',Math.max(...w.map(x=>x.o)),'notificações','#ef4444')}
+      ${kpi('Média semanal',Math.round(w.reduce((s,x)=>s+x.o,0)/w.length),'observado')}
+    </div>
+    <div class="glass rounded-xl border border-gray-200 dark:border-slate-700 p-4 shadow-sm mb-4">
+      <h3 class="text-sm font-semibold mb-3 text-gray-600 dark:text-gray-300">Notificações Semanais: Observado vs Previsto</h3>
+      <div style="height:340px" id="c1"></div>
+    </div>
+    <div class="glass rounded-xl border border-gray-200 dark:border-slate-700 p-4 shadow-sm">
+      <h3 class="text-sm font-semibold mb-3 text-gray-600 dark:text-gray-300">Mesorregiões em Alerta por Semana</h3>
+      <div style="height:220px" id="c2"></div>
+    </div>`;
+  const lb=w.map(x=>x.s);
+  charts.n1=mkChart(document.getElementById('c1'),{type:'line',
+    data:{labels:lb,datasets:[
+      {label:'Observado',data:w.map(x=>x.o),borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.1)',fill:true,borderWidth:2,pointRadius:1,tension:.3},
+      {label:'Previsto (t+4)',data:w.map(x=>x.p),borderColor:'#f97316',backgroundColor:'rgba(249,115,22,.08)',fill:true,borderWidth:2,pointRadius:1,borderDash:[5,3],tension:.3}
+    ]},options:{plugins:{tooltip:{mode:'index',intersect:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>fmt(v)}}}}});
+  charts.n2=mkChart(document.getElementById('c2'),{type:'bar',
+    data:{labels:lb,datasets:[
+      {label:'Muito Alto',data:w.map(x=>x.su),backgroundColor:'#ef4444',borderRadius:3},
+      {label:'Alto+',data:w.map(x=>x.al-x.su),backgroundColor:'#f97316',borderRadius:3}
+    ]},options:{plugins:{tooltip:{mode:'index',intersect:false}},scales:{x:{stacked:true},y:{stacked:true,beginAtZero:true}}}});
+}
+
+// ===== REGIONAL =====
+function rRegional(el){
+  const ufs=D.uf;
+  el.innerHTML=`
+    <div class="mb-6"><h2 class="text-2xl font-bold mb-1">Análise Regional</h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400">Resumo por UF · 27 estados</p></div>
+    <div class="mb-5 p-4 rounded-xl bg-amber-50 dark:bg-amber-900/15 border border-amber-200 dark:border-amber-800/40 text-sm text-amber-800 dark:text-amber-300 fade-in">
+      <span class="font-semibold">Leitura:</span> Cada UF agrega suas mesorregiões. "Surto" indica mesorregiões com risco <span class="font-semibold text-red-600 dark:text-red-400">muito alto</span> (acima do percentil 90 histórico). "Alto+" inclui <span class="text-orange-600 dark:text-orange-400 font-semibold">alto</span> e <span class="text-red-600 dark:text-red-400 font-semibold">muito alto</span>.
+    </div>
+    <div class="glass rounded-xl border border-gray-200 dark:border-slate-700 p-4 shadow-sm mb-4">
+      <div style="height:380px" id="c3"></div>
+    </div>
+    <div class="glass rounded-xl border border-gray-200 dark:border-slate-700 p-4 shadow-sm">
+      <div class="overflow-x-auto"><table class="w-full text-sm"><thead>
+        <tr class="text-left text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-slate-700">
+          <th class="pb-2 pr-3">UF</th><th class="pb-2 pr-3">Região</th>
+          <th class="pb-2 pr-3 text-right">Notificações</th><th class="pb-2 pr-3 text-right">Previsão</th>
+          <th class="pb-2 pr-3 text-right">Surto</th><th class="pb-2 pr-3 text-right">Alto+</th><th class="pb-2 pr-3 text-right">Meso</th>
+        </tr></thead><tbody>
+        ${ufs.map((u,i)=>`<tr class="border-b border-gray-100 dark:border-slate-800 hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors slide-in" style="animation-delay:${i*25}ms">
+          <td class="py-2 pr-3 font-semibold">${u.u}</td>
+          <td class="py-2 pr-3 text-gray-500">${UF_REG[u.u]||''}</td>
+          <td class="py-2 pr-3 text-right font-mono">${fmt(u.nt)}</td>
+          <td class="py-2 pr-3 text-right font-mono">${fmt(u.pt)}</td>
+          <td class="py-2 pr-3 text-right">${u.ms>0?`<span class="text-red-500 font-semibold">${u.ms}</span>`:'-'}</td>
+          <td class="py-2 pr-3 text-right">${u.ma>0?`<span class="text-orange-500 font-semibold">${u.ma}</span>`:'-'}</td>
+          <td class="py-2 pr-3 text-right text-gray-400">${u.nm}</td>
+        </tr>`).join('')}
+      </tbody></table></div>
+    </div>`;
+  const t12=ufs.slice(0,12);
+  charts.uf=mkChart(document.getElementById('c3'),{type:'bar',
+    data:{labels:t12.map(u=>u.u),datasets:[
+      {label:'Observado',data:t12.map(u=>u.nt),backgroundColor:'rgba(59,130,246,.7)',borderRadius:4},
+      {label:'Previsto',data:t12.map(u=>u.pt),backgroundColor:'rgba(249,115,22,.7)',borderRadius:4}
+    ]},options:{indexAxis:'y',plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+': '+fmt(c.raw)}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>fmt(v)}}}}});
+}
+
+// ===== SERIES =====
+function rSeries(el){
+  const keys=Object.keys(D.ts);
+  el.innerHTML=`
+    <div class="mb-6"><h2 class="text-2xl font-bold mb-1">Séries por Mesorregião</h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400">Observado vs previsto · top 15 mesorregiões</p></div>
+    <div class="mb-5 p-4 rounded-xl bg-violet-50 dark:bg-violet-900/15 border border-violet-200 dark:border-violet-800/40 text-sm text-violet-800 dark:text-violet-300 fade-in">
+      <span class="font-semibold">Como interpretar:</span> A <span class="font-semibold">timeline de risco</span> abaixo do gráfico mostra a evolução do nível de alerta semana a semana. Cores mais quentes indicam maior risco. Selecione uma mesorregião para ver seu histórico individual.
+    </div>
+    <div class="mb-4">
+      <select id="smeso" onchange="upSeries()" class="px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm font-medium">
+        ${keys.map(k=>`<option value="${k}">${D.ts[k].n} (${D.ts[k].u})</option>`).join('')}
+      </select>
+    </div>
+    <div class="glass rounded-xl border border-gray-200 dark:border-slate-700 p-4 shadow-sm mb-4">
+      <h3 class="text-sm font-semibold mb-2 text-gray-600 dark:text-gray-300" id="stitle"></h3>
+      <div style="height:340px" id="c4"></div>
+    </div>
+    <div class="glass rounded-xl border border-gray-200 dark:border-slate-700 p-4 shadow-sm">
+      <h3 class="text-sm font-semibold mb-2 text-gray-600 dark:text-gray-300">Timeline de Risco</h3>
+      <div class="flex gap-0.5 overflow-x-auto py-2" id="rtl"></div>
+    </div>`;
+  upSeries();
+}
+
+function upSeries(){
+  const k=document.getElementById('smeso').value, s=D.ts[k];
+  document.getElementById('stitle').textContent=s.n+' ('+s.u+')';
+  if(charts.ser)charts.ser.destroy();
+  charts.ser=mkChart(document.getElementById('c4'),{type:'line',
+    data:{labels:s.d.map(x=>x.s),datasets:[
+      {label:'Observado',data:s.d.map(x=>x.o),borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.1)',fill:true,borderWidth:2,pointRadius:1,tension:.3},
+      {label:'Previsto',data:s.d.map(x=>x.p),borderColor:'#f97316',borderWidth:2,pointRadius:1,borderDash:[5,3],tension:.3}
+    ]},options:{plugins:{tooltip:{mode:'index',intersect:false}},scales:{y:{beginAtZero:true}}}});
+  document.getElementById('rtl').innerHTML=s.d.map(x=>
+    `<div class="w-3 h-8 rounded-sm flex-shrink-0 hover:scale-y-150 hover:brightness-110 transition-all duration-200 cursor-pointer" style="background:${RC[x.r]}" title="${x.s}: ${RL[x.r]}"></div>`
+  ).join('');
+}
+
+// ===== CLIMA =====
+function rClima(el){
+  const li=D.li, sf=D.sf;
+  el.innerHTML=`
+    <div class="mb-6"><h2 class="text-2xl font-bold mb-1">Alertas Climáticos</h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400">Limiares SHAP · regras acionáveis para vigilância epidemiológica</p></div>
+    <div class="mb-5 p-4 rounded-xl bg-teal-50 dark:bg-teal-900/15 border border-teal-200 dark:border-teal-800/40 text-sm text-teal-800 dark:text-teal-300 fade-in">
+      <span class="font-semibold">O que é SHAP?</span> <span class="info-tip" data-tip="SHapley Additive exPlanations — método de interpretabilidade de modelos de ML">SHAP</span> mede quanto cada variável climática contribui para a previsão. Os <span class="font-semibold">limiares</span> abaixo mostram valores críticos: quando uma variável ultrapassa seu limiar, o modelo prevê mais dengue. A <span class="text-red-600 dark:text-red-400">↑ seta vermelha</span> indica que valores altos aumentam risco; <span class="text-blue-600 dark:text-blue-400">↓ azul</span> indica o inverso.
+    </div>
+    <div class="grid md:grid-cols-2 gap-3 mb-6">
+      ${li.map((t,i)=>{
+        const icon=t.direction==='positivo'?'↑':'↓';
+        const col=t.direction==='positivo'?'text-red-500':'text-blue-500';
+        const nm=t.feature.replace(/_/g,' ');
+        return `<div class="glass rounded-xl border border-gray-200 dark:border-slate-700 p-4 shadow-sm fade-in card-hover" style="animation-delay:${i*60}ms">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs px-2 py-0.5 rounded-full bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-gray-300 font-mono">#${t.rank}</span>
+            <span class="text-lg ${col} font-bold">${icon}</span>
+          </div>
+          <h4 class="font-semibold text-sm mb-1">${nm}</h4>
+          <p class="text-xs text-gray-500 dark:text-gray-400">Limiar: <span class="font-mono font-semibold text-gray-700 dark:text-gray-200">${t.threshold.toFixed(2)}</span></p>
+          <div class="flex gap-4 mt-2 text-xs">
+            <span class="text-green-600">Abaixo: ${t.mean_shap_below>0?'+':''}${t.mean_shap_below.toFixed(3)}</span>
+            <span class="text-red-600">Acima: ${t.mean_shap_above>0?'+':''}${t.mean_shap_above.toFixed(3)}</span>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+    <div class="glass rounded-xl border border-gray-200 dark:border-slate-700 p-4 shadow-sm">
+      <h3 class="text-sm font-semibold mb-3 text-gray-600 dark:text-gray-300">Top 20 Features — Importância SHAP</h3>
+      <div style="height:${sf.length*24+60}px" id="c5"></div>
+    </div>`;
+  const sfr=[...sf].reverse();
+  charts.shap=mkChart(document.getElementById('c5'),{type:'bar',
+    data:{labels:sfr.map(f=>f.feature.replace(/_/g,' ')),datasets:[{
+      label:'|SHAP|',data:sfr.map(f=>f.mean_abs_shap),
+      backgroundColor:sfr.map(f=>f.category.startsWith('sinan')?'rgba(59,130,246,.7)':'rgba(249,115,22,.7)'),borderRadius:3
+    }]},options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw.toFixed(4)}}},
+      scales:{x:{beginAtZero:true},y:{ticks:{font:{size:10,family:'monospace'}}}}}});
+}
+
+// ===== MODELO =====
+function rModelo(el){
+  const m=D.m;
+  el.innerHTML=`
+    <div class="mb-6"><h2 class="text-2xl font-bold mb-1">Sobre o Modelo</h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400">Detalhes técnicos do sistema preditivo</p></div>
+    <div class="mb-5 p-4 rounded-xl bg-emerald-50 dark:bg-emerald-900/15 border border-emerald-200 dark:border-emerald-800/40 text-sm text-emerald-800 dark:text-emerald-300 fade-in">
+      <span class="font-semibold">Entendendo as métricas:</span>
+      O <span class="info-tip font-semibold" data-tip="Coeficiente de determinação — varia de 0 a 1, onde 1 = previsão perfeita">R²</span> mede quanto da variação das notificações o modelo consegue explicar. Um R² de ${m.r2} significa que <span class="font-semibold">${Math.round(parseFloat(m.r2)*100)}% da variação é capturada</span>. O <span class="info-tip font-semibold" data-tip="Mean Absolute Error — erro médio em notificações">MAE</span> indica o erro médio em cada previsão.
+    </div>
+    <div class="glass rounded-xl border border-gray-200 dark:border-slate-700 p-6 shadow-sm mb-4 flex flex-col items-center scale-in">
+      <h3 class="font-semibold mb-4 text-brand-600 text-lg">Precisão do Modelo</h3>
+      <div class="flex items-center gap-8 flex-wrap justify-center">
+        <div class="relative flex-shrink-0">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="50" fill="none" stroke="currentColor" stroke-width="8" opacity=".08"/>
+            <circle id="r2-ring-big" cx="60" cy="60" r="50" fill="none" stroke="#22c55e" stroke-width="8" stroke-linecap="round"
+              stroke-dasharray="314" stroke-dashoffset="314" transform="rotate(-90 60 60)" class="r2-ring"/>
+          </svg>
+          <div class="absolute inset-0 flex flex-col items-center justify-center">
+            <span class="text-2xl font-bold text-green-600 dark:text-green-400">${m.r2}</span>
+            <span class="text-xs text-gray-400">R²</span>
+          </div>
+        </div>
+        <div class="space-y-3 text-sm">
+          <div class="flex items-center gap-3"><span class="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 font-bold text-lg">✓</span>
+            <div><div class="font-semibold">R² = ${m.r2}</div><div class="text-xs text-gray-500">Explica ${Math.round(parseFloat(m.r2)*100)}% da variação</div></div></div>
+          <div class="flex items-center gap-3"><span class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 font-bold text-sm">±</span>
+            <div><div class="font-semibold">MAE = ${m.mae}</div><div class="text-xs text-gray-500">Erro médio por mesorregião-semana</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="glass rounded-xl border border-gray-200 dark:border-slate-700 p-5 shadow-sm card-hover">
+        <h3 class="font-semibold mb-3 text-brand-600">Arquitetura</h3>
+        <dl class="space-y-2 text-sm">
+          ${[['Algoritmo','XGBoost (Gradient Boosting)'],['Features',m.feat],['Granularidade',m.meso+' mesorregiões'],['Horizonte',m.hz],['Target','log1p(notificações)']].map(([k,v])=>
+            `<div class="flex justify-between"><dt class="text-gray-500">${k}</dt><dd class="font-mono font-semibold">${v}</dd></div>`).join('')}
+        </dl>
+      </div>
+      <div class="glass rounded-xl border border-gray-200 dark:border-slate-700 p-5 shadow-sm card-hover">
+        <h3 class="font-semibold mb-3 text-brand-600">Performance</h3>
+        <dl class="space-y-2 text-sm">
+          ${[['R² (log)',`<span class="text-green-600 font-bold">${m.r2}</span>`],['MAE',m.mae+' notificações'],['Período teste',m.per],['Treino','2019 + 2021'],['Validação','2023']].map(([k,v])=>
+            `<div class="flex justify-between"><dt class="text-gray-500">${k}</dt><dd class="font-mono font-semibold">${v}</dd></div>`).join('')}
+        </dl>
+      </div>
+      <div class="glass rounded-xl border border-gray-200 dark:border-slate-700 p-5 shadow-sm card-hover">
+        <h3 class="font-semibold mb-3 text-brand-600">Classes de Risco</h3>
+        <div class="space-y-2 text-sm">
+          ${[['low','Baixo','< '+m.p50],['med','Moderado',m.p50+'–'+m.p75],['high','Alto',m.p75+'–'+m.p90],['crit','Muito Alto','> '+m.p90]].map(([c,l,r])=>
+            `<div class="flex items-center gap-3"><span class="w-3 h-3 rounded-full bg-risk-${c}"></span><span>${l}</span><span class="ml-auto font-mono">${r} notif.</span></div>`).join('')}
+        </div>
+      </div>
+      <div class="glass rounded-xl border border-gray-200 dark:border-slate-700 p-5 shadow-sm card-hover">
+        <h3 class="font-semibold mb-3 text-brand-600">Fontes de Dados</h3>
+        <dl class="space-y-2 text-sm">
+          ${[['SINAN','Ministério da Saúde'],['INMET','687 estações'],['Pipeline','13 scripts Python'],['Variáveis SINAN','110 features'],['Variáveis INMET','156 features']].map(([k,v])=>
+            `<div class="flex justify-between"><dt class="text-gray-500">${k}</dt><dd class="font-semibold">${v}</dd></div>`).join('')}
+        </dl>
+      </div>
+    </div>
+    <div class="mt-6 glass rounded-xl border border-gray-200 dark:border-slate-700 p-5 shadow-sm">
+      <h3 class="font-semibold mb-3 text-brand-600">Distribuição de Risco (período de teste)</h3>
+      <div style="height:220px" id="c6"></div>
+    </div>`;
+  charts.rd=mkChart(document.getElementById('c6'),{type:'doughnut',
+    data:{labels:Object.keys(D.rd),datasets:[{data:Object.values(D.rd),backgroundColor:RC,borderWidth:0,hoverOffset:8}]},
+    options:{plugins:{legend:{position:'right',labels:{font:{size:12}}}},cutout:'60%'}});
+}
+
+// INIT
+const _r2=parseFloat(D.m.r2);
+document.getElementById('r2-badge').textContent=D.m.r2;
+document.getElementById('r2-explain').textContent='Acerta '+Math.round(_r2*100)+'% da variação';
+const _ring=document.getElementById('r2-ring');
+setTimeout(()=>{_ring.style.strokeDashoffset=88*(1-_r2)},200);
+const _la=D.a[0];document.getElementById('last-update').textContent=_la.a+'-S'+String(_la.s).padStart(2,'0');
+renderTabs();renderTab('alertas');
+</script>
+</body>
+</html>
