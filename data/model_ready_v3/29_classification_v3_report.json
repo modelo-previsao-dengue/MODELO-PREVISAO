@@ -3,190 +3,190 @@
     "A_sinan_only": {
       "label": "A: SINAN-only",
       "n_features": 110,
-      "accuracy": 0.5279,
-      "f1_macro": 0.4346,
-      "f1_weighted": 0.5314,
-      "auc_macro_ovr": 0.723,
+      "accuracy": 0.548,
+      "f1_macro": 0.4704,
+      "f1_weighted": 0.5522,
+      "auc_macro_ovr": 0.7496,
       "f1_per_class": {
-        "baixo": 0.7088,
-        "moderado": 0.3018,
-        "alto": 0.2073,
-        "muito_alto": 0.5204
+        "baixo": 0.724,
+        "moderado": 0.2855,
+        "alto": 0.2632,
+        "muito_alto": 0.609
       },
       "precision_recall_per_class": {
         "baixo": {
-          "precision": 0.6905,
-          "recall": 0.7281
+          "precision": 0.7088,
+          "recall": 0.7398
         },
         "moderado": {
-          "precision": 0.2633,
-          "recall": 0.3535
+          "precision": 0.2904,
+          "recall": 0.2808
         },
         "alto": {
-          "precision": 0.2156,
-          "recall": 0.1997
+          "precision": 0.2343,
+          "recall": 0.3002
         },
         "muito_alto": {
-          "precision": 0.7052,
-          "recall": 0.4123
+          "precision": 0.729,
+          "recall": 0.5229
         }
       },
       "confusion_matrix": [
         [
-          5633,
-          1672,
-          347,
-          85
+          6036,
+          1437,
+          633,
+          53
         ],
         [
-          1469,
-          1106,
-          350,
-          204
+          1563,
+          975,
+          792,
+          142
         ],
         [
-          551,
-          704,
-          381,
-          272
+          618,
+          552,
+          677,
+          408
         ],
         [
-          505,
-          719,
-          689,
-          1342
+          299,
+          393,
+          788,
+          1622
         ]
       ],
-      "best_iteration": 132
+      "best_iteration": 125
     },
     "B_inmet_bruto": {
       "label": "B: INMET bruto",
       "n_features": 122,
-      "accuracy": 0.537,
-      "f1_macro": 0.4451,
-      "f1_weighted": 0.5428,
-      "auc_macro_ovr": 0.7412,
+      "accuracy": 0.5675,
+      "f1_macro": 0.4908,
+      "f1_weighted": 0.5725,
+      "auc_macro_ovr": 0.7711,
       "f1_per_class": {
-        "baixo": 0.7233,
-        "moderado": 0.3188,
-        "alto": 0.2192,
-        "muito_alto": 0.5189
+        "baixo": 0.7401,
+        "moderado": 0.323,
+        "alto": 0.2684,
+        "muito_alto": 0.6319
       },
       "precision_recall_per_class": {
         "baixo": {
-          "precision": 0.7127,
-          "recall": 0.7343
+          "precision": 0.7316,
+          "recall": 0.7487
         },
         "moderado": {
-          "precision": 0.2792,
-          "recall": 0.3717
+          "precision": 0.3113,
+          "recall": 0.3355
         },
         "alto": {
-          "precision": 0.2142,
-          "recall": 0.2243
+          "precision": 0.2528,
+          "recall": 0.286
         },
         "muito_alto": {
-          "precision": 0.7054,
-          "recall": 0.4104
+          "precision": 0.7339,
+          "recall": 0.5548
         }
       },
       "confusion_matrix": [
         [
-          5681,
-          1655,
-          305,
-          96
+          6109,
+          1541,
+          467,
+          42
         ],
         [
-          1327,
-          1163,
-          457,
-          182
+          1451,
+          1165,
+          687,
+          169
         ],
         [
-          508,
-          692,
-          428,
-          280
+          529,
+          668,
+          645,
+          413
         ],
         [
-          455,
-          656,
-          808,
-          1336
+          261,
+          368,
+          752,
+          1721
         ]
       ],
-      "best_iteration": 188
+      "best_iteration": 225
     },
     "C_inmet_enriquecido": {
       "label": "C: INMET enriquecido",
       "n_features": 266,
-      "accuracy": 0.5331,
-      "f1_macro": 0.4455,
-      "f1_weighted": 0.5406,
-      "auc_macro_ovr": 0.7376,
+      "accuracy": 0.5642,
+      "f1_macro": 0.4905,
+      "f1_weighted": 0.5697,
+      "auc_macro_ovr": 0.7713,
       "f1_per_class": {
-        "baixo": 0.7169,
-        "moderado": 0.3167,
-        "alto": 0.2287,
-        "muito_alto": 0.5198
+        "baixo": 0.7359,
+        "moderado": 0.2993,
+        "alto": 0.2836,
+        "muito_alto": 0.6432
       },
       "precision_recall_per_class": {
         "baixo": {
-          "precision": 0.7194,
-          "recall": 0.7144
+          "precision": 0.7294,
+          "recall": 0.7425
         },
         "moderado": {
-          "precision": 0.2832,
-          "recall": 0.3592
+          "precision": 0.29,
+          "recall": 0.3093
         },
         "alto": {
-          "precision": 0.2175,
-          "recall": 0.2411
+          "precision": 0.2653,
+          "recall": 0.3047
         },
         "muito_alto": {
-          "precision": 0.634,
-          "recall": 0.4406
+          "precision": 0.7392,
+          "recall": 0.5693
         }
       },
       "confusion_matrix": [
         [
-          5527,
-          1642,
-          398,
-          170
+          6058,
+          1609,
+          444,
+          48
         ],
         [
-          1244,
-          1124,
-          471,
-          290
+          1457,
+          1074,
+          768,
+          173
         ],
         [
-          474,
-          606,
-          460,
-          368
+          524,
+          642,
+          687,
+          402
         ],
         [
-          438,
-          597,
-          786,
-          1434
+          266,
+          379,
+          691,
+          1766
         ]
       ],
-      "best_iteration": 120
+      "best_iteration": 262
     }
   },
-  "melhor_modelo": "C: INMET enriquecido",
+  "melhor_modelo": "B: INMET bruto",
   "f1_muito_alto_comparison": {
-    "A: SINAN-only": 0.5204,
-    "B: INMET bruto": 0.5189,
-    "C: INMET enriquecido": 0.5198
+    "A: SINAN-only": 0.609,
+    "B: INMET bruto": 0.6319,
+    "C: INMET enriquecido": 0.6432
   },
   "conclusao": {
     "inmet_bruto_melhora_classificacao": true,
     "inmet_enriquecido_melhora_classificacao": true,
-    "enriched_melhora_muito_alto": false
+    "enriched_melhora_muito_alto": true
   }
 }

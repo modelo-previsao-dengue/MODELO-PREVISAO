@@ -16,6 +16,13 @@ def load(path=None):
     return cfg
 
 
+def load_v3(path=None):
+    """Split da pipeline v3 mesorregional, com a lista de anos ja expandida."""
+    v3 = dict(load(path)["split_v3"])
+    v3["anos_pipeline"] = list(range(v3["warmup_ano"], v3["ano_fim"] + 1))
+    return v3
+
+
 def describe(cfg):
     return (
         f"UFs={','.join(cfg['ufs'])} | recorte={cfg['ano_inicio']}-{cfg['ano_fim']} "

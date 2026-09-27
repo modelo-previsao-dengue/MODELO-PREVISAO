@@ -19,6 +19,15 @@
     "val": [2021, 2022],
     "test": [2023]
   },
+  "split_v3": {
+    "descricao": "Pipeline v3 mesorregional (scripts 21-31), nacional, 137 mesorregioes. Anos contiguos: a versao anterior pulava 2020 e 2022 (ZIPs do INMET fora do inventario), e os shift() de lag e de alvo cruzavam a lacuna. 2018 entra so como warm-up dos lags; o teste 2024-2026 e o mesmo da v3 original.",
+    "warmup_ano": 2018,
+    "ano_fim": 2026,
+    "train": [2019, 2020, 2021, 2022],
+    "val": [2023],
+    "test": [2024, 2025, 2026],
+    "_nota_climatologia": "As anomalias do script 25 usam a climatologia apenas dos anos de train, para nao vazar o teste."
+  },
   "fallback_limiares": "uf",
   "incluir_notificacoes_atual": true,
   "_nota_incluir_notificacoes_atual": "notificacoes na semana t e conhecida quando se preve t+4, e e exatamente o que o baseline de persistencia usa. A versao anterior a excluia das features mas mantinha notificacoes_lag_1, o que handicapava o modelo contra o proprio baseline."

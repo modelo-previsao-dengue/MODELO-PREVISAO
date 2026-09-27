@@ -12,11 +12,15 @@ import numpy as np
 import pandas as pd
 import pyarrow.parquet as pq
 
+import recorte_config
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data" / "model_ready_v3"
 SINAN_GOLD = BASE_DIR / "data" / "sinan" / "gold" / "sinan_tcc2_v2" / "official_dense"
 
-VALID_YEARS = [2019, 2021, 2023, 2024, 2025, 2026]
+# Anos contiguos (warm-up incluso) vindos de config/recorte.json. A lista fixa
+# anterior pulava 2020 e 2022, e os lags do script 24 cruzavam a lacuna.
+VALID_YEARS = recorte_config.load_v3()["anos_pipeline"]
 
 GROUP_KEYS = ["cod_mesorregiao", "ano", "semana_epidemiologica"]
 

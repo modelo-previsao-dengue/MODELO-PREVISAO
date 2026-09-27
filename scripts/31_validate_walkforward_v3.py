@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""US-211: Walk-forward v3 (mesorregional) — 5 folds temporais, 3 modelos.
+"""US-211: Walk-forward v3 (mesorregional) — folds anuais expansivos, 3 modelos.
 
 Usa o dataset completo `integrated_mesorregiao_v3.parquet` (não os splits
 pré-definidos) para permitir janelas expansivas por ano. Para cada fold,
@@ -19,6 +19,8 @@ import pandas as pd
 import xgboost as xgb
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
+import recorte_config
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data" / "model_ready_v3"
 FIG_DIR = BASE_DIR.parent / "Overleaf" / "TCC2 Base FCTE UnB" / "figuras" / "resultados"
@@ -37,13 +39,23 @@ XGB_PARAMS = dict(
 
 N_VAL_WEEKS = 10
 
-FOLDS = [
-    {"train": [2019], "test": [2021]},
-    {"train": [2019, 2021], "test": [2023]},
-    {"train": [2019, 2021, 2023], "test": [2024]},
-    {"train": [2019, 2021, 2023, 2024], "test": [2025]},
-    {"train": [2019, 2021, 2023, 2024, 2025], "test": [2026]},
-]
+def build_folds():
+    """Janela expansiva, um fold por ano de val/test (config/recorte.json).
+
+    O primeiro ano de teste e o primeiro apos o treino: folds que testassem
+    anos do treino (2020-2022) usariam anomalias cuja climatologia (script 25)
+    inclui o proprio ano de teste.
+    """
+    split = recorte_config.load_v3()
+    train = list(split["train"])
+    folds = []
+    for ano in split["val"] + split["test"]:
+        folds.append({"train": list(train), "test": [ano]})
+        train.append(ano)
+    return folds
+
+
+FOLDS = build_folds()
 
 
 def categorize_features(schema_path):
@@ -148,7 +160,7 @@ def plot_walk_forward(results_by_model, out_path):
 def main():
     FIG_DIR.mkdir(parents=True, exist_ok=True)
     print("=" * 60)
-    print("  US-211: Walk-Forward v3 Mesorregional — 5 Folds, 3 Modelos")
+    print(f"  US-211: Walk-Forward v3 Mesorregional — {len(FOLDS)} Folds, 3 Modelos")
     print("=" * 60)
 
     print("\nCarregando dataset completo v3...")

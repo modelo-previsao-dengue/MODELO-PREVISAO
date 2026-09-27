@@ -441,9 +441,15 @@ def write_station_metadata(all_stations):
     st_unique = st_unique[[c for c in cols if c in st_unique.columns]].copy()
     st_unique = st_unique.merge(anos, on="codigo_wmo", how="left")
 
-    # Reprocessar so alguns anos nao pode apagar estacoes dos demais.
+    # Reprocessar so alguns anos nao pode apagar estacoes dos demais, nem os
+    # anos que uma estacao reprocessada tinha fora dos anos desta execucao.
     if path.exists():
-        prev = pd.read_csv(path, dtype={"codigo_wmo": str})
+        prev = pd.read_csv(path, dtype={"codigo_wmo": str, "anos_com_dados": str})
+        anos_prev = prev.set_index("codigo_wmo")["anos_com_dados"].dropna()
+        st_unique["anos_com_dados"] = [
+            ",".join(sorted(set(novos.split(",")) | set(anos_prev.get(cod, "").split(",")) - {""}))
+            for cod, novos in zip(st_unique["codigo_wmo"], st_unique["anos_com_dados"])
+        ]
         keep = prev[~prev["codigo_wmo"].isin(st_unique["codigo_wmo"])]
         st_unique = pd.concat([keep, st_unique], ignore_index=True)
 
