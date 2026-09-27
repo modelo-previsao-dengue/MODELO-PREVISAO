@@ -25,7 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 RAIZ = BASE_DIR / "data" / "model_ready"
 
 CONJUNTOS = {"e1": RAIZ, "e2": RAIZ / "e2",
-             "mesorregiao": RAIZ / "mesorregiao", "uf": RAIZ / "uf"}
+             "mesorregiao": RAIZ / "mesorregiao", "uf": RAIZ / "uf",
+             "mesorregiao_surto": RAIZ / "mesorregiao_surto"}
 
 OBRIGATORIOS = ["train.parquet", "val.parquet", "test.parquet",
                 "feature_schema.csv", "risk_thresholds.csv",
@@ -37,6 +38,15 @@ TARGET = "notificacoes_t4"
 # Precisam existir nos parquets e estar fora do feature_schema.
 NUNCA_FEATURE = [TARGET, "risco_surto_t4", "risco_surto_t4_com_vazamento",
                  "threshold_source"] + ID_COLS
+
+# US-010: rotulo binario de surto por canal endemico (mesorregiao_surto). As
+# flags "_t" sao funcao direta de notificacoes na propria semana — deixa-las
+# virar feature seria vazar um proxy do alvo t+4; semana_alvo/ano_alvo sao a
+# marcacao de auditoria do deslocamento, derivada do proprio alinhamento do
+# alvo.
+NUNCA_FEATURE += ["surto_media_t", "surto_media_2dp_t",
+                  "surto_media_t4", "surto_media_2dp_t4",
+                  "semana_alvo", "ano_alvo"]
 
 
 def checar(nome, pasta):

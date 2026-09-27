@@ -1,0 +1,1157 @@
+<title>Retreino no Kaggle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+:root {
+  --ground:      #F2F4F3;
+  --surface:     #FFFFFF;
+  --surface-alt: #E9EDEB;
+  --ink:         #12211F;
+  --ink-soft:    #5A6B68;
+  --ink-faint:   #8A9895;
+  --rule:        #D5DCDA;
+  --rule-strong: #B9C4C1;
+  --accent:      #0F6E5C;
+  --accent-soft: #DCEAE5;
+  --warn:        #B8542A;
+  --warn-soft:   #F6E6DC;
+  --danger:      #A3282C;
+  --danger-soft: #F7E1E1;
+  --code-bg:     #12211F;
+  --code-ink:    #DCE7E4;
+  --code-dim:    #7F918D;
+
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground:      #0D1614;
+    --surface:     #152220;
+    --surface-alt: #1D2C2A;
+    --ink:         #E4EBE9;
+    --ink-soft:    #9DAFAB;
+    --ink-faint:   #748682;
+    --rule:        #243634;
+    --rule-strong: #334846;
+    --accent:      #45C4A7;
+    --accent-soft: #16332C;
+    --warn:        #E08A5F;
+    --warn-soft:   #331F14;
+    --danger:      #F08A8A;
+    --danger-soft: #331617;
+    --code-bg:     #08100F;
+    --code-ink:    #D3E2DE;
+    --code-dim:    #6E827E;
+  }
+}
+
+:root[data-theme="dark"] {
+  --ground:      #0D1614;
+  --surface:     #152220;
+  --surface-alt: #1D2C2A;
+  --ink:         #E4EBE9;
+  --ink-soft:    #9DAFAB;
+  --ink-faint:   #748682;
+  --rule:        #243634;
+  --rule-strong: #334846;
+  --accent:      #45C4A7;
+  --accent-soft: #16332C;
+  --warn:        #E08A5F;
+  --warn-soft:   #331F14;
+  --danger:      #F08A8A;
+  --danger-soft: #331617;
+  --code-bg:     #08100F;
+  --code-ink:    #D3E2DE;
+  --code-dim:    #6E827E;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- shell ---------- */
+
+.shell {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: 56px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 32px 120px;
+  align-items: start;
+}
+
+/* ---------- masthead ---------- */
+
+.masthead {
+  grid-column: 1 / -1;
+  border-bottom: 2px solid var(--ink);
+  padding: 52px 0 26px;
+  margin-bottom: 44px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px 40px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.masthead h1 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(2.1rem, 5vw, 3.1rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  margin: 0;
+  text-wrap: balance;
+  max-width: 15ch;
+}
+
+.masthead .lede {
+  margin: 12px 0 0;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  max-width: 46ch;
+}
+
+.stamp {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  line-height: 1.75;
+  color: var(--ink-soft);
+  text-align: right;
+  white-space: nowrap;
+}
+.stamp b { color: var(--ink); font-weight: 700; }
+
+/* ---------- side rail ---------- */
+
+.rail {
+  position: sticky;
+  top: 24px;
+  font-family: var(--display);
+}
+
+.rail-title {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 6px;
+}
+
+.rail ol { list-style: none; margin: 0; padding: 0; }
+
+.rail a {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 10px;
+  align-items: baseline;
+  padding: 9px 0;
+  text-decoration: none;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-bottom: 1px solid var(--rule);
+  transition: color .15s;
+}
+.rail a:hover { color: var(--accent); }
+.rail a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.rail .n {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ink-faint);
+}
+.rail a:hover .n { color: var(--accent); }
+.rail .aside-link .n { color: var(--warn); }
+.rail .danger-link .n { color: var(--danger); }
+.rail .danger-link:hover { color: var(--danger); }
+.rail .danger-link:hover .n { color: var(--danger); }
+
+.rail-note {
+  margin-top: 20px;
+  font-family: var(--body);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--ink-faint);
+}
+
+/* ---------- sections ---------- */
+
+section { margin-bottom: 68px; scroll-margin-top: 24px; }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.eyebrow.hot { color: var(--danger); }
+
+h2 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.72rem;
+  letter-spacing: -0.018em;
+  line-height: 1.15;
+  margin: 0 0 18px;
+  text-wrap: balance;
+}
+
+h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.06rem;
+  letter-spacing: -0.005em;
+  margin: 34px 0 12px;
+}
+
+p { margin: 0 0 16px; max-width: 66ch; }
+p.tight { margin-bottom: 8px; }
+
+a.inline {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+strong { font-weight: 600; }
+
+code:not(pre code) {
+  font-family: var(--mono);
+  font-size: 0.85em;
+  background: var(--surface-alt);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+/* ---------- answers ---------- */
+
+.answers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+
+.answer {
+  background: var(--surface);
+  padding: 22px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.answer .q {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.answer .a {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.45rem;
+  letter-spacing: -0.015em;
+  color: var(--accent);
+  line-height: 1;
+}
+.answer .a.no { color: var(--warn); }
+
+.answer .why {
+  font-size: 0.87rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ---------- coverage chart ---------- */
+
+.chart {
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  padding: 26px 26px 20px;
+}
+
+.chart-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.chart-head h3 { margin: 0; font-size: 0.98rem; }
+
+.legend {
+  display: flex;
+  gap: 18px;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.swatch { width: 11px; height: 11px; display: inline-block; }
+.swatch.in { background: var(--accent); }
+.swatch.out { background: var(--rule-strong); }
+
+.bars { display: flex; flex-direction: column; gap: 3px; }
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 52px;
+  gap: 10px;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+}
+
+.bar-row .uf { font-weight: 700; color: var(--ink-soft); }
+.bar-row.sel .uf { color: var(--accent); }
+
+.track {
+  position: relative;
+  height: 15px;
+  background: var(--surface-alt);
+}
+
+.fill { height: 100%; background: var(--rule-strong); }
+.bar-row.sel .fill { background: var(--accent); }
+
+.bar-row .val {
+  text-align: right;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+.bar-row.sel .val { color: var(--ink); font-weight: 500; }
+
+.cutline {
+  position: relative;
+  height: 22px;
+  margin: 7px 0;
+  border-top: 1px dashed var(--warn);
+}
+.cutline span {
+  position: absolute;
+  top: 5px;
+  left: 44px;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--warn);
+  background: var(--surface);
+  padding-right: 8px;
+}
+
+.chart-foot {
+  margin: 18px 0 0;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  max-width: none;
+}
+
+/* ---------- tables ---------- */
+
+.scroller { overflow-x: auto; border: 1px solid var(--rule); background: var(--surface); }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  min-width: 520px;
+}
+
+th {
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.66rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--rule-strong);
+  white-space: nowrap;
+}
+
+td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+tr:last-child td { border-bottom: none; }
+
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+tr.total td { font-weight: 700; color: var(--ink); border-top: 1px solid var(--rule-strong); }
+td.note { font-family: var(--body); font-size: 0.88rem; line-height: 1.45; color: var(--ink-soft); min-width: 260px; }
+td.bad { color: var(--danger); font-weight: 700; }
+
+/* ---------- code ---------- */
+
+.code {
+  position: relative;
+  background: var(--code-bg);
+  margin: 0 0 18px;
+}
+
+.code-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 9px 14px;
+  border-bottom: 1px solid rgba(255,255,255,.09);
+}
+
+.code-label {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--code-dim);
+}
+
+.copy {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--code-dim);
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.16);
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: color .15s, border-color .15s;
+}
+.copy:hover { color: var(--code-ink); border-color: rgba(255,255,255,.4); }
+.copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.copy.done { color: #6FD9BC; border-color: #6FD9BC; }
+
+pre {
+  margin: 0;
+  padding: 16px 18px 18px;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: var(--code-ink);
+  tab-size: 2;
+}
+pre .c { color: var(--code-dim); }
+pre .k { color: #7FD4BC; }
+pre .bad { color: #F0918F; }
+
+/* ---------- callouts ---------- */
+
+.trap {
+  border-left: 3px solid var(--warn);
+  background: var(--warn-soft);
+  padding: 18px 22px;
+  margin: 0 0 20px;
+}
+.trap.critical { border-left-color: var(--danger); background: var(--danger-soft); }
+.trap .tag {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--warn);
+  display: block;
+  margin-bottom: 7px;
+}
+.trap.critical .tag { color: var(--danger); }
+.trap p { margin: 0 0 10px; font-size: 0.94rem; }
+.trap p:last-child { margin-bottom: 0; }
+
+.note-box {
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  padding: 16px 22px;
+  margin: 0 0 20px;
+}
+.note-box p { margin: 0; font-size: 0.94rem; }
+
+/* ---------- step heading ---------- */
+
+.step-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  border-bottom: 1px solid var(--rule-strong);
+  padding-bottom: 14px;
+  margin-bottom: 22px;
+}
+
+.step-n {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--surface);
+  background: var(--accent);
+  padding: 4px 9px;
+  flex: none;
+}
+.step-n.alert { background: var(--danger); }
+
+.step-head h2 { margin: 0; }
+
+.step-head .opt {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  border: 1px solid var(--rule-strong);
+  padding: 3px 8px;
+  margin-left: auto;
+  white-space: nowrap;
+  align-self: center;
+}
+
+/* ---------- experiment picker ---------- */
+
+.exps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-bottom: 20px;
+}
+
+.exp {
+  background: var(--surface);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.exp .path {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+.exp .name { font-family: var(--display); font-weight: 600; font-size: 0.92rem; }
+.exp .meta {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- checklist ---------- */
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--display);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  cursor: pointer;
+  margin-top: 18px;
+  user-select: none;
+}
+.check input { accent-color: var(--accent); width: 15px; height: 15px; cursor: pointer; }
+.check input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- footer ---------- */
+
+.colophon {
+  grid-column: 1 / -1;
+  border-top: 2px solid var(--ink);
+  padding-top: 22px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  line-height: 1.8;
+  color: var(--ink-faint);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 36px;
+  justify-content: space-between;
+}
+
+@media (max-width: 900px) {
+  .shell { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 0 20px 80px; }
+  .rail { position: static; margin-bottom: 44px; }
+  .rail ol { display: flex; flex-wrap: wrap; gap: 0 22px; }
+  .rail a { border-bottom: none; padding: 6px 0; }
+  .rail-note { display: none; }
+  .masthead { padding-top: 34px; }
+  .stamp { text-align: left; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+</style>
+
+<div class="shell">
+
+  <header class="masthead">
+    <div>
+      <h1>Retreino no Kaggle</h1>
+      <p class="lede">Do parquet local ao notebook rodando. O que reconstruir, o que subir para o HuggingFace, e onde o caminho antigo te derruba em silêncio.</p>
+    </div>
+    <div class="stamp">
+      branch <b>feat/retreino-recorte-2019-2023</b><br>
+      recorte <b>2019–2023</b> · <b>6 UFs</b> · <b>1.369 municípios</b><br>
+      dataset <b>thiagorfreitas/dengue-tcc2-data</b>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="Etapas">
+    <div class="rail-title">Sequência</div>
+    <ol>
+      <li><a href="#auditoria" class="danger-link"><span class="n">!!</span><span>Seu notebook atual</span></a></li>
+      <li><a href="#estados"><span class="n">UF</span><span>Quais estados entraram</span></a></li>
+      <li><a href="#p1"><span class="n">01</span><span>Reconstruir os dados</span></a></li>
+      <li><a href="#p2"><span class="n">02</span><span>Subir para o HuggingFace</span></a></li>
+      <li><a href="#p3"><span class="n">03</span><span>Configurar o Kaggle</span></a></li>
+      <li><a href="#p4"><span class="n">04</span><span>Treinar e avaliar</span></a></li>
+      <li><a href="#armadilhas" class="aside-link"><span class="n">!</span><span>Armadilhas</span></a></li>
+    </ol>
+    <p class="rail-note">As etapas são sequenciais de verdade: cada uma consome o que a anterior escreve. A 01 é pulável se os parquet locais já estiverem atualizados.</p>
+  </nav>
+
+  <main>
+
+    <!-- ============ AUDITORIA ============ -->
+    <section id="auditoria">
+      <div class="step-head">
+        <span class="step-n alert">!!</span>
+        <h2>Seu notebook atual não pode rodar como está</h2>
+      </div>
+
+      <p>Auditoria do notebook <em>Treino XGBoost — Dengue TCC2</em> contra o dataset novo. Um notebook corrigido está no repositório em <code>kaggle/notebook_retreino.py</code> — cole-o no Kaggle no lugar do atual.</p>
+
+      <div class="trap critical">
+        <span class="tag">Bloqueador 1 · vazamento do alvo</span>
+        <p>O <code>DROP_COLS</code> remove cinco colunas e deixa passar duas que o dataset novo introduziu. A pior é <code>risco_surto_t4_com_vazamento</code>: ela é o <strong>próprio alvo binado em quatro faixas</strong>, com correlação de Spearman de <strong>0,863</strong> com <code>notificacoes_t4</code>.</p>
+        <p>Essa coluna existe só para medir de quanto era a inflação do vazamento temporal. Como feature, ela entrega a resposta ao modelo.</p>
+      </div>
+
+      <div class="scroller">
+        <table>
+          <thead><tr><th>Faixa de risco_surto_t4_com_vazamento</th><th class="num">Linhas no teste</th><th class="num">Média de notificacoes_t4</th></tr></thead>
+          <tbody>
+            <tr><td>0</td><td class="num">45.017</td><td class="num">1,0</td></tr>
+            <tr><td>1</td><td class="num">7.456</td><td class="num">10,6</td></tr>
+            <tr><td>2</td><td class="num">9.036</td><td class="num">19,9</td></tr>
+            <tr><td>3</td><td class="num">11.048</td><td class="num">61,3</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note-box">
+        <p><strong>O que te salva de publicar um resultado falso é um acidente.</strong> A outra coluna que passa, <code>threshold_source</code>, é texto — o XGBoost lança <code>ValueError</code> antes de treinar. Se você "resolver" isso com um <code>select_dtypes(include=np.number)</code>, o texto some, <em>o vazamento fica</em>, e o modelo passa a entregar métricas excelentes e sem sentido. Use lista de exclusão explícita.</p>
+      </div>
+
+      <div class="code">
+        <div class="code-bar"><span class="code-label">A correção</span><button class="copy" type="button">Copiar</button></div>
+<pre>NUNCA_FEATURE = [
+    "notificacoes_t4",               <span class="c"># o alvo</span>
+    "risco_surto_t4",                <span class="c"># alvo da classificação</span>
+    "risco_surto_t4_com_vazamento",  <span class="bad"># o alvo binado — Spearman 0,863</span>
+    "threshold_source",              <span class="bad"># texto; quebra o fit</span>
+    "ibge_municipio", "ano", "semana_epidemiologica",
+]</pre>
+      </div>
+
+      <div class="trap critical">
+        <span class="tag">Bloqueador 2 · o dataset no HF é o antigo</span>
+        <p>Em <code>thiagorfreitas/dengue-tcc2-data</code>, a pasta <code>data/model_ready/</code> ainda tem os arquivos de três meses atrás — o dataset nacional 2000–2026 anterior ao recorte, com os cinco defeitos dentro.</p>
+      </div>
+
+      <div class="scroller">
+        <table>
+          <thead><tr><th>Arquivo</th><th class="num">No HF hoje</th><th class="num">Depois do retreino</th></tr></thead>
+          <tbody>
+            <tr><td>train.parquet</td><td class="num">249 MB</td><td class="num">23 MB</td></tr>
+            <tr><td>val.parquet</td><td class="num">51,7 MB</td><td class="num">6,2 MB</td></tr>
+            <tr><td>test.parquet</td><td class="num">66,4 MB</td><td class="num">7,2 MB</td></tr>
+            <tr><td>feature_schema.csv</td><td class="num bad">ausente</td><td class="num">presente</td></tr>
+            <tr><td>risk_thresholds.csv</td><td class="num bad">ausente</td><td class="num">presente</td></tr>
+            <tr><td>resumo_dataset.json</td><td class="num bad">ausente</td><td class="num">presente</td></tr>
+            <tr><td>e2/ · mesorregiao/ · uf/</td><td class="num bad">ausentes</td><td class="num">presentes</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="trap">
+        <span class="tag">Bloqueador 3 · o walk-forward falha, e em silêncio</span>
+        <p>A última célula tem três defeitos. Os dois primeiros lançam exceção; o terceiro é o perigoso, porque não lança nada.</p>
+      </div>
+
+      <div class="scroller">
+        <table>
+          <thead><tr><th>Linha</th><th class="note">Problema</th></tr></thead>
+          <tbody>
+            <tr><td>**study.best_params</td><td class="note"><code>study</code> nunca é definido — a célula do Optuna foi substituída por <code>KNOWN_BEST</code>. <strong>NameError</strong>.</td></tr>
+            <tr><td>early_stopping_rounds=20</td><td class="note">Removido do <code>fit()</code> no XGBoost 2.0+; é parâmetro do construtor. <strong>TypeError</strong>.</td></tr>
+            <tr><td>TRAIN_MIN_ANOS = 5</td><td class="note">O recorte tem <strong>4 anos</strong> em train+val (2019–2022). Nenhum fold é gerado, <code>cv_df</code> sai vazio e a média vira <code>NaN</code> — <strong>sem erro nenhum na tela</strong>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Problemas menores, que ainda assim mudam os números</h3>
+      <div class="scroller">
+        <table>
+          <thead><tr><th>Ponto</th><th class="note">Por quê</th></tr></thead>
+          <tbody>
+            <tr><td>Sem log1p</td><td class="note">Treina em contagem crua, então um município com 3.000 casos numa semana domina o treino. O pipeline local treina em <code>log1p</code> e volta com <code>expm1</code> — os seus números não são comparáveis às tabelas do TCC.</td></tr>
+            <tr><td>KNOWN_BEST · MAE 2,795</td><td class="note">Veio do dataset antigo, com outro conjunto de features. Como referência não vale mais. Os hiperparâmetros reais do braço <code>e1_sinan_inmet</code> estão no notebook corrigido.</td></tr>
+            <tr><td>Nenhum baseline</td><td class="note">Sem a linha de persistência não há como afirmar que o modelo aprendeu algo. No recorte a persistência dá R²_orig 0,400 contra 0,390 do melhor XGBoost.</td></tr>
+            <tr><td>Não usa feature_schema.csv</td><td class="note">Sem ele não dá para separar <code>sinan</code> de <code>sinan+inmet</code> — que é a pergunta central do trabalho.</td></tr>
+            <tr><td>load_dataset(…).to_pandas()</td><td class="note">Converte via Arrow mantendo as duas cópias vivas. No E2, com 6,1 milhões de linhas, dobra a memória. <code>hf_hub_download</code> + <code>read_parquet</code> é mais enxuto.</td></tr>
+            <tr><td>device="cuda" fixo</td><td class="note">Válido no XGBoost 2.0+ e bom para o E1. Mas a sessão de GPU do Kaggle tem menos RAM que a de CPU, e o E2 teve pico medido de 9 GB — para ele, prefira CPU.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note-box">
+        <p><strong>Referência para saber se deu certo</strong> — braço <code>e1_sinan_inmet</code>, teste 2023: MAE <strong>7,935</strong> · R²_orig <strong>0,390</strong> · R²_log <strong>0,707</strong>. Diferenças pequenas são esperadas (GPU e CPU mudam a ordem de soma em ponto flutuante). Um MAE muito <em>menor</em> que isso é sinal de vazamento, não de sucesso.</p>
+      </div>
+    </section>
+
+    <!-- ============ ESTADOS ============ -->
+    <section id="estados">
+      <div class="eyebrow">Recorte espacial</div>
+      <h2>Quais estados entraram, e por que 21 ficaram de fora</h2>
+      <p>O clima só existe onde há estação automática funcionando. A cobertura abaixo é o percentual de semanas-município com as três variáveis exigidas — chuva, temperatura e umidade relativa — presentes ao mesmo tempo, antes de qualquer filtro.</p>
+
+      <div class="chart">
+        <div class="chart-head">
+          <h3>Cobertura climática por UF, 2019–2023</h3>
+          <div class="legend">
+            <span><i class="swatch in"></i> entrou</span>
+            <span><i class="swatch out"></i> ficou de fora</span>
+          </div>
+        </div>
+        <div class="bars" id="bars"></div>
+        <p class="chart-foot"><strong>Repare em SC.</strong> Tem 80,64% de cobertura, acima de SP com 78,77%, e mesmo assim ficou de fora. O critério não foi só cobertura: SC tem caso em apenas 13,3% das semanas, enquanto SP concentra o maior volume de notificações do país. Dizer isso importa — implícito, a seleção pareceria mais mecânica do que foi.</p>
+      </div>
+
+      <h3>As seis aprovadas, já dentro do recorte</h3>
+      <p class="tight">Cobertura aqui é depois do filtro municipal de 80%, que derrubou 546 dos 1.915 municípios candidatos.</p>
+      <div class="scroller">
+        <table>
+          <thead>
+            <tr>
+              <th>UF</th>
+              <th class="num">Cobertura</th>
+              <th class="num">Municípios</th>
+              <th class="num">Linhas</th>
+              <th class="num">Notificações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>DF</td><td class="num">99,62%</td><td class="num">1</td><td class="num">262</td><td class="num">239.002</td></tr>
+            <tr><td>RJ</td><td class="num">95,10%</td><td class="num">83</td><td class="num">21.746</td><td class="num">122.369</td></tr>
+            <tr><td>MG</td><td class="num">95,01%</td><td class="num">745</td><td class="num">195.190</td><td class="num">1.010.365</td></tr>
+            <tr><td>GO</td><td class="num">94,48%</td><td class="num">173</td><td class="num">45.326</td><td class="num">541.627</td></tr>
+            <tr><td>ES</td><td class="num">92,92%</td><td class="num">54</td><td class="num">14.148</td><td class="num">219.065</td></tr>
+            <tr><td>SP</td><td class="num">92,37%</td><td class="num">313</td><td class="num">82.006</td><td class="num">1.177.273</td></tr>
+            <tr class="total"><td>Total</td><td class="num">94,26%</td><td class="num">1.369</td><td class="num">358.678</td><td class="num">3.309.701</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note-box">
+        <p>Esse é o custo declarado do recorte: 21 UFs fora, quase todas por falta de estação meteorológica. É exatamente por isso que existe o experimento <strong>E2</strong>, que roda sem clima sobre o Brasil inteiro de 2000 a 2023.</p>
+      </div>
+    </section>
+
+    <!-- ============ ETAPA 1 ============ -->
+    <section id="p1">
+      <div class="step-head">
+        <span class="step-n">01</span>
+        <h2>Reconstruir os dados</h2>
+        <span class="opt">Pulável</span>
+      </div>
+
+      <p>Todos os comandos passam por <code>scripts/rodar_com_teto.sh</code>, que roda dentro de um cgroup com limite de memória. Sem ele, um script que exagera derruba a VM inteira do WSL em vez de morrer sozinho — foi o que fechava o terminal repetidamente durante o desenvolvimento.</p>
+
+      <div class="code">
+        <div class="code-bar"><span class="code-label">1.1 · INMET — 35 milhões de registros horários</span><button class="copy" type="button">Copiar</button></div>
+<pre><span class="c"># Requer os ZIPs anuais do INMET em ~/Downloads</span>
+scripts/rodar_com_teto.sh -m 9G -- python3 scripts/inmet_extract_standardize.py --years 2018-2024
+scripts/rodar_com_teto.sh -m 9G -- python3 scripts/inmet_weekly_aggregate.py   --years 2018-2024
+scripts/rodar_com_teto.sh -m 9G -- python3 scripts/inmet_municipal_features.py --years 2018-2024</pre>
+      </div>
+
+      <div class="code">
+        <div class="code-bar"><span class="code-label">1.2 · Integrar SINAN + INMET</span><button class="copy" type="button">Copiar</button></div>
+<pre>scripts/rodar_com_teto.sh -m 9G -- python3 scripts/integrate_sinan_inmet.py</pre>
+      </div>
+
+      <div class="code">
+        <div class="code-bar"><span class="code-label">1.3 · Os quatro datasets de modelagem</span><button class="copy" type="button">Copiar</button></div>
+<pre>scripts/rodar_com_teto.sh -m 9G -- python3 scripts/prepare_model_dataset.py --modo e1
+scripts/rodar_com_teto.sh -m 9G -- python3 scripts/prepare_model_dataset.py --modo e2
+scripts/rodar_com_teto.sh -m 7G -- python3 scripts/prepare_mesoregion_dataset.py --nivel mesorregiao
+scripts/rodar_com_teto.sh -m 7G -- python3 scripts/prepare_mesoregion_dataset.py --nivel uf</pre>
+      </div>
+
+      <p>Para mudar o recorte — outras UFs, outros anos, outro limiar de cobertura — edite <code>config/recorte.json</code> e rode de novo a partir do 1.3. Nenhum script tem UF ou ano escrito no código.</p>
+
+      <h3>Conferir antes de subir</h3>
+      <div class="code">
+        <div class="code-bar"><span class="code-label">Verificação de volumetria</span><button class="copy" type="button">Copiar</button></div>
+<pre>python3 -c "
+import json
+for d in ['', '/e2', '/mesorregiao', '/uf']:
+    r = json.load(open(f'data/model_ready{d}/resumo_dataset.json'))
+    print(d or '/e1', r['linhas'], r['n_features'], 'features')
+"</pre>
+      </div>
+
+      <div class="scroller">
+        <table>
+          <thead><tr><th>Diretório</th><th class="num">Treino</th><th class="num">Validação</th><th class="num">Teste</th><th class="num">Features</th></tr></thead>
+          <tbody>
+            <tr><td>model_ready/</td><td class="num">214.933</td><td class="num">71.188</td><td class="num">72.557</td><td class="num">178</td></tr>
+            <tr><td>model_ready/e2/</td><td class="num">6.110.370</td><td class="num">578.760</td><td class="num">294.945</td><td class="num">129</td></tr>
+            <tr><td>model_ready/mesorregiao/</td><td class="num">6.751</td><td class="num">2.236</td><td class="num">2.279</td><td class="num">163</td></tr>
+            <tr><td>model_ready/uf/</td><td class="num">942</td><td class="num">312</td><td class="num">318</td><td class="num">163</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <label class="check"><input type="checkbox" data-step="1"> Marcar etapa 01 como feita</label>
+    </section>
+
+    <!-- ============ ETAPA 2 ============ -->
+    <section id="p2">
+      <div class="step-head">
+        <span class="step-n">02</span>
+        <h2>Subir para o HuggingFace</h2>
+      </div>
+
+      <p>O Kaggle não lê o seu disco. Os dados vão pelo dataset <code>thiagorfreitas/dengue-tcc2-data</code>. O script tinha o repositório de outro autor escrito no código; agora aceita variável de ambiente.</p>
+
+      <div class="code">
+        <div class="code-bar"><span class="code-label">Upload · ~172 MB de model_ready</span><button class="copy" type="button">Copiar</button></div>
+<pre>export HF_TOKEN=hf_xxxxxxxxxxxx                    <span class="c"># permissão de escrita</span>
+export HF_REPO_ID=thiagorfreitas/dengue-tcc2-data
+python3 scripts/upload_data_to_hf.py</pre>
+      </div>
+
+      <div class="trap">
+        <span class="tag">Bug corrigido neste branch</span>
+        <p>O script usava o padrão <code>"*"</code> para <code>model_ready</code>, que pega só arquivos da raiz e <strong>ignora subdiretórios em silêncio</strong>. Como <code>e2/</code>, <code>mesorregiao/</code> e <code>uf/</code> são novos, os três não subiriam — e o notebook baixaria apenas o E1, sem erro nenhum aparecer.</p>
+        <p>O padrão agora é <code>"**/*"</code>. Se você estiver usando uma cópia antiga do script, corrija antes de subir.</p>
+      </div>
+
+      <h3>Confirme no HF antes de ir para o Kaggle</h3>
+      <p class="tight">Abra <code>data/model_ready/</code> no navegador e verifique que apareceram:</p>
+      <div class="scroller">
+        <table>
+          <thead><tr><th>Arquivo</th><th class="note">Para quê</th></tr></thead>
+          <tbody>
+            <tr><td>feature_schema.csv</td><td class="note">Diz quais features são <code>sinan</code> e quais são <code>inmet</code>. É o que separa os braços da ablação — não derive por nome de coluna.</td></tr>
+            <tr><td>risk_thresholds.csv</td><td class="note">Limiares de risco derivados <strong>só do treino</strong>. Recalcular no notebook reintroduz o vazamento temporal que infla o F1 macro em até 0,11.</td></tr>
+            <tr><td>resumo_dataset.json</td><td class="note">Volumetria, para conferir que baixou o dataset certo.</td></tr>
+            <tr><td>e2/ mesorregiao/ uf/</td><td class="note">As outras três granularidades. Se não aparecerem, o script que você rodou é a versão antiga com o <code>glob</code> errado.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <label class="check"><input type="checkbox" data-step="2"> Marcar etapa 02 como feita</label>
+    </section>
+
+    <!-- ============ ETAPA 3 ============ -->
+    <section id="p3">
+      <div class="step-head">
+        <span class="step-n">03</span>
+        <h2>Configurar o Kaggle</h2>
+      </div>
+
+      <div class="scroller">
+        <table>
+          <thead><tr><th>Onde</th><th>Valor</th><th class="note">Por quê</th></tr></thead>
+          <tbody>
+            <tr><td>Settings › Accelerator</td><td>GPU T4 · exceto E2</td><td class="note">A GPU acelera bem o E1 e as granularidades pequenas. Para o E2, use CPU: são 6,1 milhões de linhas com pico medido de 9 GB, e a sessão de GPU tem menos RAM que a de CPU.</td></tr>
+            <tr><td>Settings › Internet</td><td>On</td><td class="note">Necessário para o <code>hf_hub_download</code>.</td></tr>
+            <tr><td>Add-ons › Secrets</td><td>HF_TOKEN</td><td class="note">Seu token do HuggingFace, lido pelo <code>UserSecretsClient</code>. <code>os.environ</code> não funciona no Kaggle.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Escolha o experimento</h3>
+      <div class="exps">
+        <div class="exp"><span class="path">""</span><span class="name">E1 — recorte</span><span class="meta">6 UFs · 214.933 treino<br>178 features · com clima</span></div>
+        <div class="exp"><span class="path">"e2/"</span><span class="name">E2 — histórico</span><span class="meta">Brasil · 6.110.370 treino<br>129 features · sem clima</span></div>
+        <div class="exp"><span class="path">"mesorregiao/"</span><span class="name">Mesorregião</span><span class="meta">43 séries · 6.751 treino<br>163 features · com clima</span></div>
+        <div class="exp"><span class="path">"uf/"</span><span class="name">UF</span><span class="meta">6 séries · 942 treino<br>163 features · com clima</span></div>
+      </div>
+
+      <div class="code">
+        <div class="code-bar"><span class="code-label">Célula de setup</span><button class="copy" type="button">Copiar</button></div>
+<pre>!pip install -q xgboost optuna shap huggingface_hub
+
+<span class="k">from</span> kaggle_secrets <span class="k">import</span> UserSecretsClient
+<span class="k">import</span> pandas <span class="k">as</span> pd
+<span class="k">from</span> huggingface_hub <span class="k">import</span> hf_hub_download
+
+REPO_ID  = "thiagorfreitas/dengue-tcc2-data"
+HF_TOKEN = UserSecretsClient().get_secret("HF_TOKEN")
+
+EXPERIMENTO = ""   <span class="c"># "" | "e2/" | "mesorregiao/" | "uf/"</span>
+DEVICE = "cuda" <span class="k">if</span> EXPERIMENTO != "e2/" <span class="k">else</span> "cpu"
+
+<span class="k">def</span> baixar(nome, ext="parquet"):
+    caminho = hf_hub_download(
+        repo_id=REPO_ID,
+        filename=f"data/model_ready/{EXPERIMENTO}{nome}.{ext}",
+        repo_type="dataset", token=HF_TOKEN,
+    )
+    <span class="k">return</span> pd.read_parquet(caminho) <span class="k">if</span> ext == "parquet" <span class="k">else</span> pd.read_csv(caminho)
+
+df_train, df_val, df_test = baixar("train"), baixar("val"), baixar("test")
+schema = baixar("feature_schema", "csv")
+
+print(f"train {len(df_train):,} | val {len(df_val):,} | test {len(df_test):,}")</pre>
+      </div>
+
+      <label class="check"><input type="checkbox" data-step="3"> Marcar etapa 03 como feita</label>
+    </section>
+
+    <!-- ============ ETAPA 4 ============ -->
+    <section id="p4">
+      <div class="step-head">
+        <span class="step-n">04</span>
+        <h2>Treinar e avaliar</h2>
+      </div>
+
+      <h3>Separar os braços, com checagem de vazamento</h3>
+      <div class="code">
+        <div class="code-bar"><span class="code-label">Features vêm do schema, e o assert é a rede de segurança</span><button class="copy" type="button">Copiar</button></div>
+<pre>FEATS = {
+    "sinan":       schema.loc[schema.origem == "sinan", "feature"].tolist(),
+    "sinan_inmet": schema["feature"].tolist(),
+}
+<span class="k">for</span> nome, fs <span class="k">in</span> FEATS.items():
+    FEATS[nome] = [f <span class="k">for</span> f <span class="k">in</span> fs
+                   <span class="k">if</span> f <span class="k">not in</span> NUNCA_FEATURE <span class="k">and</span> f <span class="k">in</span> df_train.columns]
+
+<span class="c"># Nenhuma coluna de texto pode sobrar, nenhuma proibida pode entrar.</span>
+<span class="k">for</span> nome, fs <span class="k">in</span> FEATS.items():
+    <span class="k">assert not</span> [c <span class="k">for</span> c <span class="k">in</span> fs <span class="k">if</span> df_train[c].dtype == object]
+    <span class="k">assert not</span> [c <span class="k">for</span> c <span class="k">in</span> fs <span class="k">if</span> c <span class="k">in</span> NUNCA_FEATURE]
+print("Checagem de vazamento: OK")</pre>
+      </div>
+
+      <h3>Treinar</h3>
+      <div class="code">
+        <div class="code-bar"><span class="code-label">Alvo em log1p, previsão volta com expm1</span><button class="copy" type="button">Copiar</button></div>
+<pre><span class="k">import</span> numpy <span class="k">as</span> np, xgboost <span class="k">as</span> xgb
+
+FIXOS = dict(tree_method="hist", device=DEVICE, random_state=42,
+             n_estimators=2000, early_stopping_rounds=50)
+
+<span class="c"># Do braço e1_sinan_inmet, 30 trials de Optuna sobre o treino inteiro.</span>
+BEST_PARAMS = {
+    "max_depth": 11, "learning_rate": 0.0156,
+    "subsample": 0.561, "colsample_bytree": 0.365,
+    "min_child_weight": 93, "reg_alpha": 2.051,
+    "reg_lambda": 0.0171, "gamma": 0.579,
+}
+
+<span class="k">def</span> treinar(feats):
+    m = xgb.XGBRegressor(**BEST_PARAMS, **FIXOS)
+    m.fit(df_train[feats], np.log1p(df_train["notificacoes_t4"]),
+          eval_set=[(df_val[feats], np.log1p(df_val["notificacoes_t4"]))],
+          verbose=False)
+    <span class="k">return</span> m
+
+pred = np.expm1(m.predict(df_test[feats]))   <span class="c"># desfaça a transformação!</span></pre>
+      </div>
+
+      <div class="note-box">
+        <p>Reportar R² sem desfazer o <code>log1p</code> dá um número diferente e mais otimista — foi o erro do relatório anterior. <strong>R²_log</strong> e <strong>R²_orig</strong> são medidas distintas e as duas devem aparecer na tabela.</p>
+      </div>
+
+      <h3>Baselines — obrigatórios, e rodam primeiro</h3>
+      <p>Nenhum resultado de XGBoost deve ser reportado sem eles ao lado. No recorte municipal a persistência dá R²_orig de 0,400 contra 0,390 do melhor modelo: sem essa linha não dá para saber se o modelo aprendeu algo além da autocorrelação.</p>
+
+      <div class="code">
+        <div class="code-bar"><span class="code-label">Persistência e sazonal</span><button class="copy" type="button">Copiar</button></div>
+<pre>serie = pd.concat([df_train, df_val, df_test], ignore_index=True).sort_values(
+    ["ibge_municipio", "ano", "semana_epidemiologica"])
+
+<span class="c"># Persistência: repete o valor de hoje quatro semanas à frente</span>
+pred_persistencia = df_test["notificacoes"]
+
+<span class="c"># Sazonal: o alvo da mesma semana no ano anterior</span>
+anterior = serie[["ibge_municipio","ano","semana_epidemiologica","notificacoes_t4"]].copy()
+anterior["ano"] += 1
+pred_sazonal = df_test.merge(
+    anterior.rename(columns={"notificacoes_t4": "pred"}),
+    on=["ibge_municipio","ano","semana_epidemiologica"], how="left")["pred"]</pre>
+      </div>
+
+      <h3>O que cabe no Kaggle</h3>
+      <div class="scroller">
+        <table>
+          <thead><tr><th>Experimento</th><th>Cabe?</th><th class="note">Observação</th></tr></thead>
+          <tbody>
+            <tr><td>E1 · município</td><td>Sim</td><td class="note">~5 min por braço com 30 trials de Optuna, em CPU. Com GPU T4, menos.</td></tr>
+            <tr><td>Mesorregião</td><td>Sim</td><td class="note">~2 min por braço.</td></tr>
+            <tr><td>UF</td><td>Sim</td><td class="note">Segundos. Mas trate como ponto extremo da curva, não como modelo: 318 linhas de teste.</td></tr>
+            <tr><td>E2 · histórico</td><td>Cuidado</td><td class="note">6,1 milhões de linhas, pico de <strong>9 GB</strong> e ~2 h com 20 trials. Use CPU e poucos trials, ou salve o estudo do Optuna em disco.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <label class="check"><input type="checkbox" data-step="4"> Marcar etapa 04 como feita</label>
+    </section>
+
+    <!-- ============ ARMADILHAS ============ -->
+    <section id="armadilhas">
+      <div class="eyebrow hot">Falham em silêncio</div>
+      <h2>Armadilhas</h2>
+
+      <div class="trap critical">
+        <span class="tag">Crítico · notebooks em colab/</span>
+        <p>Os três notebooks filtram apenas o Distrito Federal com <code>DF_CODE = "5300108"</code>. Isso <strong>não é viável</strong> com o recorte novo: o DF tem 1 município, e sobram <strong>157 linhas de treino</strong> para 178 features. Overfitting garantido, sem nenhum erro na tela.</p>
+        <p>Duas saídas: remova o filtro e treine nas 6 UFs, ou use <code>EXPERIMENTO = "e2/"</code>, que cobre 2000–2023 e dá ao DF cerca de 1.250 linhas de treino — mas sem clima, porque o E2 é SINAN-only.</p>
+      </div>
+
+      <h3>O que não repetir dos notebooks antigos</h3>
+      <div class="scroller">
+        <table>
+          <thead><tr><th>Prática antiga</th><th class="note">Por que está errada</th></tr></thead>
+          <tbody>
+            <tr><td>Recalcular percentis de risco</td><td class="note">Vazamento temporal. Infla o F1 macro em até 0,11 no nível de UF. Use o <code>risk_thresholds.csv</code> que veio pronto.</td></tr>
+            <tr><td>TUNE_SAMPLE = 500_000</td><td class="note">Hiperparâmetros ótimos dependem do tamanho da amostra. Tunar em 500 mil e treinar em milhões entrega parâmetros de outro problema.</td></tr>
+            <tr><td>SAMPLE_SIZE = 50000 no SHAP</td><td class="note">Explica um modelo que não é o entregue.</td></tr>
+            <tr><td>Reportar "R2" sem escala</td><td class="note">R²_log e R²_orig são números diferentes. No E1 são 0,707 e 0,390 — publique os dois.</td></tr>
+            <tr><td>risco_surto_t4_com_vazamento</td><td class="note">Existe só para medir a inflação do vazamento. Nunca como alvo de produção nem como feature.</td></tr>
+            <tr><td>select_dtypes(include=np.number)</td><td class="note">Parece resolver o erro de coluna de texto, mas só esconde o vazamento: a coluna numérica que carrega o alvo continua entrando.</td></tr>
+            <tr><td>Comparar XGBoost só com XGBoost</td><td class="note">Sem baseline não há como afirmar que o modelo aprendeu alguma coisa.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="colophon">
+    <span>Notebook corrigido: <b>kaggle/notebook_retreino.py</b> · fonte: <b>docs/COMO_RODAR_NO_KAGGLE.md</b> · técnico: <b>docs/GUIA_TECNICO_RETREINO.md</b></span>
+    <span>TCC2 — previsão de dengue · SINAN + INMET · XGBoost</span>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // Cobertura climática por UF, 2019-2023, medida apos as correcoes.
+  // Fonte: data/integrated/coverage_by_uf.csv, coluna pct_completo.
+  var UFS = [
+    ["DF", 99.73, 1], ["MG", 91.00, 1], ["RJ", 90.86, 1], ["GO", 85.06, 1],
+    ["ES", 84.92, 1], ["SC", 80.64, 0], ["SP", 78.77, 1], ["PB", 77.20, 0],
+    ["PR", 76.81, 0], ["TO", 76.06, 0], ["BA", 72.49, 0], ["PE", 66.57, 0],
+    ["PA", 62.66, 0], ["CE", 61.39, 0], ["SE", 59.53, 0], ["RN", 58.37, 0],
+    ["PI", 58.29, 0], ["MA", 55.70, 0], ["MS", 55.69, 0], ["RO", 54.16, 0],
+    ["AL", 52.05, 0], ["AP", 49.90, 0], ["AM", 47.10, 0], ["RS", 45.91, 0],
+    ["AC", 42.57, 0], ["MT", 42.19, 0], ["RR", 29.49, 0]
+  ];
+
+  var host = document.getElementById("bars");
+  if (host) {
+    var frag = document.createDocumentFragment();
+    UFS.forEach(function (u) {
+      // A linha de corte entra logo depois de SP, a ultima aprovada.
+      if (u[0] === "PB") {
+        var cut = document.createElement("div");
+        cut.className = "cutline";
+        cut.innerHTML = '<span>abaixo daqui, nenhuma UF entrou</span>';
+        frag.appendChild(cut);
+      }
+      var row = document.createElement("div");
+      row.className = "bar-row" + (u[2] ? " sel" : "");
+      row.innerHTML =
+        '<span class="uf">' + u[0] + '</span>' +
+        '<span class="track"><span class="fill" style="width:' + u[1].toFixed(2) + '%"></span></span>' +
+        '<span class="val">' + u[1].toFixed(2).replace(".", ",") + '%</span>';
+      row.setAttribute("title", u[0] + ": " + u[1].toFixed(2).replace(".", ",") +
+        "% de cobertura climática — " + (u[2] ? "entrou no recorte" : "ficou de fora"));
+      frag.appendChild(row);
+    });
+    host.appendChild(frag);
+  }
+
+  // Copiar comandos
+  document.querySelectorAll(".copy").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var pre = btn.closest(".code").querySelector("pre");
+      var texto = pre.innerText;
+      var feito = function () {
+        btn.textContent = "Copiado";
+        btn.classList.add("done");
+        setTimeout(function () {
+          btn.textContent = "Copiar";
+          btn.classList.remove("done");
+        }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(texto).then(feito, function () {
+          btn.textContent = "Falhou";
+        });
+      } else {
+        var ta = document.createElement("textarea");
+        ta.value = texto;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand("copy"); feito(); }
+        catch (e) { btn.textContent = "Falhou"; }
+        document.body.removeChild(ta);
+      }
+    });
+  });
+
+  // Marcar etapas concluidas. Conveniencia local de quem esta lendo:
+  // fica no navegador, nao viaja com o link.
+  var CHAVE = "retreino-kaggle-etapas";
+  var feitas = {};
+  try { feitas = JSON.parse(localStorage.getItem(CHAVE) || "{}"); } catch (e) { feitas = {}; }
+
+  document.querySelectorAll(".check input").forEach(function (box) {
+    var id = box.getAttribute("data-step");
+    box.checked = !!feitas[id];
+    box.addEventListener("change", function () {
+      feitas[id] = box.checked;
+      try { localStorage.setItem(CHAVE, JSON.stringify(feitas)); } catch (e) { /* modo privado */ }
+    });
+  });
+})();
+</script>

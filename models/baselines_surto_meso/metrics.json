@@ -1,0 +1,275 @@
+{
+  "dataset": "data/model_ready/mesorregiao_surto",
+  "baselines": {
+    "persistencia": {
+      "regressao": {
+        "alvo": "notificacoes_t4",
+        "n": 2279,
+        "MAE_orig": 252.0987,
+        "RMSE_orig": 736.0044,
+        "R2_orig": 0.3971,
+        "MAE_log": 0.8225,
+        "RMSE_log": 1.3134,
+        "R2_log": 0.5322,
+        "MAPE_pct_positivos": 200.31,
+        "n_positivos": 2217,
+        "media_y_true": 429.9965,
+        "cobertura_teste_pct": 100.0
+      },
+      "classificacao_binaria": {
+        "media": {
+          "alvo": "surto_media_t4",
+          "n": 2279,
+          "prevalencia": 0.5994,
+          "limiar": null,
+          "acuracia": 0.7951,
+          "precisao": 0.8434,
+          "recall_sensibilidade": 0.8082,
+          "especificidade": 0.7755,
+          "F1_positivo": 0.8254,
+          "F2_positivo": 0.815,
+          "VP": 1104,
+          "FP": 205,
+          "VN": 708,
+          "FN": 262,
+          "AUC_ROC": 0.6701,
+          "AUC_PR": 0.7574
+        },
+        "media_2dp": {
+          "alvo": "surto_media_2dp_t4",
+          "n": 2279,
+          "prevalencia": 0.2799,
+          "limiar": null,
+          "acuracia": 0.7911,
+          "precisao": 0.622,
+          "recall_sensibilidade": 0.6473,
+          "especificidade": 0.847,
+          "F1_positivo": 0.6344,
+          "F2_positivo": 0.6421,
+          "VP": 413,
+          "FP": 251,
+          "VN": 1390,
+          "FN": 225,
+          "AUC_ROC": 0.6415,
+          "AUC_PR": 0.4512
+        }
+      }
+    },
+    "sazonal": {
+      "regressao": {
+        "alvo": "notificacoes_t4",
+        "n": 2236,
+        "MAE_orig": 377.7433,
+        "RMSE_orig": 891.7188,
+        "R2_orig": -0.1959,
+        "MAE_log": 1.3136,
+        "RMSE_log": 1.6893,
+        "R2_log": 0.2166,
+        "MAPE_pct_positivos": 146.75,
+        "n_positivos": 2174,
+        "media_y_true": 404.3493,
+        "cobertura_teste_pct": 98.11
+      },
+      "classificacao_binaria": {
+        "media": {
+          "alvo": "surto_media_t4",
+          "n": 2236,
+          "prevalencia": 0.5948,
+          "limiar": null,
+          "acuracia": 0.5385,
+          "precisao": 0.6761,
+          "recall_sensibilidade": 0.4301,
+          "especificidade": 0.6976,
+          "F1_positivo": 0.5257,
+          "F2_positivo": 0.4638,
+          "VP": 572,
+          "FP": 274,
+          "VN": 632,
+          "FN": 758,
+          "AUC_ROC": 0.5363,
+          "AUC_PR": 0.5981
+        },
+        "media_2dp": {
+          "alvo": "surto_media_2dp_t4",
+          "n": 2236,
+          "prevalencia": 0.2773,
+          "limiar": null,
+          "acuracia": 0.7053,
+          "precisao": 0.4377,
+          "recall_sensibilidade": 0.221,
+          "especificidade": 0.8911,
+          "F1_positivo": 0.2937,
+          "F2_positivo": 0.2453,
+          "VP": 137,
+          "FP": 176,
+          "VN": 1440,
+          "FN": 483,
+          "AUC_ROC": 0.5415,
+          "AUC_PR": 0.2822
+        }
+      }
+    },
+    "media_movel_4": {
+      "regressao": {
+        "alvo": "notificacoes_t4",
+        "n": 2279,
+        "MAE_orig": 304.649,
+        "RMSE_orig": 786.8074,
+        "R2_orig": 0.311,
+        "MAE_log": 0.8833,
+        "RMSE_log": 1.169,
+        "R2_log": 0.6294,
+        "MAPE_pct_positivos": 200.74,
+        "n_positivos": 2217,
+        "media_y_true": 429.9965,
+        "cobertura_teste_pct": 100.0
+      },
+      "classificacao_binaria": {
+        "media": {
+          "alvo": "surto_media_t4",
+          "n": 2279,
+          "prevalencia": 0.5994,
+          "limiar": null,
+          "acuracia": 0.7745,
+          "precisao": 0.8208,
+          "recall_sensibilidade": 0.798,
+          "especificidade": 0.7393,
+          "F1_positivo": 0.8092,
+          "F2_positivo": 0.8024,
+          "VP": 1090,
+          "FP": 238,
+          "VN": 675,
+          "FN": 276,
+          "AUC_ROC": 0.6859,
+          "AUC_PR": 0.7658
+        },
+        "media_2dp": {
+          "alvo": "surto_media_2dp_t4",
+          "n": 2279,
+          "prevalencia": 0.2799,
+          "limiar": null,
+          "acuracia": 0.7477,
+          "precisao": 0.5449,
+          "recall_sensibilidade": 0.5987,
+          "especificidade": 0.8056,
+          "F1_positivo": 0.5706,
+          "F2_positivo": 0.5872,
+          "VP": 382,
+          "FP": 319,
+          "VN": 1322,
+          "FN": 256,
+          "AUC_ROC": 0.6451,
+          "AUC_PR": 0.4502
+        }
+      }
+    },
+    "persistencia_de_rotulo": {
+      "classificacao_binaria": {
+        "media": {
+          "alvo": "surto_media_t4",
+          "n": 2279,
+          "prevalencia": 0.5994,
+          "limiar": null,
+          "acuracia": 0.8205,
+          "precisao": 0.8724,
+          "recall_sensibilidade": 0.8206,
+          "especificidade": 0.8204,
+          "F1_positivo": 0.8457,
+          "F2_positivo": 0.8305,
+          "VP": 1121,
+          "FP": 164,
+          "VN": 749,
+          "FN": 245
+        },
+        "media_2dp": {
+          "alvo": "surto_media_2dp_t4",
+          "n": 2279,
+          "prevalencia": 0.2799,
+          "limiar": null,
+          "acuracia": 0.8469,
+          "precisao": 0.7437,
+          "recall_sensibilidade": 0.6912,
+          "especificidade": 0.9074,
+          "F1_positivo": 0.7165,
+          "F2_positivo": 0.7011,
+          "VP": 441,
+          "FP": 152,
+          "VN": 1489,
+          "FN": 197
+        }
+      }
+    },
+    "sempre_positivo": {
+      "classificacao_binaria": {
+        "media": {
+          "alvo": "surto_media_t4",
+          "n": 2279,
+          "prevalencia": 0.5994,
+          "limiar": null,
+          "acuracia": 0.5994,
+          "precisao": 0.5994,
+          "recall_sensibilidade": 1.0,
+          "especificidade": 0.0,
+          "F1_positivo": 0.7495,
+          "F2_positivo": 0.8821,
+          "VP": 1366,
+          "FP": 913,
+          "VN": 0,
+          "FN": 0
+        },
+        "media_2dp": {
+          "alvo": "surto_media_2dp_t4",
+          "n": 2279,
+          "prevalencia": 0.2799,
+          "limiar": null,
+          "acuracia": 0.2799,
+          "precisao": 0.2799,
+          "recall_sensibilidade": 1.0,
+          "especificidade": 0.0,
+          "F1_positivo": 0.4374,
+          "F2_positivo": 0.6603,
+          "VP": 638,
+          "FP": 1641,
+          "VN": 0,
+          "FN": 0
+        }
+      }
+    },
+    "sempre_negativo": {
+      "classificacao_binaria": {
+        "media": {
+          "alvo": "surto_media_t4",
+          "n": 2279,
+          "prevalencia": 0.5994,
+          "limiar": null,
+          "acuracia": 0.4006,
+          "precisao": 0.0,
+          "recall_sensibilidade": 0.0,
+          "especificidade": 1.0,
+          "F1_positivo": 0.0,
+          "F2_positivo": 0.0,
+          "VP": 0,
+          "FP": 0,
+          "VN": 913,
+          "FN": 1366
+        },
+        "media_2dp": {
+          "alvo": "surto_media_2dp_t4",
+          "n": 2279,
+          "prevalencia": 0.2799,
+          "limiar": null,
+          "acuracia": 0.7201,
+          "precisao": 0.0,
+          "recall_sensibilidade": 0.0,
+          "especificidade": 1.0,
+          "F1_positivo": 0.0,
+          "F2_positivo": 0.0,
+          "VP": 0,
+          "FP": 0,
+          "VN": 1641,
+          "FN": 638
+        }
+      }
+    }
+  }
+}

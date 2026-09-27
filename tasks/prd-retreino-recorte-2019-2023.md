@@ -156,6 +156,81 @@ Este PRD cobre: (1) correcao dos tres defeitos, (2) reprocessamento da pipeline 
 - [x] Comparacao das tres granularidades: municipio, mesorregiao, UF
 - [x] Conclusao documentada: se o clima ganha importancia em granularidade mais grossa, isso e contribuicao metodologica e nao resultado negativo
 
+### US-010: Classificacao binaria de surto por canal endemico
+
+**Description:** Como pesquisador, quero que o alerta de surto deixe de ser 4
+classes de percentil sazonalmente confundido e passe a ser uma decisao
+binaria contra um canal endemico, com limiar calibrado e baselines ao lado,
+porque o classificador de 4 classes perde para a persistencia nos sete
+bracos (F1_macro 0,399 contra 0,484) e o rotulo p90 agregado e, na pratica,
+"e verao".
+
+**Contexto bibliografico:** canal endemico e o metodo padrao de vigilancia
+(OPAS); o trabalho mais proximo (Kirstein et al. 2025, deteccao de surto em
+municipios brasileiros) usa duas variantes — `> media(SE)` e
+`> media(SE) + 2*DP(SE)`. Brady et al. (2015) testaram 102 definicoes de
+surto em dados brasileiros e acharam 65% de variacao na proporcao
+classificada como surto conforme a definicao, entao reportar as duas lado a
+lado nao e indecisao, e exigencia.
+
+**Acceptance Criteria:**
+- [x] `scripts/canal_endemico.py`: climatologia por (mesorregiao, semana_epi)
+      sobre 2010-2018 (estritamente anterior a todos os splits). Nao 2014-2018:
+      com n=5 o maior z-score possivel e (n-1)/sqrt(n) = 1,789 < 2 e a variante
+      estrita seria inatingivel in-sample.
+- [x] Rotulo alinhado a semana DO ALVO (t+4), nao da linha — via o mesmo
+      `shift(-4)` por mesorregiao que `pmd.add_target()` usa. `se_clim = min(SE, 52)`
+      obrigatorio (unico ano de 53 semanas em 2010-2018 e 2014).
+- [x] Assercao mestra: `notificacoes_t4` reconstruido do gold bate exatamente
+      com o parquet do E1 mesorregional (11.266 linhas, diff 0,0).
+- [x] `scripts/metrics_common.py`: `binary_metrics`, `calibrar_limiar` (F1/F2/
+      Youden), `aplicar_limiar`, `to_row_binario`. Funcoes de 4 classes
+      intocadas — `roc_auc_score(multi_class="ovr")` quebra no binario e o
+      `except` nu gravaria AUC=None em silencio.
+- [x] `scripts/train_ablation.py`: `carregar_cfg(cfg)` extraida de `carregar()`
+      com `cfg["meta"]` opcional; parametro `objetivo` no Optuna (`rmse_log`
+      default preserva os 7 bracos bit a bit, `rmse_orig` para os novos).
+- [x] `scripts/train_surto_binario.py`: bracos `meso_surto_sinan` e
+      `meso_surto_sinan_inmet`. Sem `scale_pos_weight` — o desbalanceamento e
+      tratado pelo limiar. Limiar calibrado na metade rigorosa da validacao
+      (SE>=27, nunca vista por Optuna nem early stopping); versao de reuso da
+      validacao inteira reportada ao lado.
+- [x] `scripts/baselines_surto.py`: persistencia, sazonal, media-movel-4,
+      **persistencia de rotulo** (`surto_t4 = surto_t`), sempre-positivo,
+      sempre-negativo — todos classificados pelo mesmo limiar do canal.
+- [x] `scripts/tabela_surto_binario.py` -> `docs/resultados_surto_binario.{csv,md}`,
+      uma secao por variante. Raiz `models/ablacao_surto/` separada de
+      `models/ablacao/` para nao quebrar `tabela_resultados.py` (que indexa
+      `classificacao.F1_macro` sem `.get()`).
+- [x] `scripts/train_quantis.py`: intervalos de predicao via `reg:quantileerror`
+      multi-quantil (um so modelo), treino em log1p com `expm1` por quantil
+      (equivariante, exato). Nao vira metrica oficial — WIS/CRPS fica adiado.
+- [x] `scripts/validar_model_ready.py`: `mesorregiao_surto` em CONJUNTOS, as 6
+      colunas de rotulo em NUNCA_FEATURE.
+
+**Resultado (teste 2023, variante `media`, F1_positivo):**
+
+| abordagem | F1_pos |
+|---|---|
+| sempre-negativo | 0,000 |
+| sazonal | 0,526 |
+| sempre-positivo | 0,750 |
+| classificador dedicado (XGBoost binario) | 0,72-0,74 |
+| media-movel-4 | 0,809 |
+| persistencia | 0,825 |
+| **limiar sobre a previsao da regressao** | **0,830-0,832** |
+| persistencia de rotulo | 0,846 |
+
+**Achado central:** o classificador binario dedicado, mesmo com rotulo
+corrigido, limiar calibrado e Optuna proprio, **perde para a persistencia**.
+A saida: como "surto" e literalmente `notificacoes_t4 > limiar`, limiarizar a
+previsao continua da regressao (R2_orig 0,44-0,49) pelo canal — sem
+classificador, sem parametro livre — supera a persistencia. O gargalo era o
+classificador, nao o sinal. Por essa via SINAN-only e SINAN+INMET empatam
+(0,832 vs 0,830): o ganho de clima do R2_orig continuo nao se traduz em
+ganho de F1 binario. `classificar_via_regressao` em `train_surto_binario.py`
+e agora resultado oficial em `models/ablacao_surto/*/metrics.json`.
+
 ## Functional Requirements
 
 1. Nenhum script pode assumir janela ou UFs fixas; recorte e split vem de configuracao
@@ -231,7 +306,17 @@ Este PRD cobre: (1) correcao dos tres defeitos, (2) reprocessamento da pipeline 
    segundo. Alinhar o objetivo da busca a metrica reportada e provavelmente o
    ajuste de maior retorno que sobrou.
 
-3. **O classificador perde para a persistencia em F1_macro nos sete bracos.**
-   Ele minimiza logloss e, sem tratamento de desbalanceamento, escorrega para
-   a classe majoritaria. A correcao e conhecida (pesar as amostras) e nao foi
-   aplicada para nao misturar o efeito com o da ablacao.
+3. ~~**O classificador perde para a persistencia em F1_macro nos sete bracos.**~~
+   **Encaminhado na US-010.** Rotulo trocado para canal endemico binario,
+   limiar calibrado, Optuna proprio testado. O classificador dedicado
+   *continua* perdendo para a persistencia — o que aponta que o problema nao
+   era desbalanceamento nem calibracao. A saida foi abandonar o classificador
+   separado e classificar limiarizando a previsao da regressao pelo canal, que
+   supera a persistencia. Fica aberto: por que um XGBClassifier probabilistico
+   captura a autocorrelacao pior do que "copiar o valor de hoje", e se isso
+   vale so nesta granularidade.
+
+4. **Os intervalos de predicao subcobrem em 2023.** `train_quantis.py` da
+   cobertura empirica de 0,79 (SINAN+INMET) e 0,85 (SINAN-only) contra 0,90
+   nominal — a mesma degradacao em anos recentes que aparece em todo o
+   projeto. WIS/CRPS como metrica oficial fica para trabalho futuro.

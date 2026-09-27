@@ -583,8 +583,67 @@ Não é enorme, mas era ganho de graça que o modelo não teria em produção �
    6,1 milhões. Só ao agregar por mesorregião o clima recupera a diferença.
 5. **O classificador precisa de tratamento de desbalanceamento** antes de ser
    comparado de forma justa ao baseline: perde em F1_macro nos cinco braços.
+   Ver seção 7.8 — a US-010 tentou isso e descobriu que o problema é mais fundo.
 6. **A busca está otimizando a métrica errada** para a pergunta do TCC. Ver
    [seção 7.4](#74-um-aviso-sobre-o-que-a-busca-otimiza).
+
+### 7.8 US-010: surto binário por canal endêmico
+
+O rótulo de risco de 4 classes vinha de percentis p50/p75/p90 das
+notificações de cada município, calculados sobre **todas as semanas juntas**.
+Como dengue é sazonal, "acima do p90" significa na prática "é verão" — o
+rótulo estava confundido com a estação, e o `week_of_year_sin/cos` sozinho já
+o previa. Os limiares também colapsavam em inteiros minúsculos: p90 = 2 em
+municípios pequenos, ou seja "surto" = mais de 2 casos.
+
+**Correção:** `scripts/canal_endemico.py` troca o percentil agregado por um
+**canal endêmico** — o método padrão de vigilância (OPAS). O limiar passa a
+ser calculado por semana epidemiológica, comparando cada semana com a mesma
+semana em 2010–2018 (janela estritamente anterior a todos os splits). Duas
+variantes, reportadas lado a lado porque a literatura mostra que a escolha da
+definição muda a proporção classificada como surto em até 65%:
+
+- `media` — surto = `notificações_t4 > média_histórica(SE)`
+- `media_2dp` — surto = `> média_histórica(SE) + 2·desvio(SE)`
+
+O alvo é binário (surto/não-surto). As classes intermediárias da v2 nunca
+funcionaram (F1 0,20 e 0,22) e a vigilância consome uma decisão, não uma
+faixa. O limiar de decisão do classificador é calibrado **só na validação**,
+e na metade dela (SE ≥ 27) que o Optuna e o early stopping nunca viram.
+
+**O que apareceu ao rodar os baselines** (teste 2023, variante `media`,
+F1_positivo):
+
+| abordagem | F1_pos |
+|---|---|
+| classificador XGBoost binário dedicado | 0,72–0,74 |
+| persistência | 0,825 |
+| limiar sobre a previsão da regressão | **0,830–0,832** |
+| persistência de rótulo (`surto_t4 = surto_t`) | 0,846 |
+
+O classificador dedicado **perde para a persistência** — mesmo com o rótulo
+corrigido, o limiar calibrado e um Optuna próprio maximizando AUC-PR (que
+piorou o F1, por overfit do split pequeno de validação). Variar o critério de
+limiar entre F1, F2 e Youden não fecha a lacuna: o melhor threshold possível
+bate 0,749.
+
+Como "surto" é literalmente `notificações_t4 > limiar`, a saída foi
+**abandonar o classificador separado** e classificar limiarizando a previsão
+contínua da regressão (que já é forte: R²_orig 0,44–0,49) contra o mesmo
+limiar do canal. Sem classificador, sem parâmetro livre. Isso supera a
+persistência nas duas variantes. Está em `classificar_via_regressao()` de
+`train_surto_binario.py` e é resultado oficial em
+`models/ablacao_surto/*/metrics.json`.
+
+Nota: por essa via, SINAN-only e SINAN+INMET empatam (0,832 vs 0,830). O
+ganho de clima que aparece no R²_orig contínuo não se traduz em ganho de F1
+binário — a decisão depende mais de estar do lado certo do limiar do que da
+magnitude exata.
+
+Fica aberto: por que um XGBClassifier probabilístico captura a
+autocorrelação pior que "copiar o valor de hoje". Os intervalos de predição
+de `train_quantis.py` subcobrem em 2023 (0,79–0,85 contra 0,90 nominal), a
+mesma degradação em anos recentes que aparece em todo o projeto.
 
 ---
 
@@ -765,7 +824,21 @@ scripts/rodar_com_teto.sh -m 9G -- .venv/bin/python3 scripts/train_ablation.py -
 scripts/rodar_com_teto.sh -m 6G -- .venv/bin/python3 scripts/explain_shap.py --arm e1_sinan_inmet
 scripts/rodar_com_teto.sh -m 6G -- .venv/bin/python3 scripts/explain_shap.py --arm meso_sinan_inmet
 python3 scripts/tabela_resultados.py
+
+# 7. US-010: surto binário por canal endêmico (só mesorregião)
+python3 scripts/canal_endemico.py                         # -> data/model_ready/mesorregiao_surto
+python3 scripts/validar_model_ready.py
+python3 scripts/train_surto_binario.py --arm meso_surto_sinan
+python3 scripts/train_surto_binario.py --arm meso_surto_sinan_inmet
+python3 scripts/baselines_surto.py
+python3 scripts/train_quantis.py --arm meso_surto_sinan
+python3 scripts/train_quantis.py --arm meso_surto_sinan_inmet
+python3 scripts/tabela_surto_binario.py                   # -> docs/resultados_surto_binario.{csv,md}
 ```
+
+O braço de surto herda os hiperparâmetros do Optuna da regressão por padrão;
+`--tune-clf` roda um Optuna próprio do classificador (testado, piora o F1 —
+não usar como resultado principal).
 
 **Tetos de memória medidos** (pico real, com `/usr/bin/time -v`):
 

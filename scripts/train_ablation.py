@@ -140,22 +140,33 @@ def procedencia():
     }
 
 
-def carregar(arm):
-    """Le so as colunas do braco, para nao abrir 6 milhoes de linhas inteiras."""
-    cfg = ARMS[arm]
+def carregar_cfg(cfg):
+    """Le so as colunas do braco, para nao abrir 6 milhoes de linhas inteiras.
+
+    cfg["meta"], se vier, substitui NAO_FEATURE nas colunas de metadado lidas
+    — e o que permite a scripts/train_surto_binario.py (US-010) ler as
+    colunas de rotulo de surto sem que ARMS precise conhece-las. Sem esse
+    parametro, acrescentar as colunas novas a NAO_FEATURE quebraria a leitura
+    dos 7 bracos de data/model_ready, que nao as tem.
+    """
     dataset = BASE_DIR / cfg["dataset"]
     schema = pd.read_csv(dataset / "feature_schema.csv")
     feats = schema.loc[schema["origem"].isin(cfg["origens"]), "feature"].tolist()
+    meta_cols = cfg.get("meta", NAO_FEATURE)
 
     partes = {}
     for nome in ("train", "val", "test"):
         caminho = dataset / f"{nome}.parquet"
         partes[nome] = {
             "X": _ler_matriz(caminho, feats),
-            "meta": pd.read_parquet(caminho, columns=NAO_FEATURE),
+            "meta": pd.read_parquet(caminho, columns=meta_cols),
         }
     gc.collect()
     return partes, feats, dataset
+
+
+def carregar(arm):
+    return carregar_cfg(ARMS[arm])
 
 
 def _ler_matriz(caminho, feats):
@@ -179,7 +190,21 @@ def _ler_matriz(caminho, feats):
     return X
 
 
-def tune_regressao(partes, feats, trials, semente=42):
+OBJETIVOS_OPTUNA = {
+    # RMSE_log e o comportamento original — preservado bit a bit (sem passar
+    # por metrics_common) para nao introduzir arredondamento em nenhum dos 7
+    # bracos ja existentes.
+    "rmse_log": None,
+    # Num conjunto de validacao fixo, SST e constante — minimizar RMSE_orig
+    # e exatamente maximizar R2_orig, a metrica que o TCC reporta. Roteado
+    # por metrics_common para que o objetivo nunca possa divergir do
+    # relatorio final.
+    "rmse_orig": "RMSE_orig",
+    "mae_orig": "MAE_orig",
+}
+
+
+def tune_regressao(partes, feats, trials, semente=42, objetivo_nome="rmse_log"):
     """Optuna sobre o conjunto inteiro de treino, sem subamostragem.
 
     A versao anterior tunava em 500 mil linhas e retreinava em 2 milhoes, o
@@ -188,6 +213,11 @@ def tune_regressao(partes, feats, trials, semente=42):
     """
     import optuna
     optuna.logging.set_verbosity(optuna.logging.WARNING)
+
+    if objetivo_nome not in OBJETIVOS_OPTUNA:
+        raise ValueError(f"objetivo desconhecido: {objetivo_nome} "
+                         f"(opcoes: {list(OBJETIVOS_OPTUNA)})")
+    chave_metrica = OBJETIVOS_OPTUNA[objetivo_nome]
 
     Xtr, ytr = partes["train"]["X"], np.log1p(partes["train"]["meta"][TARGET])
     Xva, yva = partes["val"]["X"], np.log1p(partes["val"]["meta"][TARGET])
@@ -198,20 +228,24 @@ def tune_regressao(partes, feats, trials, semente=42):
         m = xgb.XGBRegressor(**espaco(trial), **fixos)
         m.fit(Xtr, ytr, eval_set=[(Xva, yva)], verbose=False)
         pred = m.predict(Xva)
-        return float(np.sqrt(np.mean((yva - pred) ** 2)))
+        if chave_metrica is None:
+            return float(np.sqrt(np.mean((yva - pred) ** 2)))
+        metricas = metrics_common.regression_metrics(
+            np.expm1(yva), np.expm1(pred))
+        return metricas[chave_metrica]
 
     def progresso(estudo, trial):
         # Sem isto a busca fica muda por dezenas de minutos e nao da para
         # distinguir "esta lento" de "travou".
         print(f"    trial {trial.number + 1}/{trials}: "
-              f"RMSE_log {trial.value:.4f} | melhor {estudo.best_value:.4f} | "
+              f"{objetivo_nome} {trial.value:.4f} | melhor {estudo.best_value:.4f} | "
               f"{trial.duration.total_seconds():.0f}s", flush=True)
 
     estudo = optuna.create_study(
         direction="minimize", sampler=optuna.samplers.TPESampler(seed=semente))
     estudo.optimize(objetivo, n_trials=trials, show_progress_bar=False,
                     callbacks=[progresso])
-    print(f"  melhor RMSE_log na validacao: {estudo.best_value:.4f}")
+    print(f"  melhor {objetivo_nome} na validacao: {estudo.best_value:.4f}")
     return estudo.best_params, estudo.best_value
 
 

@@ -1,0 +1,48 @@
+{
+  "granularidade": "mesorregiao_surto",
+  "linhas": {
+    "train": 6751,
+    "val": 2236,
+    "test": 2279
+  },
+  "unidades": 43,
+  "municipios_de_origem": 1369,
+  "n_features": 163,
+  "climatologia": {
+    "janela": [
+      2010,
+      2018
+    ],
+    "n_anos": 9,
+    "n_mesorregioes": 43
+  },
+  "variantes": [
+    "media",
+    "media_2dp"
+  ],
+  "taxas_positivos_por_split": {
+    "train": {
+      "media": 0.4789,
+      "media_2dp": 0.1835
+    },
+    "val": {
+      "media": 0.3721,
+      "media_2dp": 0.1395
+    },
+    "test": {
+      "media": 0.5994,
+      "media_2dp": 0.2799
+    }
+  },
+  "checagem_sensibilidade_anos_epidemicos": {
+    "anos_excluidos": [
+      2015,
+      2016
+    ],
+    "n_anos_baseline": 7,
+    "taxas_positivos": {
+      "media": 0.5531,
+      "media_2dp": 0.2688
+    }
+  }
+}
