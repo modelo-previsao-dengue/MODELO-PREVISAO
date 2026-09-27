@@ -1,0 +1,13 @@
+ibge_municipio,p50,p75,p90,threshold_source,escopo
+DF,417.0,878.0,2245.4,municipio,municipio
+ES,270.0,610.0,1986.0,municipio,municipio
+GO,1441.0,2511.0,3924.2,municipio,municipio
+MG,984.0,3576.0,10120.6,municipio,municipio
+RJ,159.0,347.0,1043.4,municipio,municipio
+SP,2139.0,6875.0,12407.0,municipio,municipio
+DF,417.0,878.0,2245.4,,uf_fallback
+ES,270.0,610.0,1986.0,,uf_fallback
+GO,1441.0,2511.0,3924.2,,uf_fallback
+MG,984.0,3576.0,10120.6,,uf_fallback
+RJ,159.0,347.0,1043.4,,uf_fallback
+SP,2139.0,6875.0,12407.0,,uf_fallback

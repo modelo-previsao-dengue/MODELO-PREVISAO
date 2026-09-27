@@ -1,0 +1,13 @@
+{
+  "granularidade": "uf",
+  "linhas": {
+    "train": 942,
+    "val": 312,
+    "test": 318
+  },
+  "unidades": 6,
+  "municipios_de_origem": 1369,
+  "n_features": 163,
+  "n_features_inmet": 49,
+  "estacoes_por_unidade_mediana": 17.0
+}

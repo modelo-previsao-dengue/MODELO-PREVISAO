@@ -36,3 +36,8 @@ __pycache__/
 
 # macOS
 .DS_Store
+
+# Retreino: binarios de modelo e parquets em subpastas
+models/**/modelo_*.json
+models/**/*.parquet
+data/model_ready/**/*.parquet
