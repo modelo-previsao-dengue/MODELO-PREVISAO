@@ -2,7 +2,8 @@
 """US-205: Feature Engineering — Anomalias climáticas mesorregionais.
 
 Para cada variável climática base, calcula:
-  - anomalia = valor_observado - média_histórica(mesorregiao, semana_epidemiologica)
+  - anomalia = valor_observado - média_histórica(mesorregiao, semana_epidemiologica),
+    com a média histórica calculada só nos anos de treino (config/recorte.json)
   - anomalia_std = anomalia / desvio_padrão histórico (z-score)
 Total: 12 × 2 = 24 novas features.
 
@@ -15,6 +16,8 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+
+import recorte_config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data" / "model_ready_v3"
@@ -29,16 +32,22 @@ CLIMATE_BASE = [
 ]
 
 
-def compute_anomalies(df):
-    """Compute anomalies: deviation from historical mean per (mesorregiao, epi_week)."""
-    print("\nCalculando anomalias climáticas...")
+def compute_anomalies(df, climatology_years):
+    """Compute anomalies: deviation from historical mean per (mesorregiao, epi_week).
+
+    A climatologia (media e desvio) sai so dos anos de treino. Calculada sobre
+    o dataframe inteiro, como antes, ela incorporava os anos de validacao e
+    teste nas proprias features.
+    """
+    print(f"\nCalculando anomalias climáticas (climatologia {climatology_years})...")
+    base = df[df["ano"].isin(climatology_years)]
     new_cols = {}
     for feat in CLIMATE_BASE:
         if feat not in df.columns:
             print(f"  AVISO: {feat} não encontrada, pulando")
             continue
 
-        stats = df.groupby(GROUP_KEYS)[feat].agg(["mean", "std"])
+        stats = base.groupby(GROUP_KEYS)[feat].agg(["mean", "std"])
         stats.columns = ["hist_mean", "hist_std"]
         stats["hist_std"] = stats["hist_std"].replace(0, np.nan)
 
@@ -65,7 +74,8 @@ def main():
     print(f"  {len(df):,} linhas, {len(df.columns)} colunas")
 
     n_before = len(df.columns)
-    df = compute_anomalies(df)
+    climatology_years = recorte_config.load_v3()["train"]
+    df = compute_anomalies(df, climatology_years)
     n_after = len(df.columns)
     n_new = n_after - n_before
     print(f"\n  Colunas: {n_before} → {n_after} (+{n_new} novas)")
@@ -77,6 +87,7 @@ def main():
     report = {
         "n_new_features": n_new,
         "n_base_climate_features": len(CLIMATE_BASE),
+        "climatologia_anos": climatology_years,
         "dataset_rows": len(df),
         "dataset_cols": len(df.columns),
     }

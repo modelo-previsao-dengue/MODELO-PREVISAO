@@ -1,0 +1,4 @@
+modelo,n_teste,MAE_orig,RMSE_orig,R2_orig,MAE_log,R2_log,acuracia,F1_macro,cobertura_teste_pct
+baseline_persistencia,318,1650.9214,3501.2322,0.4544,0.7063,-0.1518,0.5818,0.5719,100.0
+baseline_sazonal,312,2361.2692,4069.0959,0.1303,1.3033,-0.4169,0.2821,0.2091,98.11
+baseline_media_movel_4,318,2020.8695,3886.4556,0.3278,0.728,0.3348,0.5346,0.5244,100.0

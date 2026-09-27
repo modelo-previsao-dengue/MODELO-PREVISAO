@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """US-206: Preparar splits train/val/test mesorregionais (v3) com features enriquecidas.
 
-Split temporal: train [2019,2021], val [2023], test [2024,2025,2026].
+Split temporal (config/recorte.json, split_v3): train 2019-2022, val 2023,
+test 2024-2026; 2018 so como warm-up dos lags.
 Target de regressão: notificacoes_t4 = notificacoes deslocado -4 semanas.
 Target de classificação: risco_surto_t4, 4 classes calculadas a partir de
 percentis calculados SOMENTE no conjunto de treino (por mesorregião), para
@@ -14,12 +15,16 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+import recorte_config
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data" / "model_ready_v3"
 
-TRAIN_YEARS = [2019, 2021]
-VAL_YEARS = [2023]
-TEST_YEARS = [2024, 2025, 2026]
+# Split de config/recorte.json (split_v3). O ano de warm-up fica fora dos tres.
+_SPLIT = recorte_config.load_v3()
+TRAIN_YEARS = _SPLIT["train"]
+VAL_YEARS = _SPLIT["val"]
+TEST_YEARS = _SPLIT["test"]
 
 GROUP_KEY = "cod_mesorregiao"
 ID_COLS = ["cod_mesorregiao", "ano", "semana_epidemiologica"]

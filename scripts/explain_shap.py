@@ -1,7 +1,24 @@
 #!/usr/bin/env python3
-"""US-011: Explicabilidade com SHAP."""
+"""US-008: explicabilidade SHAP dos bracos da ablacao, sem subamostragem.
 
+A versao anterior tinha tres problemas. Explicava 50 mil linhas sorteadas de
+um modelo treinado em milhoes, entao a importancia relatada nao era a do
+modelo entregue. Apontava para modelos que nao existem mais
+(models/xgb_regression_tuned). E a lista CLIMATE_FEATURES estava desatualizada
+em relacao as variaveis novas: sem ponto de orvalho e sem rajada de vento, e
+com o mapeamento de colunas ainda errado por tras dos nomes.
+
+Aqui o conjunto de teste inteiro e explicado, os nomes climaticos saem do
+mesmo prefixo que o resto do pipeline usa, e o resultado sai por braco, para
+poder ser comparado entre eles.
+
+Uso:
+    .venv/bin/python3 scripts/explain_shap.py --arm e1_sinan_inmet
+"""
+
+import argparse
 import json
+import sys
 from pathlib import Path
 
 import matplotlib
@@ -12,119 +29,96 @@ import pandas as pd
 import shap
 import xgboost as xgb
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import prepare_model_dataset as pmd
+import train_ablation as ta
+
 BASE_DIR = Path(__file__).resolve().parent.parent
-MODEL_READY = BASE_DIR / "data" / "model_ready"
-SHAP_DIR = BASE_DIR / "models" / "shap_analysis"
-
-ID_COLS = ["ibge_municipio", "ano", "semana_epidemiologica"]
-TARGET = "notificacoes_t4"
-CLASS_TARGET = "risco_surto_t4"
-
-SAMPLE_SIZE = 50000
-
-CLIMATE_FEATURES = [
-    "rain_sum_mm", "rain_mean_mm", "rain_days", "rain_heavy_days",
-    "temp_mean_c", "temp_min_c", "temp_max_c", "temp_range_c",
-    "humidity_mean_pct", "pressure_mean_mbar", "wind_speed_mean_ms",
-    "radiation_mean_kj",
-]
 
 
 def main():
-    SHAP_DIR.mkdir(parents=True, exist_ok=True)
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--arm", choices=list(ta.ARMS), required=True)
+    ap.add_argument("--max-display", type=int, default=30)
+    args = ap.parse_args()
 
-    # Load best model (tuned if available, else MVP)
-    tuned_path = BASE_DIR / "models" / "xgb_regression_tuned" / "model.json"
-    mvp_path = BASE_DIR / "models" / "xgb_regression_mvp" / "model.json"
-    model_path = tuned_path if tuned_path.exists() else mvp_path
-    print(f"Carregando modelo: {model_path.parent.name}")
+    modelo_dir = BASE_DIR / "models" / "ablacao" / args.arm
+    modelo_path = modelo_dir / "modelo_regressao.json"
+    if not modelo_path.exists():
+        raise FileNotFoundError(
+            f"{modelo_path} nao existe. Rode primeiro:\n"
+            f"  .venv/bin/python3 scripts/train_ablation.py --arm {args.arm}")
 
-    model = xgb.XGBRegressor()
-    model.load_model(str(model_path))
+    saida = modelo_dir / "shap"
+    saida.mkdir(parents=True, exist_ok=True)
 
-    print("Carregando dados de teste...")
-    test = pd.read_parquet(MODEL_READY / "test.parquet")
-    feature_cols = [c for c in test.columns if c not in ID_COLS + [TARGET, CLASS_TARGET]]
+    print(f"Braco: {args.arm}")
+    partes, feats, _ = ta.carregar(args.arm)
+    X = partes["test"]["X"]
+    print(f"  {X.shape[0]:,} linhas de teste, {len(feats)} features "
+          f"(conjunto inteiro, sem amostragem)")
 
-    # Sample for SHAP
-    if len(test) > SAMPLE_SIZE:
-        sample = test.sample(SAMPLE_SIZE, random_state=42)
-    else:
-        sample = test
-    X_sample = sample[feature_cols]
-    y_sample = sample[TARGET]
-    print(f"  Sample: {len(X_sample)} linhas")
+    modelo = xgb.XGBRegressor()
+    modelo.load_model(str(modelo_path))
 
-    print("Calculando SHAP values (TreeExplainer)...")
-    explainer = shap.TreeExplainer(model)
-    shap_values = explainer.shap_values(X_sample)
+    print("Calculando SHAP (TreeExplainer)...")
+    explainer = shap.TreeExplainer(modelo)
+    valores = explainer.shap_values(X)
 
-    # Summary plot (beeswarm)
-    print("Gerando summary plot...")
-    plt.figure(figsize=(12, 10))
-    shap.summary_plot(shap_values, X_sample, show=False, max_display=30)
-    plt.tight_layout()
-    plt.savefig(SHAP_DIR / "shap_summary_beeswarm.png", dpi=150, bbox_inches="tight")
-    plt.close()
+    # A origem vem do mesmo prefixo que o resto do pipeline usa, em vez de uma
+    # lista solta de nomes climaticos que envelhece a cada variavel nova.
+    media_abs = np.abs(valores).mean(axis=0)
+    ranking = pd.DataFrame({
+        "feature": feats,
+        "shap_medio_abs": media_abs,
+        "origem": ["inmet" if f.startswith(pmd.INMET_PREFIXES) else "sinan"
+                   for f in feats],
+    }).sort_values("shap_medio_abs", ascending=False)
+    ranking.to_csv(saida / "shap_ranking.csv", index=False)
 
-    # Top-5 climate features dependence plots
-    climate_cols_present = [c for c in feature_cols if any(c.startswith(cf) for cf in CLIMATE_FEATURES)]
-    mean_abs_shap = np.abs(shap_values).mean(axis=0)
-    climate_importance = [(c, mean_abs_shap[feature_cols.index(c)]) for c in climate_cols_present]
-    climate_importance.sort(key=lambda x: x[1], reverse=True)
-    top5_climate = [c for c, _ in climate_importance[:5]]
-
-    print(f"Top-5 climate features: {top5_climate}")
-    fig, axes = plt.subplots(1, min(5, len(top5_climate)), figsize=(20, 4))
-    if len(top5_climate) == 1:
-        axes = [axes]
-    for i, feat in enumerate(top5_climate[:5]):
-        idx = feature_cols.index(feat)
-        ax = axes[i] if len(top5_climate) > 1 else axes[0]
-        ax.scatter(X_sample[feat].values, shap_values[:, idx], alpha=0.1, s=1)
-        ax.set_xlabel(feat)
-        ax.set_ylabel("SHAP value")
-        ax.set_title(feat)
-    plt.tight_layout()
-    plt.savefig(SHAP_DIR / "shap_dependence_climate_top5.png", dpi=150)
-    plt.close()
-
-    # Feature importance ranking from SHAP
-    shap_importance = pd.DataFrame({
-        "feature": feature_cols,
-        "mean_abs_shap": mean_abs_shap,
-    }).sort_values("mean_abs_shap", ascending=False)
-    shap_importance["is_climate"] = shap_importance["feature"].apply(
-        lambda c: any(c.startswith(cf) for cf in CLIMATE_FEATURES)
-    )
-    shap_importance.to_csv(SHAP_DIR / "shap_feature_importance.csv", index=False)
-
-    # Climate features in top-20
-    top20 = shap_importance.head(20)
-    climate_in_top20 = top20[top20["is_climate"]]["feature"].tolist()
-
-    print(f"\nTop-20 SHAP features:")
-    print(top20[["feature", "mean_abs_shap", "is_climate"]].to_string(index=False))
-
-    # Validation: climate features with lag 2-8 should have significant importance
-    lag_climate = [c for c in climate_cols_present if any(f"lag_{l}" in c for l in [2, 4, 8])]
-    lag_climate_ranks = {c: int(shap_importance[shap_importance["feature"] == c].index[0] + 1)
-                         for c in lag_climate if c in shap_importance["feature"].values}
-
-    report = {
-        "model_source": model_path.parent.name,
-        "sample_size": len(X_sample),
-        "top5_climate_features": top5_climate,
-        "climate_in_top20": climate_in_top20,
-        "n_climate_in_top20": len(climate_in_top20),
-        "lag_climate_ranks": lag_climate_ranks,
+    total = float(media_abs.sum())
+    peso_clima = float(ranking.loc[ranking["origem"] == "inmet",
+                                   "shap_medio_abs"].sum())
+    resumo = {
+        "braco": args.arm,
+        "n_linhas_explicadas": int(X.shape[0]),
+        "n_features": len(feats),
+        "peso_relativo_clima": round(peso_clima / total, 4) if total else 0.0,
+        "top_15": ranking.head(15).to_dict("records"),
+        "top_5_clima": ranking[ranking["origem"] == "inmet"].head(5)
+                              .to_dict("records"),
     }
-    with open(SHAP_DIR / "shap_report.json", "w") as f:
-        json.dump(report, f, indent=2)
+    with open(saida / "shap_resumo.json", "w", encoding="utf-8") as f:
+        json.dump(resumo, f, indent=2, ensure_ascii=False)
 
-    print(f"\nClimate features no top-20: {len(climate_in_top20)} → {climate_in_top20}")
-    print(f"Lag climate feature ranks: {lag_climate_ranks}")
-    print(f"\nResultados salvos em {SHAP_DIR}")
+    print(f"  peso relativo do clima: {resumo['peso_relativo_clima']:.2%}")
+    print("  top 10:")
+    for r in ranking.head(10).itertuples(index=False):
+        print(f"    {r.feature:35s} {r.shap_medio_abs:.5f}  [{r.origem}]")
+
+    print("Gerando beeswarm...")
+    plt.figure(figsize=(12, 10))
+    shap.summary_plot(valores, X, feature_names=feats, show=False,
+                      max_display=args.max_display)
+    plt.tight_layout()
+    plt.savefig(saida / "shap_beeswarm.png", dpi=150, bbox_inches="tight")
+    plt.close()
+
+    clima = ranking[ranking["origem"] == "inmet"].head(5)["feature"].tolist()
+    if clima:
+        print(f"Dependencia das 5 climaticas mais fortes: {clima}")
+        fig, eixos = plt.subplots(1, len(clima), figsize=(4 * len(clima), 4))
+        eixos = np.atleast_1d(eixos)
+        for eixo, feat in zip(eixos, clima):
+            j = feats.index(feat)
+            eixo.scatter(X[:, j], valores[:, j], alpha=0.08, s=1)
+            eixo.set_xlabel(feat)
+            eixo.set_ylabel("valor SHAP")
+        plt.tight_layout()
+        plt.savefig(saida / "shap_dependencia_clima.png", dpi=150)
+        plt.close()
+
+    print(f"\n-> {saida}")
 
 
 if __name__ == "__main__":

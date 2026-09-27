@@ -1,0 +1,110 @@
+{
+  "braco": "e1_sinan_inmet",
+  "n_linhas_explicadas": 72557,
+  "n_features": 178,
+  "peso_relativo_clima": 0.1799,
+  "top_15": [
+    {
+      "feature": "notificacoes",
+      "shap_medio_abs": 0.22352275252342224,
+      "origem": "sinan"
+    },
+    {
+      "feature": "notificacoes_lag_1",
+      "shap_medio_abs": 0.12125881761312485,
+      "origem": "sinan"
+    },
+    {
+      "feature": "notificacoes_media_movel_3",
+      "shap_medio_abs": 0.08589299023151398,
+      "origem": "sinan"
+    },
+    {
+      "feature": "notificacoes_razao_media_4",
+      "shap_medio_abs": 0.06826838850975037,
+      "origem": "sinan"
+    },
+    {
+      "feature": "week_of_year_cos",
+      "shap_medio_abs": 0.06035848706960678,
+      "origem": "sinan"
+    },
+    {
+      "feature": "notificacoes_max_movel_3",
+      "shap_medio_abs": 0.0515192411839962,
+      "origem": "sinan"
+    },
+    {
+      "feature": "notificacoes_min_movel_3",
+      "shap_medio_abs": 0.049516648054122925,
+      "origem": "sinan"
+    },
+    {
+      "feature": "notificacoes_media_movel_4",
+      "shap_medio_abs": 0.042559925466775894,
+      "origem": "sinan"
+    },
+    {
+      "feature": "week_of_year_sin",
+      "shap_medio_abs": 0.03755515441298485,
+      "origem": "sinan"
+    },
+    {
+      "feature": "notificacoes_razao_media_8",
+      "shap_medio_abs": 0.03387318179011345,
+      "origem": "sinan"
+    },
+    {
+      "feature": "qt_confirmados_provaveis",
+      "shap_medio_abs": 0.032439447939395905,
+      "origem": "sinan"
+    },
+    {
+      "feature": "label_alerta_q90",
+      "shap_medio_abs": 0.02587699517607689,
+      "origem": "sinan"
+    },
+    {
+      "feature": "notificacoes_diff_4",
+      "shap_medio_abs": 0.02446688339114189,
+      "origem": "sinan"
+    },
+    {
+      "feature": "notificacoes_media_movel_8",
+      "shap_medio_abs": 0.02349712699651718,
+      "origem": "sinan"
+    },
+    {
+      "feature": "dewpoint_mean_c_mm4",
+      "shap_medio_abs": 0.020749909803271294,
+      "origem": "inmet"
+    }
+  ],
+  "top_5_clima": [
+    {
+      "feature": "dewpoint_mean_c_mm4",
+      "shap_medio_abs": 0.020749909803271294,
+      "origem": "inmet"
+    },
+    {
+      "feature": "pressure_mean_mbar",
+      "shap_medio_abs": 0.01777161844074726,
+      "origem": "inmet"
+    },
+    {
+      "feature": "rain_sum_mm_mm8",
+      "shap_medio_abs": 0.015373061411082745,
+      "origem": "inmet"
+    },
+    {
+      "feature": "dewpoint_mean_c_mm8",
+      "shap_medio_abs": 0.01150598842650652,
+      "origem": "inmet"
+    },
+    {
+      "feature": "dewpoint_mean_c",
+      "shap_medio_abs": 0.010926888324320316,
+      "origem": "inmet"
+    }
+  ]
+}

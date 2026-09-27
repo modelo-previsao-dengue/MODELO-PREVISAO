@@ -3,12 +3,12 @@
   "mesorregioes": 137,
   "ufs": 27,
   "grandes_regioes": 5,
-  "estacoes_mapeadas": 687,
+  "estacoes_mapeadas": 700,
   "mesorregioes_com_estacao": 137,
   "estacoes_por_mesorregiao": {
     "min": 1,
-    "max": 26,
-    "media": 5.0,
+    "max": 31,
+    "media": 5.1,
     "mediana": 4.0
   }
 }
