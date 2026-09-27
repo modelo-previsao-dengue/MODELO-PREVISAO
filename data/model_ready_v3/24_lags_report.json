@@ -1,0 +1,8 @@
+{
+  "n_sinan_lag_features": 12,
+  "n_inmet_lag_features": 96,
+  "n_inmet_mm_features": 24,
+  "n_total_new": 132,
+  "dataset_rows": 38086,
+  "dataset_cols": 252
+}

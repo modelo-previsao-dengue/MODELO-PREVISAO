@@ -1,0 +1,58 @@
+{
+  "modelos": {
+    "A_sinan_only": {
+      "label": "A: SINAN-only",
+      "n_features": 110,
+      "R2_log": 0.843,
+      "R2": 0.2281,
+      "RMSE": 2346.91,
+      "RMSE_log": 0.7965,
+      "MAE": 316.9535,
+      "best_iteration": 62
+    },
+    "B_inmet_bruto": {
+      "label": "B: INMET bruto",
+      "n_features": 122,
+      "R2_log": 0.8487,
+      "R2": 0.2895,
+      "RMSE": 2251.63,
+      "RMSE_log": 0.7821,
+      "MAE": 304.6576,
+      "best_iteration": 128
+    },
+    "C_inmet_enriquecido": {
+      "label": "C: INMET enriquecido",
+      "n_features": 266,
+      "R2_log": 0.8534,
+      "R2": 0.3306,
+      "RMSE": 2185.57,
+      "RMSE_log": 0.7697,
+      "MAE": 287.6169,
+      "best_iteration": 238
+    }
+  },
+  "deltas": {
+    "B_vs_A": 0.0057,
+    "C_vs_A": 0.0104,
+    "C_vs_B": 0.0047
+  },
+  "testes_t": {
+    "A vs B": {
+      "t_stat": 6.7687,
+      "p_value": 1.3443038440382872e-11
+    },
+    "A vs C": {
+      "t_stat": 10.8128,
+      "p_value": 3.716303829513345e-27
+    },
+    "B vs C": {
+      "t_stat": 5.6836,
+      "p_value": 1.3419542805874678e-08
+    }
+  },
+  "conclusao": {
+    "inmet_bruto_ajuda": true,
+    "inmet_enriquecido_ajuda": true,
+    "feature_eng_ajuda": true
+  }
+}

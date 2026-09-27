@@ -1,0 +1,345 @@
+{
+  "modelo_analisado": "C_inmet_enriquecido",
+  "model_path": "models/regression_v3/model_c_inmet_enriquecido.ubj",
+  "sample_size": 16029,
+  "n_features": 266,
+  "climate_in_top_10": 0,
+  "climate_in_top_20": 6,
+  "climate_in_top_30": 10,
+  "best_climate_feature": "pressure_mean_mbar",
+  "best_climate_rank": 12,
+  "best_climate_shap": 0.025,
+  "mean_shap_inmet": 0.0045,
+  "mean_shap_sinan": 0.0193,
+  "dependence_features_requested": {
+    "temp_mean_c_lag_8w": "temp_mean_c_lag_8w",
+    "rain_sum_mm_lag_4w": "rain_sum_mm_lag_4w",
+    "humidity_mean_pct_lag_4w": "humidity_mean_pct_lag_4w"
+  },
+  "thresholds": [
+    {
+      "feature": "pressure_mean_mbar",
+      "rank": 12,
+      "threshold": 972.87,
+      "direction": "negativo",
+      "mean_shap_above": -0.0212,
+      "mean_shap_below": 0.0285
+    },
+    {
+      "feature": "rain_mean_mm_mm_2_4w",
+      "rank": 13,
+      "threshold": 0.11,
+      "direction": "positivo",
+      "mean_shap_above": 0.0232,
+      "mean_shap_below": -0.0152
+    },
+    {
+      "feature": "humidity_mean_pct",
+      "rank": 14,
+      "threshold": 15.69,
+      "direction": "positivo",
+      "mean_shap_above": 0.0171,
+      "mean_shap_below": -0.0293
+    },
+    {
+      "feature": "rain_heavy_days_anomalia_std",
+      "rank": 15,
+      "threshold": 1.78,
+      "direction": "negativo",
+      "mean_shap_above": -0.0035,
+      "mean_shap_below": 0.0138
+    },
+    {
+      "feature": "humidity_mean_pct_lag_1w",
+      "rank": 16,
+      "threshold": 16.16,
+      "direction": "positivo",
+      "mean_shap_above": 0.0177,
+      "mean_shap_below": -0.0216
+    },
+    {
+      "feature": "rain_mean_mm",
+      "rank": 17,
+      "threshold": 0.16,
+      "direction": "positivo",
+      "mean_shap_above": 0.021,
+      "mean_shap_below": -0.0085
+    },
+    {
+      "feature": "humidity_mean_pct_lag_2w",
+      "rank": 21,
+      "threshold": 16.54,
+      "direction": "positivo",
+      "mean_shap_above": 0.0133,
+      "mean_shap_below": -0.0172
+    },
+    {
+      "feature": "rain_mean_mm_lag_1w",
+      "rank": 24,
+      "threshold": 0.15,
+      "direction": "positivo",
+      "mean_shap_above": 0.0148,
+      "mean_shap_below": -0.0053
+    },
+    {
+      "feature": "humidity_mean_pct_mm_2_4w",
+      "rank": 27,
+      "threshold": 16.62,
+      "direction": "positivo",
+      "mean_shap_above": 0.0078,
+      "mean_shap_below": -0.0136
+    },
+    {
+      "feature": "rain_mean_mm_lag_2w",
+      "rank": 29,
+      "threshold": 0.17,
+      "direction": "positivo",
+      "mean_shap_above": 0.0123,
+      "mean_shap_below": -0.0056
+    }
+  ],
+  "top_10": [
+    {
+      "rank": 1,
+      "feature": "notificacoes_lag_1w",
+      "mean_abs_shap": 1.0312680006027222,
+      "category": "sinan"
+    },
+    {
+      "rank": 2,
+      "feature": "qt_confirmados_provaveis",
+      "mean_abs_shap": 0.24382589757442474,
+      "category": "sinan"
+    },
+    {
+      "rank": 3,
+      "feature": "week_of_year_cos",
+      "mean_abs_shap": 0.1166052520275116,
+      "category": "sinan"
+    },
+    {
+      "rank": 4,
+      "feature": "notificacoes_diff_1w",
+      "mean_abs_shap": 0.0956459566950798,
+      "category": "sinan"
+    },
+    {
+      "rank": 5,
+      "feature": "notificacoes_pct_change_1w",
+      "mean_abs_shap": 0.07589065283536911,
+      "category": "sinan"
+    },
+    {
+      "rank": 6,
+      "feature": "week_of_year_sin",
+      "mean_abs_shap": 0.058357514441013336,
+      "category": "sinan"
+    },
+    {
+      "rank": 7,
+      "feature": "prop_confirmado_provavel",
+      "mean_abs_shap": 0.05028859153389931,
+      "category": "sinan"
+    },
+    {
+      "rank": 8,
+      "feature": "notificacoes_media_movel_2_4w",
+      "mean_abs_shap": 0.04120476916432381,
+      "category": "sinan"
+    },
+    {
+      "rank": 9,
+      "feature": "notificacoes_lag_2w",
+      "mean_abs_shap": 0.03378615900874138,
+      "category": "sinan"
+    },
+    {
+      "rank": 10,
+      "feature": "notificacoes_lag_3w",
+      "mean_abs_shap": 0.033003997057676315,
+      "category": "sinan"
+    }
+  ],
+  "top_30": [
+    {
+      "rank": 1,
+      "feature": "notificacoes_lag_1w",
+      "mean_abs_shap": 1.0312680006027222,
+      "category": "sinan"
+    },
+    {
+      "rank": 2,
+      "feature": "qt_confirmados_provaveis",
+      "mean_abs_shap": 0.24382589757442474,
+      "category": "sinan"
+    },
+    {
+      "rank": 3,
+      "feature": "week_of_year_cos",
+      "mean_abs_shap": 0.1166052520275116,
+      "category": "sinan"
+    },
+    {
+      "rank": 4,
+      "feature": "notificacoes_diff_1w",
+      "mean_abs_shap": 0.0956459566950798,
+      "category": "sinan"
+    },
+    {
+      "rank": 5,
+      "feature": "notificacoes_pct_change_1w",
+      "mean_abs_shap": 0.07589065283536911,
+      "category": "sinan"
+    },
+    {
+      "rank": 6,
+      "feature": "week_of_year_sin",
+      "mean_abs_shap": 0.058357514441013336,
+      "category": "sinan"
+    },
+    {
+      "rank": 7,
+      "feature": "prop_confirmado_provavel",
+      "mean_abs_shap": 0.05028859153389931,
+      "category": "sinan"
+    },
+    {
+      "rank": 8,
+      "feature": "notificacoes_media_movel_2_4w",
+      "mean_abs_shap": 0.04120476916432381,
+      "category": "sinan"
+    },
+    {
+      "rank": 9,
+      "feature": "notificacoes_lag_2w",
+      "mean_abs_shap": 0.03378615900874138,
+      "category": "sinan"
+    },
+    {
+      "rank": 10,
+      "feature": "notificacoes_lag_3w",
+      "mean_abs_shap": 0.033003997057676315,
+      "category": "sinan"
+    },
+    {
+      "rank": 11,
+      "feature": "indice_confirmacao",
+      "mean_abs_shap": 0.02617615833878517,
+      "category": "sinan"
+    },
+    {
+      "rank": 12,
+      "feature": "pressure_mean_mbar",
+      "mean_abs_shap": 0.024972060695290565,
+      "category": "inmet_bruto"
+    },
+    {
+      "rank": 13,
+      "feature": "rain_mean_mm_mm_2_4w",
+      "mean_abs_shap": 0.020877107977867126,
+      "category": "inmet_mm_bio"
+    },
+    {
+      "rank": 14,
+      "feature": "humidity_mean_pct",
+      "mean_abs_shap": 0.020226864144206047,
+      "category": "inmet_bruto"
+    },
+    {
+      "rank": 15,
+      "feature": "rain_heavy_days_anomalia_std",
+      "mean_abs_shap": 0.019727598875761032,
+      "category": "inmet_anomalia"
+    },
+    {
+      "rank": 16,
+      "feature": "humidity_mean_pct_lag_1w",
+      "mean_abs_shap": 0.018140273168683052,
+      "category": "inmet_lag_bio"
+    },
+    {
+      "rank": 17,
+      "feature": "rain_mean_mm",
+      "mean_abs_shap": 0.01563505083322525,
+      "category": "inmet_bruto"
+    },
+    {
+      "rank": 18,
+      "feature": "qt_hospitalizados",
+      "mean_abs_shap": 0.015559714287519455,
+      "category": "sinan"
+    },
+    {
+      "rank": 19,
+      "feature": "atraso_notificacao_medio_dias",
+      "mean_abs_shap": 0.015225185081362724,
+      "category": "sinan"
+    },
+    {
+      "rank": 20,
+      "feature": "idade_media_anos",
+      "mean_abs_shap": 0.014713328331708908,
+      "category": "sinan"
+    },
+    {
+      "rank": 21,
+      "feature": "humidity_mean_pct_lag_2w",
+      "mean_abs_shap": 0.013986097648739815,
+      "category": "inmet_lag_bio"
+    },
+    {
+      "rank": 22,
+      "feature": "prop_raca_parda",
+      "mean_abs_shap": 0.013733047060668468,
+      "category": "sinan"
+    },
+    {
+      "rank": 23,
+      "feature": "prop_sexo_fem",
+      "mean_abs_shap": 0.013075710274279118,
+      "category": "sinan"
+    },
+    {
+      "rank": 24,
+      "feature": "rain_mean_mm_lag_1w",
+      "mean_abs_shap": 0.011944470927119255,
+      "category": "inmet_lag_bio"
+    },
+    {
+      "rank": 25,
+      "feature": "prop_criterio_lab",
+      "mean_abs_shap": 0.011324713937938213,
+      "category": "sinan"
+    },
+    {
+      "rank": 26,
+      "feature": "prop_exantema",
+      "mean_abs_shap": 0.010745598003268242,
+      "category": "sinan"
+    },
+    {
+      "rank": 27,
+      "feature": "humidity_mean_pct_mm_2_4w",
+      "mean_abs_shap": 0.01040160283446312,
+      "category": "inmet_mm_bio"
+    },
+    {
+      "rank": 28,
+      "feature": "notificacoes_lag_8w",
+      "mean_abs_shap": 0.010384021326899529,
+      "category": "sinan"
+    },
+    {
+      "rank": 29,
+      "feature": "rain_mean_mm_lag_2w",
+      "mean_abs_shap": 0.009902972728013992,
+      "category": "inmet_lag_bio"
+    },
+    {
+      "rank": 30,
+      "feature": "prop_conjuntvit",
+      "mean_abs_shap": 0.009731887839734554,
+      "category": "sinan"
+    }
+  ]
+}

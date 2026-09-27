@@ -1,0 +1,118 @@
+{
+  "cenarios": {
+    "Full (referência)": {
+      "com_inmet": {
+        "label": "Full (referência) + INMET",
+        "n_features": 266,
+        "R2_log": 0.8534,
+        "R2": 0.3306,
+        "RMSE": 2185.57,
+        "MAE": 287.6169,
+        "best_iteration": 238
+      },
+      "sem_inmet": {
+        "label": "Full (referência) sem INMET",
+        "n_features": 110,
+        "R2_log": 0.843,
+        "R2": 0.2281,
+        "RMSE": 2346.91,
+        "MAE": 316.9535,
+        "best_iteration": 62
+      },
+      "delta_R2_log": 0.0104,
+      "ttest": {
+        "t_stat": 10.8128,
+        "p_value": 3.716303829513345e-27
+      },
+      "n_masked": 0,
+      "inmet_ajuda": true
+    },
+    "Blind-4w": {
+      "com_inmet": {
+        "label": "Blind-4w + INMET",
+        "n_features": 266,
+        "R2_log": 0.8466,
+        "R2": 0.3224,
+        "RMSE": 2198.91,
+        "MAE": 298.9009,
+        "best_iteration": 337
+      },
+      "sem_inmet": {
+        "label": "Blind-4w sem INMET",
+        "n_features": 110,
+        "R2_log": 0.8472,
+        "R2": 0.2832,
+        "RMSE": 2261.62,
+        "MAE": 308.5555,
+        "best_iteration": 153
+      },
+      "delta_R2_log": -0.0006,
+      "ttest": {
+        "t_stat": -0.5251,
+        "p_value": 0.5995454789499757
+      },
+      "n_masked": 7,
+      "inmet_ajuda": false
+    },
+    "Blind-8w": {
+      "com_inmet": {
+        "label": "Blind-8w + INMET",
+        "n_features": 266,
+        "R2_log": 0.8486,
+        "R2": 0.3064,
+        "RMSE": 2224.71,
+        "MAE": 299.5775,
+        "best_iteration": 411
+      },
+      "sem_inmet": {
+        "label": "Blind-8w sem INMET",
+        "n_features": 110,
+        "R2_log": 0.8499,
+        "R2": 0.2567,
+        "RMSE": 2303.07,
+        "MAE": 309.726,
+        "best_iteration": 136
+      },
+      "delta_R2_log": -0.0013,
+      "ttest": {
+        "t_stat": -1.2212,
+        "p_value": 0.22203826523893946
+      },
+      "n_masked": 12,
+      "inmet_ajuda": false
+    },
+    "INMET-only": {
+      "com_inmet": {
+        "label": "INMET-only + INMET",
+        "n_features": 266,
+        "R2_log": 0.3852,
+        "R2": 0.0336,
+        "RMSE": 2625.98,
+        "MAE": 468.948,
+        "best_iteration": 216
+      },
+      "sem_inmet": {
+        "label": "INMET-only sem INMET",
+        "n_features": 110,
+        "R2_log": -0.0085,
+        "R2": -0.0312,
+        "RMSE": 2712.65,
+        "MAE": 498.0477,
+        "best_iteration": 8
+      },
+      "delta_R2_log": 0.3937,
+      "ttest": {
+        "t_stat": 39.7284,
+        "p_value": 0.0
+      },
+      "n_masked": 110,
+      "inmet_ajuda": true
+    }
+  },
+  "conclusao": {
+    "cenario_inmet_mais_ajuda": "INMET-only",
+    "delta_maximo": 0.3937,
+    "inmet_compensa_atraso_4w": false,
+    "inmet_compensa_atraso_8w": false
+  }
+}
