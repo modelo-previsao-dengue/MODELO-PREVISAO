@@ -1,0 +1,65 @@
+{
+  "braco": "e1_sinan",
+  "dataset": "data/model_ready",
+  "n_features": 129,
+  "n_treino": 214933,
+  "melhores_params": {
+    "max_depth": 5,
+    "learning_rate": 0.04612811663739071,
+    "subsample": 0.5704621124873813,
+    "colsample_bytree": 0.8615378865278278,
+    "min_child_weight": 1,
+    "reg_alpha": 7.620481786158549,
+    "reg_lambda": 0.08916674715636537,
+    "gamma": 5.35330210833913e-07
+  },
+  "n_trials": 30,
+  "regressao": {
+    "alvo": "notificacoes_t4",
+    "n": 72557,
+    "MAE_orig": 8.0602,
+    "RMSE_orig": 85.986,
+    "R2_orig": 0.3611,
+    "MAE_log": 0.4749,
+    "RMSE_log": 0.7326,
+    "R2_log": 0.7057,
+    "MAPE_pct_positivos": 80.39,
+    "n_positivos": 33002,
+    "media_y_true": 13.5061,
+    "melhor_rmse_log_val": 0.5755,
+    "n_arvores_usadas": 145
+  },
+  "classificacao": {
+    "alvo": "risco_surto_t4",
+    "n": 72557,
+    "acuracia": 0.6896,
+    "F1_macro": 0.4011,
+    "F1_weighted": 0.6325,
+    "distribuicao_real": {
+      "0": 45385,
+      "1": 6347,
+      "2": 7684,
+      "3": 13141
+    },
+    "AUC_macro_ovr": 0.7775
+  },
+  "classificacao_com_vazamento": {
+    "alvo": "risco_surto_t4_com_vazamento",
+    "n": 72557,
+    "acuracia": 0.6911,
+    "F1_macro": 0.4284,
+    "F1_weighted": 0.6347,
+    "distribuicao_real": {
+      "0": 45017,
+      "1": 7456,
+      "2": 9036,
+      "3": 11048
+    },
+    "AUC_macro_ovr": 0.7978
+  },
+  "inflacao_do_vazamento": {
+    "F1_macro": 0.0273,
+    "AUC_macro_ovr": 0.0203
+  },
+  "segundos": 294.0
+}

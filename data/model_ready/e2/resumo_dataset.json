@@ -1,0 +1,29 @@
+{
+  "modo": "e2",
+  "config": {
+    "descricao": "Referencia de producao SINAN-only sobre o historico completo. O ano de teste e o mesmo do E1 para que a diferenca entre os dois nao misture efeito de recorte com efeito de periodo de teste.",
+    "ano_inicio": 2000,
+    "train_ate": 2020,
+    "val": [
+      2021,
+      2022
+    ],
+    "test": [
+      2023
+    ],
+    "incluir_notificacoes_atual": true
+  },
+  "linhas": {
+    "train": 6110370,
+    "val": 578760,
+    "test": 294945
+  },
+  "municipios": {
+    "train": 5565,
+    "val": 5565,
+    "test": 5565
+  },
+  "n_features": 129,
+  "n_features_inmet": 0,
+  "rotulos_alterados_sem_vazamento": 110422
+}

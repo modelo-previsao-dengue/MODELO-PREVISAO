@@ -1,0 +1,22 @@
+{
+  "repo_hf": "thiagorfreitas/dengue-tcc2-data",
+  "experimento": "e1",
+  "ambiente": "Kaggle Notebooks, GPU T4",
+  "n_features": {"sinan": 129, "sinan_inmet": 178},
+  "linhas": {"train": 214933, "val": 71188, "test": 72557},
+  "params": {
+    "max_depth": 11,
+    "learning_rate": 0.015594054205343648,
+    "subsample": 0.5607784504928788,
+    "colsample_bytree": 0.36459603466129137,
+    "min_child_weight": 93,
+    "reg_alpha": 2.0511456764725984,
+    "reg_lambda": 0.017135281765880774,
+    "gamma": 0.5788413262117456
+  },
+  "xgboost": "3.2.0",
+  "_nota_params": "Os dois bracos usaram os hiperparametros do e1_sinan_inmet. Localmente cada braco teve a propria busca, e o do SINAN-only saiu com max_depth 5 e min_child_weight 1 — o que explica a diferenca no braco sem clima.",
+  "shap_top_climaticas": ["dewpoint_mean_c_mm4", "pressure_mean_mbar",
+                          "rain_sum_mm_mm8", "dewpoint_mean_c", "temp_min_c"],
+  "data_execucao": "2026-09-08"
+}

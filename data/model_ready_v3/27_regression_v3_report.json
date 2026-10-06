@@ -3,51 +3,51 @@
     "A_sinan_only": {
       "label": "A: SINAN-only",
       "n_features": 110,
-      "R2_log": 0.843,
-      "R2": 0.2281,
-      "RMSE": 2346.91,
-      "RMSE_log": 0.7965,
-      "MAE": 316.9535,
-      "best_iteration": 62
+      "R2_log": 0.8588,
+      "R2": 0.2801,
+      "RMSE": 2203.72,
+      "RMSE_log": 0.7533,
+      "MAE": 271.7491,
+      "best_iteration": 68
     },
     "B_inmet_bruto": {
       "label": "B: INMET bruto",
       "n_features": 122,
-      "R2_log": 0.8487,
-      "R2": 0.2895,
-      "RMSE": 2251.63,
-      "RMSE_log": 0.7821,
-      "MAE": 304.6576,
-      "best_iteration": 128
+      "R2_log": 0.8676,
+      "R2": 0.3329,
+      "RMSE": 2121.34,
+      "RMSE_log": 0.7295,
+      "MAE": 252.5866,
+      "best_iteration": 162
     },
     "C_inmet_enriquecido": {
       "label": "C: INMET enriquecido",
       "n_features": 266,
-      "R2_log": 0.8534,
-      "R2": 0.3306,
-      "RMSE": 2185.57,
-      "RMSE_log": 0.7697,
-      "MAE": 287.6169,
-      "best_iteration": 238
+      "R2_log": 0.8698,
+      "R2": 0.3443,
+      "RMSE": 2103.17,
+      "RMSE_log": 0.7233,
+      "MAE": 252.1721,
+      "best_iteration": 288
     }
   },
   "deltas": {
-    "B_vs_A": 0.0057,
-    "C_vs_A": 0.0104,
-    "C_vs_B": 0.0047
+    "B_vs_A": 0.0088,
+    "C_vs_A": 0.011,
+    "C_vs_B": 0.0022
   },
   "testes_t": {
     "A vs B": {
-      "t_stat": 6.7687,
-      "p_value": 1.3443038440382872e-11
+      "t_stat": 14.0409,
+      "p_value": 1.5531206890930824e-44
     },
     "A vs C": {
-      "t_stat": 10.8128,
-      "p_value": 3.716303829513345e-27
+      "t_stat": 12.0579,
+      "p_value": 2.411620382225757e-33
     },
     "B vs C": {
-      "t_stat": 5.6836,
-      "p_value": 1.3419542805874678e-08
+      "t_stat": 3.4813,
+      "p_value": 0.0005003200377530876
     }
   },
   "conclusao": {

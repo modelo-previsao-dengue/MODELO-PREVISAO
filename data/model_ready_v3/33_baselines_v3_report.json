@@ -1,0 +1,74 @@
+{
+  "teste_anos": [
+    2024,
+    2025,
+    2026
+  ],
+  "n_teste": 16988,
+  "baselines": {
+    "persistencia": {
+      "n": 16988,
+      "regressao": {
+        "R2_log": 0.8078,
+        "R2": 0.6684,
+        "RMSE": 1495.64,
+        "RMSE_log": 0.8789,
+        "MAE": 277.1388
+      },
+      "classificacao": {
+        "accuracy": 0.6928,
+        "f1_macro": 0.622,
+        "f1_weighted": 0.6931,
+        "f1_per_class": {
+          "baixo": 0.8365,
+          "moderado": 0.4814,
+          "alto": 0.4155,
+          "muito_alto": 0.7545
+        }
+      }
+    },
+    "media_movel_4": {
+      "n": 16988,
+      "regressao": {
+        "R2_log": 0.7573,
+        "R2": 0.4594,
+        "RMSE": 1909.56,
+        "RMSE_log": 0.9876,
+        "MAE": 361.9059
+      },
+      "classificacao": {
+        "accuracy": 0.6504,
+        "f1_macro": 0.5782,
+        "f1_weighted": 0.6542,
+        "f1_per_class": {
+          "baixo": 0.8098,
+          "moderado": 0.4309,
+          "alto": 0.3722,
+          "muito_alto": 0.6998
+        }
+      }
+    },
+    "sazonal": {
+      "n": 16988,
+      "regressao": {
+        "R2_log": 0.3564,
+        "R2": -0.7186,
+        "RMSE": 3404.92,
+        "RMSE_log": 1.6083,
+        "MAE": 712.9121
+      },
+      "classificacao": {
+        "accuracy": 0.5011,
+        "f1_macro": 0.4203,
+        "f1_weighted": 0.5084,
+        "f1_per_class": {
+          "baixo": 0.6968,
+          "moderado": 0.2772,
+          "alto": 0.2419,
+          "muito_alto": 0.4652
+        }
+      }
+    }
+  },
+  "nota_sazonal": "shift de 48 semanas na serie densa; em anos de 53 semanas fica a uma semana do exato"
+}

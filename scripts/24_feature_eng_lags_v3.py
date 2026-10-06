@@ -97,6 +97,23 @@ def compute_bio_moving_averages(df):
     return pd.concat([df, new_df], axis=1)
 
 
+def check_contiguous(df):
+    """Aborta se os lags por shift() fossem cruzar uma lacuna de anos.
+
+    shift(k) dentro da mesorregiao so equivale a "k semanas atras" se a serie
+    for densa: anos contiguos e o mesmo calendario de semanas em todas as
+    mesorregioes. A versao anterior tinha 2020 e 2022 ausentes, e o lag_1 da
+    primeira semana de 2021 era a ultima semana de 2019.
+    """
+    anos = sorted(int(a) for a in df["ano"].unique())
+    faltando = sorted(set(range(anos[0], anos[-1] + 1)) - set(anos))
+    assert not faltando, f"Anos ausentes na serie: {faltando}"
+    semanas = df.groupby(GROUP_KEY).size()
+    assert semanas.nunique() == 1, (
+        f"Mesorregioes com numero de semanas diferente: {semanas.value_counts().to_dict()}")
+    print(f"  Serie densa: anos {anos[0]}-{anos[-1]}, {semanas.iloc[0]} semanas por mesorregiao")
+
+
 def main():
     print("=" * 60)
     print("  US-204: Feature Engineering — Lags Mesorregionais")
@@ -107,6 +124,7 @@ def main():
     df = df.sort_values([GROUP_KEY, "ano", "semana_epidemiologica"]).reset_index(drop=True)
     print(f"  {len(df):,} linhas, {df[GROUP_KEY].nunique():,} mesorregiões")
     print(f"  Colunas iniciais: {len(df.columns)}")
+    check_contiguous(df)
 
     n_before = len(df.columns)
 

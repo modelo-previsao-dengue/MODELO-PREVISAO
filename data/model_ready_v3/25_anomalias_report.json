@@ -1,6 +1,12 @@
 {
   "n_new_features": 24,
   "n_base_climate_features": 12,
-  "dataset_rows": 38086,
+  "climatologia_anos": [
+    2019,
+    2020,
+    2021,
+    2022
+  ],
+  "dataset_rows": 60554,
   "dataset_cols": 276
 }

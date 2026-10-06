@@ -1,0 +1,5 @@
+modelo,n,MAE_orig,RMSE_orig,R2_orig,MAE_log,R2_log,arvores
+baseline: persistencia,72557,9.4491,83.3082,0.4003,0.5254,0.57,
+baseline: sazonal,71188,14.0458,91.605,-0.1038,0.7887,0.0473,
+XGBoost: sinan,72557,7.9576,84.6464,0.3809,0.473,0.7108,435.0
+XGBoost: sinan_inmet,72557,7.9191,83.8484,0.3925,0.4766,0.7065,343.0

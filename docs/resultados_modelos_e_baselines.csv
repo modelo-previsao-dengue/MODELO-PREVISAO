@@ -1,0 +1,20 @@
+grupo,modelo,n_teste,MAE_orig,RMSE_orig,R2_orig,MAE_log,R2_log,F1_macro,AUC_macro_ovr
+"E1 — recorte 2019-2023, 1.369 municipios, teste 2023",baseline: persistencia,72557,9.4491,83.3082,0.4003,0.5254,0.57,0.4842,
+"E1 — recorte 2019-2023, 1.369 municipios, teste 2023",baseline: sazonal,71188,14.0458,91.605,-0.1038,0.7887,0.0473,0.3236,
+"E1 — recorte 2019-2023, 1.369 municipios, teste 2023",baseline: media_movel_4,72557,10.891,84.5873,0.3817,0.5705,0.5689,0.4583,
+"E1 — recorte 2019-2023, 1.369 municipios, teste 2023",XGBoost: e1_sinan,72557,8.0602,85.986,0.3611,0.4749,0.7057,0.4011,0.7775
+"E1 — recorte 2019-2023, 1.369 municipios, teste 2023",XGBoost: e1_sinan_inmet,72557,7.9349,84.0184,0.39,0.4763,0.7068,0.3992,0.7859
+"E2 — historico completo 2000-2023, 5.565 municipios, teste 2023",baseline: persistencia,294945,4.6535,53.3568,0.4352,0.3387,0.5845,0.4969,
+"E2 — historico completo 2000-2023, 5.565 municipios, teste 2023",baseline: sazonal,289380,7.6971,63.8967,-0.0186,0.5505,-0.0118,0.3714,
+"E2 — historico completo 2000-2023, 5.565 municipios, teste 2023",baseline: media_movel_4,294945,5.3826,58.2606,0.3266,0.3676,0.588,0.4773,
+"E2 — historico completo 2000-2023, 5.565 municipios, teste 2023",XGBoost: e2_sinan,294945,3.7435,50.7186,0.4897,0.3174,0.7335,0.4514,0.8402
+"US-009 — mesmo recorte agregado por mesorregiao (43 series), teste 2023",baseline: persistencia,2279,252.0987,736.0044,0.3971,0.8225,0.5322,0.5675,
+"US-009 — mesmo recorte agregado por mesorregiao (43 series), teste 2023",baseline: sazonal,2236,377.7433,891.7188,-0.1959,1.3136,0.2166,0.3699,
+"US-009 — mesmo recorte agregado por mesorregiao (43 series), teste 2023",baseline: media_movel_4,2279,304.649,786.8074,0.311,0.8833,0.6294,0.5069,
+"US-009 — mesmo recorte agregado por mesorregiao (43 series), teste 2023",XGBoost: meso_sinan,2279,224.0244,745.5022,0.3814,0.6812,0.6924,0.4092,0.7244
+"US-009 — mesmo recorte agregado por mesorregiao (43 series), teste 2023",XGBoost: meso_sinan_inmet,2279,195.6541,678.6526,0.4874,0.6461,0.7031,0.4336,0.7553
+"US-009 — mesmo recorte agregado por UF (6 series), teste 2023",baseline: persistencia,318,1650.9214,3501.2322,0.4544,0.7063,-0.1518,0.5719,
+"US-009 — mesmo recorte agregado por UF (6 series), teste 2023",baseline: sazonal,312,2361.2692,4069.0959,0.1303,1.3033,-0.4169,0.2091,
+"US-009 — mesmo recorte agregado por UF (6 series), teste 2023",baseline: media_movel_4,318,2020.8695,3886.4556,0.3278,0.728,0.3348,0.5244,
+"US-009 — mesmo recorte agregado por UF (6 series), teste 2023",XGBoost: uf_sinan,318,1204.4024,2904.6329,0.6245,0.5723,0.0872,0.3013,0.6827
+"US-009 — mesmo recorte agregado por UF (6 series), teste 2023",XGBoost: uf_sinan_inmet,318,1305.9856,3256.9059,0.5279,0.5686,0.0754,0.2932,0.718
