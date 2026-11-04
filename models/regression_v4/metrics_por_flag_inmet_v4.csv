@@ -1,0 +1,19 @@
+modelo,flag_fonte_inmet,R2_log,RMSE,n
+Var A: SINAN-only,0,0.862,88.11,369
+Var A: SINAN-only,1,0.8688,2238.51,15660
+Var A: INMET bruto,0,0.8544,89.01,369
+Var A: INMET bruto,1,0.8692,2159.45,15660
+Var A: INMET enriquecido,0,0.8567,82.99,369
+Var A: INMET enriquecido,1,0.8723,2087.31,15660
+Var B: SINAN-only,0,0.8598,95.61,369
+Var B: SINAN-only,1,0.8823,2119.78,15660
+Var B: INMET bruto,0,0.8544,100.71,369
+Var B: INMET bruto,1,0.8851,1951.48,15660
+Var B: INMET enriquecido,0,0.8629,100.98,369
+Var B: INMET enriquecido,1,0.888,2033.77,15660
+Var C: SINAN-only,0,0.856,97.5,369
+Var C: SINAN-only,1,0.8791,2160.34,15660
+Var C: INMET bruto,0,0.8548,98.62,369
+Var C: INMET bruto,1,0.8838,1984.45,15660
+Var C: INMET enriquecido,0,0.8621,86.79,369
+Var C: INMET enriquecido,1,0.8872,1967.57,15660

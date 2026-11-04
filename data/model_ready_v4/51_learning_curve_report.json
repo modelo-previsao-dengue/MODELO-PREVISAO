@@ -1,0 +1,56 @@
+{
+  "windows": [
+    {
+      "label": "2001-2022 (22yr)",
+      "start_year": 2001,
+      "end_year": 2022,
+      "n_years": 22,
+      "n_train_rows": 157413,
+      "R2_log": 0.888,
+      "RMSE_log": 0.6729,
+      "best_iteration": 425
+    },
+    {
+      "label": "2007-2022 (16yr)",
+      "start_year": 2007,
+      "end_year": 2022,
+      "n_years": 16,
+      "n_train_rows": 114395,
+      "R2_log": 0.8829,
+      "RMSE_log": 0.6881,
+      "best_iteration": 216
+    },
+    {
+      "label": "2012-2022 (11yr)",
+      "start_year": 2012,
+      "end_year": 2022,
+      "n_years": 11,
+      "n_train_rows": 78638,
+      "R2_log": 0.8842,
+      "RMSE_log": 0.6842,
+      "best_iteration": 214
+    },
+    {
+      "label": "2017-2022 (6yr)",
+      "start_year": 2017,
+      "end_year": 2022,
+      "n_years": 6,
+      "n_train_rows": 42881,
+      "R2_log": 0.876,
+      "RMSE_log": 0.708,
+      "best_iteration": 249
+    },
+    {
+      "label": "2019-2022 (4yr)",
+      "start_year": 2019,
+      "end_year": 2022,
+      "n_years": 4,
+      "n_train_rows": 28633,
+      "R2_log": 0.8713,
+      "RMSE_log": 0.7212,
+      "best_iteration": 240
+    }
+  ],
+  "best_window": "2001-2022 (22yr)",
+  "tempo_s": 203.1
+}

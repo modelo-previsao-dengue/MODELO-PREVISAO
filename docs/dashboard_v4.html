@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DengueCast v4</title>
+<script src="https://cdn.tailwindcss.com/3.4.1"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root { --bg: #f8fafc; --card: #fff; --text: #1e293b; --muted: #64748b; --border: #e2e8f0; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --muted: #94a3b8; --border: #334155; } }
+:root[data-theme="dark"] { --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --muted: #94a3b8; --border: #334155; }
+body { background: var(--bg); color: var(--text); font-family: system-ui, sans-serif; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+.kpi { text-align: center; }
+.kpi .value { font-size: 2rem; font-weight: 700; color: #2563eb; }
+.kpi .label { font-size: 0.85rem; color: var(--muted); }
+canvas { max-height: 400px; }
+</style>
+</head>
+<body class="min-h-screen">
+<div class="max-w-6xl mx-auto px-4 py-8">
+
+<!-- Header -->
+<header class="text-center mb-10">
+<h1 class="text-3xl md:text-4xl font-bold mb-2">🦟 DengueCast v4 — Sistema Preditivo de Surtos de Dengue</h1>
+<p class="text-lg" style="color:var(--muted)">Modelo XGBoost treinado com SINAN + INMET (2001–2022) — previsão de notificações e risco 4 semanas à frente</p>
+<p class="text-sm mt-1" style="color:var(--muted)">137 mesorregiões | 266 features | 16,029 previsões geradas</p>
+<button id="themeToggle" onclick="toggleTheme()" class="mt-3 px-3 py-1 rounded border text-sm" style="border-color:var(--border);color:var(--muted)">🌙 / ☀️</button>
+</header>
+
+<!-- Prediction Alert KPIs -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+<div class="card kpi"><div class="value" style="color:#F44336">39</div><div class="label">Mesorregiões em Surto</div></div>
+<div class="card kpi"><div class="value" style="color:#FF9800">37</div><div class="label">Risco Alto</div></div>
+<div class="card kpi"><div class="value" style="color:#FFC107">45</div><div class="label">Risco Moderado</div></div>
+<div class="card kpi"><div class="value" style="color:#4CAF50">16</div><div class="label">Risco Baixo</div></div>
+</div>
+
+<!-- Alerts Table -->
+
+<section class="card mb-8">
+<h2 class="text-xl font-semibold mb-4" style="color:#F44336">Alertas de Surto — Top 15 Mesorregiões</h2>
+<p class="text-sm mb-3" style="color:var(--muted)">Mesorregiões com risco previsto Alto ou Surto, ordenadas por volume de notificações previstas (t+4 semanas).</p>
+<div class="overflow-x-auto">
+<table class="w-full text-sm">
+<thead><tr class="border-b" style="border-color:var(--border)">
+<th class="py-2 text-left">Mesorregião</th><th>UF</th><th>Prev. Notif.</th><th>Risco</th>
+</tr></thead>
+<tbody>
+<tr class="border-b" style="border-color:var(--border)"><td class="py-1">5203 - Centro Goiano</td><td class="text-center">GO</td><td class="text-center">3,062</td><td class="text-center"><span style="color:#F44336;font-weight:600">Surto</span></td></tr><tr class="border-b" style="border-color:var(--border)"><td class="py-1">5205 - Sul Goiano</td><td class="text-center">GO</td><td class="text-center">2,593</td><td class="text-center"><span style="color:#F44336;font-weight:600">Surto</span></td></tr><tr class="border-b" style="border-color:var(--border)"><td class="py-1">3105 - Triângulo Mineiro/Alto Paranaíba</td><td class="text-center">MG</td><td class="text-center">1,613</td><td class="text-center"><span style="color:#F44336;font-weight:600">Surto</span></td></tr><tr class="border-b" style="border-color:var(--border)"><td class="py-1">3107 - Metropolitana de Belo Horizonte</td><td class="text-center">MG</td><td class="text-center">1,358</td><td class="text-center"><span style="color:#F44336;font-weight:600">Surto</span></td></tr><tr class="border-b" style="border-color:var(--border)"><td class="py-1">3515 - Metropolitana de São Paulo</td><td class="text-center">SP</td><td class="text-center">1,008</td><td class="text-center"><span style="color:#F44336;font-weight:600">Surto</span></td></tr><tr class="border-b" style="border-color:var(--border)"><td class="py-1">3507 - Campinas</td><td class="text-center">SP</td><td class="text-center">878</td><td class="text-center"><span style="color:#F44336;font-weight:600">Surto</span></td></tr><tr class="border-b" style="border-color:var(--border)"><td class="py-1">3513 - Vale do Paraíba Paulista</td><td class="text-center">SP</td><td class="text-center">749</td><td class="text-center"><span style="color:#F44336;font-weight:600">Surto</span></td></tr><tr class="border-b" style="border-color:var(--border)"><td class="py-1">3102 - Norte de Minas</td><td class="text-center">MG</td><td class="text-center">664</td><td class="text-center"><span style="color:#F44336;font-weight:600">Surto</span></td></tr><tr class="border-b" style="border-color:var(--border)"><td class="py-1">3109 - Oeste de Minas</td><td class="text-center">MG</td><td class="text-center">637</td><td class="text-center"><span style="color:#F44336;font-weight:600">Surto</span></td></tr><tr class="border-b" style="border-color:var(--border)"><td class="py-1">3203 - Central Espírito-santense</td><td class="text-center">ES</td><td class="text-center">630</td><td class="text-center"><span style="color:#F44336;font-weight:600">Surto</span></td></tr><tr class="border-b" style="border-color:var(--border)"><td class="py-1">1701 - Ocidental do Tocantins</td><td class="text-center">TO</td><td class="text-center">629</td><td class="text-center"><span style="color:#F44336;font-weight:600">Surto</span></td></tr><tr class="border-b" style="border-color:var(--border)"><td class="py-1">3501 - São José do Rio Preto</td><td class="text-center">SP</td><td class="text-center">593</td><td class="text-center"><span style="color:#F44336;font-weight:600">Surto</span></td></tr><tr class="border-b" style="border-color:var(--border)"><td class="py-1">4103 - Norte Central Paranaense</td><td class="text-center">PR</td><td class="text-center">584</td><td class="text-center"><span style="color:#F44336;font-weight:600">Surto</span></td></tr><tr class="border-b" style="border-color:var(--border)"><td class="py-1">3508 - Presidente Prudente</td><td class="text-center">SP</td><td class="text-center">427</td><td class="text-center"><span style="color:#F44336;font-weight:600">Surto</span></td></tr><tr class="border-b" style="border-color:var(--border)"><td class="py-1">3503 - Araçatuba</td><td class="text-center">SP</td><td class="text-center">411</td><td class="text-center"><span style="color:#F44336;font-weight:600">Surto</span></td></tr>
+</tbody></table>
+</div>
+</section>
+
+
+<!-- Prediction Charts -->
+<div class="grid md:grid-cols-2 gap-8 mb-8">
+<section class="card"><h2 class="text-lg font-semibold mb-3">Evolução de Alertas por Semana</h2><canvas id="chartWeeklyAlerts"></canvas></section>
+<section class="card"><h2 class="text-lg font-semibold mb-3">Risco Médio por UF</h2><canvas id="chartUFRisk"></canvas></section>
+</div>
+
+<!-- Model Performance KPIs -->
+<div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+<div class="card kpi"><div class="value">0.8878</div><div class="label">R²_log (Var B)</div></div>
+<div class="card kpi"><div class="value">2010</div><div class="label">RMSE</div></div>
+<div class="card kpi"><div class="value">137</div><div class="label">Mesorregiões</div></div>
+<div class="card kpi"><div class="value">22</div><div class="label">Anos de treino</div></div>
+<div class="card kpi"><div class="value">266</div><div class="label">Features</div></div>
+</div>
+
+<!-- Variantes -->
+<section class="card mb-8">
+<h2 class="text-xl font-semibold mb-4">Comparação de Variantes (INMET enriquecido)</h2>
+<div class="overflow-x-auto">
+<table class="w-full text-sm">
+<thead><tr class="border-b" style="border-color:var(--border)">
+<th class="py-2 text-left">Variante</th><th>R²_log</th><th>IC 95%</th><th>RMSE</th><th>MAE</th>
+</tr></thead>
+<tbody>
+<tr class="border-b" style="border-color:var(--border)"><td class="py-2">A (baseline 4yr)</td><td class="text-center">0.8723</td><td class="text-center">[0.8661, 0.8780]</td><td class="text-center">2063</td><td class="text-center">253.3</td></tr>
+<tr class="border-b font-semibold" style="border-color:var(--border)"><td class="py-2">B (série 22yr) ⭐</td><td class="text-center">0.8878</td><td class="text-center">[0.8820, 0.8929]</td><td class="text-center">2010</td><td class="text-center">246.0</td></tr>
+<tr><td class="py-2">C (série + peso)</td><td class="text-center">0.8870</td><td class="text-center">[0.8812, 0.8924]</td><td class="text-center">1945</td><td class="text-center">237.0</td></tr>
+</tbody></table>
+</div>
+<div class="mt-4" style="max-width:500px;margin:0 auto"><canvas id="chartVariantes"></canvas></div>
+</section>
+
+<!-- Statistical Tests -->
+<section class="card mb-8">
+<h2 class="text-xl font-semibold mb-4">Testes Estatísticos</h2>
+<div class="overflow-x-auto">
+<table class="w-full text-sm">
+<thead><tr class="border-b" style="border-color:var(--border)">
+<th class="py-2 text-left">Comparação</th><th>ΔR²_log</th><th>IC 95%</th><th>p-value</th><th>Sig.</th>
+</tr></thead>
+<tbody>
+<tr class="border-b" style="border-color:var(--border)"><td class="py-2">B vs A</td><td class="text-center">+0.0155</td><td class="text-center">[0.0131, 0.0178]</td><td class="text-center">8.29e-40</td><td class="text-center">***</td></tr>
+<tr class="border-b" style="border-color:var(--border)"><td class="py-2">C vs A</td><td class="text-center">+0.0147</td><td class="text-center">[0.0129, 0.0165]</td><td class="text-center">7.24e-56</td><td class="text-center">***</td></tr>
+<tr><td class="py-2">C vs B</td><td class="text-center">-0.0008</td><td class="text-center">[-0.0018, 0.0002]</td><td class="text-center">1.24e-01</td><td class="text-center">ns</td></tr>
+</tbody></table>
+</div>
+</section>
+
+<!-- Charts grid -->
+<div class="grid md:grid-cols-2 gap-8 mb-8">
+<section class="card"><h2 class="text-lg font-semibold mb-3">Walk-Forward</h2><canvas id="chartWF"></canvas></section>
+<section class="card"><h2 class="text-lg font-semibold mb-3">SHAP — Top 20 Features</h2><canvas id="chartSHAP"></canvas></section>
+<section class="card"><h2 class="text-lg font-semibold mb-3">Cobertura INMET por Ano</h2><canvas id="chartCoverage"></canvas></section>
+<section class="card"><h2 class="text-lg font-semibold mb-3">R²_log por UF (Var B)</h2><canvas id="chartUF"></canvas></section>
+</div>
+
+<div class="grid md:grid-cols-2 gap-8 mb-8">
+<section class="card"><h2 class="text-lg font-semibold mb-3">Learning Curve</h2><canvas id="chartLC"></canvas></section>
+<section class="card"><h2 class="text-lg font-semibold mb-3">Data Drift (PSI por Ano)</h2><canvas id="chartDrift"></canvas></section>
+</div>
+
+<!-- Classification -->
+
+<section class="card mb-8">
+<h2 class="text-xl font-semibold mb-4">Classificação de Risco (Var B INMET enriquecido)</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="kpi"><div class="value">0.5778</div><div class="label">F1 macro</div></div>
+<div class="kpi"><div class="value">0.8295</div><div class="label">AUC macro OVR</div></div>
+<div class="kpi"><div class="value">0.5974</div><div class="label">Acurácia</div></div>
+<div class="kpi"><div class="value">0.7247</div><div class="label">F1 surto</div></div>
+</div>
+</section>
+
+
+<!-- Conclusions -->
+<section class="card mb-8">
+<h2 class="text-xl font-semibold mb-4">Conclusões</h2>
+<ol class="list-decimal pl-5 space-y-2">
+<li><strong>H1 — Série temporal completa melhora:</strong> SIM. ΔR²_log = +0.0155, p &lt; 0.001.</li>
+<li><strong>H2 — Decaimento exponencial melhora:</strong> NÃO. ΔR²_log C vs B = -0.0008, ns.</li>
+<li><strong>Melhor variante: B</strong> (série completa sem peso).</li>
+<li>Walk-forward confirma B &gt; A (Δ = +0.0141).</li>
+</ol>
+</section>
+
+<!-- Footer -->
+<footer class="text-center py-6 text-sm" style="color:var(--muted)">
+DengueCast v4 — Sistema Preditivo de Surtos de Dengue — TCC Eng. Software UnB
+<br>Gerado em <span id="genDate"></span> | 16 scripts, 9 modelos regressão + 9 classificação, 137 mesorregiões
+</footer>
+
+</div>
+
+<script>
+const D = {"variantes": {"labels": ["Var A", "Var B", "Var C"], "r2_log": [0.8723, 0.8878, 0.887], "ci_lo": [0.8661, 0.882, 0.8812], "ci_hi": [0.878, 0.8929, 0.8924], "rmse": [2063.18, 2010.28, 1944.84], "mae": [253.2747, 246.0395, 236.9834]}, "walkforward": {"A": 0.7934, "B": 0.8075, "C": 0.8052, "folds": {}}, "shap": {"features": ["notificacoes_lag_1w", "week_of_year_cos", "notificacoes_diff_1w", "qt_confirmados_provaveis", "notificacoes_media_movel_2_4w", "notificacoes_pct_change_1w", "notificacoes_lag_2w", "week_of_year_sin", "prop_confirmado_provavel", "notificacoes_lag_3w", "atraso_notificacao_medio_dias", "notificacoes_media_movel_4_8w", "prop_raca_parda", "notificacoes_lag_6w", "prop_criterio_lab", "prop_raca_branca", "humidity_mean_pct_mm_4_8w", "prop_nausea", "prop_sexo_fem", "prop_exantema"], "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, "coverage": {"years": [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026], "pcts": [2.1, 5.9, 12.8, 28.7, 31.8, 36.0, 43.8, 71.0, 87.6, 1.8, 94.7, 95.6, 95.9, 96.4, 95.2, 97.1, 97.9, 99.7, 100.0, 99.3, 1.9, 99.3, 0.0, 99.3, 98.5, 96.7, 98.5]}, "uf": {"labels": ["AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO"], "r2_log": [0.6374, 0.7917, 0.7514, 0.7061, 0.8156, 0.6578, 0.8329, 0.8862, 0.9032, 0.6773, 0.8742, 0.7957, 0.7792, 0.6993, 0.7069, 0.7475, 0.7918, 0.9092, 0.8754, 0.7738, 0.6983, 0.1833, 0.8996, 0.9199, 0.5002, 0.8904, 0.8678]}};
+const E = {"wf_folds": {"A": {"labels": ["F1 (2023)", "F2 (2024)", "F3 (2025)", "F4 (2026)"], "values": [0.826, 0.899, 0.8944, 0.5542]}, "B": {"labels": ["F1 (2023)", "F2 (2024)", "F3 (2025)", "F4 (2026)"], "values": [0.847, 0.9151, 0.9026, 0.5655]}, "C": {"labels": ["F1 (2023)", "F2 (2024)", "F3 (2025)", "F4 (2026)"], "values": [0.8427, 0.9146, 0.9, 0.5634]}}, "learning_curve": {"labels": ["2001-2022 (22yr)", "2007-2022 (16yr)", "2012-2022 (11yr)", "2017-2022 (6yr)", "2019-2022 (4yr)"], "r2": [0.888, 0.8829, 0.8842, 0.876, 0.8713]}, "drift": {"years": [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022], "psi": [2.2602, 1.9751, 1.9989, 2.3677, 2.1556, 2.0029, 1.0387, 1.0953, 1.1411, 0.9191, 0.9649, 1.014, 0.9115, 0.968, 0.6023, 0.2834, 0.3691, 0.3882, 0.2335, 0.2592, 0.2685, 0.0702]}};
+const P = {"uf_risk": {"labels": ["MA", "ES", "TO", "SP", "GO", "MG", "PR", "PI", "DF", "BA", "MT", "MS", "RS", "SC", "PE", "RJ", "PB", "PA", "CE", "RN", "RO", "AP", "AC", "AL", "SE", "AM", "RR"], "values": [2.8, 2.5, 2.5, 2.33, 2.2, 2.17, 2.1, 2.0, 2.0, 1.86, 1.8, 1.75, 1.71, 1.67, 1.6, 1.5, 1.5, 1.33, 1.14, 1.0, 1.0, 1.0, 1.0, 0.67, 0.33, 0.25, 0.0]}, "weekly": {"periodos": ["2024-S01", "2024-S02", "2024-S03", "2024-S04", "2024-S05", "2024-S06", "2024-S07", "2024-S08", "2024-S09", "2024-S10", "2024-S11", "2024-S12", "2024-S13", "2024-S14", "2024-S15", "2024-S16", "2024-S17", "2024-S18", "2024-S19", "2024-S20", "2024-S21", "2024-S22", "2024-S23", "2024-S24", "2024-S25", "2024-S26", "2024-S27", "2024-S28", "2024-S29", "2024-S30", "2024-S31", "2024-S32", "2024-S33", "2024-S34", "2024-S35", "2024-S36", "2024-S37", "2024-S38", "2024-S39", "2024-S40", "2024-S41", "2024-S42", "2024-S43", "2024-S44", "2024-S45", "2024-S46", "2024-S47", "2024-S48", "2024-S49", "2024-S50", "2024-S51", "2024-S52", "2025-S01", "2025-S02", "2025-S03", "2025-S04", "2025-S05", "2025-S06", "2025-S07", "2025-S08", "2025-S09", "2025-S10", "2025-S11", "2025-S12", "2025-S13", "2025-S14", "2025-S15", "2025-S16", "2025-S17", "2025-S18", "2025-S19", "2025-S20", "2025-S21", "2025-S22", "2025-S23", "2025-S24", "2025-S25", "2025-S26", "2025-S27", "2025-S28", "2025-S29", "2025-S30", "2025-S31", "2025-S32", "2025-S33", "2025-S34", "2025-S35", "2025-S36", "2025-S37", "2025-S38", "2025-S39", "2025-S40", "2025-S41", "2025-S42", "2025-S43", "2025-S44", "2025-S45", "2025-S46", "2025-S47", "2025-S48", "2025-S49", "2025-S50", "2025-S51", "2025-S52", "2025-S53", "2026-S01", "2026-S02", "2026-S03", "2026-S04", "2026-S05", "2026-S06", "2026-S07", "2026-S08", "2026-S09", "2026-S10", "2026-S11", "2026-S12"], "surto": [56, 70, 68, 80, 82, 93, 93, 112, 110, 109, 111, 108, 102, 99, 104, 90, 81, 69, 59, 43, 28, 14, 6, 10, 6, 2, 8, 3, 3, 4, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 2, 2, 3, 3, 6, 21, 25, 26, 23, 37, 43, 45, 48, 49, 53, 61, 63, 54, 52, 57, 52, 54, 55, 49, 43, 31, 19, 9, 6, 5, 3, 2, 1, 0, 2, 0, 2, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 2, 1, 1, 1, 1, 0, 0, 1, 1, 8, 6, 10, 4, 5, 5, 13, 11, 19, 21, 34, 28, 35, 43, 39], "alto": [14, 7, 21, 15, 16, 20, 17, 10, 10, 9, 9, 15, 13, 17, 14, 24, 30, 29, 39, 43, 58, 54, 55, 41, 37, 25, 17, 16, 12, 9, 10, 13, 11, 4, 3, 3, 2, 2, 2, 1, 5, 5, 13, 19, 20, 26, 34, 34, 34, 26, 33, 22, 22, 27, 26, 29, 32, 34, 39, 31, 28, 32, 38, 33, 35, 36, 33, 32, 34, 41, 47, 56, 48, 42, 24, 16, 8, 8, 5, 4, 5, 5, 6, 4, 7, 3, 2, 6, 4, 2, 2, 5, 4, 3, 7, 7, 8, 17, 8, 15, 16, 20, 25, 21, 34, 38, 34, 31, 33, 46, 48, 55, 42, 44, 41, 41, 37]}};
+document.getElementById('genDate').textContent = new Date().toLocaleDateString('pt-BR');
+
+function toggleTheme() {
+  const r = document.documentElement;
+  const cur = r.getAttribute('data-theme');
+  r.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+}
+
+const colors = { A: '#1976D2', B: '#FF9800', C: '#E53935' };
+
+// Variantes bar
+new Chart(document.getElementById('chartVariantes'), {
+  type: 'bar',
+  data: {
+    labels: D.variantes.labels,
+    datasets: [{
+      data: D.variantes.r2_log,
+      backgroundColor: [colors.A, colors.B, colors.C],
+      borderWidth: 0,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: { y: { beginAtZero: false, title: { display: true, text: 'R²_log' } } },
+  }
+});
+
+// Walk-forward
+if (E.wf_folds && E.wf_folds.B) {
+  const datasets = [];
+  for (const v of ['A','B','C']) {
+    if (E.wf_folds[v]) {
+      datasets.push({
+        label: 'Var ' + v,
+        data: E.wf_folds[v].values,
+        borderColor: colors[v],
+        backgroundColor: colors[v] + '33',
+        tension: 0.3,
+        pointRadius: 5,
+      });
+    }
+  }
+  new Chart(document.getElementById('chartWF'), {
+    type: 'line',
+    data: { labels: E.wf_folds.B.labels, datasets },
+    options: { responsive: true, scales: { y: { title: { display: true, text: 'R²_log' } } } }
+  });
+}
+
+// SHAP
+if (D.shap.features.length) {
+  new Chart(document.getElementById('chartSHAP'), {
+    type: 'bar',
+    data: {
+      labels: D.shap.features.slice().reverse(),
+      datasets: [{ data: D.shap.values.slice().reverse(), backgroundColor: '#2563eb88', borderColor: '#2563eb', borderWidth: 1 }]
+    },
+    options: { indexAxis: 'y', responsive: true, plugins: { legend: { display: false } },
+      scales: { x: { title: { display: true, text: 'Mean |SHAP|' } } } }
+  });
+}
+
+// Coverage
+if (D.coverage.years.length) {
+  new Chart(document.getElementById('chartCoverage'), {
+    type: 'bar',
+    data: {
+      labels: D.coverage.years,
+      datasets: [{ data: D.coverage.pcts, backgroundColor: D.coverage.pcts.map(p => p >= 80 ? '#4CAF50' : p >= 40 ? '#FF9800' : '#E53935') }]
+    },
+    options: { responsive: true, plugins: { legend: { display: false } },
+      scales: { y: { title: { display: true, text: 'Cobertura (%)' }, max: 100 } } }
+  });
+}
+
+// UF
+if (D.uf.labels.length) {
+  new Chart(document.getElementById('chartUF'), {
+    type: 'bar',
+    data: { labels: D.uf.labels, datasets: [{ data: D.uf.r2_log, backgroundColor: '#2563eb88' }] },
+    options: { responsive: true, plugins: { legend: { display: false } },
+      scales: { y: { title: { display: true, text: 'R²_log' } } } }
+  });
+}
+
+// Learning Curve
+if (E.learning_curve && E.learning_curve.labels) {
+  new Chart(document.getElementById('chartLC'), {
+    type: 'line',
+    data: {
+      labels: E.learning_curve.labels,
+      datasets: [{ label: 'R²_log', data: E.learning_curve.r2, borderColor: '#2563eb', tension: 0.3, pointRadius: 5 }]
+    },
+    options: { responsive: true, scales: { y: { title: { display: true, text: 'R²_log' } } } }
+  });
+}
+
+// Drift
+if (E.drift && E.drift.years) {
+  new Chart(document.getElementById('chartDrift'), {
+    type: 'bar',
+    data: {
+      labels: E.drift.years,
+      datasets: [{ data: E.drift.psi, backgroundColor: E.drift.psi.map(p => p > 0.2 ? '#E53935' : p > 0.1 ? '#FF9800' : '#4CAF50') }]
+    },
+    options: { responsive: true, plugins: { legend: { display: false } },
+      scales: { y: { title: { display: true, text: 'PSI médio' } } } }
+  });
+}
+
+// Weekly Alerts
+if (P.weekly && P.weekly.periodos) {
+  new Chart(document.getElementById('chartWeeklyAlerts'), {
+    type: 'line',
+    data: {
+      labels: P.weekly.periodos,
+      datasets: [
+        { label: 'Surto', data: P.weekly.surto, borderColor: '#F44336', backgroundColor: 'rgba(244,67,54,0.15)', fill: true, tension: 0.3 },
+        { label: 'Alto', data: P.weekly.alto, borderColor: '#FF9800', backgroundColor: 'rgba(255,152,0,0.1)', fill: true, tension: 0.3 }
+      ]
+    },
+    options: { responsive: true, scales: { y: { title: { display: true, text: 'Nº Mesorregiões' } } } }
+  });
+}
+
+// UF Risk
+if (P.uf_risk && P.uf_risk.labels) {
+  new Chart(document.getElementById('chartUFRisk'), {
+    type: 'bar',
+    data: {
+      labels: P.uf_risk.labels,
+      datasets: [{ data: P.uf_risk.values, backgroundColor: P.uf_risk.values.map(v => v >= 2 ? '#F44336' : v >= 1.5 ? '#FF9800' : v >= 1 ? '#FFC107' : '#4CAF50') }]
+    },
+    options: { responsive: true, plugins: { legend: { display: false } },
+      scales: { y: { title: { display: true, text: 'Risco médio (0=Baixo→3=Surto)' }, max: 3 } } }
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+{
+  "registros_silver_total": 442168,
+  "linhas_mesorregiao_semana": 123551,
+  "mesorregioes_com_dados": 137,
+  "anos_disponiveis": [
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "anos_sem_silver": [
+    2009,
+    2020,
+    2022
+  ],
+  "cobertura_por_ano": {
+    "2000": {
+      "mesorregioes": 5,
+      "pct_meso": 3.6,
+      "semanas": 35
+    },
+    "2001": {
+      "mesorregioes": 16,
+      "pct_meso": 11.7,
+      "semanas": 52
+    },
+    "2002": {
+      "mesorregioes": 27,
+      "pct_meso": 19.7,
+      "semanas": 52
+    },
+    "2003": {
+      "mesorregioes": 43,
+      "pct_meso": 31.4,
+      "semanas": 52
+    },
+    "2004": {
+      "mesorregioes": 49,
+      "pct_meso": 35.8,
+      "semanas": 52
+    },
+    "2005": {
+      "mesorregioes": 50,
+      "pct_meso": 36.5,
+      "semanas": 52
+    },
+    "2006": {
+      "mesorregioes": 84,
+      "pct_meso": 61.3,
+      "semanas": 53
+    },
+    "2007": {
+      "mesorregioes": 111,
+      "pct_meso": 81.0,
+      "semanas": 52
+    },
+    "2008": {
+      "mesorregioes": 128,
+      "pct_meso": 93.4,
+      "semanas": 52
+    },
+    "2009": {
+      "mesorregioes": 129,
+      "pct_meso": 94.2,
+      "semanas": 1
+    },
+    "2010": {
+      "mesorregioes": 131,
+      "pct_meso": 95.6,
+      "semanas": 52
+    },
+    "2011": {
+      "mesorregioes": 131,
+      "pct_meso": 95.6,
+      "semanas": 52
+    },
+    "2012": {
+      "mesorregioes": 132,
+      "pct_meso": 96.4,
+      "semanas": 53
+    },
+    "2013": {
+      "mesorregioes": 133,
+      "pct_meso": 97.1,
+      "semanas": 52
+    },
+    "2014": {
+      "mesorregioes": 133,
+      "pct_meso": 97.1,
+      "semanas": 52
+    },
+    "2015": {
+      "mesorregioes": 133,
+      "pct_meso": 97.1,
+      "semanas": 52
+    },
+    "2016": {
+      "mesorregioes": 136,
+      "pct_meso": 99.3,
+      "semanas": 52
+    },
+    "2017": {
+      "mesorregioes": 137,
+      "pct_meso": 100.0,
+      "semanas": 53
+    },
+    "2018": {
+      "mesorregioes": 137,
+      "pct_meso": 100.0,
+      "semanas": 52
+    },
+    "2019": {
+      "mesorregioes": 136,
+      "pct_meso": 99.3,
+      "semanas": 52
+    },
+    "2020": {
+      "mesorregioes": 136,
+      "pct_meso": 99.3,
+      "semanas": 1
+    },
+    "2021": {
+      "mesorregioes": 136,
+      "pct_meso": 99.3,
+      "semanas": 52
+    },
+    "2023": {
+      "mesorregioes": 136,
+      "pct_meso": 99.3,
+      "semanas": 53
+    },
+    "2024": {
+      "mesorregioes": 135,
+      "pct_meso": 98.5,
+      "semanas": 52
+    },
+    "2025": {
+      "mesorregioes": 135,
+      "pct_meso": 98.5,
+      "semanas": 52
+    },
+    "2026": {
+      "mesorregioes": 135,
+      "pct_meso": 98.5,
+      "semanas": 17
+    }
+  },
+  "cobertura_por_variavel": {
+    "rain_sum_mm": 100.0,
+    "rain_mean_mm": 95.0,
+    "rain_days": 100.0,
+    "rain_heavy_days": 100.0,
+    "temp_mean_c": 96.1,
+    "temp_min_c": 96.1,
+    "temp_max_c": 95.8,
+    "temp_range_c": 95.8,
+    "humidity_mean_pct": 95.8,
+    "pressure_mean_mbar": 96.0,
+    "wind_speed_mean_ms": 94.7,
+    "radiation_mean_kj": 95.7
+  }
+}

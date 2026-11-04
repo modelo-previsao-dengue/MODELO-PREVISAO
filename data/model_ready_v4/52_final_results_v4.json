@@ -1,0 +1,3695 @@
+{
+  "pipeline_v4": {
+    "dataset": {
+      "rows": 188512,
+      "cols": 277,
+      "years": [
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "mesorregioes": 137,
+      "inmet_coverage_pct": 65.3,
+      "inmet_missing_years": [
+        2009,
+        2020,
+        2022
+      ]
+    },
+    "features": {
+      "total": 266,
+      "sinan": 110,
+      "inmet_total": 156
+    }
+  },
+  "regression_results": {
+    "variante_a": {
+      "label": "Var A: INMET enriquecido",
+      "n_features": 266,
+      "n_train": 28633,
+      "R2_log": 0.8723,
+      "R2_log_bootstrap_mean": 0.8721,
+      "R2_log_CI95_lo": 0.8661,
+      "R2_log_CI95_hi": 0.878,
+      "R2": 0.4035,
+      "RMSE": 2063.18,
+      "RMSE_log": 0.7185,
+      "MAE": 253.2747,
+      "best_iteration": 194,
+      "train_time_s": 28.1
+    },
+    "variante_b": {
+      "label": "Var B: INMET enriquecido",
+      "n_features": 266,
+      "n_train": 157413,
+      "R2_log": 0.8878,
+      "R2_log_bootstrap_mean": 0.8877,
+      "R2_log_CI95_lo": 0.882,
+      "R2_log_CI95_hi": 0.8929,
+      "R2": 0.4337,
+      "RMSE": 2010.28,
+      "RMSE_log": 0.6734,
+      "MAE": 246.0395,
+      "best_iteration": 343,
+      "train_time_s": 63.0
+    },
+    "variante_c": {
+      "label": "Var C: INMET enriquecido",
+      "n_features": 266,
+      "n_train": 157413,
+      "R2_log": 0.887,
+      "R2_log_bootstrap_mean": 0.8869,
+      "R2_log_CI95_lo": 0.8812,
+      "R2_log_CI95_hi": 0.8924,
+      "R2": 0.4699,
+      "RMSE": 1944.84,
+      "RMSE_log": 0.6759,
+      "MAE": 236.9834,
+      "best_iteration": 585,
+      "train_time_s": 87.7
+    },
+    "deltas": {
+      "B_vs_A": 0.0155,
+      "C_vs_A": 0.0147,
+      "C_vs_B": -0.0008
+    },
+    "testes_t": {
+      "A_vs_B": {
+        "t_stat": 13.2404,
+        "p_value": 8.293077484404253e-40
+      },
+      "A_vs_C": {
+        "t_stat": 15.808,
+        "p_value": 7.237420389777939e-56
+      },
+      "B_vs_C": {
+        "t_stat": -1.5384,
+        "p_value": 0.12395985515650726
+      }
+    },
+    "bootstrap_diffs": {
+      "A_vs_B": {
+        "mean_diff": 0.0155,
+        "CI95_lo": 0.0131,
+        "CI95_hi": 0.0178
+      },
+      "A_vs_C": {
+        "mean_diff": 0.0147,
+        "CI95_lo": 0.0129,
+        "CI95_hi": 0.0165
+      },
+      "B_vs_C": {
+        "mean_diff": -0.0008,
+        "CI95_lo": -0.0018,
+        "CI95_hi": 0.0002
+      }
+    }
+  },
+  "optuna_results": {
+    "n_trials": 30,
+    "baseline_val_R2_log": 0.851,
+    "best_val_R2_log": 0.8533,
+    "improvement": 0.0023,
+    "adopted": false
+  },
+  "classification_results": {
+    "melhor_modelo": "C_inmet_enriquecido",
+    "f1_macro_B_enriquecido": 0.5778,
+    "serie_completa_melhora": true
+  },
+  "walkforward_results": {
+    "n_models": 36,
+    "resumo_enriquecido": {
+      "mean_R2_log_A": 0.7934,
+      "mean_R2_log_B": 0.8075,
+      "mean_R2_log_C": 0.8052,
+      "delta_B_vs_A": 0.0141,
+      "delta_C_vs_A": 0.0118
+    }
+  },
+  "conclusoes": {
+    "serie_completa_ajuda": true,
+    "peso_recencia_ajuda": false,
+    "melhor_variante": "B",
+    "delta_B_vs_A_R2_log": 0.0155,
+    "delta_B_vs_A_significativo": true
+  },
+  "reports_individuais": {
+    "40_sinan_aggregation": {
+      "linhas": 188512,
+      "mesorregioes": 137,
+      "colunas": 107,
+      "anos": [
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "n_anos": 27,
+      "colunas_soma": 10,
+      "colunas_media_ponderada": 87,
+      "notificacoes_por_ano": {
+        "2000": 171654.0,
+        "2001": 485989.0,
+        "2002": 885534.0,
+        "2003": 416298.0,
+        "2004": 136524.0,
+        "2005": 260443.0,
+        "2006": 410039.0,
+        "2007": 714498.0,
+        "2008": 914831.0,
+        "2009": 599275.0,
+        "2010": 1371679.0,
+        "2011": 1144368.0,
+        "2012": 944889.0,
+        "2013": 2022238.0,
+        "2014": 966369.0,
+        "2015": 2397091.0,
+        "2016": 2296878.0,
+        "2017": 518345.0,
+        "2018": 478768.0,
+        "2019": 2261441.0,
+        "2020": 1494587.0,
+        "2021": 1009791.0,
+        "2022": 1404535.0,
+        "2023": 1644709.0,
+        "2024": 6560720.0,
+        "2025": 1642300.0,
+        "2026": 258071.0
+      }
+    },
+    "41_inmet_aggregation": {
+      "registros_silver_total": 442168,
+      "linhas_mesorregiao_semana": 123551,
+      "mesorregioes_com_dados": 137,
+      "anos_disponiveis": [
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "anos_sem_silver": [
+        2009,
+        2020,
+        2022
+      ],
+      "cobertura_por_ano": {
+        "2000": {
+          "mesorregioes": 5,
+          "pct_meso": 3.6,
+          "semanas": 35
+        },
+        "2001": {
+          "mesorregioes": 16,
+          "pct_meso": 11.7,
+          "semanas": 52
+        },
+        "2002": {
+          "mesorregioes": 27,
+          "pct_meso": 19.7,
+          "semanas": 52
+        },
+        "2003": {
+          "mesorregioes": 43,
+          "pct_meso": 31.4,
+          "semanas": 52
+        },
+        "2004": {
+          "mesorregioes": 49,
+          "pct_meso": 35.8,
+          "semanas": 52
+        },
+        "2005": {
+          "mesorregioes": 50,
+          "pct_meso": 36.5,
+          "semanas": 52
+        },
+        "2006": {
+          "mesorregioes": 84,
+          "pct_meso": 61.3,
+          "semanas": 53
+        },
+        "2007": {
+          "mesorregioes": 111,
+          "pct_meso": 81.0,
+          "semanas": 52
+        },
+        "2008": {
+          "mesorregioes": 128,
+          "pct_meso": 93.4,
+          "semanas": 52
+        },
+        "2009": {
+          "mesorregioes": 129,
+          "pct_meso": 94.2,
+          "semanas": 1
+        },
+        "2010": {
+          "mesorregioes": 131,
+          "pct_meso": 95.6,
+          "semanas": 52
+        },
+        "2011": {
+          "mesorregioes": 131,
+          "pct_meso": 95.6,
+          "semanas": 52
+        },
+        "2012": {
+          "mesorregioes": 132,
+          "pct_meso": 96.4,
+          "semanas": 53
+        },
+        "2013": {
+          "mesorregioes": 133,
+          "pct_meso": 97.1,
+          "semanas": 52
+        },
+        "2014": {
+          "mesorregioes": 133,
+          "pct_meso": 97.1,
+          "semanas": 52
+        },
+        "2015": {
+          "mesorregioes": 133,
+          "pct_meso": 97.1,
+          "semanas": 52
+        },
+        "2016": {
+          "mesorregioes": 136,
+          "pct_meso": 99.3,
+          "semanas": 52
+        },
+        "2017": {
+          "mesorregioes": 137,
+          "pct_meso": 100.0,
+          "semanas": 53
+        },
+        "2018": {
+          "mesorregioes": 137,
+          "pct_meso": 100.0,
+          "semanas": 52
+        },
+        "2019": {
+          "mesorregioes": 136,
+          "pct_meso": 99.3,
+          "semanas": 52
+        },
+        "2020": {
+          "mesorregioes": 136,
+          "pct_meso": 99.3,
+          "semanas": 1
+        },
+        "2021": {
+          "mesorregioes": 136,
+          "pct_meso": 99.3,
+          "semanas": 52
+        },
+        "2023": {
+          "mesorregioes": 136,
+          "pct_meso": 99.3,
+          "semanas": 53
+        },
+        "2024": {
+          "mesorregioes": 135,
+          "pct_meso": 98.5,
+          "semanas": 52
+        },
+        "2025": {
+          "mesorregioes": 135,
+          "pct_meso": 98.5,
+          "semanas": 52
+        },
+        "2026": {
+          "mesorregioes": 135,
+          "pct_meso": 98.5,
+          "semanas": 17
+        }
+      },
+      "cobertura_por_variavel": {
+        "rain_sum_mm": 100.0,
+        "rain_mean_mm": 95.0,
+        "rain_days": 100.0,
+        "rain_heavy_days": 100.0,
+        "temp_mean_c": 96.1,
+        "temp_min_c": 96.1,
+        "temp_max_c": 95.8,
+        "temp_range_c": 95.8,
+        "humidity_mean_pct": 95.8,
+        "pressure_mean_mbar": 96.0,
+        "wind_speed_mean_ms": 94.7,
+        "radiation_mean_kj": 95.7
+      }
+    },
+    "42_integration": {
+      "linhas": 188512,
+      "colunas": 121,
+      "cobertura_inmet_pct": 65.3,
+      "cobertura_por_ano": {
+        "2000": 2.1,
+        "2001": 5.9,
+        "2002": 12.8,
+        "2003": 28.7,
+        "2004": 31.8,
+        "2005": 36.0,
+        "2006": 43.8,
+        "2007": 71.0,
+        "2008": 87.6,
+        "2009": 1.8,
+        "2010": 94.7,
+        "2011": 95.6,
+        "2012": 95.9,
+        "2013": 96.4,
+        "2014": 95.2,
+        "2015": 97.1,
+        "2016": 97.9,
+        "2017": 99.7,
+        "2018": 100.0,
+        "2019": 99.3,
+        "2020": 1.9,
+        "2021": 99.3,
+        "2022": 0.0,
+        "2023": 99.3,
+        "2024": 98.5,
+        "2025": 96.7,
+        "2026": 98.5
+      },
+      "anos": [
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "n_anos": 27,
+      "mesorregioes": 137,
+      "flag_fonte_inmet_sum": 123063
+    },
+    "43_lags": {
+      "n_sinan_lag_features": 12,
+      "n_inmet_lag_features": 96,
+      "n_inmet_mm_features": 24,
+      "n_total_new": 132,
+      "dataset_rows": 188512,
+      "dataset_cols": 253
+    },
+    "44_anomalias": {
+      "n_new_features": 24,
+      "n_base_climate_features": 12,
+      "climatologia_anos": [
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "dataset_rows": 188512,
+      "dataset_cols": 277
+    },
+    "45_splits": {
+      "n_features": 266,
+      "n_sinan_features": 110,
+      "n_inmet_total": 156,
+      "n_inmet_bruto": 12,
+      "n_inmet_lags_bio": 96,
+      "n_inmet_mm_bio": 24,
+      "n_inmet_anomalias": 24,
+      "variantes": {
+        "A": {
+          "train_years": [
+            2019,
+            2020,
+            2021,
+            2022
+          ],
+          "train_rows": 28633,
+          "val_rows": 7261,
+          "test_rows": 16029,
+          "cobertura_inmet_train": 0.4813,
+          "risk_dist_train": {
+            "0": 0.5182,
+            "1": 0.2381,
+            "2": 0.1449,
+            "3": 0.0988
+          }
+        },
+        "B": {
+          "train_years": [
+            2001,
+            2002,
+            2003,
+            2004,
+            2005,
+            2006,
+            2007,
+            2008,
+            2009,
+            2010,
+            2011,
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022
+          ],
+          "train_rows": 157413,
+          "val_rows": 7261,
+          "test_rows": 16029,
+          "cobertura_inmet_train": 0.6224,
+          "risk_dist_train": {
+            "0": 0.5188,
+            "1": 0.2387,
+            "2": 0.1442,
+            "3": 0.0982
+          }
+        },
+        "C": {
+          "train_years": [
+            2001,
+            2002,
+            2003,
+            2004,
+            2005,
+            2006,
+            2007,
+            2008,
+            2009,
+            2010,
+            2011,
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022
+          ],
+          "train_rows": 157413,
+          "val_rows": 7261,
+          "test_rows": 16029,
+          "cobertura_inmet_train": 0.6224,
+          "risk_dist_train": {
+            "0": 0.5188,
+            "1": 0.2387,
+            "2": 0.1442,
+            "3": 0.0982
+          }
+        }
+      }
+    },
+    "46_regression": {
+      "modelos": {
+        "A_sinan_only": {
+          "label": "Var A: SINAN-only",
+          "n_features": 110,
+          "n_train": 28633,
+          "R2_log": 0.869,
+          "R2_log_bootstrap_mean": 0.8691,
+          "R2_log_CI95_lo": 0.8634,
+          "R2_log_CI95_hi": 0.8748,
+          "R2": 0.3139,
+          "RMSE": 2212.64,
+          "RMSE_log": 0.7276,
+          "MAE": 275.6582,
+          "best_iteration": 78,
+          "train_time_s": 4.2
+        },
+        "A_inmet_bruto": {
+          "label": "Var A: INMET bruto",
+          "n_features": 122,
+          "n_train": 28633,
+          "R2_log": 0.8692,
+          "R2_log_bootstrap_mean": 0.8692,
+          "R2_log_CI95_lo": 0.8626,
+          "R2_log_CI95_hi": 0.8758,
+          "R2": 0.3615,
+          "RMSE": 2134.49,
+          "RMSE_log": 0.727,
+          "MAE": 259.0164,
+          "best_iteration": 273,
+          "train_time_s": 9.5
+        },
+        "A_inmet_enriquecido": {
+          "label": "Var A: INMET enriquecido",
+          "n_features": 266,
+          "n_train": 28633,
+          "R2_log": 0.8723,
+          "R2_log_bootstrap_mean": 0.8721,
+          "R2_log_CI95_lo": 0.8661,
+          "R2_log_CI95_hi": 0.878,
+          "R2": 0.4035,
+          "RMSE": 2063.18,
+          "RMSE_log": 0.7185,
+          "MAE": 253.2747,
+          "best_iteration": 194,
+          "train_time_s": 28.1
+        },
+        "B_sinan_only": {
+          "label": "Var B: SINAN-only",
+          "n_features": 110,
+          "n_train": 157413,
+          "R2_log": 0.8821,
+          "R2_log_bootstrap_mean": 0.8819,
+          "R2_log_CI95_lo": 0.8768,
+          "R2_log_CI95_hi": 0.8871,
+          "R2": 0.3848,
+          "RMSE": 2095.29,
+          "RMSE_log": 0.6904,
+          "MAE": 256.9634,
+          "best_iteration": 332,
+          "train_time_s": 19.0
+        },
+        "B_inmet_bruto": {
+          "label": "Var B: INMET bruto",
+          "n_features": 122,
+          "n_train": 157413,
+          "R2_log": 0.8848,
+          "R2_log_bootstrap_mean": 0.8848,
+          "R2_log_CI95_lo": 0.8793,
+          "R2_log_CI95_hi": 0.8904,
+          "R2": 0.4786,
+          "RMSE": 1928.95,
+          "RMSE_log": 0.6824,
+          "MAE": 239.3846,
+          "best_iteration": 430,
+          "train_time_s": 26.9
+        },
+        "B_inmet_enriquecido": {
+          "label": "Var B: INMET enriquecido",
+          "n_features": 266,
+          "n_train": 157413,
+          "R2_log": 0.8878,
+          "R2_log_bootstrap_mean": 0.8877,
+          "R2_log_CI95_lo": 0.882,
+          "R2_log_CI95_hi": 0.8929,
+          "R2": 0.4337,
+          "RMSE": 2010.28,
+          "RMSE_log": 0.6734,
+          "MAE": 246.0395,
+          "best_iteration": 343,
+          "train_time_s": 63.0
+        },
+        "C_sinan_only": {
+          "label": "Var C: SINAN-only",
+          "n_features": 110,
+          "n_train": 157413,
+          "R2_log": 0.8789,
+          "R2_log_bootstrap_mean": 0.8788,
+          "R2_log_CI95_lo": 0.8736,
+          "R2_log_CI95_hi": 0.8839,
+          "R2": 0.361,
+          "RMSE": 2135.38,
+          "RMSE_log": 0.6995,
+          "MAE": 261.6764,
+          "best_iteration": 283,
+          "train_time_s": 14.7
+        },
+        "C_inmet_bruto": {
+          "label": "Var C: INMET bruto",
+          "n_features": 122,
+          "n_train": 157413,
+          "R2_log": 0.8835,
+          "R2_log_bootstrap_mean": 0.8835,
+          "R2_log_CI95_lo": 0.878,
+          "R2_log_CI95_hi": 0.8891,
+          "R2": 0.4608,
+          "RMSE": 1961.53,
+          "RMSE_log": 0.6862,
+          "MAE": 238.4845,
+          "best_iteration": 243,
+          "train_time_s": 15.6
+        },
+        "C_inmet_enriquecido": {
+          "label": "Var C: INMET enriquecido",
+          "n_features": 266,
+          "n_train": 157413,
+          "R2_log": 0.887,
+          "R2_log_bootstrap_mean": 0.8869,
+          "R2_log_CI95_lo": 0.8812,
+          "R2_log_CI95_hi": 0.8924,
+          "R2": 0.4699,
+          "RMSE": 1944.84,
+          "RMSE_log": 0.6759,
+          "MAE": 236.9834,
+          "best_iteration": 585,
+          "train_time_s": 87.7
+        }
+      },
+      "deltas_enriquecido": {
+        "B_vs_A": 0.0155,
+        "C_vs_A": 0.0147,
+        "C_vs_B": -0.0008
+      },
+      "testes_t": {
+        "A_vs_B": {
+          "t_stat": 13.2404,
+          "p_value": 8.293077484404253e-40
+        },
+        "A_vs_C": {
+          "t_stat": 15.808,
+          "p_value": 7.237420389777939e-56
+        },
+        "B_vs_C": {
+          "t_stat": -1.5384,
+          "p_value": 0.12395985515650726
+        }
+      },
+      "bootstrap_diffs": {
+        "A_vs_B": {
+          "mean_diff": 0.0155,
+          "CI95_lo": 0.0131,
+          "CI95_hi": 0.0178
+        },
+        "A_vs_C": {
+          "mean_diff": 0.0147,
+          "CI95_lo": 0.0129,
+          "CI95_hi": 0.0165
+        },
+        "B_vs_C": {
+          "mean_diff": -0.0008,
+          "CI95_lo": -0.0018,
+          "CI95_hi": 0.0002
+        }
+      },
+      "metricas_por_ano": [
+        {
+          "modelo": "Var A: SINAN-only",
+          "ano": 2024,
+          "R2_log": 0.8927,
+          "RMSE": 3292.43,
+          "n": 7124
+        },
+        {
+          "modelo": "Var A: SINAN-only",
+          "ano": 2025,
+          "R2_log": 0.8862,
+          "RMSE": 406.75,
+          "n": 7261
+        },
+        {
+          "modelo": "Var A: SINAN-only",
+          "ano": 2026,
+          "R2_log": 0.5453,
+          "RMSE": 170.78,
+          "n": 1644
+        },
+        {
+          "modelo": "Var A: INMET bruto",
+          "ano": 2024,
+          "R2_log": 0.8928,
+          "RMSE": 3177.68,
+          "n": 7124
+        },
+        {
+          "modelo": "Var A: INMET bruto",
+          "ano": 2025,
+          "R2_log": 0.8875,
+          "RMSE": 379.76,
+          "n": 7261
+        },
+        {
+          "modelo": "Var A: INMET bruto",
+          "ano": 2026,
+          "R2_log": 0.5409,
+          "RMSE": 168.04,
+          "n": 1644
+        },
+        {
+          "modelo": "Var A: INMET enriquecido",
+          "ano": 2024,
+          "R2_log": 0.897,
+          "RMSE": 3071.28,
+          "n": 7124
+        },
+        {
+          "modelo": "Var A: INMET enriquecido",
+          "ano": 2025,
+          "R2_log": 0.8913,
+          "RMSE": 368.06,
+          "n": 7261
+        },
+        {
+          "modelo": "Var A: INMET enriquecido",
+          "ano": 2026,
+          "R2_log": 0.5338,
+          "RMSE": 171.64,
+          "n": 1644
+        },
+        {
+          "modelo": "Var B: SINAN-only",
+          "ano": 2024,
+          "R2_log": 0.9125,
+          "RMSE": 3122.71,
+          "n": 7124
+        },
+        {
+          "modelo": "Var B: SINAN-only",
+          "ano": 2025,
+          "R2_log": 0.89,
+          "RMSE": 344.21,
+          "n": 7261
+        },
+        {
+          "modelo": "Var B: SINAN-only",
+          "ano": 2026,
+          "R2_log": 0.5585,
+          "RMSE": 161.37,
+          "n": 1644
+        },
+        {
+          "modelo": "Var B: INMET bruto",
+          "ano": 2024,
+          "R2_log": 0.9146,
+          "RMSE": 2873.25,
+          "n": 7124
+        },
+        {
+          "modelo": "Var B: INMET bruto",
+          "ano": 2025,
+          "R2_log": 0.8959,
+          "RMSE": 324.5,
+          "n": 7261
+        },
+        {
+          "modelo": "Var B: INMET bruto",
+          "ano": 2026,
+          "R2_log": 0.5514,
+          "RMSE": 197.06,
+          "n": 1644
+        },
+        {
+          "modelo": "Var B: INMET enriquecido",
+          "ano": 2024,
+          "R2_log": 0.9147,
+          "RMSE": 2995.29,
+          "n": 7124
+        },
+        {
+          "modelo": "Var B: INMET enriquecido",
+          "ano": 2025,
+          "R2_log": 0.9023,
+          "RMSE": 335.51,
+          "n": 7261
+        },
+        {
+          "modelo": "Var B: INMET enriquecido",
+          "ano": 2026,
+          "R2_log": 0.5619,
+          "RMSE": 164.69,
+          "n": 1644
+        },
+        {
+          "modelo": "Var C: SINAN-only",
+          "ano": 2024,
+          "R2_log": 0.9085,
+          "RMSE": 3179.94,
+          "n": 7124
+        },
+        {
+          "modelo": "Var C: SINAN-only",
+          "ano": 2025,
+          "R2_log": 0.8877,
+          "RMSE": 372.07,
+          "n": 7261
+        },
+        {
+          "modelo": "Var C: SINAN-only",
+          "ano": 2026,
+          "R2_log": 0.5561,
+          "RMSE": 168.39,
+          "n": 1644
+        },
+        {
+          "modelo": "Var C: INMET bruto",
+          "ano": 2024,
+          "R2_log": 0.9129,
+          "RMSE": 2923.37,
+          "n": 7124
+        },
+        {
+          "modelo": "Var C: INMET bruto",
+          "ano": 2025,
+          "R2_log": 0.8957,
+          "RMSE": 318.69,
+          "n": 7261
+        },
+        {
+          "modelo": "Var C: INMET bruto",
+          "ano": 2026,
+          "R2_log": 0.5475,
+          "RMSE": 180.59,
+          "n": 1644
+        },
+        {
+          "modelo": "Var C: INMET enriquecido",
+          "ano": 2024,
+          "R2_log": 0.9136,
+          "RMSE": 2897.1,
+          "n": 7124
+        },
+        {
+          "modelo": "Var C: INMET enriquecido",
+          "ano": 2025,
+          "R2_log": 0.9023,
+          "RMSE": 328.27,
+          "n": 7261
+        },
+        {
+          "modelo": "Var C: INMET enriquecido",
+          "ano": 2026,
+          "R2_log": 0.5585,
+          "RMSE": 178.54,
+          "n": 1644
+        }
+      ],
+      "metricas_por_flag_inmet": [
+        {
+          "modelo": "Var A: SINAN-only",
+          "flag_fonte_inmet": 0,
+          "R2_log": 0.862,
+          "RMSE": 88.11,
+          "n": 369
+        },
+        {
+          "modelo": "Var A: SINAN-only",
+          "flag_fonte_inmet": 1,
+          "R2_log": 0.8688,
+          "RMSE": 2238.51,
+          "n": 15660
+        },
+        {
+          "modelo": "Var A: INMET bruto",
+          "flag_fonte_inmet": 0,
+          "R2_log": 0.8544,
+          "RMSE": 89.01,
+          "n": 369
+        },
+        {
+          "modelo": "Var A: INMET bruto",
+          "flag_fonte_inmet": 1,
+          "R2_log": 0.8692,
+          "RMSE": 2159.45,
+          "n": 15660
+        },
+        {
+          "modelo": "Var A: INMET enriquecido",
+          "flag_fonte_inmet": 0,
+          "R2_log": 0.8567,
+          "RMSE": 82.99,
+          "n": 369
+        },
+        {
+          "modelo": "Var A: INMET enriquecido",
+          "flag_fonte_inmet": 1,
+          "R2_log": 0.8723,
+          "RMSE": 2087.31,
+          "n": 15660
+        },
+        {
+          "modelo": "Var B: SINAN-only",
+          "flag_fonte_inmet": 0,
+          "R2_log": 0.8598,
+          "RMSE": 95.61,
+          "n": 369
+        },
+        {
+          "modelo": "Var B: SINAN-only",
+          "flag_fonte_inmet": 1,
+          "R2_log": 0.8823,
+          "RMSE": 2119.78,
+          "n": 15660
+        },
+        {
+          "modelo": "Var B: INMET bruto",
+          "flag_fonte_inmet": 0,
+          "R2_log": 0.8544,
+          "RMSE": 100.71,
+          "n": 369
+        },
+        {
+          "modelo": "Var B: INMET bruto",
+          "flag_fonte_inmet": 1,
+          "R2_log": 0.8851,
+          "RMSE": 1951.48,
+          "n": 15660
+        },
+        {
+          "modelo": "Var B: INMET enriquecido",
+          "flag_fonte_inmet": 0,
+          "R2_log": 0.8629,
+          "RMSE": 100.98,
+          "n": 369
+        },
+        {
+          "modelo": "Var B: INMET enriquecido",
+          "flag_fonte_inmet": 1,
+          "R2_log": 0.888,
+          "RMSE": 2033.77,
+          "n": 15660
+        },
+        {
+          "modelo": "Var C: SINAN-only",
+          "flag_fonte_inmet": 0,
+          "R2_log": 0.856,
+          "RMSE": 97.5,
+          "n": 369
+        },
+        {
+          "modelo": "Var C: SINAN-only",
+          "flag_fonte_inmet": 1,
+          "R2_log": 0.8791,
+          "RMSE": 2160.34,
+          "n": 15660
+        },
+        {
+          "modelo": "Var C: INMET bruto",
+          "flag_fonte_inmet": 0,
+          "R2_log": 0.8548,
+          "RMSE": 98.62,
+          "n": 369
+        },
+        {
+          "modelo": "Var C: INMET bruto",
+          "flag_fonte_inmet": 1,
+          "R2_log": 0.8838,
+          "RMSE": 1984.45,
+          "n": 15660
+        },
+        {
+          "modelo": "Var C: INMET enriquecido",
+          "flag_fonte_inmet": 0,
+          "R2_log": 0.8621,
+          "RMSE": 86.79,
+          "n": 369
+        },
+        {
+          "modelo": "Var C: INMET enriquecido",
+          "flag_fonte_inmet": 1,
+          "R2_log": 0.8872,
+          "RMSE": 1967.57,
+          "n": 15660
+        }
+      ],
+      "conclusao": {
+        "serie_completa_ajuda": true,
+        "peso_recencia_ajuda": false,
+        "melhor_variante": "B"
+      },
+      "tempo_total_s": 275.7
+    },
+    "47_walkforward": {
+      "n_folds": 4,
+      "n_models_total": 36,
+      "n_val_weeks": 10,
+      "modelos": {
+        "A_sinan_only": {
+          "mean_R2_log": 0.7805,
+          "std_R2_log": 0.13,
+          "folds": [
+            {
+              "label": "VarA SINAN F1(test=2023)",
+              "train_years": [
+                2019,
+                2020,
+                2021,
+                2022
+              ],
+              "test_years": [
+                2023
+              ],
+              "RMSE": 495.78,
+              "MAE": 104.1538,
+              "R2": 0.6053,
+              "R2_log": 0.8164,
+              "train_rows": 27263,
+              "val_rows": 1370,
+              "test_rows": 7261,
+              "best_iteration": 80
+            },
+            {
+              "label": "VarA SINAN F2(test=2024)",
+              "train_years": [
+                2019,
+                2020,
+                2021,
+                2022,
+                2023
+              ],
+              "test_years": [
+                2024
+              ],
+              "RMSE": 3645.41,
+              "MAE": 666.0204,
+              "R2": 0.1212,
+              "R2_log": 0.8567,
+              "train_rows": 34524,
+              "val_rows": 1370,
+              "test_rows": 7124,
+              "best_iteration": 35
+            },
+            {
+              "label": "VarA SINAN F3(test=2025)",
+              "train_years": [
+                2019,
+                2020,
+                2021,
+                2022,
+                2023,
+                2024
+              ],
+              "test_years": [
+                2025
+              ],
+              "RMSE": 304.71,
+              "MAE": 71.504,
+              "R2": 0.8505,
+              "R2_log": 0.8891,
+              "train_rows": 41648,
+              "val_rows": 1370,
+              "test_rows": 7261,
+              "best_iteration": 83
+            },
+            {
+              "label": "VarA SINAN F4(test=2026)",
+              "train_years": [
+                2019,
+                2020,
+                2021,
+                2022,
+                2023,
+                2024,
+                2025
+              ],
+              "test_years": [
+                2026
+              ],
+              "RMSE": 155.56,
+              "MAE": 63.5249,
+              "R2": 0.756,
+              "R2_log": 0.5599,
+              "train_rows": 48909,
+              "val_rows": 1370,
+              "test_rows": 1644,
+              "best_iteration": 59
+            }
+          ]
+        },
+        "A_inmet_bruto": {
+          "mean_R2_log": 0.7863,
+          "std_R2_log": 0.1381,
+          "folds": [
+            {
+              "label": "VarA INMET-b F1(test=2023)",
+              "train_years": [
+                2019,
+                2020,
+                2021,
+                2022
+              ],
+              "test_years": [
+                2023
+              ],
+              "RMSE": 484.48,
+              "MAE": 105.4574,
+              "R2": 0.6231,
+              "R2_log": 0.8189,
+              "train_rows": 27263,
+              "val_rows": 1370,
+              "test_rows": 7261,
+              "best_iteration": 87
+            },
+            {
+              "label": "VarA INMET-b F2(test=2024)",
+              "train_years": [
+                2019,
+                2020,
+                2021,
+                2022,
+                2023
+              ],
+              "test_years": [
+                2024
+              ],
+              "RMSE": 3400.16,
+              "MAE": 554.8187,
+              "R2": 0.2355,
+              "R2_log": 0.8815,
+              "train_rows": 34524,
+              "val_rows": 1370,
+              "test_rows": 7124,
+              "best_iteration": 54
+            },
+            {
+              "label": "VarA INMET-b F3(test=2025)",
+              "train_years": [
+                2019,
+                2020,
+                2021,
+                2022,
+                2023,
+                2024
+              ],
+              "test_years": [
+                2025
+              ],
+              "RMSE": 286.97,
+              "MAE": 66.9458,
+              "R2": 0.8674,
+              "R2_log": 0.8926,
+              "train_rows": 41648,
+              "val_rows": 1370,
+              "test_rows": 7261,
+              "best_iteration": 64
+            },
+            {
+              "label": "VarA INMET-b F4(test=2026)",
+              "train_years": [
+                2019,
+                2020,
+                2021,
+                2022,
+                2023,
+                2024,
+                2025
+              ],
+              "test_years": [
+                2026
+              ],
+              "RMSE": 154.42,
+              "MAE": 63.5318,
+              "R2": 0.7596,
+              "R2_log": 0.552,
+              "train_rows": 48909,
+              "val_rows": 1370,
+              "test_rows": 1644,
+              "best_iteration": 59
+            }
+          ]
+        },
+        "A_inmet_enriquecido": {
+          "mean_R2_log": 0.7934,
+          "std_R2_log": 0.1411,
+          "folds": [
+            {
+              "label": "VarA INMET-e F1(test=2023)",
+              "train_years": [
+                2019,
+                2020,
+                2021,
+                2022
+              ],
+              "test_years": [
+                2023
+              ],
+              "RMSE": 472.53,
+              "MAE": 106.3509,
+              "R2": 0.6415,
+              "R2_log": 0.826,
+              "train_rows": 27263,
+              "val_rows": 1370,
+              "test_rows": 7261,
+              "best_iteration": 111
+            },
+            {
+              "label": "VarA INMET-e F2(test=2024)",
+              "train_years": [
+                2019,
+                2020,
+                2021,
+                2022,
+                2023
+              ],
+              "test_years": [
+                2024
+              ],
+              "RMSE": 3207.96,
+              "MAE": 493.0066,
+              "R2": 0.3195,
+              "R2_log": 0.899,
+              "train_rows": 34524,
+              "val_rows": 1370,
+              "test_rows": 7124,
+              "best_iteration": 292
+            },
+            {
+              "label": "VarA INMET-e F3(test=2025)",
+              "train_years": [
+                2019,
+                2020,
+                2021,
+                2022,
+                2023,
+                2024
+              ],
+              "test_years": [
+                2025
+              ],
+              "RMSE": 287.99,
+              "MAE": 70.9163,
+              "R2": 0.8665,
+              "R2_log": 0.8944,
+              "train_rows": 41648,
+              "val_rows": 1370,
+              "test_rows": 7261,
+              "best_iteration": 106
+            },
+            {
+              "label": "VarA INMET-e F4(test=2026)",
+              "train_years": [
+                2019,
+                2020,
+                2021,
+                2022,
+                2023,
+                2024,
+                2025
+              ],
+              "test_years": [
+                2026
+              ],
+              "RMSE": 162.34,
+              "MAE": 65.1286,
+              "R2": 0.7343,
+              "R2_log": 0.5542,
+              "train_rows": 48909,
+              "val_rows": 1370,
+              "test_rows": 1644,
+              "best_iteration": 73
+            }
+          ]
+        },
+        "B_sinan_only": {
+          "mean_R2_log": 0.8032,
+          "std_R2_log": 0.1422,
+          "folds": [
+            {
+              "label": "VarB SINAN F1(test=2023)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022
+              ],
+              "test_years": [
+                2023
+              ],
+              "RMSE": 458.02,
+              "MAE": 94.9781,
+              "R2": 0.6632,
+              "R2_log": 0.8451,
+              "train_rows": 156043,
+              "val_rows": 1370,
+              "test_rows": 7261,
+              "best_iteration": 112
+            },
+            {
+              "label": "VarB SINAN F2(test=2024)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022,
+                2023
+              ],
+              "test_years": [
+                2024
+              ],
+              "RMSE": 3129.98,
+              "MAE": 473.2352,
+              "R2": 0.3522,
+              "R2_log": 0.9142,
+              "train_rows": 163304,
+              "val_rows": 1370,
+              "test_rows": 7124,
+              "best_iteration": 417
+            },
+            {
+              "label": "VarB SINAN F3(test=2025)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022,
+                2023,
+                2024
+              ],
+              "test_years": [
+                2025
+              ],
+              "RMSE": 333.42,
+              "MAE": 74.658,
+              "R2": 0.821,
+              "R2_log": 0.8928,
+              "train_rows": 170428,
+              "val_rows": 1370,
+              "test_rows": 7261,
+              "best_iteration": 120
+            },
+            {
+              "label": "VarB SINAN F4(test=2026)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022,
+                2023,
+                2024,
+                2025
+              ],
+              "test_years": [
+                2026
+              ],
+              "RMSE": 160.21,
+              "MAE": 63.8525,
+              "R2": 0.7412,
+              "R2_log": 0.5608,
+              "train_rows": 177689,
+              "val_rows": 1370,
+              "test_rows": 1644,
+              "best_iteration": 110
+            }
+          ]
+        },
+        "B_inmet_bruto": {
+          "mean_R2_log": 0.8051,
+          "std_R2_log": 0.1458,
+          "folds": [
+            {
+              "label": "VarB INMET-b F1(test=2023)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022
+              ],
+              "test_years": [
+                2023
+              ],
+              "RMSE": 463.09,
+              "MAE": 94.9415,
+              "R2": 0.6557,
+              "R2_log": 0.8477,
+              "train_rows": 156043,
+              "val_rows": 1370,
+              "test_rows": 7261,
+              "best_iteration": 120
+            },
+            {
+              "label": "VarB INMET-b F2(test=2024)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022,
+                2023
+              ],
+              "test_years": [
+                2024
+              ],
+              "RMSE": 3016.76,
+              "MAE": 456.2831,
+              "R2": 0.3982,
+              "R2_log": 0.9177,
+              "train_rows": 163304,
+              "val_rows": 1370,
+              "test_rows": 7124,
+              "best_iteration": 442
+            },
+            {
+              "label": "VarB INMET-b F3(test=2025)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022,
+                2023,
+                2024
+              ],
+              "test_years": [
+                2025
+              ],
+              "RMSE": 320.71,
+              "MAE": 73.0075,
+              "R2": 0.8344,
+              "R2_log": 0.8984,
+              "train_rows": 170428,
+              "val_rows": 1370,
+              "test_rows": 7261,
+              "best_iteration": 119
+            },
+            {
+              "label": "VarB INMET-b F4(test=2026)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022,
+                2023,
+                2024,
+                2025
+              ],
+              "test_years": [
+                2026
+              ],
+              "RMSE": 163.85,
+              "MAE": 63.8953,
+              "R2": 0.7293,
+              "R2_log": 0.5564,
+              "train_rows": 177689,
+              "val_rows": 1370,
+              "test_rows": 1644,
+              "best_iteration": 104
+            }
+          ]
+        },
+        "B_inmet_enriquecido": {
+          "mean_R2_log": 0.8075,
+          "std_R2_log": 0.1421,
+          "folds": [
+            {
+              "label": "VarB INMET-e F1(test=2023)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022
+              ],
+              "test_years": [
+                2023
+              ],
+              "RMSE": 454.12,
+              "MAE": 93.6206,
+              "R2": 0.6689,
+              "R2_log": 0.847,
+              "train_rows": 156043,
+              "val_rows": 1370,
+              "test_rows": 7261,
+              "best_iteration": 124
+            },
+            {
+              "label": "VarB INMET-e F2(test=2024)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022,
+                2023
+              ],
+              "test_years": [
+                2024
+              ],
+              "RMSE": 3044.33,
+              "MAE": 468.9975,
+              "R2": 0.3871,
+              "R2_log": 0.9151,
+              "train_rows": 163304,
+              "val_rows": 1370,
+              "test_rows": 7124,
+              "best_iteration": 459
+            },
+            {
+              "label": "VarB INMET-e F3(test=2025)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022,
+                2023,
+                2024
+              ],
+              "test_years": [
+                2025
+              ],
+              "RMSE": 283.8,
+              "MAE": 66.521,
+              "R2": 0.8703,
+              "R2_log": 0.9026,
+              "train_rows": 170428,
+              "val_rows": 1370,
+              "test_rows": 7261,
+              "best_iteration": 160
+            },
+            {
+              "label": "VarB INMET-e F4(test=2026)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022,
+                2023,
+                2024,
+                2025
+              ],
+              "test_years": [
+                2026
+              ],
+              "RMSE": 168.61,
+              "MAE": 63.5013,
+              "R2": 0.7134,
+              "R2_log": 0.5655,
+              "train_rows": 177689,
+              "val_rows": 1370,
+              "test_rows": 1644,
+              "best_iteration": 131
+            }
+          ]
+        },
+        "C_sinan_only": {
+          "mean_R2_log": 0.8002,
+          "std_R2_log": 0.1412,
+          "folds": [
+            {
+              "label": "VarC SINAN F1(test=2023)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022
+              ],
+              "test_years": [
+                2023
+              ],
+              "RMSE": 475.56,
+              "MAE": 99.5883,
+              "R2": 0.6369,
+              "R2_log": 0.837,
+              "train_rows": 156043,
+              "val_rows": 1370,
+              "test_rows": 7261,
+              "best_iteration": 80
+            },
+            {
+              "label": "VarC SINAN F2(test=2024)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022,
+                2023
+              ],
+              "test_years": [
+                2024
+              ],
+              "RMSE": 3122.91,
+              "MAE": 475.7784,
+              "R2": 0.3551,
+              "R2_log": 0.9117,
+              "train_rows": 163304,
+              "val_rows": 1370,
+              "test_rows": 7124,
+              "best_iteration": 502
+            },
+            {
+              "label": "VarC SINAN F3(test=2025)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022,
+                2023,
+                2024
+              ],
+              "test_years": [
+                2025
+              ],
+              "RMSE": 351.48,
+              "MAE": 77.2684,
+              "R2": 0.8011,
+              "R2_log": 0.8919,
+              "train_rows": 170428,
+              "val_rows": 1370,
+              "test_rows": 7261,
+              "best_iteration": 105
+            },
+            {
+              "label": "VarC SINAN F4(test=2026)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022,
+                2023,
+                2024,
+                2025
+              ],
+              "test_years": [
+                2026
+              ],
+              "RMSE": 161.12,
+              "MAE": 63.916,
+              "R2": 0.7382,
+              "R2_log": 0.5603,
+              "train_rows": 177689,
+              "val_rows": 1370,
+              "test_rows": 1644,
+              "best_iteration": 83
+            }
+          ]
+        },
+        "C_inmet_bruto": {
+          "mean_R2_log": 0.8042,
+          "std_R2_log": 0.1433,
+          "folds": [
+            {
+              "label": "VarC INMET-b F1(test=2023)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022
+              ],
+              "test_years": [
+                2023
+              ],
+              "RMSE": 462.51,
+              "MAE": 96.6878,
+              "R2": 0.6565,
+              "R2_log": 0.8456,
+              "train_rows": 156043,
+              "val_rows": 1370,
+              "test_rows": 7261,
+              "best_iteration": 133
+            },
+            {
+              "label": "VarC INMET-b F2(test=2024)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022,
+                2023
+              ],
+              "test_years": [
+                2024
+              ],
+              "RMSE": 3000.48,
+              "MAE": 448.6678,
+              "R2": 0.4047,
+              "R2_log": 0.9149,
+              "train_rows": 163304,
+              "val_rows": 1370,
+              "test_rows": 7124,
+              "best_iteration": 353
+            },
+            {
+              "label": "VarC INMET-b F3(test=2025)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022,
+                2023,
+                2024
+              ],
+              "test_years": [
+                2025
+              ],
+              "RMSE": 329.05,
+              "MAE": 74.1353,
+              "R2": 0.8257,
+              "R2_log": 0.8963,
+              "train_rows": 170428,
+              "val_rows": 1370,
+              "test_rows": 7261,
+              "best_iteration": 87
+            },
+            {
+              "label": "VarC INMET-b F4(test=2026)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022,
+                2023,
+                2024,
+                2025
+              ],
+              "test_years": [
+                2026
+              ],
+              "RMSE": 160.44,
+              "MAE": 63.9372,
+              "R2": 0.7405,
+              "R2_log": 0.5599,
+              "train_rows": 177689,
+              "val_rows": 1370,
+              "test_rows": 1644,
+              "best_iteration": 66
+            }
+          ]
+        },
+        "C_inmet_enriquecido": {
+          "mean_R2_log": 0.8052,
+          "std_R2_log": 0.1422,
+          "folds": [
+            {
+              "label": "VarC INMET-e F1(test=2023)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022
+              ],
+              "test_years": [
+                2023
+              ],
+              "RMSE": 466.84,
+              "MAE": 96.3492,
+              "R2": 0.6501,
+              "R2_log": 0.8427,
+              "train_rows": 156043,
+              "val_rows": 1370,
+              "test_rows": 7261,
+              "best_iteration": 129
+            },
+            {
+              "label": "VarC INMET-e F2(test=2024)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022,
+                2023
+              ],
+              "test_years": [
+                2024
+              ],
+              "RMSE": 3053.16,
+              "MAE": 469.5308,
+              "R2": 0.3836,
+              "R2_log": 0.9146,
+              "train_rows": 163304,
+              "val_rows": 1370,
+              "test_rows": 7124,
+              "best_iteration": 356
+            },
+            {
+              "label": "VarC INMET-e F3(test=2025)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022,
+                2023,
+                2024
+              ],
+              "test_years": [
+                2025
+              ],
+              "RMSE": 302.95,
+              "MAE": 70.3102,
+              "R2": 0.8522,
+              "R2_log": 0.9,
+              "train_rows": 170428,
+              "val_rows": 1370,
+              "test_rows": 7261,
+              "best_iteration": 120
+            },
+            {
+              "label": "VarC INMET-e F4(test=2026)",
+              "train_years": [
+                2001,
+                2002,
+                2003,
+                2004,
+                2005,
+                2006,
+                2007,
+                2008,
+                2009,
+                2010,
+                2011,
+                2012,
+                2013,
+                2014,
+                2015,
+                2016,
+                2017,
+                2018,
+                2019,
+                2020,
+                2021,
+                2022,
+                2023,
+                2024,
+                2025
+              ],
+              "test_years": [
+                2026
+              ],
+              "RMSE": 165.67,
+              "MAE": 64.7016,
+              "R2": 0.7232,
+              "R2_log": 0.5634,
+              "train_rows": 177689,
+              "val_rows": 1370,
+              "test_rows": 1644,
+              "best_iteration": 80
+            }
+          ]
+        }
+      },
+      "tempo_total_s": 644.9,
+      "resumo_enriquecido": {
+        "mean_R2_log_A": 0.7934,
+        "mean_R2_log_B": 0.8075,
+        "mean_R2_log_C": 0.8052,
+        "delta_B_vs_A": 0.0141,
+        "delta_C_vs_A": 0.0118
+      }
+    },
+    "48_shap": {
+      "n_shap_samples": 10000,
+      "n_features": 266,
+      "shap_top10_A": [
+        {
+          "feature": "notificacoes_lag_1w",
+          "shap_mean_abs_A": 1.0553510189056396
+        },
+        {
+          "feature": "qt_confirmados_provaveis",
+          "shap_mean_abs_A": 0.25704899430274963
+        },
+        {
+          "feature": "week_of_year_cos",
+          "shap_mean_abs_A": 0.21314699947834015
+        },
+        {
+          "feature": "notificacoes_diff_1w",
+          "shap_mean_abs_A": 0.12623600661754608
+        },
+        {
+          "feature": "week_of_year_sin",
+          "shap_mean_abs_A": 0.08398500084877014
+        },
+        {
+          "feature": "notificacoes_pct_change_1w",
+          "shap_mean_abs_A": 0.0799190029501915
+        },
+        {
+          "feature": "prop_confirmado_provavel",
+          "shap_mean_abs_A": 0.0408799983561039
+        },
+        {
+          "feature": "notificacoes_media_movel_2_4w",
+          "shap_mean_abs_A": 0.04028499871492386
+        },
+        {
+          "feature": "notificacoes_lag_3w",
+          "shap_mean_abs_A": 0.028015000745654106
+        },
+        {
+          "feature": "qt_hospitalizados",
+          "shap_mean_abs_A": 0.02774300053715706
+        }
+      ],
+      "shap_top10_B": [
+        {
+          "feature": "notificacoes_lag_1w",
+          "shap_mean_abs_B": 1.1529719829559326
+        },
+        {
+          "feature": "week_of_year_cos",
+          "shap_mean_abs_B": 0.26352599263191223
+        },
+        {
+          "feature": "notificacoes_diff_1w",
+          "shap_mean_abs_B": 0.17420800030231476
+        },
+        {
+          "feature": "qt_confirmados_provaveis",
+          "shap_mean_abs_B": 0.12344499677419662
+        },
+        {
+          "feature": "notificacoes_media_movel_2_4w",
+          "shap_mean_abs_B": 0.10603199899196625
+        },
+        {
+          "feature": "notificacoes_pct_change_1w",
+          "shap_mean_abs_B": 0.08990400284528732
+        },
+        {
+          "feature": "notificacoes_lag_2w",
+          "shap_mean_abs_B": 0.08362399786710739
+        },
+        {
+          "feature": "week_of_year_sin",
+          "shap_mean_abs_B": 0.050202999264001846
+        },
+        {
+          "feature": "prop_confirmado_provavel",
+          "shap_mean_abs_B": 0.030997000634670258
+        },
+        {
+          "feature": "notificacoes_lag_3w",
+          "shap_mean_abs_B": 0.02840599976480007
+        }
+      ],
+      "gain_top10_A": [
+        [
+          "notificacoes_lag_1w",
+          596.34375
+        ],
+        [
+          "qt_confirmados_provaveis",
+          181.90345764160156
+        ],
+        [
+          "notificacoes_lag_3w",
+          64.22209167480469
+        ],
+        [
+          "notificacoes_media_movel_2_4w",
+          47.88161849975586
+        ],
+        [
+          "notificacoes_diff_1w",
+          44.19549560546875
+        ],
+        [
+          "qt_hospitalizados",
+          24.991395950317383
+        ],
+        [
+          "notificacoes_lag_2w",
+          18.38373374938965
+        ],
+        [
+          "week_of_year_cos",
+          17.195697784423828
+        ],
+        [
+          "notificacoes_pct_change_1w",
+          14.794510841369629
+        ],
+        [
+          "prop_confirmado_provavel",
+          8.95681381225586
+        ]
+      ],
+      "gain_top10_B": [
+        [
+          "notificacoes_lag_1w",
+          1906.544189453125
+        ],
+        [
+          "notificacoes_media_movel_2_4w",
+          515.5396728515625
+        ],
+        [
+          "notificacoes_lag_3w",
+          212.20469665527344
+        ],
+        [
+          "qt_confirmados_provaveis",
+          193.71444702148438
+        ],
+        [
+          "notificacoes_lag_2w",
+          187.98672485351562
+        ],
+        [
+          "notificacoes_diff_1w",
+          97.21973419189453
+        ],
+        [
+          "week_of_year_cos",
+          80.54971313476562
+        ],
+        [
+          "is_zero_notification_week",
+          75.3717269897461
+        ],
+        [
+          "notificacoes_pct_change_1w",
+          36.84455490112305
+        ],
+        [
+          "notificacoes_media_movel_4_8w",
+          21.741804122924805
+        ]
+      ],
+      "tempo_total_s": 67.6
+    },
+    "49_optuna": {
+      "n_trials": 30,
+      "baseline_params": {
+        "n_estimators": 1000,
+        "max_depth": 8,
+        "learning_rate": 0.05,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "reg_alpha": 0.1,
+        "reg_lambda": 1.0,
+        "min_child_weight": 5,
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": -1
+      },
+      "baseline_val_R2_log": 0.851,
+      "baseline_test_R2_log": 0.8878,
+      "best_trial_number": 16,
+      "best_val_R2_log": 0.8533,
+      "best_params": {
+        "max_depth": 6,
+        "learning_rate": 0.038978039603753546,
+        "subsample": 0.797777914554466,
+        "colsample_bytree": 0.7457170802464117,
+        "min_child_weight": 18,
+        "reg_alpha": 0.05249064706338463,
+        "reg_lambda": 0.03573408764525792
+      },
+      "improvement_val": 0.0023,
+      "threshold": 0.005,
+      "exceeds_threshold": false,
+      "best_test_R2_log": null,
+      "adopted": false,
+      "trials": [
+        {
+          "number": 0,
+          "value": 0.847703,
+          "params": {
+            "max_depth": 6,
+            "learning_rate": 0.2536999076681772,
+            "subsample": 0.892797576724562,
+            "colsample_bytree": 0.8394633936788146,
+            "min_child_weight": 5,
+            "reg_alpha": 0.004207053950287938,
+            "reg_lambda": 0.0017073967431528124
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 1,
+          "value": 0.851222,
+          "params": {
+            "max_depth": 10,
+            "learning_rate": 0.07725378389307355,
+            "subsample": 0.8832290311184181,
+            "colsample_bytree": 0.608233797718321,
+            "min_child_weight": 30,
+            "reg_alpha": 2.1368329072358767,
+            "reg_lambda": 0.0070689749506246055
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 2,
+          "value": 0.849098,
+          "params": {
+            "max_depth": 5,
+            "learning_rate": 0.018659959624904916,
+            "subsample": 0.7216968971838151,
+            "colsample_bytree": 0.8099025726528951,
+            "min_child_weight": 13,
+            "reg_alpha": 0.014618962793704957,
+            "reg_lambda": 0.2801635158716261
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 3,
+          "value": 0.84748,
+          "params": {
+            "max_depth": 4,
+            "learning_rate": 0.027010527749605478,
+            "subsample": 0.7465447373174767,
+            "colsample_bytree": 0.7824279936868144,
+            "min_child_weight": 24,
+            "reg_alpha": 0.006290644294586149,
+            "reg_lambda": 0.11400863701127326
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 4,
+          "value": 0.848668,
+          "params": {
+            "max_depth": 8,
+            "learning_rate": 0.011711509955524094,
+            "subsample": 0.8430179407605753,
+            "colsample_bytree": 0.6682096494749166,
+            "min_child_weight": 2,
+            "reg_alpha": 6.245139574743075,
+            "reg_lambda": 7.2866537374910445
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 5,
+          "value": 0.850374,
+          "params": {
+            "max_depth": 9,
+            "learning_rate": 0.028180680291847244,
+            "subsample": 0.6390688456025535,
+            "colsample_bytree": 0.8736932106048627,
+            "min_child_weight": 14,
+            "reg_alpha": 0.003077180271250686,
+            "reg_lambda": 0.09565499215943825
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 6,
+          "value": 0.849284,
+          "params": {
+            "max_depth": 4,
+            "learning_rate": 0.22038218939289875,
+            "subsample": 0.7035119926400067,
+            "colsample_bytree": 0.8650089137415928,
+            "min_child_weight": 10,
+            "reg_alpha": 0.12030178871154672,
+            "reg_lambda": 0.1537592023548176
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 7,
+          "value": 0.843775,
+          "params": {
+            "max_depth": 5,
+            "learning_rate": 0.27051668818999286,
+            "subsample": 0.9100531293444458,
+            "colsample_bytree": 0.9757995766256756,
+            "min_child_weight": 27,
+            "reg_alpha": 0.24637685958997463,
+            "reg_lambda": 4.869640941520899
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 8,
+          "value": 0.845104,
+          "params": {
+            "max_depth": 4,
+            "learning_rate": 0.01947558230629543,
+            "subsample": 0.6180909155642152,
+            "colsample_bytree": 0.7301321323053057,
+            "min_child_weight": 12,
+            "reg_alpha": 0.01217295809836997,
+            "reg_lambda": 2.0651425578959257
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 9,
+          "value": 0.851472,
+          "params": {
+            "max_depth": 6,
+            "learning_rate": 0.026000059117302653,
+            "subsample": 0.8170784332632994,
+            "colsample_bytree": 0.6563696899899051,
+            "min_child_weight": 25,
+            "reg_alpha": 0.0019870215385428634,
+            "reg_lambda": 8.862326508576253
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 10,
+          "value": 0.850455,
+          "params": {
+            "max_depth": 7,
+            "learning_rate": 0.06663408467875924,
+            "subsample": 0.9878148443151463,
+            "colsample_bytree": 0.6071847502459278,
+            "min_child_weight": 21,
+            "reg_alpha": 0.0014285676124002433,
+            "reg_lambda": 0.8345792463621333
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 11,
+          "value": 0.850377,
+          "params": {
+            "max_depth": 10,
+            "learning_rate": 0.06962550818742679,
+            "subsample": 0.8106368221577908,
+            "colsample_bytree": 0.6065489764249231,
+            "min_child_weight": 29,
+            "reg_alpha": 1.8362911585012827,
+            "reg_lambda": 0.0095797057254948
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 12,
+          "value": 0.848891,
+          "params": {
+            "max_depth": 7,
+            "learning_rate": 0.13022805284850866,
+            "subsample": 0.8759561693398767,
+            "colsample_bytree": 0.6871414335345349,
+            "min_child_weight": 20,
+            "reg_alpha": 0.8148185579958351,
+            "reg_lambda": 0.011445599149004863
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 13,
+          "value": 0.85026,
+          "params": {
+            "max_depth": 10,
+            "learning_rate": 0.04054206635493738,
+            "subsample": 0.9501005770314805,
+            "colsample_bytree": 0.6916807777598375,
+            "min_child_weight": 30,
+            "reg_alpha": 0.026360072523839973,
+            "reg_lambda": 0.023506997063237146
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 14,
+          "value": 0.850862,
+          "params": {
+            "max_depth": 8,
+            "learning_rate": 0.1118001532852583,
+            "subsample": 0.7821942989022134,
+            "colsample_bytree": 0.6430321582856263,
+            "min_child_weight": 24,
+            "reg_alpha": 9.656310060863266,
+            "reg_lambda": 0.001660191931177739
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 15,
+          "value": 0.851522,
+          "params": {
+            "max_depth": 6,
+            "learning_rate": 0.049886994212228794,
+            "subsample": 0.8332837744047984,
+            "colsample_bytree": 0.7475292997862891,
+            "min_child_weight": 20,
+            "reg_alpha": 0.045046017246530755,
+            "reg_lambda": 0.004697760042322922
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 16,
+          "value": 0.853314,
+          "params": {
+            "max_depth": 6,
+            "learning_rate": 0.038978039603753546,
+            "subsample": 0.797777914554466,
+            "colsample_bytree": 0.7457170802464117,
+            "min_child_weight": 18,
+            "reg_alpha": 0.05249064706338463,
+            "reg_lambda": 0.03573408764525792
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 17,
+          "value": 0.852486,
+          "params": {
+            "max_depth": 6,
+            "learning_rate": 0.04451858893805847,
+            "subsample": 0.770603405726299,
+            "colsample_bytree": 0.7224977029199221,
+            "min_child_weight": 18,
+            "reg_alpha": 0.04883390949202254,
+            "reg_lambda": 0.03367541837835657
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 18,
+          "value": 0.851583,
+          "params": {
+            "max_depth": 5,
+            "learning_rate": 0.04223506119986348,
+            "subsample": 0.668147523279367,
+            "colsample_bytree": 0.7486504194102371,
+            "min_child_weight": 18,
+            "reg_alpha": 0.2187298824239418,
+            "reg_lambda": 0.02898756052851247
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 19,
+          "value": 0.849641,
+          "params": {
+            "max_depth": 7,
+            "learning_rate": 0.010519672653182946,
+            "subsample": 0.7660831237678355,
+            "colsample_bytree": 0.9406069544760229,
+            "min_child_weight": 17,
+            "reg_alpha": 0.0555135926491153,
+            "reg_lambda": 0.034475110070085704
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 20,
+          "value": 0.847286,
+          "params": {
+            "max_depth": 8,
+            "learning_rate": 0.09806146822400062,
+            "subsample": 0.6876712073426932,
+            "colsample_bytree": 0.7173789513717697,
+            "min_child_weight": 8,
+            "reg_alpha": 0.34290885433239543,
+            "reg_lambda": 0.05669588021951677
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 21,
+          "value": 0.852177,
+          "params": {
+            "max_depth": 5,
+            "learning_rate": 0.042322289136516644,
+            "subsample": 0.6676184949676007,
+            "colsample_bytree": 0.7635374350695496,
+            "min_child_weight": 16,
+            "reg_alpha": 0.14742654757198687,
+            "reg_lambda": 0.022000686874744834
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 22,
+          "value": 0.850136,
+          "params": {
+            "max_depth": 6,
+            "learning_rate": 0.034214380487636864,
+            "subsample": 0.7423036527448112,
+            "colsample_bytree": 0.7823910904230362,
+            "min_child_weight": 16,
+            "reg_alpha": 0.09890652419095071,
+            "reg_lambda": 0.3206785905409236
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 23,
+          "value": 0.851694,
+          "params": {
+            "max_depth": 5,
+            "learning_rate": 0.05839397066422396,
+            "subsample": 0.6015320237834957,
+            "colsample_bytree": 0.8069410260856268,
+            "min_child_weight": 22,
+            "reg_alpha": 0.03172391286691907,
+            "reg_lambda": 0.015258676157226479
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 24,
+          "value": 0.850384,
+          "params": {
+            "max_depth": 6,
+            "learning_rate": 0.019412147859067343,
+            "subsample": 0.6653364163479973,
+            "colsample_bytree": 0.7652716439079014,
+            "min_child_weight": 15,
+            "reg_alpha": 0.6326322581799344,
+            "reg_lambda": 0.05666375275613052
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 25,
+          "value": 0.84984,
+          "params": {
+            "max_depth": 5,
+            "learning_rate": 0.047387180343858935,
+            "subsample": 0.7879259337101082,
+            "colsample_bytree": 0.7099319196661158,
+            "min_child_weight": 18,
+            "reg_alpha": 0.09205323733168355,
+            "reg_lambda": 0.004952199751411482
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 26,
+          "value": 0.851898,
+          "params": {
+            "max_depth": 6,
+            "learning_rate": 0.034178451607565254,
+            "subsample": 0.7267340845030492,
+            "colsample_bytree": 0.8421296235010496,
+            "min_child_weight": 11,
+            "reg_alpha": 0.013372501428914562,
+            "reg_lambda": 0.36485519425797447
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 27,
+          "value": 0.848625,
+          "params": {
+            "max_depth": 7,
+            "learning_rate": 0.16220437139398866,
+            "subsample": 0.8446998365119338,
+            "colsample_bytree": 0.7365408631898037,
+            "min_child_weight": 19,
+            "reg_alpha": 0.12943271709637968,
+            "reg_lambda": 0.0028379801063608745
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 28,
+          "value": 0.847623,
+          "params": {
+            "max_depth": 5,
+            "learning_rate": 0.014536035063906744,
+            "subsample": 0.760710820344839,
+            "colsample_bytree": 0.8279131840867091,
+            "min_child_weight": 8,
+            "reg_alpha": 0.4751555982117171,
+            "reg_lambda": 0.04103767213341274
+          },
+          "state": "TrialState.COMPLETE"
+        },
+        {
+          "number": 29,
+          "value": 0.850874,
+          "params": {
+            "max_depth": 6,
+            "learning_rate": 0.08391512743887342,
+            "subsample": 0.7028476550501077,
+            "colsample_bytree": 0.8823630661884385,
+            "min_child_weight": 15,
+            "reg_alpha": 0.006964532996336373,
+            "reg_lambda": 0.01957716375155964
+          },
+          "state": "TrialState.COMPLETE"
+        }
+      ],
+      "tempo_total_s": 2695.6
+    },
+    "50_drift": {
+      "n_features": 20,
+      "n_train_years": 22,
+      "psi_summary": {
+        "high_drift_gt025": 192,
+        "moderate_drift_01_025": 71,
+        "low_drift_le01": 177
+      },
+      "mean_psi_by_year": {
+        "2001": 2.2602,
+        "2002": 1.9751,
+        "2003": 1.9989,
+        "2004": 2.3677,
+        "2005": 2.1556,
+        "2006": 2.0029,
+        "2007": 1.0387,
+        "2008": 1.0953,
+        "2009": 1.1411,
+        "2010": 0.9191,
+        "2011": 0.9649,
+        "2012": 1.014,
+        "2013": 0.9115,
+        "2014": 0.968,
+        "2015": 0.6023,
+        "2016": 0.2834,
+        "2017": 0.3691,
+        "2018": 0.3882,
+        "2019": 0.2335,
+        "2020": 0.2592,
+        "2021": 0.2685,
+        "2022": 0.0702
+      },
+      "features_analyzed": [
+        "notificacoes_lag_1w",
+        "week_of_year_cos",
+        "notificacoes_diff_1w",
+        "qt_confirmados_provaveis",
+        "notificacoes_media_movel_2_4w",
+        "notificacoes_pct_change_1w",
+        "notificacoes_lag_2w",
+        "week_of_year_sin",
+        "prop_confirmado_provavel",
+        "notificacoes_lag_3w",
+        "atraso_notificacao_medio_dias",
+        "notificacoes_media_movel_4_8w",
+        "prop_raca_parda",
+        "notificacoes_lag_6w",
+        "prop_criterio_lab",
+        "prop_raca_branca",
+        "humidity_mean_pct_mm_4_8w",
+        "prop_nausea",
+        "prop_sexo_fem",
+        "prop_exantema"
+      ],
+      "tempo_s": 7.1
+    },
+    "51_learning_curve": {
+      "windows": [
+        {
+          "label": "2001-2022 (22yr)",
+          "start_year": 2001,
+          "end_year": 2022,
+          "n_years": 22,
+          "n_train_rows": 157413,
+          "R2_log": 0.888,
+          "RMSE_log": 0.6729,
+          "best_iteration": 425
+        },
+        {
+          "label": "2007-2022 (16yr)",
+          "start_year": 2007,
+          "end_year": 2022,
+          "n_years": 16,
+          "n_train_rows": 114395,
+          "R2_log": 0.8829,
+          "RMSE_log": 0.6881,
+          "best_iteration": 216
+        },
+        {
+          "label": "2012-2022 (11yr)",
+          "start_year": 2012,
+          "end_year": 2022,
+          "n_years": 11,
+          "n_train_rows": 78638,
+          "R2_log": 0.8842,
+          "RMSE_log": 0.6842,
+          "best_iteration": 214
+        },
+        {
+          "label": "2017-2022 (6yr)",
+          "start_year": 2017,
+          "end_year": 2022,
+          "n_years": 6,
+          "n_train_rows": 42881,
+          "R2_log": 0.876,
+          "RMSE_log": 0.708,
+          "best_iteration": 249
+        },
+        {
+          "label": "2019-2022 (4yr)",
+          "start_year": 2019,
+          "end_year": 2022,
+          "n_years": 4,
+          "n_train_rows": 28633,
+          "R2_log": 0.8713,
+          "RMSE_log": 0.7212,
+          "best_iteration": 240
+        }
+      ],
+      "best_window": "2001-2022 (22yr)",
+      "tempo_s": 203.1
+    },
+    "54_classification": {
+      "modelos": {
+        "A_sinan_only": {
+          "label": "Var A: SINAN-only",
+          "n_features": 110,
+          "n_train": 28633,
+          "accuracy": 0.5567,
+          "f1_macro": 0.4775,
+          "f1_weighted": 0.5574,
+          "auc_macro_ovr": 0.7552,
+          "f1_per_class": {
+            "baixo": 0.7322,
+            "moderado": 0.3023,
+            "alto": 0.2575,
+            "surto": 0.618
+          },
+          "precision_recall_per_class": {
+            "baixo": {
+              "precision": 0.7027,
+              "recall": 0.7642
+            },
+            "moderado": {
+              "precision": 0.3058,
+              "recall": 0.299
+            },
+            "alto": {
+              "precision": 0.2398,
+              "recall": 0.2779
+            },
+            "surto": {
+              "precision": 0.7552,
+              "recall": 0.523
+            }
+          },
+          "confusion_matrix": [
+            [
+              5757,
+              1294,
+              437,
+              45
+            ],
+            [
+              1571,
+              1013,
+              684,
+              120
+            ],
+            [
+              568,
+              614,
+              587,
+              343
+            ],
+            [
+              297,
+              392,
+              740,
+              1567
+            ]
+          ],
+          "best_iteration": 115,
+          "train_time_s": 54.8
+        },
+        "A_inmet_bruto": {
+          "label": "Var A: INMET bruto",
+          "n_features": 122,
+          "n_train": 28633,
+          "accuracy": 0.5642,
+          "f1_macro": 0.4837,
+          "f1_weighted": 0.5676,
+          "auc_macro_ovr": 0.7709,
+          "f1_per_class": {
+            "baixo": 0.7459,
+            "moderado": 0.3563,
+            "alto": 0.2509,
+            "surto": 0.5816
+          },
+          "precision_recall_per_class": {
+            "baixo": {
+              "precision": 0.7252,
+              "recall": 0.7677
+            },
+            "moderado": {
+              "precision": 0.3291,
+              "recall": 0.3884
+            },
+            "alto": {
+              "precision": 0.2433,
+              "recall": 0.259
+            },
+            "surto": {
+              "precision": 0.7727,
+              "recall": 0.4663
+            }
+          },
+          "confusion_matrix": [
+            [
+              5783,
+              1438,
+              281,
+              31
+            ],
+            [
+              1418,
+              1316,
+              564,
+              90
+            ],
+            [
+              502,
+              773,
+              547,
+              290
+            ],
+            [
+              271,
+              472,
+              856,
+              1397
+            ]
+          ],
+          "best_iteration": 282,
+          "train_time_s": 100.5
+        },
+        "A_inmet_enriquecido": {
+          "label": "Var A: INMET enriquecido",
+          "n_features": 266,
+          "n_train": 28633,
+          "accuracy": 0.5597,
+          "f1_macro": 0.4842,
+          "f1_weighted": 0.5648,
+          "auc_macro_ovr": 0.7684,
+          "f1_per_class": {
+            "baixo": 0.7388,
+            "moderado": 0.3266,
+            "alto": 0.2596,
+            "surto": 0.6118
+          },
+          "precision_recall_per_class": {
+            "baixo": {
+              "precision": 0.7278,
+              "recall": 0.7502
+            },
+            "moderado": {
+              "precision": 0.3066,
+              "recall": 0.3495
+            },
+            "alto": {
+              "precision": 0.25,
+              "recall": 0.2699
+            },
+            "surto": {
+              "precision": 0.7376,
+              "recall": 0.5227
+            }
+          },
+          "confusion_matrix": [
+            [
+              5651,
+              1520,
+              323,
+              39
+            ],
+            [
+              1392,
+              1184,
+              664,
+              148
+            ],
+            [
+              495,
+              677,
+              570,
+              370
+            ],
+            [
+              226,
+              481,
+              723,
+              1566
+            ]
+          ],
+          "best_iteration": 209,
+          "train_time_s": 164.8
+        },
+        "B_sinan_only": {
+          "label": "Var B: SINAN-only",
+          "n_features": 110,
+          "n_train": 157413,
+          "accuracy": 0.5737,
+          "f1_macro": 0.5596,
+          "f1_weighted": 0.5787,
+          "auc_macro_ovr": 0.8138,
+          "f1_per_class": {
+            "baixo": 0.6829,
+            "moderado": 0.4485,
+            "alto": 0.3926,
+            "surto": 0.7142
+          },
+          "precision_recall_per_class": {
+            "baixo": {
+              "precision": 0.6896,
+              "recall": 0.6764
+            },
+            "moderado": {
+              "precision": 0.4193,
+              "recall": 0.4822
+            },
+            "alto": {
+              "precision": 0.392,
+              "recall": 0.3932
+            },
+            "surto": {
+              "precision": 0.7772,
+              "recall": 0.6606
+            }
+          },
+          "confusion_matrix": [
+            [
+              3881,
+              1559,
+              251,
+              47
+            ],
+            [
+              1167,
+              1961,
+              814,
+              125
+            ],
+            [
+              384,
+              865,
+              1114,
+              470
+            ],
+            [
+              196,
+              292,
+              663,
+              2240
+            ]
+          ],
+          "best_iteration": 762,
+          "train_time_s": 397.4
+        },
+        "B_inmet_bruto": {
+          "label": "Var B: INMET bruto",
+          "n_features": 122,
+          "n_train": 157413,
+          "accuracy": 0.5928,
+          "f1_macro": 0.5769,
+          "f1_weighted": 0.5985,
+          "auc_macro_ovr": 0.8288,
+          "f1_per_class": {
+            "baixo": 0.7117,
+            "moderado": 0.4708,
+            "alto": 0.3947,
+            "surto": 0.7305
+          },
+          "precision_recall_per_class": {
+            "baixo": {
+              "precision": 0.7335,
+              "recall": 0.6912
+            },
+            "moderado": {
+              "precision": 0.4332,
+              "recall": 0.5156
+            },
+            "alto": {
+              "precision": 0.397,
+              "recall": 0.3925
+            },
+            "surto": {
+              "precision": 0.7809,
+              "recall": 0.6862
+            }
+          },
+          "confusion_matrix": [
+            [
+              3966,
+              1471,
+              260,
+              41
+            ],
+            [
+              1023,
+              2097,
+              832,
+              115
+            ],
+            [
+              285,
+              939,
+              1112,
+              497
+            ],
+            [
+              133,
+              334,
+              597,
+              2327
+            ]
+          ],
+          "best_iteration": 822,
+          "train_time_s": 357.5
+        },
+        "B_inmet_enriquecido": {
+          "label": "Var B: INMET enriquecido",
+          "n_features": 266,
+          "n_train": 157413,
+          "accuracy": 0.5974,
+          "f1_macro": 0.5778,
+          "f1_weighted": 0.602,
+          "auc_macro_ovr": 0.8295,
+          "f1_per_class": {
+            "baixo": 0.7236,
+            "moderado": 0.4827,
+            "alto": 0.3804,
+            "surto": 0.7247
+          },
+          "precision_recall_per_class": {
+            "baixo": {
+              "precision": 0.7535,
+              "recall": 0.6959
+            },
+            "moderado": {
+              "precision": 0.4383,
+              "recall": 0.537
+            },
+            "alto": {
+              "precision": 0.396,
+              "recall": 0.366
+            },
+            "surto": {
+              "precision": 0.7551,
+              "recall": 0.6965
+            }
+          },
+          "confusion_matrix": [
+            [
+              3993,
+              1489,
+              212,
+              44
+            ],
+            [
+              962,
+              2184,
+              772,
+              149
+            ],
+            [
+              244,
+              979,
+              1037,
+              573
+            ],
+            [
+              100,
+              331,
+              598,
+              2362
+            ]
+          ],
+          "best_iteration": 748,
+          "train_time_s": 645.6
+        },
+        "C_sinan_only": {
+          "label": "Var C: SINAN-only",
+          "n_features": 110,
+          "n_train": 157413,
+          "accuracy": 0.5779,
+          "f1_macro": 0.5612,
+          "f1_weighted": 0.5815,
+          "auc_macro_ovr": 0.815,
+          "f1_per_class": {
+            "baixo": 0.6906,
+            "moderado": 0.4514,
+            "alto": 0.389,
+            "surto": 0.7137
+          },
+          "precision_recall_per_class": {
+            "baixo": {
+              "precision": 0.6838,
+              "recall": 0.6976
+            },
+            "moderado": {
+              "precision": 0.4263,
+              "recall": 0.4797
+            },
+            "alto": {
+              "precision": 0.3934,
+              "recall": 0.3848
+            },
+            "surto": {
+              "precision": 0.7849,
+              "recall": 0.6544
+            }
+          },
+          "confusion_matrix": [
+            [
+              4003,
+              1442,
+              246,
+              47
+            ],
+            [
+              1239,
+              1951,
+              770,
+              107
+            ],
+            [
+              403,
+              886,
+              1090,
+              454
+            ],
+            [
+              209,
+              298,
+              665,
+              2219
+            ]
+          ],
+          "best_iteration": 697,
+          "train_time_s": 243.3
+        },
+        "C_inmet_bruto": {
+          "label": "Var C: INMET bruto",
+          "n_features": 122,
+          "n_train": 157413,
+          "accuracy": 0.5897,
+          "f1_macro": 0.573,
+          "f1_weighted": 0.5948,
+          "auc_macro_ovr": 0.8288,
+          "f1_per_class": {
+            "baixo": 0.7068,
+            "moderado": 0.4732,
+            "alto": 0.3894,
+            "surto": 0.7225
+          },
+          "precision_recall_per_class": {
+            "baixo": {
+              "precision": 0.72,
+              "recall": 0.6941
+            },
+            "moderado": {
+              "precision": 0.4348,
+              "recall": 0.5191
+            },
+            "alto": {
+              "precision": 0.3963,
+              "recall": 0.3826
+            },
+            "surto": {
+              "precision": 0.7826,
+              "recall": 0.6709
+            }
+          },
+          "confusion_matrix": [
+            [
+              3983,
+              1489,
+              228,
+              38
+            ],
+            [
+              1067,
+              2111,
+              774,
+              115
+            ],
+            [
+              320,
+              950,
+              1084,
+              479
+            ],
+            [
+              162,
+              305,
+              649,
+              2275
+            ]
+          ],
+          "best_iteration": 734,
+          "train_time_s": 160.6
+        },
+        "C_inmet_enriquecido": {
+          "label": "Var C: INMET enriquecido",
+          "n_features": 266,
+          "n_train": 157413,
+          "accuracy": 0.5997,
+          "f1_macro": 0.5781,
+          "f1_weighted": 0.6027,
+          "auc_macro_ovr": 0.833,
+          "f1_per_class": {
+            "baixo": 0.7253,
+            "moderado": 0.4838,
+            "alto": 0.3755,
+            "surto": 0.7277
+          },
+          "precision_recall_per_class": {
+            "baixo": {
+              "precision": 0.7391,
+              "recall": 0.7119
+            },
+            "moderado": {
+              "precision": 0.4462,
+              "recall": 0.5284
+            },
+            "alto": {
+              "precision": 0.3928,
+              "recall": 0.3597
+            },
+            "surto": {
+              "precision": 0.7629,
+              "recall": 0.6957
+            }
+          },
+          "confusion_matrix": [
+            [
+              4085,
+              1397,
+              211,
+              45
+            ],
+            [
+              1012,
+              2149,
+              781,
+              125
+            ],
+            [
+              289,
+              962,
+              1019,
+              563
+            ],
+            [
+              141,
+              308,
+              583,
+              2359
+            ]
+          ],
+          "best_iteration": 744,
+          "train_time_s": 423.1
+        }
+      },
+      "melhor_modelo_f1_macro": "C_inmet_enriquecido",
+      "conclusao": {
+        "f1_macro_B_enriquecido": 0.5778,
+        "auc_macro_B_enriquecido": 0.8295,
+        "serie_completa_melhora_classificacao": true
+      },
+      "tempo_total_s": 2554.3
+    }
+  }
+}

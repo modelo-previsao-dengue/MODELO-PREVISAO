@@ -28,6 +28,35 @@
     "test": [2024, 2025, 2026],
     "_nota_climatologia": "As anomalias do script 25 usam a climatologia apenas dos anos de train, para nao vazar o teste."
   },
+  "experiment_v4": {
+    "descricao": "Experimento serie completa: 3 variantes com mesmo val/test. A=baseline v3, B=serie completa, C=serie completa + peso recencia.",
+    "variante_a": {
+      "descricao": "Reproducao exata da baseline v3 (4 anos de treino).",
+      "warmup_ano": 2018,
+      "ano_fim": 2026,
+      "train": [2019, 2020, 2021, 2022],
+      "val": [2023],
+      "test": [2024, 2025, 2026]
+    },
+    "variante_b": {
+      "descricao": "Serie completa (22 anos de treino, warm-up 2000).",
+      "warmup_ano": 2000,
+      "ano_fim": 2026,
+      "train": [2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],
+      "val": [2023],
+      "test": [2024, 2025, 2026]
+    },
+    "variante_c": {
+      "descricao": "Serie completa + sample_weight com decaimento exponencial (lambda=0.1).",
+      "warmup_ano": 2000,
+      "ano_fim": 2026,
+      "train": [2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],
+      "val": [2023],
+      "test": [2024, 2025, 2026],
+      "sample_weight_lambda": 0.1,
+      "sample_weight_ref_year": 2022
+    }
+  },
   "fallback_limiares": "uf",
   "incluir_notificacoes_atual": true,
   "_nota_incluir_notificacoes_atual": "notificacoes na semana t e conhecida quando se preve t+4, e e exatamente o que o baseline de persistencia usa. A versao anterior a excluia das features mas mantinha notificacoes_lag_1, o que handicapava o modelo contra o proprio baseline."

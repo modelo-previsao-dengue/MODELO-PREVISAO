@@ -23,6 +23,19 @@ def load_v3(path=None):
     return v3
 
 
+def load_v4(variante="variante_b", path=None):
+    """Carrega config de uma variante do experiment_v4.
+
+    variante: 'variante_a', 'variante_b' ou 'variante_c'.
+    Retorna dict com warmup_ano, ano_fim, train, val, test, anos_pipeline.
+    """
+    cfg = load(path)
+    exp = cfg["experiment_v4"]
+    v = dict(exp[variante])
+    v["anos_pipeline"] = list(range(v["warmup_ano"], v["ano_fim"] + 1))
+    return v
+
+
 def describe(cfg):
     return (
         f"UFs={','.join(cfg['ufs'])} | recorte={cfg['ano_inicio']}-{cfg['ano_fim']} "

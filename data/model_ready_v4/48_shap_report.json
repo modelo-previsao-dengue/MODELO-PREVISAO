@@ -1,0 +1,173 @@
+{
+  "n_shap_samples": 10000,
+  "n_features": 266,
+  "shap_top10_A": [
+    {
+      "feature": "notificacoes_lag_1w",
+      "shap_mean_abs_A": 1.0553510189056396
+    },
+    {
+      "feature": "qt_confirmados_provaveis",
+      "shap_mean_abs_A": 0.25704899430274963
+    },
+    {
+      "feature": "week_of_year_cos",
+      "shap_mean_abs_A": 0.21314699947834015
+    },
+    {
+      "feature": "notificacoes_diff_1w",
+      "shap_mean_abs_A": 0.12623600661754608
+    },
+    {
+      "feature": "week_of_year_sin",
+      "shap_mean_abs_A": 0.08398500084877014
+    },
+    {
+      "feature": "notificacoes_pct_change_1w",
+      "shap_mean_abs_A": 0.0799190029501915
+    },
+    {
+      "feature": "prop_confirmado_provavel",
+      "shap_mean_abs_A": 0.0408799983561039
+    },
+    {
+      "feature": "notificacoes_media_movel_2_4w",
+      "shap_mean_abs_A": 0.04028499871492386
+    },
+    {
+      "feature": "notificacoes_lag_3w",
+      "shap_mean_abs_A": 0.028015000745654106
+    },
+    {
+      "feature": "qt_hospitalizados",
+      "shap_mean_abs_A": 0.02774300053715706
+    }
+  ],
+  "shap_top10_B": [
+    {
+      "feature": "notificacoes_lag_1w",
+      "shap_mean_abs_B": 1.1529719829559326
+    },
+    {
+      "feature": "week_of_year_cos",
+      "shap_mean_abs_B": 0.26352599263191223
+    },
+    {
+      "feature": "notificacoes_diff_1w",
+      "shap_mean_abs_B": 0.17420800030231476
+    },
+    {
+      "feature": "qt_confirmados_provaveis",
+      "shap_mean_abs_B": 0.12344499677419662
+    },
+    {
+      "feature": "notificacoes_media_movel_2_4w",
+      "shap_mean_abs_B": 0.10603199899196625
+    },
+    {
+      "feature": "notificacoes_pct_change_1w",
+      "shap_mean_abs_B": 0.08990400284528732
+    },
+    {
+      "feature": "notificacoes_lag_2w",
+      "shap_mean_abs_B": 0.08362399786710739
+    },
+    {
+      "feature": "week_of_year_sin",
+      "shap_mean_abs_B": 0.050202999264001846
+    },
+    {
+      "feature": "prop_confirmado_provavel",
+      "shap_mean_abs_B": 0.030997000634670258
+    },
+    {
+      "feature": "notificacoes_lag_3w",
+      "shap_mean_abs_B": 0.02840599976480007
+    }
+  ],
+  "gain_top10_A": [
+    [
+      "notificacoes_lag_1w",
+      596.34375
+    ],
+    [
+      "qt_confirmados_provaveis",
+      181.90345764160156
+    ],
+    [
+      "notificacoes_lag_3w",
+      64.22209167480469
+    ],
+    [
+      "notificacoes_media_movel_2_4w",
+      47.88161849975586
+    ],
+    [
+      "notificacoes_diff_1w",
+      44.19549560546875
+    ],
+    [
+      "qt_hospitalizados",
+      24.991395950317383
+    ],
+    [
+      "notificacoes_lag_2w",
+      18.38373374938965
+    ],
+    [
+      "week_of_year_cos",
+      17.195697784423828
+    ],
+    [
+      "notificacoes_pct_change_1w",
+      14.794510841369629
+    ],
+    [
+      "prop_confirmado_provavel",
+      8.95681381225586
+    ]
+  ],
+  "gain_top10_B": [
+    [
+      "notificacoes_lag_1w",
+      1906.544189453125
+    ],
+    [
+      "notificacoes_media_movel_2_4w",
+      515.5396728515625
+    ],
+    [
+      "notificacoes_lag_3w",
+      212.20469665527344
+    ],
+    [
+      "qt_confirmados_provaveis",
+      193.71444702148438
+    ],
+    [
+      "notificacoes_lag_2w",
+      187.98672485351562
+    ],
+    [
+      "notificacoes_diff_1w",
+      97.21973419189453
+    ],
+    [
+      "week_of_year_cos",
+      80.54971313476562
+    ],
+    [
+      "is_zero_notification_week",
+      75.3717269897461
+    ],
+    [
+      "notificacoes_pct_change_1w",
+      36.84455490112305
+    ],
+    [
+      "notificacoes_media_movel_4_8w",
+      21.741804122924805
+    ]
+  ],
+  "tempo_total_s": 67.6
+}

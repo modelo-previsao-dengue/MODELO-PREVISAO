@@ -21,6 +21,14 @@ data/model_ready/*.parquet
 data/model_ready_v2/*.parquet
 data/model_ready_v3/*.parquet
 
+# v4 large parquets (>50MB, intermediate + train splits)
+data/model_ready_v4/integrated_mesorregiao_v4.parquet
+data/model_ready_v4/integrated_mesorregiao_v4_lags.parquet
+data/model_ready_v4/integrated_mesorregiao_full.parquet
+data/model_ready_v4/sinan_mesorregiao_full.parquet
+data/model_ready_v4/inmet_mesorregiao_full.parquet
+data/model_ready_v4/splits_*/train.parquet
+
 # Model binaries (large JSON/UBJ)
 models/*/model.json
 models/*/model_*.json
@@ -28,6 +36,11 @@ models/nacional/*.ubj
 models/regression_v3/*.ubj
 models/blindness_v3/*.ubj
 models/classification_v3/*.ubj
+
+# Internal planning docs
+docs/superpowers/
+tasks/prd-organizacao-apresentacao-tcc2.md
+scripts/build_dashboard.py
 
 # Python
 __pycache__/
