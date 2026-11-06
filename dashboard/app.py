@@ -64,6 +64,7 @@ html, body, [class*="css"], .stApp {
   font-family: var(--font) !important;
   background: var(--bg) !important;
   color: var(--text) !important;
+  font-size: 15px !important;
 }
 #MainMenu, footer { visibility: hidden !important; height: 0 !important }
 header[data-testid="stHeader"] {
@@ -77,63 +78,42 @@ header[data-testid="stHeader"] {
   display: none !important;
 }
 .block-container {
-  padding: 1rem 2.2rem 3rem !important;
+  padding: 1.2rem 2.5rem 3rem !important;
   max-width: 1380px;
 }
+p, li, span, div { font-size: inherit !important }
+.stMarkdown p { font-size: .92rem !important; line-height: 1.65 !important }
 
 /* ─ Sidebar ─ */
 section[data-testid="stSidebar"] {
-  background: #fafbfc !important;
-  border-right: 1px solid var(--border) !important;
+  background: #fff !important;
+  border-right: 1px solid #eaecf0 !important;
+  min-width: 280px !important;
 }
 section[data-testid="stSidebar"] > div:first-child {
   padding: 1.2rem 1rem !important;
 }
-section[data-testid="stSidebar"] * { color: var(--sub) !important }
 section[data-testid="stSidebar"] .stSelectbox label {
-  font-size: .6rem !important; font-weight: 700 !important;
+  font-size: .72rem !important; font-weight: 700 !important;
   text-transform: uppercase !important; letter-spacing: .05em !important;
-  color: var(--muted) !important; margin-bottom: .15rem !important;
+  color: #475467 !important; margin-bottom: .2rem !important;
 }
 section[data-testid="stSidebar"] .stSelectbox > div > div {
-  font-size: .8rem !important; min-height: 36px !important;
-  border-color: #e4e7ec !important; background: #fff !important;
+  font-size: .85rem !important; min-height: 42px !important;
+  border: 1.5px solid #d0d5dd !important; background: #f9fafb !important;
+  border-radius: 10px !important; color: #101828 !important;
+  font-weight: 600 !important; transition: all .15s ease !important;
+}
+section[data-testid="stSidebar"] .stSelectbox > div > div:hover,
+section[data-testid="stSidebar"] .stSelectbox > div > div:focus-within {
+  border-color: #5046e5 !important;
+  box-shadow: 0 0 0 3px rgba(80,70,229,.08) !important;
 }
 section[data-testid="stSidebar"] hr {
-  border-color: #eef0f3 !important; margin: .6rem 0 !important;
+  border-color: #eaecf0 !important; margin: .7rem 0 !important;
 }
-/* Sidebar radio → card style */
-section[data-testid="stSidebar"] .stRadio > div {
-  gap: .3rem !important;
-}
-section[data-testid="stSidebar"] .stRadio > div > label {
-  background: #fff !important; border: 1.5px solid #e4e7ec !important;
-  border-radius: 10px !important; padding: .45rem .7rem !important;
-  margin: 0 !important; transition: all .2s ease !important;
-  cursor: pointer !important;
-}
-section[data-testid="stSidebar"] .stRadio > div > label:hover {
-  border-color: #c7d2fe !important; background: #fafafe !important;
-}
-section[data-testid="stSidebar"] .stRadio > div > label:has(input:checked) {
-  border-color: #5046e5 !important; background: #eef2ff !important;
-  box-shadow: 0 0 0 1px #5046e5 !important;
-}
-section[data-testid="stSidebar"] .stRadio > div > label > div:first-child {
-  display: none !important;
-}
-section[data-testid="stSidebar"] .stRadio > div > label p {
-  font-size: .78rem !important; font-weight: 600 !important; color: #344054 !important;
-}
-section[data-testid="stSidebar"] [data-testid="stMetricValue"] {
-  color: var(--text) !important; font-size: .85rem !important; font-weight: 800 !important;
-}
-section[data-testid="stSidebar"] [data-testid="stMetricLabel"] {
-  font-size: .55rem !important; color: var(--muted) !important;
-}
-section[data-testid="stSidebar"] [data-testid="stMetric"] {
-  background: #fff !important; border: 1px solid #eef0f3 !important;
-  border-radius: 10px !important; padding: .55rem .7rem !important;
+section[data-testid="stSidebar"] .stCaption p {
+  font-size: .75rem !important; color: #667085 !important; line-height: 1.5 !important;
 }
 
 /* ─ Sidebar expand button — BIG and visible ─ */
@@ -164,18 +144,18 @@ section[data-testid="stSidebar"] [data-testid="stMetric"] {
 
 /* ─ Metrics ─ */
 [data-testid="stMetricValue"] {
-  font-size: 1.05rem !important; font-weight: 700 !important; color: var(--text) !important;
+  font-size: 1.15rem !important; font-weight: 700 !important; color: var(--text) !important;
 }
 [data-testid="stMetricLabel"] {
-  font-size: .62rem !important; font-weight: 700 !important;
-  text-transform: uppercase !important; letter-spacing: .05em !important;
+  font-size: .72rem !important; font-weight: 700 !important;
+  text-transform: uppercase !important; letter-spacing: .04em !important;
   color: var(--muted) !important;
 }
 
 /* ─ Tabs ─ */
 .stTabs [data-baseweb="tab-list"] {
-  gap: .35rem !important; background: var(--surface) !important;
-  border-bottom: none !important; padding: .35rem !important;
+  gap: .4rem !important; background: var(--surface) !important;
+  border-bottom: none !important; padding: .4rem !important;
   border-radius: 12px !important;
 }
 .stTabs [data-baseweb="tab-list"]::before,
@@ -189,8 +169,8 @@ section[data-testid="stSidebar"] [data-testid="stMetric"] {
   display: none !important;
 }
 .stTabs [data-baseweb="tab"] {
-  border-radius: 9px !important; font-weight: 600 !important; font-size: .78rem !important;
-  padding: .5rem 1.1rem !important; color: var(--sub) !important;
+  border-radius: 9px !important; font-weight: 600 !important; font-size: .88rem !important;
+  padding: .55rem 1.3rem !important; color: var(--sub) !important;
   border: none !important; background: transparent !important;
   letter-spacing: -.01em !important;
   transition: all .2s ease !important;
@@ -290,10 +270,10 @@ PLOTLY_FONT = "Plus Jakarta Sans, -apple-system, sans-serif"
 def plo(h=380, **kw):
     d = dict(
         height=h, template="plotly_white",
-        font=dict(family=PLOTLY_FONT, size=11, color="#667085"),
+        font=dict(family=PLOTLY_FONT, size=13, color="#667085"),
         margin=dict(l=48, r=16, t=32, b=40),
         plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
-        legend=dict(orientation="h", y=1.08, x=0, font=dict(size=10, family=PLOTLY_FONT)),
+        legend=dict(orientation="h", y=1.08, x=0, font=dict(size=12, family=PLOTLY_FONT)),
     )
     d.update(kw)
     return d
@@ -301,10 +281,10 @@ def plo(h=380, **kw):
 
 def sec(title):
     st.markdown(
-        f'<p style="font-size:.7rem;font-weight:800;text-transform:uppercase;'
-        f'letter-spacing:.08em;color:#98a2b3;margin:2rem 0 .65rem;'
+        f'<p class="sec-header" style="font-size:.82rem;font-weight:800;text-transform:uppercase;'
+        f'letter-spacing:.06em;color:#667085;margin:2rem 0 .7rem;'
         f'display:flex;align-items:center;gap:.5rem">'
-        f'<span style="width:16px;height:2px;background:#5046e5;border-radius:1px"></span>'
+        f'<span style="width:18px;height:3px;background:#5046e5;border-radius:2px"></span>'
         f'{title}</p>',
         unsafe_allow_html=True)
 
@@ -513,36 +493,33 @@ def main():
 
     # ── Sidebar ──
     _var_labels = {
-        "B": "Completa (22 anos)",
-        "C": "Completa + Decay",
-        "A": "Recente (4 anos)",
+        "B": "Serie completa (22 anos)",
+        "C": "Serie completa + Decay",
+        "A": "Apenas recente (4 anos)",
     }
     _sub_labels = {
-        "inmet_enriquecido": "Clima detalhado",
-        "inmet_bruto": "Clima basico",
+        "inmet_enriquecido": "Epidemiologico + Clima detalhado",
+        "inmet_bruto": "Epidemiologico + Clima basico",
         "sinan_only": "Somente epidemiologico",
     }
     _var_desc = {
-        "B": "Treino 2001–2022 · serie historica completa",
-        "C": "Treino 2001–2022 · dados recentes pesam mais",
-        "A": "Treino 2019–2022 · apenas anos recentes",
+        "B": "Treinado com dados de 2001 a 2022 — maior volume historico",
+        "C": "Treinado com 2001–2022, priorizando dados mais recentes",
+        "A": "Treinado apenas com 2019–2022 — referencia rapida",
     }
     _sub_desc = {
-        "inmet_enriquecido": "266 features · SINAN + INMET enriquecido",
-        "inmet_bruto": "122 features · SINAN + INMET bruto",
-        "sinan_only": "110 features · apenas dados epidemiologicos",
+        "inmet_enriquecido": "266 variaveis — dados de saude + clima com indicadores derivados",
+        "inmet_bruto": "122 variaveis — dados de saude + clima bruto",
+        "sinan_only": "110 variaveis — apenas dados epidemiologicos (sem clima)",
     }
     with st.sidebar:
         st.markdown("---")
-        st.markdown('<p style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#98a2b3;margin-bottom:.4rem">Periodo de treinamento</p>', unsafe_allow_html=True)
-        var = st.radio("modelo_var", ["B","C","A"], index=0,
-                       format_func=lambda v: _var_labels[v],
-                       label_visibility="collapsed")
+        var = st.selectbox("Periodo de treinamento", ["B","C","A"],
+                           format_func=lambda v: _var_labels[v])
         st.caption(_var_desc[var])
-        st.markdown('<p style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#98a2b3;margin-bottom:.4rem;margin-top:.8rem">Conjunto de dados</p>', unsafe_allow_html=True)
-        sub = st.radio("modelo_sub", ["inmet_enriquecido","inmet_bruto","sinan_only"], index=0,
-                       format_func=lambda s: _sub_labels[s],
-                       label_visibility="collapsed")
+        sub = st.selectbox("Conjunto de dados",
+                           ["inmet_enriquecido","inmet_bruto","sinan_only"],
+                           format_func=lambda s: _sub_labels[s])
         st.caption(_sub_desc[sub])
         st.markdown("---")
         dark = st.toggle("Tema escuro", value=False, key="dark_mode")
@@ -550,33 +527,109 @@ def main():
     if dark:
         st.markdown("""<style>
         :root {
-          --bg: #0f1117 !important; --card: #1a1c23 !important;
-          --border: #2d2f36 !important; --text: #f0f2f5 !important;
-          --muted: #6b7280 !important; --sub: #9ca3af !important;
-          --ink: #d1d5db !important; --surface: #1a1c23 !important;
+          --bg: #0f1117 !important; --card: #161b22 !important;
+          --border: #21262d !important; --text: #e5e7eb !important;
+          --muted: #6e7681 !important; --sub: #8b949e !important;
+          --ink: #c9d1d9 !important; --surface: #161b22 !important;
         }
-        html, body, [class*="css"], .stApp { background: #0f1117 !important; color: #f0f2f5 !important }
-        section[data-testid="stSidebar"] { background: #141620 !important; border-right-color: #2d2f36 !important }
-        section[data-testid="stSidebar"] * { color: #9ca3af !important }
-        section[data-testid="stSidebar"] .stRadio > div > label {
-          background: #1a1c23 !important; border-color: #2d2f36 !important;
-        }
-        section[data-testid="stSidebar"] .stRadio > div > label:hover {
-          border-color: #6366f1 !important; background: #1e1f2e !important;
-        }
-        section[data-testid="stSidebar"] .stRadio > div > label:has(input:checked) {
-          border-color: #6366f1 !important; background: #1e1b4b !important;
-          box-shadow: 0 0 0 1px #6366f1 !important;
-        }
-        section[data-testid="stSidebar"] .stRadio > div > label p { color: #d1d5db !important }
-        [data-testid="stMetric"] { background: #1a1c23 !important; border-color: #2d2f36 !important }
-        [data-testid="stMetricValue"] { color: #f0f2f5 !important }
-        .stSelectbox > div > div { background: #1a1c23 !important; border-color: #2d2f36 !important; color: #f0f2f5 !important }
-        .stTabs [data-baseweb="tab-list"] { background: #1a1c23 !important }
-        .stTabs [data-baseweb="tab"] { color: #9ca3af !important }
-        .stTabs [data-baseweb="tab"]:hover { color: #f0f2f5 !important; background: rgba(99,102,241,.1) !important }
-        .stTabs [aria-selected="true"] { color: #fff !important; background: #5046e5 !important }
+        html, body, [class*="css"], .stApp { background: #0f1117 !important; color: #e5e7eb !important }
         header[data-testid="stHeader"] { background: #0f1117 !important }
+        .stMarkdown p, .stMarkdown li { color: #c9d1d9 !important }
+        .block-container { background: #0f1117 !important }
+
+        /* Sidebar */
+        section[data-testid="stSidebar"] {
+          background: #161b22 !important; border-right-color: #21262d !important;
+        }
+        section[data-testid="stSidebar"] * { color: #8b949e !important }
+        section[data-testid="stSidebar"] .stSelectbox label { color: #6e7681 !important }
+        section[data-testid="stSidebar"] .stSelectbox > div > div {
+          background: #0d1117 !important; border-color: #30363d !important; color: #e5e7eb !important;
+        }
+        section[data-testid="stSidebar"] .stSelectbox > div > div:hover,
+        section[data-testid="stSidebar"] .stSelectbox > div > div:focus-within {
+          border-color: #6366f1 !important; box-shadow: 0 0 0 3px rgba(99,102,241,.15) !important;
+        }
+        section[data-testid="stSidebar"] .stCaption p { color: #6e7681 !important }
+        section[data-testid="stSidebar"] hr { border-color: #21262d !important }
+
+        /* Tabs */
+        .stTabs [data-baseweb="tab-list"] { background: #161b22 !important }
+        .stTabs [data-baseweb="tab"] { color: #8b949e !important }
+        .stTabs [data-baseweb="tab"]:hover { color: #e5e7eb !important; background: rgba(99,102,241,.12) !important }
+        .stTabs [aria-selected="true"] { color: #fff !important; background: #5046e5 !important }
+
+        /* Metrics */
+        [data-testid="stMetric"] { background: #161b22 !important; border-color: #21262d !important }
+        [data-testid="stMetricValue"] { color: #e5e7eb !important }
+        [data-testid="stMetricLabel"] { color: #6e7681 !important }
+
+        /* Selectboxes (main area) */
+        .stSelectbox > div > div {
+          background: #161b22 !important; border-color: #30363d !important; color: #e5e7eb !important;
+        }
+        .stSelectbox label { color: #8b949e !important }
+
+        /* KPI cards */
+        .kpi-card { background: #161b22 !important; border-color: #21262d !important }
+
+        /* Sidebar stats */
+        .sidebar-stat { background: #0d1117 !important; border-color: #21262d !important }
+        .sidebar-stat .stat-label { color: #6e7681 !important }
+        .sidebar-stat .stat-value { color: #e5e7eb !important }
+
+        /* Section headers */
+        .sec-header { color: #8b949e !important }
+        .sec-header span { background: #6366f1 !important }
+
+        /* DataFrames */
+        [data-testid="stDataFrame"] { border-color: #21262d !important }
+
+        /* Risk filter pills */
+        div[data-testid="stRadio"] [role="radiogroup"] { background: #161b22 !important }
+        div[data-testid="stRadio"] label { color: #8b949e !important }
+        div[data-testid="stRadio"] label[data-checked="true"],
+        div[data-testid="stRadio"] label:has(input:checked) {
+          background: #21262d !important; color: #e5e7eb !important;
+        }
+
+        /* Region cards & general white cards */
+        div[style*="background:#fff"] { background: #161b22 !important; border-color: #21262d !important }
+        div[style*="background:linear-gradient(135deg,#eef2ff"] { background: #1c1e2e !important; border-color: #312e81 !important }
+
+        /* Download button */
+        .stDownloadButton > button { box-shadow: 0 2px 8px rgba(99,102,241,.3) !important }
+
+        /* Slider */
+        .stSlider label { color: #8b949e !important }
+
+        /* Toggle */
+        section[data-testid="stSidebar"] [data-testid="stWidgetLabel"] p { color: #8b949e !important }
+
+        /* Dropdown menus */
+        [data-baseweb="popover"] { background: #161b22 !important; border-color: #21262d !important }
+        [data-baseweb="popover"] li { color: #c9d1d9 !important }
+        [data-baseweb="popover"] li:hover { background: #21262d !important }
+        ul[role="listbox"] { background: #161b22 !important }
+        ul[role="listbox"] li { color: #c9d1d9 !important }
+        ul[role="listbox"] li:hover, ul[role="listbox"] li[aria-selected="true"] {
+          background: #21262d !important;
+        }
+
+        /* Plotly charts */
+        .js-plotly-plot text { fill: #8b949e !important }
+        .js-plotly-plot .gridlayer line { stroke: #21262d !important }
+        .js-plotly-plot .zerolinelayer line { stroke: #30363d !important }
+
+        /* Plotly legend */
+        .js-plotly-plot .legend text { fill: #8b949e !important }
+
+        /* Caption text */
+        .stCaption p { color: #6e7681 !important }
+
+        /* Expander */
+        [data-testid="stExpander"] { border-color: #21262d !important; background: #161b22 !important }
+        [data-testid="stExpander"] summary { color: #c9d1d9 !important }
         </style>""", unsafe_allow_html=True)
 
     live_mode = _has_train(var)
@@ -606,16 +659,16 @@ def main():
         sel_uf = st.selectbox("UF", ["Todos"]+list(ufs))
         st.markdown("---")
         st.markdown(
-            f'<div style="display:grid;gap:.4rem">'
-            f'<div style="background:#fff;border:1px solid #eef0f3;border-radius:10px;padding:.5rem .65rem">'
-            f'<div style="font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#98a2b3">Previsoes</div>'
-            f'<div style="font-size:.88rem;font-weight:800;color:#101828">{len(preds):,}</div></div>'
-            f'<div style="background:#fff;border:1px solid #eef0f3;border-radius:10px;padding:.5rem .65rem">'
-            f'<div style="font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#98a2b3">Cobertura</div>'
-            f'<div style="font-size:.88rem;font-weight:800;color:#101828">{all_anos[0]}–{all_anos[-1]}</div></div>'
-            f'<div style="background:#fff;border:1px solid #eef0f3;border-radius:10px;padding:.5rem .65rem">'
-            f'<div style="font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#98a2b3">Mesorregioes</div>'
-            f'<div style="font-size:.88rem;font-weight:800;color:#101828">137</div></div>'
+            f'<div style="display:grid;gap:.5rem">'
+            f'<div class="sidebar-stat" style="background:#fff;border:1px solid #eef0f3;border-radius:12px;padding:.6rem .8rem">'
+            f'<div class="stat-label" style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#98a2b3">Previsoes</div>'
+            f'<div class="stat-value" style="font-size:1rem;font-weight:800;color:#101828">{len(preds):,}</div></div>'
+            f'<div class="sidebar-stat" style="background:#fff;border:1px solid #eef0f3;border-radius:12px;padding:.6rem .8rem">'
+            f'<div class="stat-label" style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#98a2b3">Cobertura</div>'
+            f'<div class="stat-value" style="font-size:1rem;font-weight:800;color:#101828">{all_anos[0]}–{all_anos[-1]}</div></div>'
+            f'<div class="sidebar-stat" style="background:#fff;border:1px solid #eef0f3;border-radius:12px;padding:.6rem .8rem">'
+            f'<div class="stat-label" style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#98a2b3">Mesorregioes</div>'
+            f'<div class="stat-value" style="font-size:1rem;font-weight:800;color:#101828">137</div></div>'
             f'</div>',
             unsafe_allow_html=True)
 
@@ -771,16 +824,36 @@ def main():
         opts = {m: mn(m, names) for m in mesos}
         sel_meso = st.selectbox("Buscar mesorregiao", mesos,
                                 format_func=lambda x: opts[x], key="meso",
-                                index=None, placeholder="Selecione uma mesorregiao...")
+                                index=None, placeholder="Digite ou selecione uma mesorregiao...")
         if sel_meso is None:
+            _latest_r = view.sort_values(["ano","semana_epidemiologica"]).groupby("cod_mesorregiao").last().reset_index()
+            _top_risk = _latest_r.nlargest(8, "pred_risco").head(8)
             st.markdown(
-                '<div style="text-align:center;padding:3rem 1rem;color:#98a2b3">'
-                '<div style="font-size:2.5rem;margin-bottom:.5rem">🔍</div>'
-                '<p style="font-size:.9rem;font-weight:600;color:#667085;margin-bottom:.3rem">'
-                'Selecione uma mesorregiao acima</p>'
-                '<p style="font-size:.78rem">Escolha uma das 137 mesorregioes para ver '
-                'previsoes detalhadas, serie temporal e probabilidades de risco.</p></div>',
+                '<div style="background:linear-gradient(135deg,#eef2ff,#f5f3ff);border:1px solid #c7d2fe;'
+                'border-radius:14px;padding:1.5rem 1.8rem;margin:1rem 0">'
+                '<p style="font-size:1rem;font-weight:700;color:#1e1b4b;margin-bottom:.3rem">'
+                'Explore uma mesorregiao</p>'
+                '<p style="font-size:.88rem;color:#667085;margin-bottom:1rem">'
+                'Selecione uma das 137 mesorregioes no campo acima para ver previsoes detalhadas, '
+                'serie temporal e probabilidades de risco por semana epidemiologica.</p>'
+                '</div>',
                 unsafe_allow_html=True)
+            sec("Mesorregioes com maior risco atual")
+            _cols = st.columns(4)
+            _pill_bg = {"Surto":"#fef2f2","Alto":"#fff7ed","Moderado":"#fefce8","Baixo":"#f0fdf4"}
+            _pill_fg = {"Surto":"#dc2626","Alto":"#ea580c","Moderado":"#a16207","Baixo":"#16a34a"}
+            for i, (_, row) in enumerate(_top_risk.iterrows()):
+                _rl = row["pred_label"]
+                _nm = mn(row["cod_mesorregiao"], names)
+                _cols[i % 4].markdown(
+                    f'<div style="background:#fff;border:1px solid #e4e7ec;border-radius:12px;'
+                    f'padding:.8rem 1rem;margin-bottom:.5rem;box-shadow:0 1px 3px rgba(16,24,40,.04)">'
+                    f'<p style="font-size:.85rem;font-weight:700;color:#101828;margin-bottom:.3rem">{_nm}</p>'
+                    f'<span style="padding:.15rem .5rem;border-radius:5px;font-size:.72rem;'
+                    f'font-weight:700;background:{_pill_bg[_rl]};color:{_pill_fg[_rl]}">{_rl}</span>'
+                    f'&nbsp;<span style="font-size:.78rem;color:#98a2b3">'
+                    f'P(Surto) {row["p_surto"]*100:.0f}%</span></div>',
+                    unsafe_allow_html=True)
         if sel_meso is not None:
             df_m = preds[preds["cod_mesorregiao"]==sel_meso].sort_values(
                 ["ano","semana_epidemiologica"]).copy()
@@ -804,10 +877,10 @@ def main():
                 unsafe_allow_html=True)
 
             c1,c2,c3,c4 = st.columns(4)
-            c1.metric("Notificacoes", f"{last['notificacoes']:,.0f}")
-            c2.metric("Previsao t+4", f"{last['pred_notif']:,.0f}")
-            c3.metric("Risco", rl)
-            c4.metric("P(Surto)", f"{last['p_surto']*100:.1f}%")
+            c1.metric("Casos atuais", f"{last['notificacoes']:,.0f}")
+            c2.metric("Previsao 4 semanas", f"{last['pred_notif']:,.0f}")
+            c3.metric("Nivel de risco", rl)
+            c4.metric("Chance de surto", f"{last['p_surto']*100:.1f}%")
 
             sec("Serie temporal")
             fig_ts = go.Figure()
@@ -843,11 +916,11 @@ def main():
             pred = df_m["pred_notif"].values
             mk = ~np.isnan(act) & ~np.isnan(pred) & (act>=0)
             if mk.sum() > 5:
-                sec("Metricas locais")
+                sec("Desempenho do modelo nesta regiao")
                 m1,m2,m3 = st.columns(3)
-                m1.metric("R² (log)", f"{r2_score(np.log1p(act[mk]), np.log1p(pred[mk])):.3f}")
-                m2.metric("MAE", f"{mean_absolute_error(act[mk], pred[mk]):.0f}")
-                m3.metric("Acuracia risco",
+                m1.metric("Qualidade (R²)", f"{r2_score(np.log1p(act[mk]), np.log1p(pred[mk])):.3f}")
+                m2.metric("Erro medio", f"{mean_absolute_error(act[mk], pred[mk]):.0f} casos")
+                m3.metric("Acerto no risco",
                           f"{(df_m['pred_risco'].values==df_m['risco_surto_t4'].values).mean():.0%}")
 
     # ════════════════════════════════════════════════════════════
@@ -855,15 +928,15 @@ def main():
     # ════════════════════════════════════════════════════════════
     with t3:
         st.markdown(
-            '<p style="font-size:.82rem;color:#667085;margin-bottom:.5rem;line-height:1.7">'
+            '<p style="font-size:.92rem;color:#667085;margin-bottom:.8rem;line-height:1.7">'
             'Analise temporal do desempenho das previsoes. Compara os valores reais de notificacoes '
             'com os previstos pelo modelo ao longo do tempo e por ano.</p>',
             unsafe_allow_html=True)
-        sec("Previsto vs Real (log scale)")
+        sec("Previsao vs Realidade")
         st.markdown(
-            '<p style="font-size:.76rem;color:#98a2b3;margin-bottom:.6rem">'
-            'Cada ponto e uma mesorregiao-semana. Pontos proximos a linha tracejada = boa previsao. '
-            'Escala logaritmica para visualizar tanto regioes com poucas quanto com muitas notificacoes.</p>',
+            '<p style="font-size:.85rem;color:#98a2b3;margin-bottom:.6rem;line-height:1.6">'
+            'Cada ponto representa uma mesorregiao em uma semana. Pontos proximos a linha tracejada '
+            'indicam boa previsao. Escala logaritmica para comparar regioes com poucos e muitos casos.</p>',
             unsafe_allow_html=True)
         samp = view.sample(min(5000, len(view)), random_state=42)
         samp["log_real"] = np.log1p(samp["notificacoes_t4"])
@@ -871,7 +944,7 @@ def main():
         fig_sc = px.scatter(
             samp, x="log_real", y="log_pred",
             color="pred_label", color_discrete_map=RISK_CLR, opacity=.3,
-            labels={"log_real":"log(Real+1)","log_pred":"log(Previsto+1)","pred_label":"Risco"})
+            labels={"log_real":"Notificacoes reais (escala log)","log_pred":"Previsao do modelo (escala log)","pred_label":"Nivel de risco"})
         mx = max(samp["log_real"].quantile(.99), samp["log_pred"].quantile(.99))
         fig_sc.add_trace(go.Scatter(
             x=[0,mx], y=[0,mx], mode="lines",
@@ -881,10 +954,10 @@ def main():
                                     yaxis=dict(gridcolor="#f2f4f7")))
         st.plotly_chart(fig_sc, use_container_width=True)
 
-        sec("Total nacional semanal")
+        sec("Total de casos no Brasil por semana")
         st.markdown(
-            '<p style="font-size:.76rem;color:#98a2b3;margin-bottom:.6rem">'
-            'Soma de todas as mesorregioes por semana epidemiologica. '
+            '<p style="font-size:.85rem;color:#98a2b3;margin-bottom:.6rem;line-height:1.6">'
+            'Soma de todas as mesorregioes por semana. '
             'Linha solida = dados reais, tracejada = previsao do modelo.</p>',
             unsafe_allow_html=True)
         wk_agg = view.groupby("periodo").agg(
@@ -902,11 +975,11 @@ def main():
                                      yaxis=dict(gridcolor="#f2f4f7", title="")))
         st.plotly_chart(fig_nat, use_container_width=True)
 
-        sec("R² por ano")
+        sec("Qualidade da previsao por ano")
         st.markdown(
-            '<p style="font-size:.76rem;color:#98a2b3;margin-bottom:.6rem">'
+            '<p style="font-size:.85rem;color:#98a2b3;margin-bottom:.6rem;line-height:1.6">'
             'Desempenho do modelo em cada ano. Cores indicam se o ano foi usado para treino, '
-            'validacao ou teste. R² mais alto = melhor previsao naquele ano.</p>',
+            'validacao ou teste. Barras mais altas indicam melhor previsao.</p>',
             unsafe_allow_html=True)
         from sklearn.metrics import r2_score
         yr_stats = []
@@ -923,12 +996,22 @@ def main():
                 })
         if yr_stats:
             df_yr = pd.DataFrame(yr_stats)
-            fig_yr = px.bar(df_yr, x="Ano", y="R2", color="split",
-                            color_discrete_map={"train":"#818cf8","val":"#fbbf24","test":"#f87171"},
-                            labels={"split":"Split","R2":"R²"})
-            fig_yr.update_layout(**plo(h=300,
-                                       xaxis=dict(showgrid=False, title=""),
-                                       yaxis=dict(gridcolor="#f2f4f7", title="R²")))
+            _split_labels = {"train":"Treino","val":"Validacao","test":"Teste"}
+            df_yr["Tipo"] = df_yr["split"].map(_split_labels)
+            fig_yr = px.bar(df_yr, x="Ano", y="R2", color="Tipo",
+                            color_discrete_map={"Treino":"#818cf8","Validacao":"#fbbf24","Teste":"#f87171"},
+                            labels={"R2":"Qualidade da previsao"},
+                            text=df_yr["R2"].apply(lambda v: f"{v:.2f}"))
+            fig_yr.update_traces(
+                textposition="outside",
+                textfont=dict(size=11, family=PLOTLY_FONT, color="#344054"),
+                width=0.7)
+            fig_yr.update_layout(**plo(h=400,
+                                       xaxis=dict(showgrid=False, title="", dtick=1,
+                                                  tickfont=dict(size=11)),
+                                       yaxis=dict(gridcolor="#f2f4f7", title="Qualidade (R²)",
+                                                  range=[0, 1.08]),
+                                       bargap=0.15))
             st.plotly_chart(fig_yr, use_container_width=True)
 
     # ════════════════════════════════════════════════════════════
@@ -936,27 +1019,28 @@ def main():
     # ════════════════════════════════════════════════════════════
     with t4:
         st.markdown(
-            '<p style="font-size:.82rem;color:#667085;margin-bottom:1rem;line-height:1.7">'
-            'Metricas de desempenho do modelo XGBoost selecionado. '
-            '<b style="color:#344054">R²</b> mede o quanto o modelo explica a variacao dos dados (mais perto de 1 = melhor). '
-            '<b style="color:#344054">RMSE</b> e <b style="color:#344054">MAE</b> medem o erro medio das previsoes em numero de notificacoes.</p>',
+            '<p style="font-size:.92rem;color:#667085;margin-bottom:1rem;line-height:1.7">'
+            'Desempenho do modelo de inteligencia artificial selecionado. '
+            '<b style="color:#344054">Qualidade (R²)</b> indica o quanto o modelo consegue explicar os dados '
+            '(mais perto de 1 = melhor). <b style="color:#344054">Erro medio</b> indica quantas notificacoes '
+            'o modelo erra em media.</p>',
             unsafe_allow_html=True)
         mk_key = f"{var}_{sub}"
         reg = reports.get("reg", {})
         if mk_key in reg.get("modelos", {}):
             m = reg["modelos"][mk_key]
-            sec("Regressao — modelo selecionado")
+            sec("Previsao de notificacoes — modelo selecionado")
             k1,k2,k3,k4 = st.columns(4)
-            k1.metric("R² (log)", f"{m['R2_log']:.4f}")
-            k2.metric("RMSE", f"{m['RMSE']:,.0f}")
-            k3.metric("MAE", f"{m['MAE']:,.1f}")
-            k4.metric("IC 95%", f"[{m['R2_log_CI95_lo']:.4f}, {m['R2_log_CI95_hi']:.4f}]")
+            k1.metric("Qualidade (R²)", f"{m['R2_log']:.4f}")
+            k2.metric("Erro medio (RMSE)", f"{m['RMSE']:,.0f}")
+            k3.metric("Desvio medio (MAE)", f"{m['MAE']:,.1f}")
+            k4.metric("Intervalo confianca", f"{m['R2_log_CI95_lo']:.4f} – {m['R2_log_CI95_hi']:.4f}")
 
         sec("Comparativo variantes")
         st.markdown(
-            '<p style="font-size:.78rem;color:#667085;margin-bottom:.8rem;line-height:1.6">'
-            'Comparacao de desempenho entre as 3 variantes de treinamento usando o sub-modelo INMET enriquecido. '
-            'As barras de erro mostram o intervalo de confianca de 95%.</p>',
+            '<p style="font-size:.88rem;color:#667085;margin-bottom:.8rem;line-height:1.6">'
+            'Comparacao entre as 3 estrategias de treinamento. '
+            'Barras de erro mostram a margem de incerteza do resultado.</p>',
             unsafe_allow_html=True)
         cv, cc = st.columns(2)
         with cv:
@@ -994,9 +1078,9 @@ def main():
                         mm = cls_r["modelos"][k]
                         rows.append({
                             "Variante": f"Var {v}",
-                            "F1 macro": f"{mm['f1_macro']:.4f}",
-                            "AUC": f"{mm['auc_macro_ovr']:.4f}",
-                            "F1 surto": f"{mm['f1_per_class']['surto']:.4f}",
+                            "Precisao geral": f"{mm['f1_macro']:.4f}",
+                            "Capacidade de distincao": f"{mm['auc_macro_ovr']:.4f}",
+                            "Acerto em surtos": f"{mm['f1_per_class']['surto']:.4f}",
                         })
                 if rows:
                     sec("Classificacao de risco")
@@ -1006,9 +1090,9 @@ def main():
         if wf and "modelos" in wf:
             sec("Walk-Forward Validation")
             st.markdown(
-                '<p style="font-size:.78rem;color:#667085;margin-bottom:.8rem;line-height:1.6">'
+                '<p style="font-size:.88rem;color:#667085;margin-bottom:.8rem;line-height:1.6">'
                 'Simulacao de uso real: o modelo e treinado com dados ate um ano e testado no ano seguinte, '
-                'avancando progressivamente. Mostra como o modelo se comportaria em producao.</p>',
+                'avancando progressivamente. Mostra como o modelo se comportaria se usado em tempo real.</p>',
                 unsafe_allow_html=True)
             wfr = []
             for v in ["A","B","C"]:
@@ -1016,15 +1100,15 @@ def main():
                 if k in wf["modelos"]:
                     for i, fold in enumerate(wf["modelos"][k].get("folds",[]),1):
                         yr = fold["test_years"][0] if "test_years" in fold else "?"
-                        wfr.append({"Var":f"Var {v}","Fold":f"F{i} ({yr})","R2":fold["R2_log"]})
+                        wfr.append({"Variante":f"Var {v}","Periodo de teste":f"Teste {yr}","Qualidade":fold["R2_log"]})
             if wfr:
-                fig_wf = px.line(pd.DataFrame(wfr), x="Fold", y="R2", color="Var",
+                fig_wf = px.line(pd.DataFrame(wfr), x="Periodo de teste", y="Qualidade", color="Variante",
                                  markers=True,
                                  color_discrete_map={"Var A":"#93c5fd","Var B":"#5046e5",
                                                      "Var C":"#a78bfa"})
                 fig_wf.update_layout(**plo(h=300,
                                            xaxis=dict(showgrid=False),
-                                           yaxis=dict(gridcolor="#f2f4f7", title="R²")))
+                                           yaxis=dict(gridcolor="#f2f4f7", title="Qualidade (R²)")))
                 st.plotly_chart(fig_wf, use_container_width=True)
 
         shap_df = reports.get("shap")
@@ -1032,18 +1116,38 @@ def main():
             shap_col = "shap_mean_abs_B" if "shap_mean_abs_B" in shap_df.columns else shap_df.columns[1]
             sec("SHAP Feature Importance")
             st.markdown(
-                '<p style="font-size:.78rem;color:#667085;margin-bottom:.8rem;line-height:1.6">'
-                'SHAP mede a contribuicao de cada variavel para as previsoes. '
-                'Quanto maior a barra, mais essa variavel influencia o resultado do modelo.</p>',
+                '<p style="font-size:.88rem;color:#667085;margin-bottom:.8rem;line-height:1.6">'
+                'Quais dados mais influenciam a previsao? '
+                'Barras maiores indicam variaveis que tem mais peso na decisao do modelo.</p>',
                 unsafe_allow_html=True)
-            n = st.slider("Top N", 10, 50, 15, key="shap_n")
-            top_n = shap_df.nlargest(n, shap_col)
-            fig_sh = px.bar(top_n, x=shap_col, y="feature", orientation="h",
+            _feat_names = {
+                "notificacoes_lag_1w": "Notificacoes (1 sem. atras)",
+                "notificacoes_lag_2w": "Notificacoes (2 sem. atras)",
+                "notificacoes_lag_3w": "Notificacoes (3 sem. atras)",
+                "notificacoes_lag_4w": "Notificacoes (4 sem. atras)",
+                "notificacoes_lag_6w": "Notificacoes (6 sem. atras)",
+                "notificacoes_lag_8w": "Notificacoes (8 sem. atras)",
+                "notificacoes_diff_1w": "Variacao semanal de casos",
+                "notificacoes_pct_change_1w": "Variacao % semanal",
+                "notificacoes_media_movel_2_4w": "Media movel 2-4 sem.",
+                "notificacoes_media_movel_4_8w": "Media movel 4-8 sem.",
+                "week_of_year_cos": "Sazonalidade (cosseno)",
+                "week_of_year_sin": "Sazonalidade (seno)",
+                "qt_confirmados_provaveis": "Casos confirmados/provaveis",
+                "prop_confirmado_provavel": "Proporcao confirmados",
+                "atraso_notificacao_medio_dias": "Atraso medio notificacao",
+                "prop_raca_parda": "Proporcao raca parda",
+                "prop_criterio_lab": "Proporcao criterio laboratorial",
+            }
+            n = st.slider("Quantidade de variaveis", 10, 50, 15, key="shap_n")
+            top_n = shap_df.nlargest(n, shap_col).copy()
+            top_n["nome"] = top_n["feature"].map(lambda f: _feat_names.get(f, f.replace("_"," ").title()))
+            fig_sh = px.bar(top_n, x=shap_col, y="nome", orientation="h",
                             color=shap_col,
                             color_continuous_scale=["#e0e7ff","#5046e5"])
-            fig_sh.update_layout(**plo(h=max(260, n*22),
+            fig_sh.update_layout(**plo(h=max(280, n*24),
                                        yaxis=dict(autorange="reversed", title=""),
-                                       xaxis=dict(title="SHAP", gridcolor="#f2f4f7"),
+                                       xaxis=dict(title="Importancia (SHAP)", gridcolor="#f2f4f7"),
                                        coloraxis_showscale=False))
             st.plotly_chart(fig_sh, use_container_width=True)
 
@@ -1131,8 +1235,40 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:#101828;back
 .warn{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:.8rem 1.1rem}
 .warn ul{padding-left:1rem;margin:0}
 .warn li{color:#92400e;font-size:.8rem;margin-bottom:.25rem}
+
+/* Dark mode */
+body.dark{background:#0f1117;color:#e5e7eb}
+body.dark .card{background:#161b22;border-color:#21262d}
+body.dark .card p,body.dark .card li{color:#8b949e}
+body.dark .card b{color:#c9d1d9}
+body.dark .card-label{color:#6e7681}
+body.dark .tbl th{color:#6e7681;border-bottom-color:#21262d}
+body.dark .tbl td{color:#8b949e;border-bottom-color:#21262d}
+body.dark .tbl tr:hover td{background:#1c2028}
+body.dark .tbl .bld{color:#e5e7eb}
+body.dark .hl{background:#1e1b4b;border-left-color:#6366f1}
+body.dark .hl p{color:#a5b4fc}
+body.dark .chip{background:#21262d;border-color:#30363d;color:#c9d1d9}
+body.dark .mc{background:#21262d;border-color:#30363d}
+body.dark .mc .v{color:#818cf8}
+body.dark .mc .k{color:#6e7681}
+body.dark .vl li{color:#8b949e;border-bottom-color:#21262d}
+body.dark .warn{background:#1c1917;border-color:#78350f}
+body.dark .warn li{color:#fbbf24}
+body.dark .pipe .ps{background:#21262d;color:#8b949e}
+body.dark .pipe .ps.ml{background:#1e1b4b;color:#818cf8}
+body.dark .pipe .ar{color:#30363d}
+body.dark .badge.bs{background:#3b1117;color:#f87171;border-color:#7f1d1d}
+body.dark .badge.ba{background:#3b2010;color:#fb923c;border-color:#7c2d12}
+body.dark .badge.bm{background:#3b3010;color:#fbbf24;border-color:#713f12}
+body.dark .badge.bb{background:#0f291a;color:#4ade80;border-color:#14532d}
+body.dark .hero-stats .hs{background:rgba(255,255,255,.08)}
+body.dark .card[style*="linear-gradient"]{background:#1e1b4b !important;border-color:#312e81 !important}
+body.dark .card[style*="linear-gradient"] p[style*="color:#1e1b4b"]{color:#e0e7ff !important}
+body.dark .card[style*="linear-gradient"] p[style*="color:#4338ca"]{color:#a5b4fc !important}
+body.dark .card[style*="linear-gradient"] p[style*="color:#667085"]{color:#6e7681 !important}
 </style>
-</head><body>
+</head><body class="__THEME__">
 
 <!-- Hero -->
 <div class="hero">
@@ -1279,7 +1415,8 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:#101828;back
 
 </div>
 </body></html>"""
-        st.components.v1.html(about_html, height=1500, scrolling=False)
+        _theme_cls = "dark" if dark else ""
+        st.components.v1.html(about_html.replace("__THEME__", _theme_cls), height=1800, scrolling=True)
 
 
 if __name__ == "__main__":
