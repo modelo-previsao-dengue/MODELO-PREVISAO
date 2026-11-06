@@ -72,95 +72,48 @@ header[data-testid="stHeader"] {
   box-shadow: none !important;
 }
 [data-testid="stHeader"] [data-testid="stStatusWidget"],
-[data-testid="stHeader"] .stDeployButton,
-[data-testid="stHeader"] button[kind="header"],
-[data-testid="stToolbar"] {
+[data-testid="stHeader"] .stDeployButton {
   display: none !important;
 }
 .block-container {
   padding: 1.2rem 2.5rem 3rem !important;
   max-width: 1380px;
 }
-p, li, span, div { font-size: inherit !important }
 .stMarkdown p { font-size: .92rem !important; line-height: 1.65 !important }
 
 /* ─ Sidebar ─ */
 section[data-testid="stSidebar"] {
   background: #fafaf9 !important;
   border-right: none !important;
-  min-width: 290px !important;
-  box-shadow: 1px 0 16px rgba(16,24,40,.04) !important;
 }
-section[data-testid="stSidebar"] > div:first-child {
-  padding: 1.5rem 1.3rem 1.2rem !important;
-}
-/* Sidebar separator — thin gradient instead of plain hr */
 section[data-testid="stSidebar"] hr {
   border: none !important; height: 1px !important;
-  background: linear-gradient(90deg, transparent, #d6d3d1 30%, #d6d3d1 70%, transparent) !important;
-  margin: 1rem 0 !important; opacity: .6 !important;
+  background: #e7e5e4 !important;
+  margin: .5rem 0 !important;
 }
-/* Section label: refined small-caps with dot accent */
-section[data-testid="stSidebar"] .stSelectbox label,
-section[data-testid="stSidebar"] .sidebar-section-label {
-  font-size: .68rem !important; font-weight: 600 !important;
-  text-transform: uppercase !important; letter-spacing: .08em !important;
-  color: #78716c !important; margin-bottom: .35rem !important;
+section[data-testid="stSidebar"] .stSelectbox label {
+  font-size: .7rem !important; font-weight: 600 !important;
+  text-transform: uppercase !important; letter-spacing: .06em !important;
+  color: #78716c !important;
 }
-/* Selectbox: warm, soft, inviting */
 section[data-testid="stSidebar"] .stSelectbox > div > div {
-  font-size: .88rem !important; min-height: 44px !important;
+  font-size: .85rem !important;
   border: 1.5px solid #e7e5e4 !important; background: #fff !important;
-  border-radius: 12px !important; color: #1c1917 !important;
+  border-radius: 10px !important; color: #1c1917 !important;
   font-weight: 600 !important;
-  transition: all .2s cubic-bezier(.4,0,.2,1) !important;
-  box-shadow: 0 1px 2px rgba(28,25,23,.04) !important;
 }
 section[data-testid="stSidebar"] .stSelectbox > div > div:hover {
   border-color: #a8a29e !important;
-  box-shadow: 0 2px 8px rgba(28,25,23,.06) !important;
-  transform: translateY(-0.5px) !important;
 }
 section[data-testid="stSidebar"] .stSelectbox > div > div:focus-within {
   border-color: #5046e5 !important;
-  box-shadow: 0 0 0 3px rgba(80,70,229,.1), 0 2px 8px rgba(80,70,229,.06) !important;
+  box-shadow: 0 0 0 3px rgba(80,70,229,.1) !important;
 }
-/* Caption description below select */
 section[data-testid="stSidebar"] .stCaption p {
-  font-size: .78rem !important; color: #a8a29e !important;
-  line-height: 1.55 !important; font-style: italic !important;
-  margin-top: .15rem !important;
-}
-/* Toggle styling */
-section[data-testid="stSidebar"] [data-testid="stWidgetLabel"] p {
-  font-size: .82rem !important; font-weight: 500 !important; color: #57534e !important;
+  font-size: .72rem !important; color: #a8a29e !important;
+  font-style: italic !important;
 }
 
-/* ─ Sidebar expand button — BIG and visible ─ */
-[data-testid="collapsedControl"] {
-  background: var(--primary) !important;
-  color: #fff !important;
-  border: none !important;
-  border-radius: 0 12px 12px 0 !important;
-  width: 36px !important;
-  height: 36px !important;
-  left: 0 !important;
-  top: 14px !important;
-  box-shadow: var(--shadow-md) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  z-index: 999 !important;
-}
-[data-testid="collapsedControl"]:hover {
-  background: var(--primary-hover) !important;
-}
-[data-testid="collapsedControl"] svg {
-  fill: #fff !important;
-  stroke: #fff !important;
-  width: 18px !important;
-  height: 18px !important;
-}
 
 /* ─ Metrics ─ */
 [data-testid="stMetricValue"] {
@@ -533,138 +486,12 @@ def main():
         "sinan_only": "110 variaveis — apenas dados epidemiologicos (sem clima)",
     }
     with st.sidebar:
-        st.markdown(
-            '<div style="margin:0 0 1.2rem;padding-bottom:.8rem;'
-            'border-bottom:1px solid rgba(0,0,0,.06)">'
-            '<p style="font-size:.62rem;font-weight:600;text-transform:uppercase;'
-            'letter-spacing:.1em;color:#a8a29e;margin-bottom:.1rem">Configuracao</p>'
-            '<p style="font-size:.78rem;color:#78716c;font-weight:400">'
-            'Modelo e filtros de analise</p></div>',
-            unsafe_allow_html=True)
-        var = st.selectbox("Periodo de treinamento", ["B","C","A"],
+        var = st.selectbox("Periodo", ["B","C","A"],
                            format_func=lambda v: _var_labels[v])
         st.caption(_var_desc[var])
-        st.markdown('<div style="height:.4rem"></div>', unsafe_allow_html=True)
-        sub = st.selectbox("Conjunto de dados",
-                           ["inmet_enriquecido","inmet_bruto","sinan_only"],
+        sub = st.selectbox("Dados", ["inmet_enriquecido","inmet_bruto","sinan_only"],
                            format_func=lambda s: _sub_labels[s])
         st.caption(_sub_desc[sub])
-        st.markdown("---")
-        dark = st.toggle("Tema escuro", value=False, key="dark_mode")
-
-    if dark:
-        st.markdown("""<style>
-        :root {
-          --bg: #0f1117 !important; --card: #161b22 !important;
-          --border: #21262d !important; --text: #e5e7eb !important;
-          --muted: #6e7681 !important; --sub: #8b949e !important;
-          --ink: #c9d1d9 !important; --surface: #161b22 !important;
-        }
-        html, body, [class*="css"], .stApp { background: #0f1117 !important; color: #e5e7eb !important }
-        header[data-testid="stHeader"] { background: #0f1117 !important }
-        .stMarkdown p, .stMarkdown li { color: #c9d1d9 !important }
-        .block-container { background: #0f1117 !important }
-
-        /* Sidebar */
-        section[data-testid="stSidebar"] {
-          background: #131316 !important; box-shadow: 1px 0 24px rgba(0,0,0,.3) !important;
-        }
-        section[data-testid="stSidebar"] * { color: #8b949e !important }
-        section[data-testid="stSidebar"] .stSelectbox label { color: #57534e !important }
-        section[data-testid="stSidebar"] .stSelectbox > div > div {
-          background: #1c1c20 !important; border-color: #2a2a30 !important; color: #e5e7eb !important;
-          box-shadow: 0 1px 3px rgba(0,0,0,.2) !important;
-        }
-        section[data-testid="stSidebar"] .stSelectbox > div > div:hover {
-          border-color: #44444e !important;
-          box-shadow: 0 2px 8px rgba(0,0,0,.3) !important;
-        }
-        section[data-testid="stSidebar"] .stSelectbox > div > div:focus-within {
-          border-color: #6366f1 !important; box-shadow: 0 0 0 3px rgba(99,102,241,.2), 0 2px 8px rgba(99,102,241,.1) !important;
-        }
-        section[data-testid="stSidebar"] .stCaption p { color: #525252 !important }
-        section[data-testid="stSidebar"] hr {
-          background: linear-gradient(90deg, transparent, #2a2a30 30%, #2a2a30 70%, transparent) !important;
-        }
-
-        /* Tabs */
-        .stTabs [data-baseweb="tab-list"] { background: #161b22 !important }
-        .stTabs [data-baseweb="tab"] { color: #8b949e !important }
-        .stTabs [data-baseweb="tab"]:hover { color: #e5e7eb !important; background: rgba(99,102,241,.12) !important }
-        .stTabs [aria-selected="true"] { color: #fff !important; background: #5046e5 !important }
-
-        /* Metrics */
-        [data-testid="stMetric"] { background: #161b22 !important; border-color: #21262d !important }
-        [data-testid="stMetricValue"] { color: #e5e7eb !important }
-        [data-testid="stMetricLabel"] { color: #6e7681 !important }
-
-        /* Selectboxes (main area) */
-        .stSelectbox > div > div {
-          background: #161b22 !important; border-color: #30363d !important; color: #e5e7eb !important;
-        }
-        .stSelectbox label { color: #8b949e !important }
-
-        /* KPI cards */
-        .kpi-card { background: #161b22 !important; border-color: #21262d !important }
-
-        /* Sidebar stats */
-        .sidebar-stat { background: #1c1c20 !important; box-shadow: 0 1px 3px rgba(0,0,0,.3) !important }
-        .sidebar-stat .stat-label { color: #525252 !important }
-        .sidebar-stat .stat-value { color: #e5e7eb !important }
-
-        /* Section headers */
-        .sec-header { color: #8b949e !important }
-        .sec-header span { background: #6366f1 !important }
-
-        /* DataFrames */
-        [data-testid="stDataFrame"] { border-color: #21262d !important }
-
-        /* Risk filter pills */
-        div[data-testid="stRadio"] [role="radiogroup"] { background: #161b22 !important }
-        div[data-testid="stRadio"] label { color: #8b949e !important }
-        div[data-testid="stRadio"] label[data-checked="true"],
-        div[data-testid="stRadio"] label:has(input:checked) {
-          background: #21262d !important; color: #e5e7eb !important;
-        }
-
-        /* Region cards & general white cards */
-        div[style*="background:#fff"] { background: #161b22 !important; border-color: #21262d !important }
-        div[style*="background:linear-gradient(135deg,#eef2ff"] { background: #1c1e2e !important; border-color: #312e81 !important }
-
-        /* Download button */
-        .stDownloadButton > button { box-shadow: 0 2px 8px rgba(99,102,241,.3) !important }
-
-        /* Slider */
-        .stSlider label { color: #8b949e !important }
-
-        /* Toggle */
-        section[data-testid="stSidebar"] [data-testid="stWidgetLabel"] p { color: #8b949e !important }
-
-        /* Dropdown menus */
-        [data-baseweb="popover"] { background: #161b22 !important; border-color: #21262d !important }
-        [data-baseweb="popover"] li { color: #c9d1d9 !important }
-        [data-baseweb="popover"] li:hover { background: #21262d !important }
-        ul[role="listbox"] { background: #161b22 !important }
-        ul[role="listbox"] li { color: #c9d1d9 !important }
-        ul[role="listbox"] li:hover, ul[role="listbox"] li[aria-selected="true"] {
-          background: #21262d !important;
-        }
-
-        /* Plotly charts */
-        .js-plotly-plot text { fill: #8b949e !important }
-        .js-plotly-plot .gridlayer line { stroke: #21262d !important }
-        .js-plotly-plot .zerolinelayer line { stroke: #30363d !important }
-
-        /* Plotly legend */
-        .js-plotly-plot .legend text { fill: #8b949e !important }
-
-        /* Caption text */
-        .stCaption p { color: #6e7681 !important }
-
-        /* Expander */
-        [data-testid="stExpander"] { border-color: #21262d !important; background: #161b22 !important }
-        [data-testid="stExpander"] summary { color: #c9d1d9 !important }
-        </style>""", unsafe_allow_html=True)
 
     live_mode = _has_train(var)
 
@@ -694,36 +521,30 @@ def main():
         with _fu:
             ufs = sorted(preds["uf"].dropna().unique())
             sel_uf = st.selectbox("UF", ["Todos"]+list(ufs))
-        st.markdown("---")
+        _stat_css = (
+            "background:#fff;border-radius:10px;padding:.5rem .55rem;"
+            "text-align:center;position:relative;overflow:hidden;"
+            "box-shadow:0 1px 2px rgba(28,25,23,.04)"
+        )
+        _val_css = "font-size:1rem;font-weight:800;color:#1c1917;letter-spacing:-.02em"
+        _lbl_css = "font-size:.62rem;font-weight:500;color:#a8a29e;margin-top:.05rem"
+        _bar1 = "background:linear-gradient(90deg,#5046e5,#818cf8)"
+        _bar2 = "background:linear-gradient(90deg,#818cf8,#a78bfa)"
+        _bar3 = "background:linear-gradient(90deg,#a78bfa,#c4b5fd)"
+        _bar_css = "position:absolute;top:0;left:0;right:0;height:2px"
         st.markdown(
-            f'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.45rem">'
-            f'<div class="sidebar-stat" style="background:#fff;border-radius:12px;'
-            f'padding:.65rem .6rem;text-align:center;position:relative;overflow:hidden;'
-            f'box-shadow:0 1px 3px rgba(28,25,23,.05)">'
-            f'<div style="position:absolute;top:0;left:0;right:0;height:2px;'
-            f'background:linear-gradient(90deg,#5046e5,#818cf8)"></div>'
-            f'<div class="stat-value" style="font-size:1.05rem;font-weight:800;'
-            f'color:#1c1917;letter-spacing:-.02em">{len(preds):,}</div>'
-            f'<div class="stat-label" style="font-size:.55rem;font-weight:600;'
-            f'text-transform:uppercase;letter-spacing:.06em;color:#a8a29e;margin-top:.1rem">Previsoes</div></div>'
-            f'<div class="sidebar-stat" style="background:#fff;border-radius:12px;'
-            f'padding:.65rem .6rem;text-align:center;position:relative;overflow:hidden;'
-            f'box-shadow:0 1px 3px rgba(28,25,23,.05)">'
-            f'<div style="position:absolute;top:0;left:0;right:0;height:2px;'
-            f'background:linear-gradient(90deg,#818cf8,#a78bfa)"></div>'
-            f'<div class="stat-value" style="font-size:.9rem;font-weight:800;'
-            f'color:#1c1917;letter-spacing:-.02em">{all_anos[0]}–{all_anos[-1]}</div>'
-            f'<div class="stat-label" style="font-size:.55rem;font-weight:600;'
-            f'text-transform:uppercase;letter-spacing:.06em;color:#a8a29e;margin-top:.1rem">Cobertura</div></div>'
-            f'<div class="sidebar-stat" style="background:#fff;border-radius:12px;'
-            f'padding:.65rem .6rem;text-align:center;position:relative;overflow:hidden;'
-            f'box-shadow:0 1px 3px rgba(28,25,23,.05)">'
-            f'<div style="position:absolute;top:0;left:0;right:0;height:2px;'
-            f'background:linear-gradient(90deg,#a78bfa,#c4b5fd)"></div>'
-            f'<div class="stat-value" style="font-size:1.05rem;font-weight:800;'
-            f'color:#1c1917;letter-spacing:-.02em">137</div>'
-            f'<div class="stat-label" style="font-size:.55rem;font-weight:600;'
-            f'text-transform:uppercase;letter-spacing:.06em;color:#a8a29e;margin-top:.1rem">Regioes</div></div>'
+            f'<div style="display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin-top:.3rem">'
+            f'<div class="sidebar-stat" style="{_stat_css}"><div style="{_bar_css};{_bar1}"></div>'
+            f'<div class="stat-value" style="{_val_css}">{len(preds):,}</div>'
+            f'<div class="stat-label" style="{_lbl_css}">Prev.</div></div>'
+            f'<div class="sidebar-stat" style="{_stat_css}"><div style="{_bar_css};{_bar2}"></div>'
+            f'<div class="stat-value" style="{_val_css};font-size:.88rem">{all_anos[0]}–{all_anos[-1]}</div>'
+            f'<div class="stat-label" style="{_lbl_css}">Periodo</div></div>'
+            f'</div>'
+            f'<div style="display:grid;grid-template-columns:1fr;gap:.4rem;margin-top:.4rem">'
+            f'<div class="sidebar-stat" style="{_stat_css}"><div style="{_bar_css};{_bar3}"></div>'
+            f'<div class="stat-value" style="{_val_css}">137 mesorregioes &middot; {len(preds["uf"].dropna().unique())} UFs</div>'
+            f'<div class="stat-label" style="{_lbl_css}">Cobertura nacional</div></div>'
             f'</div>',
             unsafe_allow_html=True)
 
@@ -1470,8 +1291,7 @@ body.dark .card[style*="linear-gradient"] p[style*="color:#667085"]{color:#6e768
 
 </div>
 </body></html>"""
-        _theme_cls = "dark" if dark else ""
-        st.components.v1.html(about_html.replace("__THEME__", _theme_cls), height=1800, scrolling=True)
+        st.components.v1.html(about_html.replace("__THEME__", ""), height=1800, scrolling=True)
 
 
 if __name__ == "__main__":
