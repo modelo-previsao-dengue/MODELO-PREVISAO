@@ -38,10 +38,10 @@ st.set_page_config(page_title="DengueCast", page_icon="🦟", layout="wide",
 # ╚══════════════════════════════════════════════════════════╝
 
 st.markdown("""<style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap');
 
 :root {
-  --font: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font: 'DM Sans', -apple-system, sans-serif;
   --bg: #f5f6f8;
   --card: #ffffff;
   --border: #e4e7ec;
@@ -86,34 +86,54 @@ p, li, span, div { font-size: inherit !important }
 
 /* ─ Sidebar ─ */
 section[data-testid="stSidebar"] {
-  background: #fff !important;
-  border-right: 1px solid #eaecf0 !important;
-  min-width: 280px !important;
+  background: #fafaf9 !important;
+  border-right: none !important;
+  min-width: 290px !important;
+  box-shadow: 1px 0 16px rgba(16,24,40,.04) !important;
 }
 section[data-testid="stSidebar"] > div:first-child {
-  padding: 1.2rem 1rem !important;
+  padding: 1.5rem 1.3rem 1.2rem !important;
 }
-section[data-testid="stSidebar"] .stSelectbox label {
-  font-size: .72rem !important; font-weight: 700 !important;
-  text-transform: uppercase !important; letter-spacing: .05em !important;
-  color: #475467 !important; margin-bottom: .2rem !important;
+/* Sidebar separator — thin gradient instead of plain hr */
+section[data-testid="stSidebar"] hr {
+  border: none !important; height: 1px !important;
+  background: linear-gradient(90deg, transparent, #d6d3d1 30%, #d6d3d1 70%, transparent) !important;
+  margin: 1rem 0 !important; opacity: .6 !important;
 }
+/* Section label: refined small-caps with dot accent */
+section[data-testid="stSidebar"] .stSelectbox label,
+section[data-testid="stSidebar"] .sidebar-section-label {
+  font-size: .68rem !important; font-weight: 600 !important;
+  text-transform: uppercase !important; letter-spacing: .08em !important;
+  color: #78716c !important; margin-bottom: .35rem !important;
+}
+/* Selectbox: warm, soft, inviting */
 section[data-testid="stSidebar"] .stSelectbox > div > div {
-  font-size: .85rem !important; min-height: 42px !important;
-  border: 1.5px solid #d0d5dd !important; background: #f9fafb !important;
-  border-radius: 10px !important; color: #101828 !important;
-  font-weight: 600 !important; transition: all .15s ease !important;
+  font-size: .88rem !important; min-height: 44px !important;
+  border: 1.5px solid #e7e5e4 !important; background: #fff !important;
+  border-radius: 12px !important; color: #1c1917 !important;
+  font-weight: 600 !important;
+  transition: all .2s cubic-bezier(.4,0,.2,1) !important;
+  box-shadow: 0 1px 2px rgba(28,25,23,.04) !important;
 }
-section[data-testid="stSidebar"] .stSelectbox > div > div:hover,
+section[data-testid="stSidebar"] .stSelectbox > div > div:hover {
+  border-color: #a8a29e !important;
+  box-shadow: 0 2px 8px rgba(28,25,23,.06) !important;
+  transform: translateY(-0.5px) !important;
+}
 section[data-testid="stSidebar"] .stSelectbox > div > div:focus-within {
   border-color: #5046e5 !important;
-  box-shadow: 0 0 0 3px rgba(80,70,229,.08) !important;
+  box-shadow: 0 0 0 3px rgba(80,70,229,.1), 0 2px 8px rgba(80,70,229,.06) !important;
 }
-section[data-testid="stSidebar"] hr {
-  border-color: #eaecf0 !important; margin: .7rem 0 !important;
-}
+/* Caption description below select */
 section[data-testid="stSidebar"] .stCaption p {
-  font-size: .75rem !important; color: #667085 !important; line-height: 1.5 !important;
+  font-size: .78rem !important; color: #a8a29e !important;
+  line-height: 1.55 !important; font-style: italic !important;
+  margin-top: .15rem !important;
+}
+/* Toggle styling */
+section[data-testid="stSidebar"] [data-testid="stWidgetLabel"] p {
+  font-size: .82rem !important; font-weight: 500 !important; color: #57534e !important;
 }
 
 /* ─ Sidebar expand button — BIG and visible ─ */
@@ -265,7 +285,7 @@ iframe[title="streamlit_app.components.v1.html"] {
 # ║                    COMPONENTS                           ║
 # ╚══════════════════════════════════════════════════════════╝
 
-PLOTLY_FONT = "Plus Jakarta Sans, -apple-system, sans-serif"
+PLOTLY_FONT = "DM Sans, -apple-system, sans-serif"
 
 def plo(h=380, **kw):
     d = dict(
@@ -513,10 +533,18 @@ def main():
         "sinan_only": "110 variaveis — apenas dados epidemiologicos (sem clima)",
     }
     with st.sidebar:
-        st.markdown("---")
+        st.markdown(
+            '<div style="margin:0 0 1.2rem;padding-bottom:.8rem;'
+            'border-bottom:1px solid rgba(0,0,0,.06)">'
+            '<p style="font-size:.62rem;font-weight:600;text-transform:uppercase;'
+            'letter-spacing:.1em;color:#a8a29e;margin-bottom:.1rem">Configuracao</p>'
+            '<p style="font-size:.78rem;color:#78716c;font-weight:400">'
+            'Modelo e filtros de analise</p></div>',
+            unsafe_allow_html=True)
         var = st.selectbox("Periodo de treinamento", ["B","C","A"],
                            format_func=lambda v: _var_labels[v])
         st.caption(_var_desc[var])
+        st.markdown('<div style="height:.4rem"></div>', unsafe_allow_html=True)
         sub = st.selectbox("Conjunto de dados",
                            ["inmet_enriquecido","inmet_bruto","sinan_only"],
                            format_func=lambda s: _sub_labels[s])
@@ -539,19 +567,25 @@ def main():
 
         /* Sidebar */
         section[data-testid="stSidebar"] {
-          background: #161b22 !important; border-right-color: #21262d !important;
+          background: #131316 !important; box-shadow: 1px 0 24px rgba(0,0,0,.3) !important;
         }
         section[data-testid="stSidebar"] * { color: #8b949e !important }
-        section[data-testid="stSidebar"] .stSelectbox label { color: #6e7681 !important }
+        section[data-testid="stSidebar"] .stSelectbox label { color: #57534e !important }
         section[data-testid="stSidebar"] .stSelectbox > div > div {
-          background: #0d1117 !important; border-color: #30363d !important; color: #e5e7eb !important;
+          background: #1c1c20 !important; border-color: #2a2a30 !important; color: #e5e7eb !important;
+          box-shadow: 0 1px 3px rgba(0,0,0,.2) !important;
         }
-        section[data-testid="stSidebar"] .stSelectbox > div > div:hover,
+        section[data-testid="stSidebar"] .stSelectbox > div > div:hover {
+          border-color: #44444e !important;
+          box-shadow: 0 2px 8px rgba(0,0,0,.3) !important;
+        }
         section[data-testid="stSidebar"] .stSelectbox > div > div:focus-within {
-          border-color: #6366f1 !important; box-shadow: 0 0 0 3px rgba(99,102,241,.15) !important;
+          border-color: #6366f1 !important; box-shadow: 0 0 0 3px rgba(99,102,241,.2), 0 2px 8px rgba(99,102,241,.1) !important;
         }
-        section[data-testid="stSidebar"] .stCaption p { color: #6e7681 !important }
-        section[data-testid="stSidebar"] hr { border-color: #21262d !important }
+        section[data-testid="stSidebar"] .stCaption p { color: #525252 !important }
+        section[data-testid="stSidebar"] hr {
+          background: linear-gradient(90deg, transparent, #2a2a30 30%, #2a2a30 70%, transparent) !important;
+        }
 
         /* Tabs */
         .stTabs [data-baseweb="tab-list"] { background: #161b22 !important }
@@ -574,8 +608,8 @@ def main():
         .kpi-card { background: #161b22 !important; border-color: #21262d !important }
 
         /* Sidebar stats */
-        .sidebar-stat { background: #0d1117 !important; border-color: #21262d !important }
-        .sidebar-stat .stat-label { color: #6e7681 !important }
+        .sidebar-stat { background: #1c1c20 !important; box-shadow: 0 1px 3px rgba(0,0,0,.3) !important }
+        .sidebar-stat .stat-label { color: #525252 !important }
         .sidebar-stat .stat-value { color: #e5e7eb !important }
 
         /* Section headers */
@@ -653,22 +687,43 @@ def main():
 
     with st.sidebar:
         st.markdown("---")
-        all_anos = sorted(preds["ano"].unique())
-        sel_ano = st.selectbox("Ano", ["Todos"]+[str(a) for a in all_anos], index=0)
-        ufs = sorted(preds["uf"].dropna().unique())
-        sel_uf = st.selectbox("UF", ["Todos"]+list(ufs))
+        _fc, _fu = st.columns(2)
+        with _fc:
+            all_anos = sorted(preds["ano"].unique())
+            sel_ano = st.selectbox("Ano", ["Todos"]+[str(a) for a in all_anos], index=0)
+        with _fu:
+            ufs = sorted(preds["uf"].dropna().unique())
+            sel_uf = st.selectbox("UF", ["Todos"]+list(ufs))
         st.markdown("---")
         st.markdown(
-            f'<div style="display:grid;gap:.5rem">'
-            f'<div class="sidebar-stat" style="background:#fff;border:1px solid #eef0f3;border-radius:12px;padding:.6rem .8rem">'
-            f'<div class="stat-label" style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#98a2b3">Previsoes</div>'
-            f'<div class="stat-value" style="font-size:1rem;font-weight:800;color:#101828">{len(preds):,}</div></div>'
-            f'<div class="sidebar-stat" style="background:#fff;border:1px solid #eef0f3;border-radius:12px;padding:.6rem .8rem">'
-            f'<div class="stat-label" style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#98a2b3">Cobertura</div>'
-            f'<div class="stat-value" style="font-size:1rem;font-weight:800;color:#101828">{all_anos[0]}–{all_anos[-1]}</div></div>'
-            f'<div class="sidebar-stat" style="background:#fff;border:1px solid #eef0f3;border-radius:12px;padding:.6rem .8rem">'
-            f'<div class="stat-label" style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#98a2b3">Mesorregioes</div>'
-            f'<div class="stat-value" style="font-size:1rem;font-weight:800;color:#101828">137</div></div>'
+            f'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.45rem">'
+            f'<div class="sidebar-stat" style="background:#fff;border-radius:12px;'
+            f'padding:.65rem .6rem;text-align:center;position:relative;overflow:hidden;'
+            f'box-shadow:0 1px 3px rgba(28,25,23,.05)">'
+            f'<div style="position:absolute;top:0;left:0;right:0;height:2px;'
+            f'background:linear-gradient(90deg,#5046e5,#818cf8)"></div>'
+            f'<div class="stat-value" style="font-size:1.05rem;font-weight:800;'
+            f'color:#1c1917;letter-spacing:-.02em">{len(preds):,}</div>'
+            f'<div class="stat-label" style="font-size:.55rem;font-weight:600;'
+            f'text-transform:uppercase;letter-spacing:.06em;color:#a8a29e;margin-top:.1rem">Previsoes</div></div>'
+            f'<div class="sidebar-stat" style="background:#fff;border-radius:12px;'
+            f'padding:.65rem .6rem;text-align:center;position:relative;overflow:hidden;'
+            f'box-shadow:0 1px 3px rgba(28,25,23,.05)">'
+            f'<div style="position:absolute;top:0;left:0;right:0;height:2px;'
+            f'background:linear-gradient(90deg,#818cf8,#a78bfa)"></div>'
+            f'<div class="stat-value" style="font-size:.9rem;font-weight:800;'
+            f'color:#1c1917;letter-spacing:-.02em">{all_anos[0]}–{all_anos[-1]}</div>'
+            f'<div class="stat-label" style="font-size:.55rem;font-weight:600;'
+            f'text-transform:uppercase;letter-spacing:.06em;color:#a8a29e;margin-top:.1rem">Cobertura</div></div>'
+            f'<div class="sidebar-stat" style="background:#fff;border-radius:12px;'
+            f'padding:.65rem .6rem;text-align:center;position:relative;overflow:hidden;'
+            f'box-shadow:0 1px 3px rgba(28,25,23,.05)">'
+            f'<div style="position:absolute;top:0;left:0;right:0;height:2px;'
+            f'background:linear-gradient(90deg,#a78bfa,#c4b5fd)"></div>'
+            f'<div class="stat-value" style="font-size:1.05rem;font-weight:800;'
+            f'color:#1c1917;letter-spacing:-.02em">137</div>'
+            f'<div class="stat-label" style="font-size:.55rem;font-weight:600;'
+            f'text-transform:uppercase;letter-spacing:.06em;color:#a8a29e;margin-top:.1rem">Regioes</div></div>'
             f'</div>',
             unsafe_allow_html=True)
 
@@ -1157,10 +1212,10 @@ def main():
     with t5:
         about_html = """<!DOCTYPE html>
 <html><head>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:#101828;background:#f5f6f8;
+body{font-family:'DM Sans',-apple-system,sans-serif;color:#101828;background:#f5f6f8;
   line-height:1.65;-webkit-font-smoothing:antialiased}
 
 /* Hero */
