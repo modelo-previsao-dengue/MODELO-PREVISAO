@@ -40,7 +40,9 @@ models/classification_v3/*.ubj
 # Internal planning docs
 docs/superpowers/
 tasks/prd-organizacao-apresentacao-tcc2.md
+tasks/prd-denguecast-ux-redesign.md
 scripts/build_dashboard.py
+.superpowers/
 
 # Python
 __pycache__/

@@ -15,6 +15,7 @@ import xgboost as xgb
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "model_ready_v4"
+CACHE_DIR = Path(__file__).resolve().parent / "data"
 REG_DIR = ROOT / "models" / "regression_v4"
 CLS_DIR = ROOT / "models" / "classification_v4"
 MAP_PATH = ROOT / "data" / "model_ready_v3" / "municipio_mesorregiao.csv"
@@ -101,6 +102,29 @@ section[data-testid="stSidebar"] .stSelectbox > div > div {
 section[data-testid="stSidebar"] hr {
   border-color: #eef0f3 !important; margin: .6rem 0 !important;
 }
+/* Sidebar radio → card style */
+section[data-testid="stSidebar"] .stRadio > div {
+  gap: .3rem !important;
+}
+section[data-testid="stSidebar"] .stRadio > div > label {
+  background: #fff !important; border: 1.5px solid #e4e7ec !important;
+  border-radius: 10px !important; padding: .45rem .7rem !important;
+  margin: 0 !important; transition: all .2s ease !important;
+  cursor: pointer !important;
+}
+section[data-testid="stSidebar"] .stRadio > div > label:hover {
+  border-color: #c7d2fe !important; background: #fafafe !important;
+}
+section[data-testid="stSidebar"] .stRadio > div > label:has(input:checked) {
+  border-color: #5046e5 !important; background: #eef2ff !important;
+  box-shadow: 0 0 0 1px #5046e5 !important;
+}
+section[data-testid="stSidebar"] .stRadio > div > label > div:first-child {
+  display: none !important;
+}
+section[data-testid="stSidebar"] .stRadio > div > label p {
+  font-size: .78rem !important; font-weight: 600 !important; color: #344054 !important;
+}
 section[data-testid="stSidebar"] [data-testid="stMetricValue"] {
   color: var(--text) !important; font-size: .85rem !important; font-weight: 800 !important;
 }
@@ -150,22 +174,33 @@ section[data-testid="stSidebar"] [data-testid="stMetric"] {
 
 /* ─ Tabs ─ */
 .stTabs [data-baseweb="tab-list"] {
-  gap: 0 !important; background: transparent !important;
-  border-bottom: 2px solid var(--border) !important; padding: 0 !important;
+  gap: .35rem !important; background: var(--surface) !important;
+  border-bottom: none !important; padding: .35rem !important;
+  border-radius: 12px !important;
+}
+.stTabs [data-baseweb="tab-list"]::before,
+.stTabs [data-baseweb="tab-list"]::after {
+  display: none !important;
+}
+.stTabs [data-baseweb="tab-highlight"] {
+  display: none !important;
+}
+.stTabs [data-baseweb="tab-border"] {
+  display: none !important;
 }
 .stTabs [data-baseweb="tab"] {
-  border-radius: 0 !important; font-weight: 600 !important; font-size: .78rem !important;
-  padding: .65rem 1.2rem !important; color: var(--muted) !important;
-  border-bottom: 2px solid transparent !important; background: transparent !important;
-  margin-bottom: -2px !important; letter-spacing: -.01em !important;
-  transition: color .15s !important;
+  border-radius: 9px !important; font-weight: 600 !important; font-size: .78rem !important;
+  padding: .5rem 1.1rem !important; color: var(--sub) !important;
+  border: none !important; background: transparent !important;
+  letter-spacing: -.01em !important;
+  transition: all .2s ease !important;
 }
 .stTabs [data-baseweb="tab"]:hover {
-  color: var(--ink) !important;
+  color: var(--ink) !important; background: rgba(80,70,229,.06) !important;
 }
 .stTabs [aria-selected="true"] {
-  color: var(--primary) !important; border-bottom-color: var(--primary) !important;
-  font-weight: 700 !important;
+  color: #fff !important; background: var(--primary) !important;
+  font-weight: 700 !important; box-shadow: 0 2px 8px rgba(80,70,229,.25) !important;
 }
 
 /* ─ Components ─ */
@@ -226,6 +261,23 @@ div[data-testid="stRadio"] > label:first-child { display: none !important }
 iframe[title="streamlit_app.components.v1.html"] {
   overflow: hidden !important;
 }
+
+/* ─ Animations ─ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px) }
+  to { opacity: 1; transform: translateY(0) }
+}
+.kpi-card,
+[data-testid="stMetric"],
+[data-testid="stPlotlyChart"],
+[data-testid="stDataFrame"] {
+  animation: fadeInUp .4s ease both;
+}
+.stColumns:first-of-type [data-testid="column"]:nth-child(1) .kpi-card { animation-delay: 0s }
+.stColumns:first-of-type [data-testid="column"]:nth-child(2) .kpi-card { animation-delay: .06s }
+.stColumns:first-of-type [data-testid="column"]:nth-child(3) .kpi-card { animation-delay: .12s }
+.stColumns:first-of-type [data-testid="column"]:nth-child(4) .kpi-card { animation-delay: .18s }
+[data-testid="stPlotlyChart"] { animation-delay: .25s }
 </style>""", unsafe_allow_html=True)
 
 
@@ -263,7 +315,7 @@ def kpi_row(items):
     for col, (val, label, color) in zip(cols, items):
         bg = accent_map.get(color, "#f9fafb")
         col.markdown(
-            f'<div style="background:{bg};border:1px solid {color}22;border-radius:14px;'
+            f'<div class="kpi-card" style="background:{bg};border:1px solid {color}22;border-radius:14px;'
             f'padding:1.15rem 1.3rem;position:relative;overflow:hidden">'
             f'<div style="position:absolute;top:0;left:0;right:0;height:3px;'
             f'background:{color};border-radius:14px 14px 0 0"></div>'
@@ -348,6 +400,16 @@ def run_predictions(_rm, _cm, df, _var, _sub):
     out["periodo"] = out["ano"].astype(str) + "-S" + out["semana_epidemiologica"].astype(str).str.zfill(2)
     return out
 
+def _has_train(var):
+    return (DATA / f"splits_{var.lower()}" / "train.parquet").exists()
+
+@st.cache_data
+def load_cached_predictions(var, sub):
+    p = CACHE_DIR / f"predictions_{var}_{sub}.parquet"
+    if not p.exists():
+        return None
+    return pd.read_parquet(p)
+
 @st.cache_data
 def load_reports():
     reps = {}
@@ -429,58 +491,112 @@ def main():
     geojson = load_geojson()
     reports = load_reports()
 
+    _logo_dir = Path(__file__).resolve().parent
+    _logo_full = str(_logo_dir / "logo_full.png")
+    _logo_icon = str(_logo_dir / "logo_icon.png")
+    st.logo(_logo_full, icon_image=_logo_icon, size="medium")
+
     # ── Header ──
-    st.markdown(
-        '<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem;padding-bottom:.4rem">'
-        '<div style="width:28px;height:28px;border-radius:7px;display:flex;align-items:center;'
-        'justify-content:center;background:#101828;position:relative;overflow:hidden">'
-        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">'
-        '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="#5046e5" opacity=".3"/>'
-        '<path d="M12 6v6l4.24 2.54" stroke="#fff" stroke-width="2" stroke-linecap="round"/>'
-        '<circle cx="12" cy="12" r="2" fill="#ef4444"/>'
-        '</svg></div>'
-        '<div>'
-        '<div style="font-size:.88rem;font-weight:800;color:#101828;letter-spacing:-.03em;line-height:1.1">'
-        'Dengue<span style="color:#5046e5">Cast</span></div>'
-        '<div style="font-size:.52rem;color:#98a2b3;font-weight:500;letter-spacing:.02em">'
-        'Vigilancia epidemiologica preditiva</div>'
-        '</div></div>',
-        unsafe_allow_html=True)
+    hdr_l, hdr_r = st.columns([0.5, 0.5])
+    with hdr_l:
+        _h1, _h2 = st.columns([0.08, 0.92])
+        with _h1:
+            st.image(_logo_icon, width=34)
+        with _h2:
+            st.markdown(
+                '<div style="margin-top:2px">'
+                '<span style="font-size:1.1rem;font-weight:800;color:#101828;letter-spacing:-.03em">'
+                'Dengue<span style="color:#5046e5">Cast</span></span>'
+                '&nbsp;&nbsp;<span style="font-size:.65rem;color:#98a2b3;font-weight:500">'
+                'Vigilancia epidemiologica preditiva</span></div>',
+                unsafe_allow_html=True)
 
     # ── Sidebar ──
+    _var_labels = {
+        "B": "Completa (22 anos)",
+        "C": "Completa + Decay",
+        "A": "Recente (4 anos)",
+    }
+    _sub_labels = {
+        "inmet_enriquecido": "Clima detalhado",
+        "inmet_bruto": "Clima basico",
+        "sinan_only": "Somente epidemiologico",
+    }
+    _var_desc = {
+        "B": "Treino 2001–2022 · serie historica completa",
+        "C": "Treino 2001–2022 · dados recentes pesam mais",
+        "A": "Treino 2019–2022 · apenas anos recentes",
+    }
+    _sub_desc = {
+        "inmet_enriquecido": "266 features · SINAN + INMET enriquecido",
+        "inmet_bruto": "122 features · SINAN + INMET bruto",
+        "sinan_only": "110 features · apenas dados epidemiologicos",
+    }
     with st.sidebar:
-        st.markdown(
-            '<div style="display:flex;align-items:center;gap:.45rem;margin-bottom:.1rem">'
-            '<div style="width:24px;height:24px;border-radius:6px;background:#101828;display:flex;'
-            'align-items:center;justify-content:center">'
-            '<svg width="13" height="13" viewBox="0 0 24 24" fill="none">'
-            '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="#5046e5" opacity=".3"/>'
-            '<path d="M12 6v6l4.24 2.54" stroke="#fff" stroke-width="2" stroke-linecap="round"/>'
-            '<circle cx="12" cy="12" r="2" fill="#ef4444"/></svg></div>'
-            '<div style="font-size:.78rem;font-weight:800;color:#101828!important;letter-spacing:-.02em">'
-            'Dengue<span style="color:#5046e5!important">Cast</span></div></div>',
-            unsafe_allow_html=True)
         st.markdown("---")
+        st.markdown('<p style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#98a2b3;margin-bottom:.4rem">Periodo de treinamento</p>', unsafe_allow_html=True)
+        var = st.radio("modelo_var", ["B","C","A"], index=0,
+                       format_func=lambda v: _var_labels[v],
+                       label_visibility="collapsed")
+        st.caption(_var_desc[var])
+        st.markdown('<p style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#98a2b3;margin-bottom:.4rem;margin-top:.8rem">Conjunto de dados</p>', unsafe_allow_html=True)
+        sub = st.radio("modelo_sub", ["inmet_enriquecido","inmet_bruto","sinan_only"], index=0,
+                       format_func=lambda s: _sub_labels[s],
+                       label_visibility="collapsed")
+        st.caption(_sub_desc[sub])
+        st.markdown("---")
+        dark = st.toggle("Tema escuro", value=False, key="dark_mode")
 
-        var = st.selectbox("Modelo", ["B","C","A"],
-                           format_func={"B":"Var B — Completa (22a)","C":"Var C — Decay",
-                                        "A":"Var A — Baseline (4a)"}.get)
-        sub = st.selectbox("Features", ["inmet_enriquecido","inmet_bruto","sinan_only"],
-                           format_func={"inmet_enriquecido":"INMET enriq. (266)",
-                                        "inmet_bruto":"INMET bruto (122)",
-                                        "sinan_only":"SINAN-only (110)"}.get)
+    if dark:
+        st.markdown("""<style>
+        :root {
+          --bg: #0f1117 !important; --card: #1a1c23 !important;
+          --border: #2d2f36 !important; --text: #f0f2f5 !important;
+          --muted: #6b7280 !important; --sub: #9ca3af !important;
+          --ink: #d1d5db !important; --surface: #1a1c23 !important;
+        }
+        html, body, [class*="css"], .stApp { background: #0f1117 !important; color: #f0f2f5 !important }
+        section[data-testid="stSidebar"] { background: #141620 !important; border-right-color: #2d2f36 !important }
+        section[data-testid="stSidebar"] * { color: #9ca3af !important }
+        section[data-testid="stSidebar"] .stRadio > div > label {
+          background: #1a1c23 !important; border-color: #2d2f36 !important;
+        }
+        section[data-testid="stSidebar"] .stRadio > div > label:hover {
+          border-color: #6366f1 !important; background: #1e1f2e !important;
+        }
+        section[data-testid="stSidebar"] .stRadio > div > label:has(input:checked) {
+          border-color: #6366f1 !important; background: #1e1b4b !important;
+          box-shadow: 0 0 0 1px #6366f1 !important;
+        }
+        section[data-testid="stSidebar"] .stRadio > div > label p { color: #d1d5db !important }
+        [data-testid="stMetric"] { background: #1a1c23 !important; border-color: #2d2f36 !important }
+        [data-testid="stMetricValue"] { color: #f0f2f5 !important }
+        .stSelectbox > div > div { background: #1a1c23 !important; border-color: #2d2f36 !important; color: #f0f2f5 !important }
+        .stTabs [data-baseweb="tab-list"] { background: #1a1c23 !important }
+        .stTabs [data-baseweb="tab"] { color: #9ca3af !important }
+        .stTabs [data-baseweb="tab"]:hover { color: #f0f2f5 !important; background: rgba(99,102,241,.1) !important }
+        .stTabs [aria-selected="true"] { color: #fff !important; background: #5046e5 !important }
+        header[data-testid="stHeader"] { background: #0f1117 !important }
+        </style>""", unsafe_allow_html=True)
 
-    full_df = load_all_data(var)
-    if full_df is None:
-        st.error("Dados nao encontrados.")
-        return
-    rm, cm = load_models(var, sub)
-    if rm is None or cm is None:
-        st.error(f"Modelos {var}_{sub} nao encontrados.")
-        return
+    live_mode = _has_train(var)
 
-    with st.spinner("Gerando previsoes..."):
-        preds = run_predictions(rm, cm, full_df, var, sub)
+    if live_mode:
+        full_df = load_all_data(var)
+        if full_df is None:
+            st.error("Dados nao encontrados.")
+            return
+        rm, cm = load_models(var, sub)
+        if rm is None or cm is None:
+            st.error(f"Modelos {var}_{sub} nao encontrados.")
+            return
+        with st.spinner("Gerando previsoes..."):
+            preds = run_predictions(rm, cm, full_df, var, sub)
+    else:
+        preds = load_cached_predictions(var, sub)
+        if preds is None:
+            st.error(f"Previsoes pre-computadas nao encontradas para {var}/{sub}.")
+            return
 
     with st.sidebar:
         st.markdown("---")
@@ -654,83 +770,101 @@ def main():
         mesos = sorted(view["cod_mesorregiao"].unique())
         opts = {m: mn(m, names) for m in mesos}
         sel_meso = st.selectbox("Buscar mesorregiao", mesos,
-                                format_func=lambda x: opts[x], key="meso")
-        if not sel_meso:
-            return
+                                format_func=lambda x: opts[x], key="meso",
+                                index=None, placeholder="Selecione uma mesorregiao...")
+        if sel_meso is None:
+            st.markdown(
+                '<div style="text-align:center;padding:3rem 1rem;color:#98a2b3">'
+                '<div style="font-size:2.5rem;margin-bottom:.5rem">🔍</div>'
+                '<p style="font-size:.9rem;font-weight:600;color:#667085;margin-bottom:.3rem">'
+                'Selecione uma mesorregiao acima</p>'
+                '<p style="font-size:.78rem">Escolha uma das 137 mesorregioes para ver '
+                'previsoes detalhadas, serie temporal e probabilidades de risco.</p></div>',
+                unsafe_allow_html=True)
+        if sel_meso is not None:
+            df_m = preds[preds["cod_mesorregiao"]==sel_meso].sort_values(
+                ["ano","semana_epidemiologica"]).copy()
+            last = df_m.iloc[-1]
+            rl = last["pred_label"]
 
-        df_m = preds[preds["cod_mesorregiao"]==sel_meso].sort_values(
-            ["ano","semana_epidemiologica"]).copy()
-        last = df_m.iloc[-1]
-        rl = last["pred_label"]
+            pill_bg = {"Surto":"#fef2f2","Alto":"#fff7ed","Moderado":"#fefce8","Baixo":"#f0fdf4"}
+            pill_fg = {"Surto":"#dc2626","Alto":"#ea580c","Moderado":"#a16207","Baixo":"#16a34a"}
+            pill_border = {"Surto":"#fecaca","Alto":"#fed7aa","Moderado":"#fef08a","Baixo":"#bbf7d0"}
+            st.markdown(
+                f'<div style="background:#fff;border:1px solid #e4e7ec;border-radius:14px;'
+                f'padding:1.1rem 1.4rem;margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;'
+                f'box-shadow:0 1px 3px rgba(16,24,40,.04)">'
+                f'<span style="font-size:1.08rem;font-weight:800;color:#101828;letter-spacing:-.02em">'
+                f'{opts[sel_meso]}</span>'
+                f'<span style="font-size:.72rem;color:#98a2b3;font-weight:500">'
+                f'{int(last["ano"])}-S{int(last["semana_epidemiologica"]):02d}</span>'
+                f'<span style="padding:.2rem .6rem;border-radius:6px;font-size:.65rem;'
+                f'font-weight:700;background:{pill_bg[rl]};color:{pill_fg[rl]};'
+                f'border:1px solid {pill_border[rl]}">{rl}</span></div>',
+                unsafe_allow_html=True)
 
-        pill_bg = {"Surto":"#fef2f2","Alto":"#fff7ed","Moderado":"#fefce8","Baixo":"#f0fdf4"}
-        pill_fg = {"Surto":"#dc2626","Alto":"#ea580c","Moderado":"#a16207","Baixo":"#16a34a"}
-        pill_border = {"Surto":"#fecaca","Alto":"#fed7aa","Moderado":"#fef08a","Baixo":"#bbf7d0"}
-        st.markdown(
-            f'<div style="background:#fff;border:1px solid #e4e7ec;border-radius:14px;'
-            f'padding:1.1rem 1.4rem;margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;'
-            f'box-shadow:0 1px 3px rgba(16,24,40,.04)">'
-            f'<span style="font-size:1.08rem;font-weight:800;color:#101828;letter-spacing:-.02em">'
-            f'{opts[sel_meso]}</span>'
-            f'<span style="font-size:.72rem;color:#98a2b3;font-weight:500">'
-            f'{int(last["ano"])}-S{int(last["semana_epidemiologica"]):02d}</span>'
-            f'<span style="padding:.2rem .6rem;border-radius:6px;font-size:.65rem;'
-            f'font-weight:700;background:{pill_bg[rl]};color:{pill_fg[rl]};'
-            f'border:1px solid {pill_border[rl]}">{rl}</span></div>',
-            unsafe_allow_html=True)
+            c1,c2,c3,c4 = st.columns(4)
+            c1.metric("Notificacoes", f"{last['notificacoes']:,.0f}")
+            c2.metric("Previsao t+4", f"{last['pred_notif']:,.0f}")
+            c3.metric("Risco", rl)
+            c4.metric("P(Surto)", f"{last['p_surto']*100:.1f}%")
 
-        c1,c2,c3,c4 = st.columns(4)
-        c1.metric("Notificacoes", f"{last['notificacoes']:,.0f}")
-        c2.metric("Previsao t+4", f"{last['pred_notif']:,.0f}")
-        c3.metric("Risco", rl)
-        c4.metric("P(Surto)", f"{last['p_surto']*100:.1f}%")
+            sec("Serie temporal")
+            fig_ts = go.Figure()
+            fig_ts.add_trace(go.Scatter(
+                x=df_m["periodo"], y=df_m["notificacoes_t4"], name="Real (t+4)",
+                line=dict(color="#5046e5", width=2)))
+            fig_ts.add_trace(go.Scatter(
+                x=df_m["periodo"], y=df_m["pred_notif"], name="Previsto (t+4)",
+                line=dict(color="#dc2626", width=2, dash="dash")))
+            fig_ts.add_trace(go.Scatter(
+                x=df_m["periodo"], y=df_m["notificacoes"], name="Atual",
+                line=dict(color="#d0d5dd", width=1)))
+            fig_ts.update_layout(**plo(h=360,
+                                        xaxis=dict(showgrid=False, title=""),
+                                        yaxis=dict(gridcolor="#f2f4f7", title="")))
+            st.plotly_chart(fig_ts, use_container_width=True)
 
-        sec("Serie temporal")
-        fig_ts = go.Figure()
-        fig_ts.add_trace(go.Scatter(
-            x=df_m["periodo"], y=df_m["notificacoes_t4"], name="Real (t+4)",
-            line=dict(color="#5046e5", width=2)))
-        fig_ts.add_trace(go.Scatter(
-            x=df_m["periodo"], y=df_m["pred_notif"], name="Previsto (t+4)",
-            line=dict(color="#dc2626", width=2, dash="dash")))
-        fig_ts.add_trace(go.Scatter(
-            x=df_m["periodo"], y=df_m["notificacoes"], name="Atual",
-            line=dict(color="#d0d5dd", width=1)))
-        fig_ts.update_layout(**plo(h=360,
-                                    xaxis=dict(showgrid=False, title=""),
-                                    yaxis=dict(gridcolor="#f2f4f7", title="")))
-        st.plotly_chart(fig_ts, use_container_width=True)
+            sec("Probabilidade de risco")
+            fig_p = go.Figure()
+            fig_p.add_trace(go.Bar(
+                x=df_m["periodo"], y=df_m["p_surto"], name="P(Surto)",
+                marker_color="rgba(220,38,38,.45)"))
+            fig_p.add_trace(go.Bar(
+                x=df_m["periodo"], y=df_m["p_alto"], name="P(Alto)",
+                marker_color="rgba(234,88,12,.25)"))
+            fig_p.update_layout(**plo(h=240, barmode="overlay",
+                                       yaxis=dict(range=[0,1], gridcolor="#f2f4f7", title=""),
+                                       xaxis=dict(showgrid=False, title="")))
+            st.plotly_chart(fig_p, use_container_width=True)
 
-        sec("Probabilidade de risco")
-        fig_p = go.Figure()
-        fig_p.add_trace(go.Bar(
-            x=df_m["periodo"], y=df_m["p_surto"], name="P(Surto)",
-            marker_color="rgba(220,38,38,.45)"))
-        fig_p.add_trace(go.Bar(
-            x=df_m["periodo"], y=df_m["p_alto"], name="P(Alto)",
-            marker_color="rgba(234,88,12,.25)"))
-        fig_p.update_layout(**plo(h=240, barmode="overlay",
-                                   yaxis=dict(range=[0,1], gridcolor="#f2f4f7", title=""),
-                                   xaxis=dict(showgrid=False, title="")))
-        st.plotly_chart(fig_p, use_container_width=True)
-
-        from sklearn.metrics import r2_score, mean_absolute_error
-        act = df_m["notificacoes_t4"].values
-        pred = df_m["pred_notif"].values
-        mk = ~np.isnan(act) & ~np.isnan(pred) & (act>=0)
-        if mk.sum() > 5:
-            sec("Metricas locais")
-            m1,m2,m3 = st.columns(3)
-            m1.metric("R² (log)", f"{r2_score(np.log1p(act[mk]), np.log1p(pred[mk])):.3f}")
-            m2.metric("MAE", f"{mean_absolute_error(act[mk], pred[mk]):.0f}")
-            m3.metric("Acuracia risco",
-                      f"{(df_m['pred_risco'].values==df_m['risco_surto_t4'].values).mean():.0%}")
+            from sklearn.metrics import r2_score, mean_absolute_error
+            act = df_m["notificacoes_t4"].values
+            pred = df_m["pred_notif"].values
+            mk = ~np.isnan(act) & ~np.isnan(pred) & (act>=0)
+            if mk.sum() > 5:
+                sec("Metricas locais")
+                m1,m2,m3 = st.columns(3)
+                m1.metric("R² (log)", f"{r2_score(np.log1p(act[mk]), np.log1p(pred[mk])):.3f}")
+                m2.metric("MAE", f"{mean_absolute_error(act[mk], pred[mk]):.0f}")
+                m3.metric("Acuracia risco",
+                          f"{(df_m['pred_risco'].values==df_m['risco_surto_t4'].values).mean():.0%}")
 
     # ════════════════════════════════════════════════════════════
     # TAB 3 — TEMPORAL
     # ════════════════════════════════════════════════════════════
     with t3:
+        st.markdown(
+            '<p style="font-size:.82rem;color:#667085;margin-bottom:.5rem;line-height:1.7">'
+            'Analise temporal do desempenho das previsoes. Compara os valores reais de notificacoes '
+            'com os previstos pelo modelo ao longo do tempo e por ano.</p>',
+            unsafe_allow_html=True)
         sec("Previsto vs Real (log scale)")
+        st.markdown(
+            '<p style="font-size:.76rem;color:#98a2b3;margin-bottom:.6rem">'
+            'Cada ponto e uma mesorregiao-semana. Pontos proximos a linha tracejada = boa previsao. '
+            'Escala logaritmica para visualizar tanto regioes com poucas quanto com muitas notificacoes.</p>',
+            unsafe_allow_html=True)
         samp = view.sample(min(5000, len(view)), random_state=42)
         samp["log_real"] = np.log1p(samp["notificacoes_t4"])
         samp["log_pred"] = np.log1p(samp["pred_notif"])
@@ -748,6 +882,11 @@ def main():
         st.plotly_chart(fig_sc, use_container_width=True)
 
         sec("Total nacional semanal")
+        st.markdown(
+            '<p style="font-size:.76rem;color:#98a2b3;margin-bottom:.6rem">'
+            'Soma de todas as mesorregioes por semana epidemiologica. '
+            'Linha solida = dados reais, tracejada = previsao do modelo.</p>',
+            unsafe_allow_html=True)
         wk_agg = view.groupby("periodo").agg(
             real=("notificacoes_t4","sum"),
             prev=("pred_notif","sum")).reset_index().sort_values("periodo")
@@ -764,6 +903,11 @@ def main():
         st.plotly_chart(fig_nat, use_container_width=True)
 
         sec("R² por ano")
+        st.markdown(
+            '<p style="font-size:.76rem;color:#98a2b3;margin-bottom:.6rem">'
+            'Desempenho do modelo em cada ano. Cores indicam se o ano foi usado para treino, '
+            'validacao ou teste. R² mais alto = melhor previsao naquele ano.</p>',
+            unsafe_allow_html=True)
         from sklearn.metrics import r2_score
         yr_stats = []
         for yr in sorted(view["ano"].unique()):
@@ -791,6 +935,12 @@ def main():
     # TAB 4 — MODELO
     # ════════════════════════════════════════════════════════════
     with t4:
+        st.markdown(
+            '<p style="font-size:.82rem;color:#667085;margin-bottom:1rem;line-height:1.7">'
+            'Metricas de desempenho do modelo XGBoost selecionado. '
+            '<b style="color:#344054">R²</b> mede o quanto o modelo explica a variacao dos dados (mais perto de 1 = melhor). '
+            '<b style="color:#344054">RMSE</b> e <b style="color:#344054">MAE</b> medem o erro medio das previsoes em numero de notificacoes.</p>',
+            unsafe_allow_html=True)
         mk_key = f"{var}_{sub}"
         reg = reports.get("reg", {})
         if mk_key in reg.get("modelos", {}):
@@ -803,6 +953,11 @@ def main():
             k4.metric("IC 95%", f"[{m['R2_log_CI95_lo']:.4f}, {m['R2_log_CI95_hi']:.4f}]")
 
         sec("Comparativo variantes")
+        st.markdown(
+            '<p style="font-size:.78rem;color:#667085;margin-bottom:.8rem;line-height:1.6">'
+            'Comparacao de desempenho entre as 3 variantes de treinamento usando o sub-modelo INMET enriquecido. '
+            'As barras de erro mostram o intervalo de confianca de 95%.</p>',
+            unsafe_allow_html=True)
         cv, cc = st.columns(2)
         with cv:
             if reg:
@@ -850,6 +1005,11 @@ def main():
         wf = reports.get("wf")
         if wf and "modelos" in wf:
             sec("Walk-Forward Validation")
+            st.markdown(
+                '<p style="font-size:.78rem;color:#667085;margin-bottom:.8rem;line-height:1.6">'
+                'Simulacao de uso real: o modelo e treinado com dados ate um ano e testado no ano seguinte, '
+                'avancando progressivamente. Mostra como o modelo se comportaria em producao.</p>',
+                unsafe_allow_html=True)
             wfr = []
             for v in ["A","B","C"]:
                 k = f"{v}_inmet_enriquecido"
@@ -871,6 +1031,11 @@ def main():
         if shap_df is not None:
             shap_col = "shap_mean_abs_B" if "shap_mean_abs_B" in shap_df.columns else shap_df.columns[1]
             sec("SHAP Feature Importance")
+            st.markdown(
+                '<p style="font-size:.78rem;color:#667085;margin-bottom:.8rem;line-height:1.6">'
+                'SHAP mede a contribuicao de cada variavel para as previsoes. '
+                'Quanto maior a barra, mais essa variavel influencia o resultado do modelo.</p>',
+                unsafe_allow_html=True)
             n = st.slider("Top N", 10, 50, 15, key="shap_n")
             top_n = shap_df.nlargest(n, shap_col)
             fig_sh = px.bar(top_n, x=shap_col, y="feature", orientation="h",
@@ -1092,6 +1257,24 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:#101828;back
       <li>2026 e ano parcial (17 semanas epidemiologicas no corte)</li>
       <li>Assume estabilidade da distribuicao temporal entre periodos de treino e teste</li>
     </ul></div>
+  </div>
+
+  <!-- Creditos -->
+  <div class="card full" style="background:linear-gradient(135deg,#fafafe,#eef2ff);border:1px solid #c7d2fe">
+    <div class="card-label">Autores</div>
+    <div style="display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap">
+      <div style="flex:1;min-width:200px">
+        <p style="font-size:.95rem;font-weight:800;color:#1e1b4b;margin-bottom:.15rem">Pedro Lucas Figueiredo Santana</p>
+        <p style="font-size:.78rem;color:#4338ca;font-weight:600">Engenharia de Software — UnB</p>
+      </div>
+      <div style="flex:1;min-width:200px">
+        <p style="font-size:.95rem;font-weight:800;color:#1e1b4b;margin-bottom:.15rem">Thiago Ribeiro Freitas</p>
+        <p style="font-size:.78rem;color:#4338ca;font-weight:600">Engenharia de Software — UnB</p>
+      </div>
+    </div>
+    <p style="margin-top:.8rem;font-size:.76rem;color:#667085">
+      Trabalho de Conclusao de Curso (TCC) — Faculdade do Gama (FGA),
+      Universidade de Brasilia, 2024–2025.</p>
   </div>
 
 </div>
