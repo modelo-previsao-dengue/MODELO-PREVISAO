@@ -124,14 +124,14 @@ button[kind="header"], .stAppDeployButton {
 }
 .dc-intro b { color: var(--ink); }
 .dc-subtle {
-  font-size: .85rem; color: var(--muted); line-height: 1.6;
-  margin-bottom: var(--sp-3); max-width: 680px;
+  font-size: .82rem; color: var(--muted); line-height: 1.55;
+  margin-bottom: var(--sp-2); max-width: 680px;
 }
 
 /* ─ Section Header ─ */
 .sec-header {
   font-size: .78rem; font-weight: 800; text-transform: uppercase;
-  letter-spacing: .06em; color: var(--sub); margin: var(--sp-8) 0 var(--sp-3);
+  letter-spacing: .06em; color: var(--sub); margin: var(--sp-6) 0 var(--sp-2);
   display: flex; align-items: center; gap: var(--sp-2);
 }
 .sec-header::before {
@@ -345,7 +345,7 @@ section[data-testid="stSidebar"] .stCaption p {
 .about-hl {
   background: linear-gradient(135deg, var(--primary-soft), #e8defb);
   border-radius: var(--radius-md); padding: .9rem 1.2rem;
-  margin: .7rem 0; border-left: 4px solid var(--primary);
+  margin: .7rem 0; border-left: 1px solid var(--primary);
 }
 .about-hl p { color: #3730a3; font-weight: 600; font-size: .82rem; margin: 0; }
 .about-tbl { width: 100%; border-collapse: collapse; font-size: .78rem; }
@@ -399,7 +399,26 @@ section[data-testid="stSidebar"] .stCaption p {
 /* ─ Divider ─ */
 .dc-divider {
   border: none; height: 1px; background: var(--border-light);
-  margin: var(--sp-8) 0;
+  margin: var(--sp-4) 0;
+}
+
+/* ─ Expander ─ */
+.stExpander {
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-sm) !important;
+  background: var(--card) !important;
+  margin-bottom: var(--sp-3) !important;
+}
+.stExpander:hover { box-shadow: var(--shadow-md) !important; }
+.stExpander [data-testid="stExpanderToggleIcon"] { color: var(--primary) !important; }
+details[data-testid="stExpander"] summary {
+  font-weight: 700 !important; font-size: .82rem !important;
+  color: var(--ink) !important; letter-spacing: -.01em !important;
+}
+details[data-testid="stExpander"] summary:hover { color: var(--primary) !important; }
+details[data-testid="stExpander"] summary span[data-testid="stMarkdownContainer"] p {
+  font-weight: 700 !important; font-size: .82rem !important;
 }
 
 /* ─ Metrics ─ */
@@ -956,7 +975,8 @@ def main():
             line=dict(color="#ea580c", width=1.5, dash="dot"),
             hovertemplate="<b>%{x}</b><br>Alto: %{y} mesorregioes<extra></extra>"))
         fig_evo.update_layout(**plo(h=280,
-                                     xaxis=dict(showgrid=False, title=""),
+                                     xaxis=dict(showgrid=False, title="", nticks=12,
+                                                tickangle=-45, tickfont=dict(size=10)),
                                      yaxis=dict(gridcolor="#f2f4f7", gridwidth=1, title="")))
         st.plotly_chart(fig_evo, use_container_width=True)
 
@@ -1052,8 +1072,9 @@ def main():
                 x=df_m["periodo"], y=df_m["notificacoes"], name="Atual",
                 line=dict(color="#d0d5dd", width=1),
                 hovertemplate="<b>%{x}</b><br>Atual: %{y:,.0f} casos<extra></extra>"))
-            fig_ts.update_layout(**plo(h=360,
-                                        xaxis=dict(showgrid=False, title=""),
+            fig_ts.update_layout(**plo(h=340,
+                                        xaxis=dict(showgrid=False, title="", nticks=12,
+                                                   tickangle=-45, tickfont=dict(size=10)),
                                         yaxis=dict(gridcolor="#f2f4f7", title="")))
             st.plotly_chart(fig_ts, use_container_width=True)
 
@@ -1067,9 +1088,10 @@ def main():
                 x=df_m["periodo"], y=df_m["p_alto"], name="P(Alto)",
                 marker_color="rgba(234,88,12,.25)",
                 hovertemplate="<b>%{x}</b><br>P(Alto): %{y:.1%}<extra></extra>"))
-            fig_p.update_layout(**plo(h=240, barmode="overlay",
+            fig_p.update_layout(**plo(h=220, barmode="overlay",
                                        yaxis=dict(range=[0,1], gridcolor="#f2f4f7", title=""),
-                                       xaxis=dict(showgrid=False, title="")))
+                                       xaxis=dict(showgrid=False, title="", nticks=12,
+                                                  tickangle=-45, tickfont=dict(size=10))))
             st.plotly_chart(fig_p, use_container_width=True)
 
             from sklearn.metrics import r2_score, mean_absolute_error
@@ -1107,30 +1129,31 @@ def main():
     with t3:
         st.markdown(
             '<p class="dc-intro">'
-            'Analise completa do desempenho do modelo. Compara previsoes com dados reais ao longo do tempo '
-            'e detalha as metricas de qualidade do modelo de inteligencia artificial selecionado.</p>',
+            'Desempenho do modelo: previsoes vs dados reais e metricas de qualidade.</p>',
             unsafe_allow_html=True)
 
         # ── Previsão vs Realidade ──
         sec("Previsao vs Realidade")
         st.markdown(
             '<p class="dc-subtle">'
-            'Cada ponto representa uma mesorregiao em uma semana. Pontos proximos a linha tracejada '
-            'indicam previsao precisa. Escala logaritmica para comparar regioes de diferentes tamanhos.</p>',
+            'Cada ponto e uma mesorregiao/semana. Proximidade a linha tracejada = previsao precisa. Escala log.</p>',
             unsafe_allow_html=True)
         samp = view.sample(min(5000, len(view)), random_state=42)
         samp["log_real"] = np.log1p(samp["notificacoes_t4"])
         samp["log_pred"] = np.log1p(samp["pred_notif"])
+        _risk_order = ["Baixo", "Moderado", "Alto", "Surto"]
+        samp["pred_label"] = pd.Categorical(samp["pred_label"], categories=_risk_order, ordered=True)
         fig_sc = px.scatter(
-            samp, x="log_real", y="log_pred",
+            samp.sort_values("pred_label"), x="log_real", y="log_pred",
             color="pred_label", color_discrete_map=RISK_CLR, opacity=.3,
+            category_orders={"pred_label": _risk_order},
             labels={"log_real":"Notificacoes reais (log)","log_pred":"Previsao do modelo (log)","pred_label":"Risco"})
         fig_sc.update_traces(marker=dict(size=5))
         mx = max(samp["log_real"].quantile(.99), samp["log_pred"].quantile(.99))
         fig_sc.add_trace(go.Scatter(
             x=[0,mx], y=[0,mx], mode="lines",
             line=dict(color="#d0d5dd", dash="dash", width=1.5), showlegend=False))
-        fig_sc.update_layout(**plo(h=440,
+        fig_sc.update_layout(**plo(h=380,
                                     xaxis=dict(gridcolor="#f2f4f7"),
                                     yaxis=dict(gridcolor="#f2f4f7")))
         st.plotly_chart(fig_sc, use_container_width=True)
@@ -1139,8 +1162,7 @@ def main():
         sec("Total de casos no Brasil por semana")
         st.markdown(
             '<p class="dc-subtle">'
-            'Soma de todas as mesorregioes por semana. '
-            'Linha solida = dados reais, tracejada = previsao do modelo.</p>',
+            'Soma de todas as mesorregioes por semana. Solida = real, tracejada = previsto.</p>',
             unsafe_allow_html=True)
         wk_agg = view.groupby("periodo").agg(
             real=("notificacoes_t4","sum"),
@@ -1154,8 +1176,9 @@ def main():
             x=wk_agg["periodo"], y=wk_agg["prev"], name="Previsto",
             line=dict(color="#dc2626", width=2, dash="dash"),
             hovertemplate="<b>%{x}</b><br>Previsto: %{y:,.0f}<extra></extra>"))
-        fig_nat.update_layout(**plo(h=320,
-                                     xaxis=dict(showgrid=False, title=""),
+        fig_nat.update_layout(**plo(h=280,
+                                     xaxis=dict(showgrid=False, title="", nticks=12,
+                                                tickangle=-45, tickfont=dict(size=10)),
                                      yaxis=dict(gridcolor="#f2f4f7", title="")))
         st.plotly_chart(fig_nat, use_container_width=True)
 
@@ -1163,8 +1186,7 @@ def main():
         sec("Qualidade da previsao por ano")
         st.markdown(
             '<p class="dc-subtle">'
-            'Desempenho do modelo em cada ano. Cores indicam se o ano foi usado para treino, '
-            'validacao ou teste. Barras mais altas indicam melhor previsao.</p>',
+            'R² por ano. Cores indicam treino, validacao ou teste.</p>',
             unsafe_allow_html=True)
         from sklearn.metrics import r2_score
         yr_stats = []
@@ -1191,9 +1213,9 @@ def main():
                 textposition="outside",
                 textfont=dict(size=11, family=PLOTLY_FONT, color="#344054"),
                 width=0.7)
-            fig_yr.update_layout(**plo(h=400,
+            fig_yr.update_layout(**plo(h=340,
                                        xaxis=dict(showgrid=False, title="", dtick=1,
-                                                  tickfont=dict(size=11)),
+                                                  tickfont=dict(size=10)),
                                        yaxis=dict(gridcolor="#f2f4f7", title="Qualidade (R²)",
                                                   range=[0, 1.08]),
                                        bargap=0.15))
@@ -1208,12 +1230,6 @@ def main():
         if mk_key in reg.get("modelos", {}):
             m = reg["modelos"][mk_key]
             sec("Metricas do modelo selecionado")
-            st.markdown(
-                '<p class="dc-subtle">'
-                '<b>Qualidade (R²)</b> indica o quanto o modelo consegue explicar os dados '
-                '(mais perto de 1 = melhor). <b>Erro medio</b> indica quantas notificacoes '
-                'o modelo erra em media.</p>',
-                unsafe_allow_html=True)
             mk1, mk2, mk3, mk4 = st.columns(4)
             with mk1:
                 st.markdown(
@@ -1242,11 +1258,6 @@ def main():
 
         # ── Comparativo de Variantes ──
         sec("Comparativo de variantes")
-        st.markdown(
-            '<p class="dc-subtle">'
-            'Comparacao entre as 3 estrategias de treinamento. '
-            'Barras de erro mostram a margem de incerteza do resultado.</p>',
-            unsafe_allow_html=True)
         cv, cc = st.columns(2)
         with cv:
             if reg:
@@ -1270,7 +1281,7 @@ def main():
                             text=f"{b['R2']:.4f}", textposition="outside",
                             textfont=dict(size=11, family=PLOTLY_FONT),
                             hovertemplate="<b>%{x}</b><br>R²: %{y:.4f}<extra></extra>"))
-                    fig_v.update_layout(**plo(h=340, showlegend=False,
+                    fig_v.update_layout(**plo(h=300, showlegend=False,
                                               yaxis=dict(range=[0.84,0.92], gridcolor="#f2f4f7"),
                                               xaxis=dict(showgrid=False, title="")))
                     st.plotly_chart(fig_v, use_container_width=True)
@@ -1292,76 +1303,76 @@ def main():
                     card_title("Classificacao de risco")
                     st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
 
-        # ── Walk-Forward ──
-        wf = reports.get("wf")
-        if wf and "modelos" in wf:
-            sec("Validacao Walk-Forward")
-            st.markdown(
-                '<p class="dc-subtle">'
-                'Simulacao de uso real: o modelo e treinado com dados ate um ano e testado no seguinte, '
-                'avancando progressivamente. Mostra como o modelo se comportaria em producao.</p>',
-                unsafe_allow_html=True)
-            wfr = []
-            for v in ["A","B","C"]:
-                k = f"{v}_inmet_enriquecido"
-                if k in wf["modelos"]:
-                    for i, fold in enumerate(wf["modelos"][k].get("folds",[]),1):
-                        yr = fold["test_years"][0] if "test_years" in fold else "?"
-                        wfr.append({"Variante":f"Var {v}","Periodo de teste":f"Teste {yr}","Qualidade":fold["R2_log"]})
-            if wfr:
-                fig_wf = px.line(pd.DataFrame(wfr), x="Periodo de teste", y="Qualidade", color="Variante",
-                                 markers=True,
-                                 color_discrete_map={"Var A":"#93c5fd","Var B":"#5046e5",
-                                                     "Var C":"#a78bfa"})
-                fig_wf.update_traces(
-                    hovertemplate="<b>%{x}</b><br>R²: %{y:.4f}<extra></extra>")
-                fig_wf.update_layout(**plo(h=300,
-                                           xaxis=dict(showgrid=False),
-                                           yaxis=dict(gridcolor="#f2f4f7", title="Qualidade (R²)")))
-                st.plotly_chart(fig_wf, use_container_width=True)
+        # ── Walk-Forward + SHAP (dentro de expander) ──
+        with st.expander("Validacao Walk-Forward e importancia de variaveis", expanded=False):
+            wf = reports.get("wf")
+            if wf and "modelos" in wf:
+                sec("Validacao Walk-Forward")
+                st.markdown(
+                    '<p class="dc-subtle">'
+                    'Simulacao de uso real: o modelo e treinado com dados ate um ano e testado no seguinte, '
+                    'avancando progressivamente.</p>',
+                    unsafe_allow_html=True)
+                wfr = []
+                for v in ["A","B","C"]:
+                    k = f"{v}_inmet_enriquecido"
+                    if k in wf["modelos"]:
+                        for i, fold in enumerate(wf["modelos"][k].get("folds",[]),1):
+                            yr = fold["test_years"][0] if "test_years" in fold else "?"
+                            wfr.append({"Variante":f"Var {v}","Periodo de teste":f"Teste {yr}","Qualidade":fold["R2_log"]})
+                if wfr:
+                    fig_wf = px.line(pd.DataFrame(wfr), x="Periodo de teste", y="Qualidade", color="Variante",
+                                     markers=True,
+                                     color_discrete_map={"Var A":"#93c5fd","Var B":"#5046e5",
+                                                         "Var C":"#a78bfa"})
+                    fig_wf.update_traces(
+                        hovertemplate="<b>%{x}</b><br>R²: %{y:.4f}<extra></extra>")
+                    fig_wf.update_layout(**plo(h=260,
+                                               xaxis=dict(showgrid=False),
+                                               yaxis=dict(gridcolor="#f2f4f7", title="Qualidade (R²)")))
+                    st.plotly_chart(fig_wf, use_container_width=True)
 
-        # ── SHAP ──
-        shap_df = reports.get("shap")
-        if shap_df is not None:
-            shap_col = "shap_mean_abs_B" if "shap_mean_abs_B" in shap_df.columns else shap_df.columns[1]
-            sec("Importancia das variaveis (SHAP)")
-            st.markdown(
-                '<p class="dc-subtle">'
-                'Quais dados mais influenciam a previsao do modelo? '
-                'Barras maiores indicam variaveis com maior peso na decisao.</p>',
-                unsafe_allow_html=True)
-            _feat_names = {
-                "notificacoes_lag_1w": "Notificacoes (1 sem. atras)",
-                "notificacoes_lag_2w": "Notificacoes (2 sem. atras)",
-                "notificacoes_lag_3w": "Notificacoes (3 sem. atras)",
-                "notificacoes_lag_4w": "Notificacoes (4 sem. atras)",
-                "notificacoes_lag_6w": "Notificacoes (6 sem. atras)",
-                "notificacoes_lag_8w": "Notificacoes (8 sem. atras)",
-                "notificacoes_diff_1w": "Variacao semanal de casos",
-                "notificacoes_pct_change_1w": "Variacao % semanal",
-                "notificacoes_media_movel_2_4w": "Media movel 2-4 sem.",
-                "notificacoes_media_movel_4_8w": "Media movel 4-8 sem.",
-                "week_of_year_cos": "Sazonalidade (cosseno)",
-                "week_of_year_sin": "Sazonalidade (seno)",
-                "qt_confirmados_provaveis": "Casos confirmados/provaveis",
-                "prop_confirmado_provavel": "Proporcao confirmados",
-                "atraso_notificacao_medio_dias": "Atraso medio notificacao",
-                "prop_raca_parda": "Proporcao raca parda",
-                "prop_criterio_lab": "Proporcao criterio laboratorial",
-            }
-            n = st.slider("Quantidade de variaveis", 10, 50, 15, key="shap_n")
-            top_n = shap_df.nlargest(n, shap_col).copy()
-            top_n["nome"] = top_n["feature"].map(lambda f: _feat_names.get(f, f.replace("_"," ").title()))
-            fig_sh = px.bar(top_n, x=shap_col, y="nome", orientation="h",
-                            color=shap_col,
-                            color_continuous_scale=["#e0e7ff","#5046e5"])
-            fig_sh.update_traces(
-                hovertemplate="<b>%{y}</b><br>SHAP: %{x:.4f}<extra></extra>")
-            fig_sh.update_layout(**plo(h=max(280, n*24),
-                                       yaxis=dict(autorange="reversed", title=""),
-                                       xaxis=dict(title="Importancia (SHAP)", gridcolor="#f2f4f7"),
-                                       coloraxis_showscale=False))
-            st.plotly_chart(fig_sh, use_container_width=True)
+            shap_df = reports.get("shap")
+            if shap_df is not None:
+                shap_col = "shap_mean_abs_B" if "shap_mean_abs_B" in shap_df.columns else shap_df.columns[1]
+                sec("Importancia das variaveis (SHAP)")
+                st.markdown(
+                    '<p class="dc-subtle">'
+                    'Quais dados mais influenciam a previsao do modelo? '
+                    'Barras maiores indicam variaveis com maior peso na decisao.</p>',
+                    unsafe_allow_html=True)
+                _feat_names = {
+                    "notificacoes_lag_1w": "Notificacoes (1 sem. atras)",
+                    "notificacoes_lag_2w": "Notificacoes (2 sem. atras)",
+                    "notificacoes_lag_3w": "Notificacoes (3 sem. atras)",
+                    "notificacoes_lag_4w": "Notificacoes (4 sem. atras)",
+                    "notificacoes_lag_6w": "Notificacoes (6 sem. atras)",
+                    "notificacoes_lag_8w": "Notificacoes (8 sem. atras)",
+                    "notificacoes_diff_1w": "Variacao semanal de casos",
+                    "notificacoes_pct_change_1w": "Variacao % semanal",
+                    "notificacoes_media_movel_2_4w": "Media movel 2-4 sem.",
+                    "notificacoes_media_movel_4_8w": "Media movel 4-8 sem.",
+                    "week_of_year_cos": "Sazonalidade (cosseno)",
+                    "week_of_year_sin": "Sazonalidade (seno)",
+                    "qt_confirmados_provaveis": "Casos confirmados/provaveis",
+                    "prop_confirmado_provavel": "Proporcao confirmados",
+                    "atraso_notificacao_medio_dias": "Atraso medio notificacao",
+                    "prop_raca_parda": "Proporcao raca parda",
+                    "prop_criterio_lab": "Proporcao criterio laboratorial",
+                }
+                n = st.slider("Quantidade de variaveis", 10, 50, 15, key="shap_n")
+                top_n = shap_df.nlargest(n, shap_col).copy()
+                top_n["nome"] = top_n["feature"].map(lambda f: _feat_names.get(f, f.replace("_"," ").title()))
+                fig_sh = px.bar(top_n, x=shap_col, y="nome", orientation="h",
+                                color=shap_col,
+                                color_continuous_scale=["#e0e7ff","#5046e5"])
+                fig_sh.update_traces(
+                    hovertemplate="<b>%{y}</b><br>SHAP: %{x:.4f}<extra></extra>")
+                fig_sh.update_layout(**plo(h=max(260, n*22),
+                                           yaxis=dict(autorange="reversed", title=""),
+                                           xaxis=dict(title="Importancia (SHAP)", gridcolor="#f2f4f7"),
+                                           coloraxis_showscale=False))
+                st.plotly_chart(fig_sh, use_container_width=True)
 
     # ════════════════════════════════════════════════════════════
     # TAB 4 — SOBRE (Native Streamlit)
