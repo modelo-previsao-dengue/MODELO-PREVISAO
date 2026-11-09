@@ -94,8 +94,11 @@ header[data-testid="stHeader"] {
   box-shadow: none !important;
 }
 [data-testid="stHeader"] [data-testid="stStatusWidget"],
-[data-testid="stHeader"] .stDeployButton {
-  display: none !important;
+[data-testid="stHeader"] .stDeployButton,
+.stDeployButton, [data-testid="stAppDeployButton"],
+button[kind="header"], .stAppDeployButton {
+  display: none !important; visibility: hidden !important;
+  width: 0 !important; height: 0 !important; overflow: hidden !important;
 }
 .block-container {
   padding: 1rem 2.5rem 3rem !important;
@@ -154,6 +157,29 @@ header[data-testid="stHeader"] {
 .dc-card-title::before {
   content: ''; width: 12px; height: 2px;
   background: var(--primary); border-radius: 1px;
+}
+
+/* ─ Chart / DataFrame card wrappers (CSS-only) ─ */
+[data-testid="stPlotlyChart"] {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: .6rem .8rem .2rem;
+  box-shadow: var(--shadow-sm); margin-bottom: var(--sp-3);
+  transition: var(--transition);
+}
+[data-testid="stPlotlyChart"]:hover {
+  box-shadow: var(--shadow-md);
+}
+[data-testid="stDataFrame"] {
+  background: var(--card); padding: var(--sp-2);
+  margin-bottom: var(--sp-3);
+}
+/* remove card from map (already transparent bg) */
+[data-testid="stPlotlyChart"]:has(.choroplethmapbox) {
+  border: none; box-shadow: none; padding: 0;
+  background: transparent;
+}
+[data-testid="stPlotlyChart"]:has(.choroplethmapbox):hover {
+  box-shadow: none;
 }
 
 /* ─ KPI Cards ─ */
@@ -272,7 +298,7 @@ section[data-testid="stSidebar"] .stCaption p {
   padding: var(--sp-6) 1.8rem; margin: var(--sp-4) 0;
 }
 .explore-title { font-size: 1rem; font-weight: 700; color: #1e1b4b; margin-bottom: .3rem; }
-.explore-desc { font-size: .88rem; color: var(--sub); margin-bottom: var(--sp-4); }
+.explore-desc { font-size: .88rem; color: var(--sub); margin-bottom: 0; }
 
 /* ─ Risk mini-card ─ */
 .risk-mini {
@@ -460,7 +486,13 @@ div[data-testid="stRadio"] label:has(input:checked) {
   background: #fff !important; color: var(--text) !important;
   box-shadow: 0 1px 4px rgba(16,24,40,.08) !important; font-weight: 700 !important;
 }
-div[data-testid="stRadio"] label input { display: none !important }
+div[data-testid="stRadio"] label input,
+div[data-testid="stRadio"] label [data-testid="stMarkdownContainer"] input,
+div[data-testid="stRadio"] [role="radiogroup"] input[type="radio"],
+div[data-testid="stRadio"] label > div:first-child {
+  display: none !important; width: 0 !important; height: 0 !important;
+  opacity: 0 !important; position: absolute !important;
+}
 div[data-testid="stRadio"] label p { margin: 0 !important }
 div[data-testid="stRadio"] > label:first-child { display: none !important }
 
@@ -527,14 +559,8 @@ def kpi_row(items):
             unsafe_allow_html=True)
 
 
-def card_start(title=None):
-    html = '<div class="dc-card">'
-    if title:
-        html += f'<div class="dc-card-title">{title}</div>'
-    st.markdown(html, unsafe_allow_html=True)
-
-def card_end():
-    st.markdown('</div>', unsafe_allow_html=True)
+def card_title(title):
+    st.markdown(f'<div class="dc-card-title">{title}</div>', unsafe_allow_html=True)
 
 
 # ╔══════════════════════════════════════════════════════════╗
@@ -825,7 +851,6 @@ def main():
 
         if geojson:
             sec("Mapa de risco por mesorregiao")
-            card_start()
             map_df = latest[["cod_mesorregiao","pred_risco","pred_label","pred_notif","p_surto","uf"]].copy()
             map_df["cod_str"] = map_df["cod_mesorregiao"].astype(str)
             map_df["nome"] = map_df["cod_mesorregiao"].apply(lambda c: mn(c, names))
@@ -866,13 +891,11 @@ def main():
             st.plotly_chart(fig_map, use_container_width=True,
                             config={"scrollZoom": False, "doubleClick": False,
                                     "displayModeBar": False})
-            card_end()
 
         sec("Risco medio por UF")
         col_chart, col_table = st.columns([1, 1])
 
         with col_chart:
-            card_start()
             uf_risk = latest.groupby("uf")["pred_risco"].mean().sort_values(ascending=True).reset_index()
             uf_risk.columns = ["uf", "risco"]
             fig_uf = go.Figure(go.Bar(
@@ -888,14 +911,13 @@ def main():
                                                   tickfont=dict(size=10)),
                                        yaxis=dict(title="", tickfont=dict(size=10))))
             st.plotly_chart(fig_uf, use_container_width=True)
-            card_end()
 
         with col_table:
             high = latest[latest["pred_risco"]>=2].nlargest(20, "pred_notif").copy()
             if high.empty:
                 st.info("Nenhum alerta Alto/Surto no periodo selecionado.")
             else:
-                card_start("Top alertas")
+                card_title("Top alertas")
                 tbl = high[["cod_mesorregiao","uf","pred_notif","pred_label","p_surto"]].copy()
                 tbl["Mesorregiao"] = tbl["cod_mesorregiao"].apply(lambda c: mn(c, names))
                 tbl["Prev"] = tbl["pred_notif"].round(0).astype(int)
@@ -909,7 +931,6 @@ def main():
                                      "P(Surto)", min_value=0, max_value=100, format="%.1f%%"),
                                  "Prev": st.column_config.NumberColumn("Prev. t+4", format="%d"),
                              })
-                card_end()
 
         c_dl, _ = st.columns([1, 3])
         with c_dl:
@@ -919,7 +940,6 @@ def main():
                                mime="application/pdf")
 
         sec("Evolucao semanal de alertas")
-        card_start()
         wk = view.groupby(["ano","semana_epidemiologica"]).agg(
             surto=("pred_risco", lambda x: (x==3).sum()),
             alto=("pred_risco", lambda x: (x==2).sum()),
@@ -939,7 +959,6 @@ def main():
                                      xaxis=dict(showgrid=False, title=""),
                                      yaxis=dict(gridcolor="#f2f4f7", gridwidth=1, title="")))
         st.plotly_chart(fig_evo, use_container_width=True)
-        card_end()
 
     # ════════════════════════════════════════════════════════════
     # TAB 2 — REGIOES
@@ -1020,7 +1039,6 @@ def main():
                     unsafe_allow_html=True)
 
             sec("Serie temporal")
-            card_start()
             fig_ts = go.Figure()
             fig_ts.add_trace(go.Scatter(
                 x=df_m["periodo"], y=df_m["notificacoes_t4"], name="Real (t+4)",
@@ -1038,10 +1056,8 @@ def main():
                                         xaxis=dict(showgrid=False, title=""),
                                         yaxis=dict(gridcolor="#f2f4f7", title="")))
             st.plotly_chart(fig_ts, use_container_width=True)
-            card_end()
 
             sec("Probabilidade de risco")
-            card_start()
             fig_p = go.Figure()
             fig_p.add_trace(go.Bar(
                 x=df_m["periodo"], y=df_m["p_surto"], name="P(Surto)",
@@ -1055,7 +1071,6 @@ def main():
                                        yaxis=dict(range=[0,1], gridcolor="#f2f4f7", title=""),
                                        xaxis=dict(showgrid=False, title="")))
             st.plotly_chart(fig_p, use_container_width=True)
-            card_end()
 
             from sklearn.metrics import r2_score, mean_absolute_error
             act = df_m["notificacoes_t4"].values
@@ -1103,7 +1118,6 @@ def main():
             'Cada ponto representa uma mesorregiao em uma semana. Pontos proximos a linha tracejada '
             'indicam previsao precisa. Escala logaritmica para comparar regioes de diferentes tamanhos.</p>',
             unsafe_allow_html=True)
-        card_start()
         samp = view.sample(min(5000, len(view)), random_state=42)
         samp["log_real"] = np.log1p(samp["notificacoes_t4"])
         samp["log_pred"] = np.log1p(samp["pred_notif"])
@@ -1120,7 +1134,6 @@ def main():
                                     xaxis=dict(gridcolor="#f2f4f7"),
                                     yaxis=dict(gridcolor="#f2f4f7")))
         st.plotly_chart(fig_sc, use_container_width=True)
-        card_end()
 
         # ── Evolução Nacional ──
         sec("Total de casos no Brasil por semana")
@@ -1129,7 +1142,6 @@ def main():
             'Soma de todas as mesorregioes por semana. '
             'Linha solida = dados reais, tracejada = previsao do modelo.</p>',
             unsafe_allow_html=True)
-        card_start()
         wk_agg = view.groupby("periodo").agg(
             real=("notificacoes_t4","sum"),
             prev=("pred_notif","sum")).reset_index().sort_values("periodo")
@@ -1146,7 +1158,6 @@ def main():
                                      xaxis=dict(showgrid=False, title=""),
                                      yaxis=dict(gridcolor="#f2f4f7", title="")))
         st.plotly_chart(fig_nat, use_container_width=True)
-        card_end()
 
         # ── Desempenho por Ano ──
         sec("Qualidade da previsao por ano")
@@ -1155,7 +1166,6 @@ def main():
             'Desempenho do modelo em cada ano. Cores indicam se o ano foi usado para treino, '
             'validacao ou teste. Barras mais altas indicam melhor previsao.</p>',
             unsafe_allow_html=True)
-        card_start()
         from sklearn.metrics import r2_score
         yr_stats = []
         for yr in sorted(view["ano"].unique()):
@@ -1188,7 +1198,6 @@ def main():
                                                   range=[0, 1.08]),
                                        bargap=0.15))
             st.plotly_chart(fig_yr, use_container_width=True)
-        card_end()
 
         # ── Separador visual ──
         st.markdown('<hr class="dc-divider">', unsafe_allow_html=True)
@@ -1240,7 +1249,6 @@ def main():
             unsafe_allow_html=True)
         cv, cc = st.columns(2)
         with cv:
-            card_start()
             if reg:
                 bars = []
                 for v in ["A","B","C"]:
@@ -1266,7 +1274,6 @@ def main():
                                               yaxis=dict(range=[0.84,0.92], gridcolor="#f2f4f7"),
                                               xaxis=dict(showgrid=False, title="")))
                     st.plotly_chart(fig_v, use_container_width=True)
-            card_end()
         with cc:
             cls_r = reports.get("cls")
             if cls_r:
@@ -1282,9 +1289,8 @@ def main():
                             "Acerto em surtos": f"{mm['f1_per_class']['surto']:.4f}",
                         })
                 if rows:
-                    card_start("Classificacao de risco")
+                    card_title("Classificacao de risco")
                     st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
-                    card_end()
 
         # ── Walk-Forward ──
         wf = reports.get("wf")
@@ -1295,7 +1301,6 @@ def main():
                 'Simulacao de uso real: o modelo e treinado com dados ate um ano e testado no seguinte, '
                 'avancando progressivamente. Mostra como o modelo se comportaria em producao.</p>',
                 unsafe_allow_html=True)
-            card_start()
             wfr = []
             for v in ["A","B","C"]:
                 k = f"{v}_inmet_enriquecido"
@@ -1314,7 +1319,6 @@ def main():
                                            xaxis=dict(showgrid=False),
                                            yaxis=dict(gridcolor="#f2f4f7", title="Qualidade (R²)")))
                 st.plotly_chart(fig_wf, use_container_width=True)
-            card_end()
 
         # ── SHAP ──
         shap_df = reports.get("shap")
@@ -1326,7 +1330,6 @@ def main():
                 'Quais dados mais influenciam a previsao do modelo? '
                 'Barras maiores indicam variaveis com maior peso na decisao.</p>',
                 unsafe_allow_html=True)
-            card_start()
             _feat_names = {
                 "notificacoes_lag_1w": "Notificacoes (1 sem. atras)",
                 "notificacoes_lag_2w": "Notificacoes (2 sem. atras)",
@@ -1359,7 +1362,6 @@ def main():
                                        xaxis=dict(title="Importancia (SHAP)", gridcolor="#f2f4f7"),
                                        coloraxis_showscale=False))
             st.plotly_chart(fig_sh, use_container_width=True)
-            card_end()
 
     # ════════════════════════════════════════════════════════════
     # TAB 4 — SOBRE (Native Streamlit)
