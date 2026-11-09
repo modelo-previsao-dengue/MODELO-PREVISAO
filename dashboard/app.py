@@ -1088,8 +1088,11 @@ def main():
                 x=df_m["periodo"], y=df_m["p_alto"], name="P(Alto)",
                 marker_color="rgba(234,88,12,.25)",
                 hovertemplate="<b>%{x}</b><br>P(Alto): %{y:.1%}<extra></extra>"))
-            fig_p.update_layout(**plo(h=220, barmode="overlay",
-                                       yaxis=dict(range=[0,1], gridcolor="#f2f4f7", title=""),
+            _pmax = max(df_m["p_surto"].max(), df_m["p_alto"].max(), 0.15)
+            fig_p.update_layout(**plo(h=200, barmode="overlay",
+                                       yaxis=dict(range=[0, min(_pmax * 1.15, 1)],
+                                                  gridcolor="#f2f4f7", title="",
+                                                  tickformat=".0%"),
                                        xaxis=dict(showgrid=False, title="", nticks=12,
                                                   tickangle=-45, tickfont=dict(size=10))))
             st.plotly_chart(fig_p, use_container_width=True)
@@ -1279,10 +1282,10 @@ def main():
                                          arrayminus=[b["R2"]-b["lo"]]),
                             marker_color=clr.get(b["Var"]), name=b["Var"],
                             text=f"{b['R2']:.4f}", textposition="outside",
-                            textfont=dict(size=11, family=PLOTLY_FONT),
+                            textfont=dict(size=10, family=PLOTLY_FONT),
                             hovertemplate="<b>%{x}</b><br>R²: %{y:.4f}<extra></extra>"))
                     fig_v.update_layout(**plo(h=300, showlegend=False,
-                                              yaxis=dict(range=[0.84,0.92], gridcolor="#f2f4f7"),
+                                              yaxis=dict(range=[0.83,0.93], gridcolor="#f2f4f7"),
                                               xaxis=dict(showgrid=False, title="")))
                     st.plotly_chart(fig_v, use_container_width=True)
         with cc:
