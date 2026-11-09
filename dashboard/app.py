@@ -533,6 +533,30 @@ div[data-testid="stRadio"] > label:first-child { display: none !important }
 .stColumns:first-of-type [data-testid="column"]:nth-child(4) .kpi-card { animation-delay: .18s }
 [data-testid="stPlotlyChart"] { animation-delay: .25s }
 .dc-card { animation-delay: .15s }
+
+/* ─ Browser surfaces ─ */
+::selection { background: rgba(80,70,229,.15); color: var(--text); }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+html { scrollbar-color: var(--border) transparent; scrollbar-width: thin; }
+
+/* ─ Responsive ─ */
+@media (max-width: 768px) {
+  .block-container { padding: 1rem 1rem 2rem !important; }
+  .about-grid { grid-template-columns: 1fr !important; }
+  .about-hero { padding: 1.5rem 1.2rem; }
+  .about-stats { gap: .4rem; }
+  .about-stat { min-width: 60px; padding: .5rem .6rem; }
+  .about-stat-n { font-size: 1rem; }
+  .dc-header { flex-direction: column; align-items: flex-start; gap: .5rem; }
+  .kpi-value { font-size: 1.6rem; }
+  .region-header { flex-direction: column; align-items: flex-start; }
+  .explore-card { padding: var(--sp-4) 1.2rem; }
+  .pipe { gap: .2rem; }
+  .pipe-step { font-size: .6rem; padding: .25rem .5rem; }
+}
 </style>""", unsafe_allow_html=True)
 
 
@@ -927,6 +951,8 @@ def main():
             ))
             fig_uf.update_layout(**plo(h=520,
                                        xaxis=dict(range=[0,3.3], showgrid=False, title="",
+                                                  tickvals=[0,1,2,3],
+                                                  ticktext=["Baixo","Moderado","Alto","Surto"],
                                                   tickfont=dict(size=10)),
                                        yaxis=dict(title="", tickfont=dict(size=10))))
             st.plotly_chart(fig_uf, use_container_width=True)
