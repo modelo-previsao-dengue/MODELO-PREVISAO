@@ -1,0 +1,82 @@
+name: Atualização Semanal — Pipeline Completo
+
+# Roda toda segunda-feira às 06:00 UTC (03:00 Brasília).
+# Baixa dados novos do SINAN + INMET, roda pipeline v4 completo,
+# sobe resultados atualizados pro HuggingFace e atualiza Kaggle.
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependências
+        run: |
+          pip install -r requirements.txt
+          pip install "huggingface_hub>=0.25"
+
+      - name: Baixar dados existentes do HuggingFace
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python3 << 'EOF'
+          from huggingface_hub import snapshot_download
+          import os
+          snapshot_download(
+              "pedrolucassantanaf/dengue-tcc2-data",
+              repo_type="dataset",
+              local_dir=".",
+              token=os.environ["HF_TOKEN"],
+          )
+          EOF
+
+      - name: Fetch dados novos (SINAN + INMET)
+        run: python3 scripts/fetch_weekly_data.py --year $(date +%Y)
+
+      - name: Pipeline SINAN (bronze → silver → gold)
+        run: |
+          cd scripts
+          python3 sinan_tcc2_pipeline.py || echo "::warning::SINAN pipeline falhou, usando dados HF existentes"
+          cd ..
+
+      - name: Pipeline INMET (extract → aggregate)
+        run: |
+          YEAR=$(date +%Y)
+          if [ -d "data/raw/inmet/$YEAR" ]; then
+            cd scripts
+            python3 inmet_extract_standardize.py --years $YEAR --source-dir ../data/raw/inmet/$YEAR || true
+            cd ..
+          fi
+
+      - name: Pipeline v4 (scripts 40-55)
+        run: scripts/rodar_v4.sh 40
+
+      - name: Upload resultados para HuggingFace
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: python3 scripts/upload_data_to_hf.py --tudo
+
+      - name: Atualizar notebooks no Kaggle
+        env:
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+        run: |
+          pip install kaggle
+          python3 scripts/publish_kaggle.py
+
+      - name: Resumo
+        run: |
+          echo "=== Atualização semanal completa ==="
+          echo "Data: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          echo "HF: https://huggingface.co/datasets/pedrolucassantanaf/dengue-tcc2-data"
+          python3 scripts/status_hf.py || true

@@ -1,5 +1,5 @@
 .PHONY: publish publish-hf publish-hf-v4 publish-hf-dashboard publish-kaggle \
-       publish-dry validate validate-remote status help
+       publish-dry validate validate-remote status help update fetch pipeline
 
 PYTHON ?= python3
 HF_SCRIPT = scripts/upload_data_to_hf.py
@@ -40,6 +40,15 @@ validate: ## Valida integridade dos artefatos locais
 
 validate-remote: ## Valida publicação remota no HuggingFace
 	$(PYTHON) $(VALIDATE_SCRIPT)
+
+update: fetch pipeline publish ## Atualização completa: fetch + pipeline + publish
+	@echo "=== Atualização semanal completa ==="
+
+fetch: ## Baixa dados novos do SINAN + INMET
+	$(PYTHON) scripts/fetch_weekly_data.py
+
+pipeline: ## Roda pipeline v4 completo (scripts 40-55)
+	scripts/rodar_v4.sh 40
 
 status: ## Mostra o que está local vs publicado
 	@echo "=== Status local ==="
