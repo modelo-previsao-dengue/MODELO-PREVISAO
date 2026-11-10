@@ -21,21 +21,21 @@ NOTEBOOKS = [
         "metadata": "v4_01_kernel-metadata.json",
         "notebook": "v4_01_exploracao.ipynb",
         "title": "DengueCast v4 — Exploração dos Dados",
-        "url": "https://www.kaggle.com/pedrolucassantana/denguecast-v4-01-exploracao",
+        "url": "https://www.kaggle.com/code/pedrolucassantana/denguecast-v4-explora-o-dos-dados",
     },
     {
         "id": "v4_02",
         "metadata": "v4_02_kernel-metadata.json",
         "notebook": "v4_02_treino.ipynb",
         "title": "DengueCast v4 — Treino e Avaliação",
-        "url": "https://www.kaggle.com/pedrolucassantana/denguecast-v4-02-treino",
+        "url": "https://www.kaggle.com/code/pedrolucassantana/denguecast-v4-treino-e-avalia-o",
     },
     {
         "id": "v4_03",
         "metadata": "v4_03_kernel-metadata.json",
         "notebook": "v4_03_resultados.ipynb",
         "title": "DengueCast v4 — Resultados e Visualizações",
-        "url": "https://www.kaggle.com/pedrolucassantana/denguecast-v4-03-resultados",
+        "url": "https://www.kaggle.com/code/pedrolucassantana/denguecast-v4-resultados-e-visualiza-es",
     },
 ]
 
