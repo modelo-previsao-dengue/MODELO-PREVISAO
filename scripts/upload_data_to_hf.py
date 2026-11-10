@@ -1,94 +1,213 @@
-"""Sobe as camadas de dados para o HuggingFace, de onde o Kaggle le.
+"""Publica TODOS os artefatos do DengueCast no HuggingFace.
 
 Uso:
-    export HF_TOKEN=hf_xxx
-    export HF_REPO_ID=seu-usuario/dengue-tcc2-data      # opcional
-    .venv/bin/python3 scripts/upload_data_to_hf.py --apenas-model-ready
-
-O --apenas-model-ready sobe 172 MB em vez de 2 GB. E o suficiente para
-rodar no Kaggle: o notebook so le data/model_ready. As demais camadas
-(bronze horario do INMET, gold do SINAN, integrado) servem para reproduzir
-o pipeline de fora desta maquina, e sozinhas somam 1,9 GB.
+    python3 scripts/upload_data_to_hf.py --tudo          # sobe tudo (~1.1 GB)
+    python3 scripts/upload_data_to_hf.py --v4            # so dados + modelos v4
+    python3 scripts/upload_data_to_hf.py --dashboard     # so cache da dashboard
+    python3 scripts/upload_data_to_hf.py --dry-run --tudo  # lista sem enviar
 """
 import argparse
+import json
 import os
-import sys
 import shutil
+import sys
 from pathlib import Path
+
 from huggingface_hub import HfApi
 
-# O repositorio de destino e configuravel: o projeto tem mais de um autor e
-# cada um sobe para o proprio dataset.
+ROOT = Path(__file__).resolve().parent.parent
 REPO_ID = os.environ.get("HF_REPO_ID", "pedrolucassantanaf/dengue-tcc2-data")
-DATA_DIR = Path(__file__).resolve().parent.parent / "data"
-STAGING = Path(__file__).resolve().parent.parent / "_hf_staging"
+STAGING = ROOT / "_hf_staging"
 
-ap = argparse.ArgumentParser(description=__doc__)
-ap.add_argument("--apenas-model-ready", action="store_true",
-                help="Sobe so data/model_ready (172 MB), que e o que o Kaggle le")
-ap.add_argument("--dry-run", action="store_true",
-                help="Lista o que subiria e para, sem enviar nada")
-args = ap.parse_args()
+LAYERS = {
+    "v4": [
+        ("data/model_ready_v4", "data/model_ready_v4", "**/*"),
+        ("models/regression_v4", "models/regression_v4", "**/*"),
+        ("models/classification_v4", "models/classification_v4", "**/*"),
+    ],
+    "dashboard": [
+        ("dashboard/data", "dashboard/data", "**/*"),
+        ("data/geojson", "data/geojson", "**/*"),
+    ],
+    "old": [
+        ("data/model_ready", "data/model_ready", "**/*"),
+    ],
+    "config": [
+        ("config/recorte.json", "config/recorte.json", None),
+        ("data/model_ready_v3/municipio_mesorregiao.csv",
+         "data/reference/municipio_mesorregiao.csv", None),
+    ],
+    "card": [
+        ("hf_dataset_card/README.md", "README.md", None),
+    ],
+}
 
-# Sem HF_TOKEN, o huggingface_hub cai no token gravado por `hf auth login`.
-TOKEN = os.environ.get("HF_TOKEN")
 
-api = HfApi(token=TOKEN)
+def parse_args():
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    g = ap.add_mutually_exclusive_group(required=True)
+    g.add_argument("--tudo", action="store_true",
+                   help="Sobe tudo: v4 + modelos + dados antigos + dashboard + config + card")
+    g.add_argument("--v4", action="store_true",
+                   help="Sobe dados v4 + modelos v4 (~786 MB)")
+    g.add_argument("--dashboard", action="store_true",
+                   help="Sobe cache da dashboard + geojson (~43 MB)")
+    ap.add_argument("--dry-run", action="store_true",
+                    help="Lista arquivos e tamanhos sem enviar")
+    return ap.parse_args()
 
-if STAGING.exists():
+
+def resolve_groups(args):
+    if args.tudo:
+        return ["v4", "dashboard", "old", "config", "card"]
+    if args.v4:
+        return ["v4", "config"]
+    if args.dashboard:
+        return ["dashboard"]
+    return []
+
+
+def validate_parquets(files):
+    try:
+        import pyarrow.parquet as pq
+    except ImportError:
+        print("WARN: pyarrow nao instalado, pulando validacao de parquets")
+        return True
+    ok = True
+    for f in files:
+        if f.suffix == ".parquet":
+            try:
+                meta = pq.read_metadata(f)
+                if meta.num_rows == 0:
+                    print(f"  ERRO: {f.name} esta vazio (0 linhas)")
+                    ok = False
+            except Exception as e:
+                print(f"  ERRO: {f.name} nao e um parquet valido: {e}")
+                ok = False
+    return ok
+
+
+def validate_jsons(files):
+    ok = True
+    for f in files:
+        if f.suffix == ".json":
+            try:
+                json.loads(f.read_text())
+            except Exception as e:
+                print(f"  ERRO: {f} nao e JSON valido: {e}")
+                ok = False
+    return ok
+
+
+def validate_models(files):
+    ok = True
+    for f in files:
+        if f.suffix == ".ubj":
+            if f.stat().st_size == 0:
+                print(f"  ERRO: {f} esta vazio (0 bytes)")
+                ok = False
+    return ok
+
+
+def stage_files(groups):
+    if STAGING.exists():
+        shutil.rmtree(STAGING)
+    STAGING.mkdir()
+
+    staged = []
+    for group in groups:
+        for entry in LAYERS[group]:
+            src_rel, dst_rel, pattern = entry
+            src = ROOT / src_rel
+
+            if pattern is None:
+                if not src.exists():
+                    print(f"  SKIP (nao encontrado): {src_rel}")
+                    continue
+                dest = STAGING / dst_rel
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                os.symlink(src, dest)
+                staged.append(src)
+            else:
+                if not src.exists():
+                    print(f"  SKIP (nao encontrado): {src_rel}/")
+                    continue
+                for f in src.glob(pattern):
+                    if f.is_file():
+                        rel = f.relative_to(src)
+                        dest = STAGING / dst_rel / rel
+                        dest.parent.mkdir(parents=True, exist_ok=True)
+                        os.symlink(f, dest)
+                        staged.append(f)
+
+    return staged
+
+
+def main():
+    args = parse_args()
+    groups = resolve_groups(args)
+
+    token = os.environ.get("HF_TOKEN")
+    if not token:
+        api = HfApi()
+        try:
+            api.whoami()
+        except Exception:
+            print("ERRO: HF_TOKEN nao configurado.")
+            print("  Opcao 1: export HF_TOKEN=hf_xxx")
+            print("  Opcao 2: huggingface-cli login")
+            sys.exit(1)
+    else:
+        api = HfApi(token=token)
+
+    print(f"Repo destino: {REPO_ID}")
+    print(f"Grupos: {', '.join(groups)}")
+    print()
+
+    print("Staging arquivos...")
+    staged = stage_files(groups)
+
+    if not staged:
+        print("Nenhum arquivo encontrado para upload.")
+        sys.exit(1)
+
+    total_mb = sum(f.stat().st_size for f in staged) / 1024**2
+    print(f"\nTotal: {len(staged)} arquivos ({total_mb:.0f} MB)")
+
+    print("\nValidando integridade...")
+    v1 = validate_parquets(staged)
+    v2 = validate_jsons(staged)
+    v3 = validate_models(staged)
+    if not (v1 and v2 and v3):
+        print("\nERRO: Validacao falhou. Corrija os erros acima antes de subir.")
+        shutil.rmtree(STAGING)
+        sys.exit(1)
+    print("Validacao OK.")
+
+    if args.dry_run:
+        print("\n--- DRY RUN: arquivos que seriam enviados ---")
+        for f in sorted(STAGING.rglob("*")):
+            if f.is_file():
+                size = f.stat().st_size
+                unit = "MB" if size > 1024**2 else "KB"
+                val = size / 1024**2 if unit == "MB" else size / 1024
+                print(f"  {f.relative_to(STAGING)}  ({val:.1f} {unit})")
+        shutil.rmtree(STAGING)
+        print(f"\n--dry-run: nada foi enviado. Total: {total_mb:.0f} MB")
+        sys.exit(0)
+
+    print(f"\nUploading {total_mb:.0f} MB para {REPO_ID}...")
+    api.upload_large_folder(
+        folder_path=str(STAGING),
+        repo_id=REPO_ID,
+        repo_type="dataset",
+    )
+
     shutil.rmtree(STAGING)
+    print(f"\nPublicado com sucesso!")
+    print(f"URL: https://huggingface.co/datasets/{REPO_ID}")
 
-STAGING.mkdir()
-data_out = STAGING / "data"
 
-layers = [
-    ("sinan/silver/sinan_tcc2_v2/official_observed", "**/*.parquet"),
-    ("sinan/gold/sinan_tcc2_v2/official_dense", "**/*.parquet"),
-    ("inmet/bronze/hourly", "**/*.parquet"),
-    ("inmet/silver", "*.parquet"),
-    ("inmet/gold", "*.parquet"),
-    ("integrated", "*.parquet"),
-    # "**/*" e nao "*": o recorte criou data/model_ready/{e2,mesorregiao,uf},
-    # e com o padrao antigo os subdiretorios eram silenciosamente ignorados —
-    # o notebook do Kaggle baixaria so o E1.
-    ("model_ready", "**/*"),
-]
-
-if args.apenas_model_ready:
-    layers = [l for l in layers if l[0] == "model_ready"]
-
-count = 0
-for subdir, pattern in layers:
-    src = DATA_DIR / subdir
-    if not src.exists():
-        print(f"SKIP (not found): {subdir}")
-        continue
-    for f in src.glob(pattern):
-        if f.is_file():
-            rel = f.relative_to(DATA_DIR)
-            dest = data_out / rel
-            dest.parent.mkdir(parents=True, exist_ok=True)
-            os.symlink(f, dest)
-            count += 1
-
-total_mb = sum(f.stat().st_size for f in data_out.rglob("*") if f.is_file()) / 1024**2
-print(f"Staged {count} files ({total_mb:.0f} MB) for upload to {REPO_ID}")
-
-if args.dry_run:
-    for f in sorted(data_out.rglob("*")):
-        if f.is_file():
-            print(f"  {f.relative_to(STAGING)}")
-    shutil.rmtree(STAGING)
-    print("\n--dry-run: nada foi enviado.")
-    sys.exit(0)
-
-print("Uploading (single batch)...")
-
-api.upload_large_folder(
-    folder_path=str(STAGING),
-    repo_id=REPO_ID,
-    repo_type="dataset",
-)
-
-shutil.rmtree(STAGING)
-print("Done.")
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,14 @@
+{
+  "id": "pedrolucassantanaf/denguecast-v4-01-exploracao",
+  "title": "DengueCast v4 — Exploração dos Dados",
+  "code_file": "v4_01_exploracao.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_internet": true,
+  "keywords": ["dengue", "xgboost", "epidemiologia", "brasil", "time-series"],
+  "dataset_sources": [],
+  "competition_sources": [],
+  "kernel_sources": []
+}
