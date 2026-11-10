@@ -21,21 +21,21 @@ NOTEBOOKS = [
         "metadata": "v4_01_kernel-metadata.json",
         "notebook": "v4_01_exploracao.ipynb",
         "title": "DengueCast v4 — Exploração dos Dados",
-        "url": "https://www.kaggle.com/pedrolucassantanaf/denguecast-v4-01-exploracao",
+        "url": "https://www.kaggle.com/pedrolucassantana/denguecast-v4-01-exploracao",
     },
     {
         "id": "v4_02",
         "metadata": "v4_02_kernel-metadata.json",
         "notebook": "v4_02_treino.ipynb",
         "title": "DengueCast v4 — Treino e Avaliação",
-        "url": "https://www.kaggle.com/pedrolucassantanaf/denguecast-v4-02-treino",
+        "url": "https://www.kaggle.com/pedrolucassantana/denguecast-v4-02-treino",
     },
     {
         "id": "v4_03",
         "metadata": "v4_03_kernel-metadata.json",
         "notebook": "v4_03_resultados.ipynb",
         "title": "DengueCast v4 — Resultados e Visualizações",
-        "url": "https://www.kaggle.com/pedrolucassantanaf/denguecast-v4-03-resultados",
+        "url": "https://www.kaggle.com/pedrolucassantana/denguecast-v4-03-resultados",
     },
 ]
 
@@ -89,7 +89,8 @@ def publish_notebook(nb, dry_run=False):
             print(f"  URL: {nb['url']}")
             return True
         else:
-            print(f"  ERRO ao publicar: {result.stderr.strip()}")
+            err = result.stderr.strip() or result.stdout.strip()
+            print(f"  ERRO ao publicar: {err}")
             return False
     except FileNotFoundError:
         print("  ERRO: comando 'kaggle' não encontrado. Instale: pip install kaggle")
