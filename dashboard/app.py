@@ -443,9 +443,13 @@ details[data-testid="stExpander"] summary span[data-testid="stMarkdownContainer"
 .stTabs [role="tablist"]::before,
 .stTabs [role="tablist"]::after { display: none !important; }
 .stTabs [data-baseweb="tab-highlight"],
-.stTabs [data-testid="stTabHighlight"] { display: none !important; }
+.stTabs [data-testid="stTabHighlight"] { display: none !important; height: 0 !important; }
 .stTabs [data-baseweb="tab-border"],
-.stTabs [data-testid="stTabBorder"] { display: none !important; }
+.stTabs [data-testid="stTabBorder"] { display: none !important; height: 0 !important; }
+.stTabs [role="tablist"] > div:last-child,
+.stTabs [data-baseweb="tab-list"] > div:last-child { display: none !important; }
+.stTabs { border-bottom: none !important; }
+.stTabs > div:first-child { border-bottom: none !important; box-shadow: none !important; }
 .stTabs [data-baseweb="tab"],
 .stTabs [role="tab"],
 .stTabs button[role="tab"] {
