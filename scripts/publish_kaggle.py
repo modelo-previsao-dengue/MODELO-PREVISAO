@@ -41,16 +41,27 @@ NOTEBOOKS = [
 
 
 def check_kaggle_credentials():
+    if os.environ.get("KAGGLE_API_TOKEN"):
+        result = subprocess.run(
+            ["kaggle", "config", "view"], capture_output=True, text=True
+        )
+        return os.environ.get("KAGGLE_USERNAME", "authenticated-via-token")
+
+    access_token = Path.home() / ".kaggle" / "access_token"
+    if access_token.exists():
+        return "authenticated-via-access-token"
+
     creds = Path.home() / ".kaggle" / "kaggle.json"
-    if not creds.exists():
-        print("ERRO: ~/.kaggle/kaggle.json não encontrado.")
-        print("  Crie em https://www.kaggle.com/settings → API → Create New Token")
-        sys.exit(1)
-    data = json.loads(creds.read_text())
-    if "username" not in data or "key" not in data:
-        print("ERRO: ~/.kaggle/kaggle.json não contém username ou key.")
-        sys.exit(1)
-    return data["username"]
+    if creds.exists():
+        data = json.loads(creds.read_text())
+        if "username" in data and "key" in data:
+            return data["username"]
+
+    print("ERRO: credenciais Kaggle não encontradas.")
+    print("  Opção 1: export KAGGLE_API_TOKEN=KGAT_xxx")
+    print("  Opção 2: ~/.kaggle/access_token")
+    print("  Opção 3: ~/.kaggle/kaggle.json (legado)")
+    sys.exit(1)
 
 
 def publish_notebook(nb, dry_run=False):
