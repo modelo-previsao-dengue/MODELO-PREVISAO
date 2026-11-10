@@ -4,11 +4,9 @@ on:
   push:
     branches: [main]
     paths:
-      - 'data/model_ready_v4/**'
-      - 'models/regression_v4/**'
-      - 'models/classification_v4/**'
+      - 'data/**'
+      - 'models/**'
       - 'dashboard/data/**'
-      - 'data/geojson/**'
       - 'config/recorte.json'
       - 'hf_dataset_card/README.md'
   workflow_dispatch:
@@ -28,7 +26,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install huggingface_hub pyarrow
+        run: pip install "huggingface_hub>=0.25" pyarrow
 
       - name: Upload to HuggingFace
         env:
