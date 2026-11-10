@@ -12,3 +12,5 @@ streamlit>=1.28
 plotly>=5.17
 pyarrow>=14.0
 fpdf2>=2.7
+optuna>=3.4
+huggingface_hub>=0.25

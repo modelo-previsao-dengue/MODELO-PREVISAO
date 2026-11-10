@@ -41,26 +41,27 @@ jobs:
           )
           EOF
 
-      - name: Fetch dados novos (SINAN + INMET)
-        run: python3 scripts/fetch_weekly_data.py --year $(date +%Y)
+      - name: Fetch dados novos SINAN
+        run: python3 scripts/fetch_weekly_data.py --year $(date +%Y) --skip-inmet
 
-      - name: Pipeline SINAN (bronze → silver → gold)
+      - name: Processar SINAN bruto para gold
         run: |
           cd scripts
-          python3 sinan_tcc2_pipeline.py || echo "::warning::SINAN pipeline falhou, usando dados HF existentes"
+          python3 sinan_tcc2_pipeline.py --skip-bronze 2>&1 || echo "::warning::SINAN completo indisponivel, usando gold existente do HF"
           cd ..
+        continue-on-error: true
 
-      - name: Pipeline INMET (extract → aggregate)
+      - name: Pipeline v4 (agregar + treinar + avaliar)
+        env:
+          PYTHONPATH: scripts
         run: |
-          YEAR=$(date +%Y)
-          if [ -d "data/raw/inmet/$YEAR" ]; then
-            cd scripts
-            python3 inmet_extract_standardize.py --years $YEAR --source-dir ../data/raw/inmet/$YEAR || true
-            cd ..
-          fi
-
-      - name: Pipeline v4 (scripts 40-55)
-        run: scripts/rodar_v4.sh 40
+          cd scripts
+          for s in 4[0-9]_*.py 5[0-5]_*.py; do
+            echo "########## $s  ($(date +%H:%M:%S))"
+            python3 "$s" || { echo "::error::$s falhou"; exit 1; }
+          done
+          echo "########## fim ($(date +%H:%M:%S))"
+          cd ..
 
       - name: Upload resultados para HuggingFace
         env:
