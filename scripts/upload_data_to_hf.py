@@ -29,13 +29,62 @@ LAYERS = {
         ("dashboard/data", "dashboard/data", "**/*"),
         ("data/geojson", "data/geojson", "**/*"),
     ],
-    "old": [
+    "sinan": [
+        ("data/sinan/bronze", "data/sinan/bronze", "**/*"),
+        ("data/sinan/silver", "data/sinan/silver", "**/*"),
+        ("data/sinan/gold", "data/sinan/gold", "**/*"),
+        ("data/sinan/governance", "data/sinan/governance", "**/*"),
+        ("data/sinan/serving", "data/sinan/serving", "**/*"),
+    ],
+    "inmet": [
+        ("data/inmet/bronze", "data/inmet/bronze", "**/*"),
+        ("data/inmet/silver", "data/inmet/silver", "**/*"),
+        ("data/inmet/gold", "data/inmet/gold", "**/*"),
+    ],
+    "integrated": [
+        ("data/integrated", "data/integrated", "**/*"),
+    ],
+    "model_ready_old": [
         ("data/model_ready", "data/model_ready", "**/*"),
+        ("data/model_ready_v2", "data/model_ready_v2", "**/*"),
+        ("data/model_ready_v3", "data/model_ready_v3", "**/*"),
+    ],
+    "reference": [
+        ("data/reference", "data/reference", "**/*"),
+    ],
+    "models_old": [
+        ("models/ablacao", "models/ablacao", "**/*"),
+        ("models/ablacao_surto", "models/ablacao_surto", "**/*"),
+        ("models/baseline_5yr", "models/baseline_5yr", "**/*"),
+        ("models/baselines", "models/baselines", "**/*"),
+        ("models/baselines_e2", "models/baselines_e2", "**/*"),
+        ("models/baselines_meso", "models/baselines_meso", "**/*"),
+        ("models/baselines_surto_meso", "models/baselines_surto_meso", "**/*"),
+        ("models/baselines_uf", "models/baselines_uf", "**/*"),
+        ("models/baselines_v3", "models/baselines_v3", "**/*"),
+        ("models/blindness_v3", "models/blindness_v3", "**/*"),
+        ("models/classification_5yr", "models/classification_5yr", "**/*"),
+        ("models/classification_v2", "models/classification_v2", "**/*"),
+        ("models/classification_v3", "models/classification_v3", "**/*"),
+        ("models/kaggle_e1", "models/kaggle_e1", "**/*"),
+        ("models/kaggle_mesorregiao", "models/kaggle_mesorregiao", "**/*"),
+        ("models/multi_horizon", "models/multi_horizon", "**/*"),
+        ("models/nacional", "models/nacional", "**/*"),
+        ("models/regression_5yr", "models/regression_5yr", "**/*"),
+        ("models/regression_v2", "models/regression_v2", "**/*"),
+        ("models/regression_v3", "models/regression_v3", "**/*"),
+        ("models/shap_5yr", "models/shap_5yr", "**/*"),
+        ("models/shap_analysis", "models/shap_analysis", "**/*"),
+        ("models/shap_v2", "models/shap_v2", "**/*"),
+        ("models/shap_v3", "models/shap_v3", "**/*"),
+        ("models/walk_forward_results", "models/walk_forward_results", "**/*"),
+        ("models/xgb_baseline_sinan_only", "models/xgb_baseline_sinan_only", "**/*"),
+        ("models/xgb_classification_mvp", "models/xgb_classification_mvp", "**/*"),
+        ("models/xgb_regression_mvp", "models/xgb_regression_mvp", "**/*"),
+        ("models/xgb_regression_tuned", "models/xgb_regression_tuned", "**/*"),
     ],
     "config": [
         ("config/recorte.json", "config/recorte.json", None),
-        ("data/model_ready_v3/municipio_mesorregiao.csv",
-         "data/reference/municipio_mesorregiao.csv", None),
     ],
     "card": [
         ("hf_dataset_card/README.md", "README.md", None),
@@ -60,7 +109,7 @@ def parse_args():
 
 def resolve_groups(args):
     if args.tudo:
-        return ["v4", "dashboard", "old", "config", "card"]
+        return list(LAYERS.keys())
     if args.v4:
         return ["v4", "config"]
     if args.dashboard:
