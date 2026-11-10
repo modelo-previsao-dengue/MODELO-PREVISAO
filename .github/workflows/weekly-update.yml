@@ -1,13 +1,23 @@
-name: Atualização Semanal — Pipeline Completo
+name: Atualização Semanal — Dados SINAN + HuggingFace
 
 # Roda toda segunda-feira às 06:00 UTC (03:00 Brasília).
-# Baixa dados novos do SINAN + INMET, roda pipeline v4 completo,
-# sobe resultados atualizados pro HuggingFace e atualiza Kaggle.
+# Baixa dados novos do SINAN, sobe para o HuggingFace.
+# Pipeline v4 completo (treino XGBoost) roda via workflow_dispatch manual
+# porque precisa de mais memória que runners gratuitos oferecem (7 GB).
 
 on:
   schedule:
     - cron: '0 6 * * 1'
   workflow_dispatch:
+    inputs:
+      run_pipeline:
+        description: 'Rodar pipeline v4 completo (treino XGBoost)?'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
 
 jobs:
   update:
@@ -25,6 +35,15 @@ jobs:
         run: |
           pip install -r requirements.txt
           pip install "huggingface_hub>=0.25"
+
+      - name: Criar swap (8 GB) para pipeline pesado
+        if: inputs.run_pipeline == 'true'
+        run: |
+          sudo fallocate -l 8G /swapfile
+          sudo chmod 600 /swapfile
+          sudo mkswap /swapfile
+          sudo swapon /swapfile
+          echo "Swap ativo: $(swapon --show)"
 
       - name: Baixar dados existentes do HuggingFace
         env:
@@ -44,14 +63,8 @@ jobs:
       - name: Fetch dados novos SINAN
         run: python3 scripts/fetch_weekly_data.py --year $(date +%Y) --skip-inmet
 
-      - name: Processar SINAN bruto para gold
-        run: |
-          cd scripts
-          python3 sinan_tcc2_pipeline.py --skip-bronze 2>&1 || echo "::warning::SINAN completo indisponivel, usando gold existente do HF"
-          cd ..
-        continue-on-error: true
-
       - name: Pipeline v4 (agregar + treinar + avaliar)
+        if: inputs.run_pipeline == 'true'
         env:
           PYTHONPATH: scripts
         run: |
@@ -63,12 +76,34 @@ jobs:
           echo "########## fim ($(date +%H:%M:%S))"
           cd ..
 
-      - name: Upload resultados para HuggingFace
+      - name: Upload dados para HuggingFace
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python3 -c "
+          from huggingface_hub import HfApi
+          import os
+          api = HfApi(token=os.environ['HF_TOKEN'])
+          repo = 'pedrolucassantanaf/dengue-tcc2-data'
+
+          # Sempre: upload dados brutos SINAN novos
+          import glob
+          raw_files = glob.glob('data/raw/sinan/*.zip')
+          for f in raw_files:
+              print(f'Uploading {f}...')
+              api.upload_file(path_or_fileobj=f, path_in_repo=f, repo_id=repo, repo_type='dataset')
+
+          print(f'Upload de {len(raw_files)} arquivo(s) SINAN bruto(s) concluido.')
+          "
+
+      - name: Upload pipeline completo para HuggingFace
+        if: inputs.run_pipeline == 'true'
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: python3 scripts/upload_data_to_hf.py --tudo
 
       - name: Atualizar notebooks no Kaggle
+        if: inputs.run_pipeline == 'true'
         env:
           KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
         run: |
@@ -79,5 +114,6 @@ jobs:
         run: |
           echo "=== Atualização semanal completa ==="
           echo "Data: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          echo "Pipeline v4: ${{ inputs.run_pipeline || 'false' }}"
           echo "HF: https://huggingface.co/datasets/pedrolucassantanaf/dengue-tcc2-data"
           python3 scripts/status_hf.py || true
