@@ -1,14 +1,18 @@
 name: Sync to HuggingFace
 
+# Dados grandes (parquets, modelos) nao estao no Git (estao no .gitignore).
+# Para upload completo (~4 GB), rode localmente: make publish-hf
+# Este workflow sobe apenas os arquivos tracked pelo Git (configs, schemas, README).
+# Use workflow_dispatch para forcar re-sync apos um make publish-hf local.
+
 on:
   push:
     branches: [main]
     paths:
-      - 'data/**'
-      - 'models/**'
-      - 'dashboard/data/**'
-      - 'config/recorte.json'
       - 'hf_dataset_card/README.md'
+      - 'config/recorte.json'
+      - 'data/geojson/**'
+      - 'scripts/upload_data_to_hf.py'
   workflow_dispatch:
 
 jobs:
