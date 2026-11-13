@@ -1,6 +1,6 @@
 {
-  "registros_silver_total": 442168,
-  "linhas_mesorregiao_semana": 123551,
+  "registros_silver_total": 533737,
+  "linhas_mesorregiao_semana": 147560,
   "mesorregioes_com_dados": 137,
   "anos_disponiveis": [
     2000,
@@ -25,16 +25,13 @@
     2019,
     2020,
     2021,
+    2022,
     2023,
     2024,
     2025,
     2026
   ],
-  "anos_sem_silver": [
-    2009,
-    2020,
-    2022
-  ],
+  "anos_sem_silver": [],
   "cobertura_por_ano": {
     "2000": {
       "mesorregioes": 5,
@@ -84,7 +81,7 @@
     "2009": {
       "mesorregioes": 129,
       "pct_meso": 94.2,
-      "semanas": 1
+      "semanas": 52
     },
     "2010": {
       "mesorregioes": 131,
@@ -139,11 +136,16 @@
     "2020": {
       "mesorregioes": 136,
       "pct_meso": 99.3,
-      "semanas": 1
+      "semanas": 52
     },
     "2021": {
       "mesorregioes": 136,
       "pct_meso": 99.3,
+      "semanas": 52
+    },
+    "2022": {
+      "mesorregioes": 135,
+      "pct_meso": 98.5,
       "semanas": 52
     },
     "2023": {
@@ -157,28 +159,28 @@
       "semanas": 52
     },
     "2025": {
-      "mesorregioes": 135,
-      "pct_meso": 98.5,
+      "mesorregioes": 136,
+      "pct_meso": 99.3,
       "semanas": 52
     },
     "2026": {
       "mesorregioes": 135,
       "pct_meso": 98.5,
-      "semanas": 17
+      "semanas": 43
     }
   },
   "cobertura_por_variavel": {
-    "rain_sum_mm": 100.0,
-    "rain_mean_mm": 95.0,
-    "rain_days": 100.0,
-    "rain_heavy_days": 100.0,
-    "temp_mean_c": 96.1,
-    "temp_min_c": 96.1,
-    "temp_max_c": 95.8,
-    "temp_range_c": 95.8,
-    "humidity_mean_pct": 95.8,
-    "pressure_mean_mbar": 96.0,
-    "wind_speed_mean_ms": 94.7,
-    "radiation_mean_kj": 95.7
+    "rain_sum_mm": 94.5,
+    "rain_mean_mm": 94.5,
+    "rain_days": 94.5,
+    "rain_heavy_days": 94.5,
+    "temp_mean_c": 95.7,
+    "temp_min_c": 95.7,
+    "temp_max_c": 95.7,
+    "temp_range_c": 95.7,
+    "humidity_mean_pct": 95.5,
+    "pressure_mean_mbar": 95.7,
+    "wind_speed_mean_ms": 94.3,
+    "radiation_mean_kj": 95.3
   }
 }

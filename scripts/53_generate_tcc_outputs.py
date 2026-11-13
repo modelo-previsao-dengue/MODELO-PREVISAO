@@ -17,9 +17,9 @@ import pandas as pd
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data" / "model_ready_v4"
 MODEL_DIR = BASE_DIR / "models" / "regression_v4"
-OVERLEAF_DIR = BASE_DIR.parent / "Overleaf" / "TCC2 Base FCTE UnB"
-FIG_DIR = OVERLEAF_DIR / "figuras" / "resultados_v4"
-TABLE_DIR = OVERLEAF_DIR / "tabelas"
+TCC2_DOCS_DIR = BASE_DIR.parent / "TCC2-DOCS" / "monografia"
+FIG_DIR = TCC2_DOCS_DIR / "figuras" / "resultados_v4"
+TABLE_DIR = TCC2_DOCS_DIR / "tabelas"
 
 
 def generate_main_table(report, out_path):

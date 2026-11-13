@@ -96,8 +96,8 @@
       ]
     },
     "A_inmet_bruto": {
-      "mean_R2_log": 0.7863,
-      "std_R2_log": 0.1381,
+      "mean_R2_log": 0.784,
+      "std_R2_log": 0.1375,
       "folds": [
         {
           "label": "VarA INMET-b F1(test=2023)",
@@ -110,10 +110,10 @@
           "test_years": [
             2023
           ],
-          "RMSE": 484.48,
-          "MAE": 105.4574,
-          "R2": 0.6231,
-          "R2_log": 0.8189,
+          "RMSE": 484.12,
+          "MAE": 102.2277,
+          "R2": 0.6237,
+          "R2_log": 0.8217,
           "train_rows": 27263,
           "val_rows": 1370,
           "test_rows": 7261,
@@ -131,14 +131,14 @@
           "test_years": [
             2024
           ],
-          "RMSE": 3400.16,
-          "MAE": 554.8187,
-          "R2": 0.2355,
-          "R2_log": 0.8815,
+          "RMSE": 3568.0,
+          "MAE": 622.7408,
+          "R2": 0.1581,
+          "R2_log": 0.8687,
           "train_rows": 34524,
           "val_rows": 1370,
           "test_rows": 7124,
-          "best_iteration": 54
+          "best_iteration": 41
         },
         {
           "label": "VarA INMET-b F3(test=2025)",
@@ -153,14 +153,14 @@
           "test_years": [
             2025
           ],
-          "RMSE": 286.97,
-          "MAE": 66.9458,
-          "R2": 0.8674,
-          "R2_log": 0.8926,
+          "RMSE": 303.27,
+          "MAE": 71.9118,
+          "R2": 0.8519,
+          "R2_log": 0.8952,
           "train_rows": 41648,
           "val_rows": 1370,
           "test_rows": 7261,
-          "best_iteration": 64
+          "best_iteration": 85
         },
         {
           "label": "VarA INMET-b F4(test=2026)",
@@ -176,10 +176,10 @@
           "test_years": [
             2026
           ],
-          "RMSE": 154.42,
-          "MAE": 63.5318,
-          "R2": 0.7596,
-          "R2_log": 0.552,
+          "RMSE": 153.93,
+          "MAE": 63.8123,
+          "R2": 0.7611,
+          "R2_log": 0.5503,
           "train_rows": 48909,
           "val_rows": 1370,
           "test_rows": 1644,
@@ -188,8 +188,8 @@
       ]
     },
     "A_inmet_enriquecido": {
-      "mean_R2_log": 0.7934,
-      "std_R2_log": 0.1411,
+      "mean_R2_log": 0.7954,
+      "std_R2_log": 0.1428,
       "folds": [
         {
           "label": "VarA INMET-e F1(test=2023)",
@@ -202,14 +202,14 @@
           "test_years": [
             2023
           ],
-          "RMSE": 472.53,
-          "MAE": 106.3509,
-          "R2": 0.6415,
-          "R2_log": 0.826,
+          "RMSE": 483.49,
+          "MAE": 102.452,
+          "R2": 0.6247,
+          "R2_log": 0.8301,
           "train_rows": 27263,
           "val_rows": 1370,
           "test_rows": 7261,
-          "best_iteration": 111
+          "best_iteration": 89
         },
         {
           "label": "VarA INMET-e F2(test=2024)",
@@ -223,14 +223,14 @@
           "test_years": [
             2024
           ],
-          "RMSE": 3207.96,
-          "MAE": 493.0066,
-          "R2": 0.3195,
-          "R2_log": 0.899,
+          "RMSE": 3237.88,
+          "MAE": 494.7912,
+          "R2": 0.3067,
+          "R2_log": 0.9027,
           "train_rows": 34524,
           "val_rows": 1370,
           "test_rows": 7124,
-          "best_iteration": 292
+          "best_iteration": 241
         },
         {
           "label": "VarA INMET-e F3(test=2025)",
@@ -245,14 +245,14 @@
           "test_years": [
             2025
           ],
-          "RMSE": 287.99,
-          "MAE": 70.9163,
-          "R2": 0.8665,
-          "R2_log": 0.8944,
+          "RMSE": 301.45,
+          "MAE": 72.431,
+          "R2": 0.8537,
+          "R2_log": 0.8959,
           "train_rows": 41648,
           "val_rows": 1370,
           "test_rows": 7261,
-          "best_iteration": 106
+          "best_iteration": 125
         },
         {
           "label": "VarA INMET-e F4(test=2026)",
@@ -268,14 +268,14 @@
           "test_years": [
             2026
           ],
-          "RMSE": 162.34,
-          "MAE": 65.1286,
-          "R2": 0.7343,
-          "R2_log": 0.5542,
+          "RMSE": 153.11,
+          "MAE": 62.8224,
+          "R2": 0.7636,
+          "R2_log": 0.553,
           "train_rows": 48909,
           "val_rows": 1370,
           "test_rows": 1644,
-          "best_iteration": 73
+          "best_iteration": 60
         }
       ]
     },
@@ -444,8 +444,8 @@
       ]
     },
     "B_inmet_bruto": {
-      "mean_R2_log": 0.8051,
-      "std_R2_log": 0.1458,
+      "mean_R2_log": 0.8054,
+      "std_R2_log": 0.1447,
       "folds": [
         {
           "label": "VarB INMET-b F1(test=2023)",
@@ -476,14 +476,14 @@
           "test_years": [
             2023
           ],
-          "RMSE": 463.09,
-          "MAE": 94.9415,
-          "R2": 0.6557,
-          "R2_log": 0.8477,
+          "RMSE": 460.98,
+          "MAE": 95.3072,
+          "R2": 0.6588,
+          "R2_log": 0.8474,
           "train_rows": 156043,
           "val_rows": 1370,
           "test_rows": 7261,
-          "best_iteration": 120
+          "best_iteration": 140
         },
         {
           "label": "VarB INMET-b F2(test=2024)",
@@ -515,14 +515,14 @@
           "test_years": [
             2024
           ],
-          "RMSE": 3016.76,
-          "MAE": 456.2831,
-          "R2": 0.3982,
-          "R2_log": 0.9177,
+          "RMSE": 3081.78,
+          "MAE": 466.1466,
+          "R2": 0.372,
+          "R2_log": 0.9171,
           "train_rows": 163304,
           "val_rows": 1370,
           "test_rows": 7124,
-          "best_iteration": 442
+          "best_iteration": 354
         },
         {
           "label": "VarB INMET-b F3(test=2025)",
@@ -555,14 +555,14 @@
           "test_years": [
             2025
           ],
-          "RMSE": 320.71,
-          "MAE": 73.0075,
-          "R2": 0.8344,
+          "RMSE": 325.13,
+          "MAE": 72.3297,
+          "R2": 0.8298,
           "R2_log": 0.8984,
           "train_rows": 170428,
           "val_rows": 1370,
           "test_rows": 7261,
-          "best_iteration": 119
+          "best_iteration": 130
         },
         {
           "label": "VarB INMET-b F4(test=2026)",
@@ -596,20 +596,20 @@
           "test_years": [
             2026
           ],
-          "RMSE": 163.85,
-          "MAE": 63.8953,
-          "R2": 0.7293,
-          "R2_log": 0.5564,
+          "RMSE": 160.26,
+          "MAE": 62.7168,
+          "R2": 0.741,
+          "R2_log": 0.5588,
           "train_rows": 177689,
           "val_rows": 1370,
           "test_rows": 1644,
-          "best_iteration": 104
+          "best_iteration": 114
         }
       ]
     },
     "B_inmet_enriquecido": {
-      "mean_R2_log": 0.8075,
-      "std_R2_log": 0.1421,
+      "mean_R2_log": 0.8094,
+      "std_R2_log": 0.1438,
       "folds": [
         {
           "label": "VarB INMET-e F1(test=2023)",
@@ -640,14 +640,14 @@
           "test_years": [
             2023
           ],
-          "RMSE": 454.12,
-          "MAE": 93.6206,
-          "R2": 0.6689,
-          "R2_log": 0.847,
+          "RMSE": 444.64,
+          "MAE": 93.2547,
+          "R2": 0.6826,
+          "R2_log": 0.8507,
           "train_rows": 156043,
           "val_rows": 1370,
           "test_rows": 7261,
-          "best_iteration": 124
+          "best_iteration": 181
         },
         {
           "label": "VarB INMET-e F2(test=2024)",
@@ -679,14 +679,14 @@
           "test_years": [
             2024
           ],
-          "RMSE": 3044.33,
-          "MAE": 468.9975,
-          "R2": 0.3871,
-          "R2_log": 0.9151,
+          "RMSE": 3011.3,
+          "MAE": 452.8245,
+          "R2": 0.4004,
+          "R2_log": 0.9204,
           "train_rows": 163304,
           "val_rows": 1370,
           "test_rows": 7124,
-          "best_iteration": 459
+          "best_iteration": 584
         },
         {
           "label": "VarB INMET-e F3(test=2025)",
@@ -719,14 +719,14 @@
           "test_years": [
             2025
           ],
-          "RMSE": 283.8,
-          "MAE": 66.521,
-          "R2": 0.8703,
-          "R2_log": 0.9026,
+          "RMSE": 293.19,
+          "MAE": 66.7512,
+          "R2": 0.8616,
+          "R2_log": 0.902,
           "train_rows": 170428,
           "val_rows": 1370,
           "test_rows": 7261,
-          "best_iteration": 160
+          "best_iteration": 218
         },
         {
           "label": "VarB INMET-e F4(test=2026)",
@@ -760,14 +760,14 @@
           "test_years": [
             2026
           ],
-          "RMSE": 168.61,
-          "MAE": 63.5013,
-          "R2": 0.7134,
-          "R2_log": 0.5655,
+          "RMSE": 162.01,
+          "MAE": 62.3399,
+          "R2": 0.7353,
+          "R2_log": 0.5643,
           "train_rows": 177689,
           "val_rows": 1370,
           "test_rows": 1644,
-          "best_iteration": 131
+          "best_iteration": 152
         }
       ]
     },
@@ -936,8 +936,8 @@
       ]
     },
     "C_inmet_bruto": {
-      "mean_R2_log": 0.8042,
-      "std_R2_log": 0.1433,
+      "mean_R2_log": 0.8022,
+      "std_R2_log": 0.1442,
       "folds": [
         {
           "label": "VarC INMET-b F1(test=2023)",
@@ -968,14 +968,14 @@
           "test_years": [
             2023
           ],
-          "RMSE": 462.51,
-          "MAE": 96.6878,
-          "R2": 0.6565,
-          "R2_log": 0.8456,
+          "RMSE": 470.11,
+          "MAE": 97.8985,
+          "R2": 0.6451,
+          "R2_log": 0.8409,
           "train_rows": 156043,
           "val_rows": 1370,
           "test_rows": 7261,
-          "best_iteration": 133
+          "best_iteration": 117
         },
         {
           "label": "VarC INMET-b F2(test=2024)",
@@ -1007,14 +1007,14 @@
           "test_years": [
             2024
           ],
-          "RMSE": 3000.48,
-          "MAE": 448.6678,
-          "R2": 0.4047,
-          "R2_log": 0.9149,
+          "RMSE": 3138.59,
+          "MAE": 475.3546,
+          "R2": 0.3486,
+          "R2_log": 0.9147,
           "train_rows": 163304,
           "val_rows": 1370,
           "test_rows": 7124,
-          "best_iteration": 353
+          "best_iteration": 345
         },
         {
           "label": "VarC INMET-b F3(test=2025)",
@@ -1047,14 +1047,14 @@
           "test_years": [
             2025
           ],
-          "RMSE": 329.05,
-          "MAE": 74.1353,
-          "R2": 0.8257,
-          "R2_log": 0.8963,
+          "RMSE": 341.58,
+          "MAE": 75.5125,
+          "R2": 0.8122,
+          "R2_log": 0.8964,
           "train_rows": 170428,
           "val_rows": 1370,
           "test_rows": 7261,
-          "best_iteration": 87
+          "best_iteration": 117
         },
         {
           "label": "VarC INMET-b F4(test=2026)",
@@ -1088,20 +1088,20 @@
           "test_years": [
             2026
           ],
-          "RMSE": 160.44,
-          "MAE": 63.9372,
-          "R2": 0.7405,
-          "R2_log": 0.5599,
+          "RMSE": 157.31,
+          "MAE": 63.8133,
+          "R2": 0.7505,
+          "R2_log": 0.557,
           "train_rows": 177689,
           "val_rows": 1370,
           "test_rows": 1644,
-          "best_iteration": 66
+          "best_iteration": 91
         }
       ]
     },
     "C_inmet_enriquecido": {
-      "mean_R2_log": 0.8052,
-      "std_R2_log": 0.1422,
+      "mean_R2_log": 0.8068,
+      "std_R2_log": 0.1454,
       "folds": [
         {
           "label": "VarC INMET-e F1(test=2023)",
@@ -1132,14 +1132,14 @@
           "test_years": [
             2023
           ],
-          "RMSE": 466.84,
-          "MAE": 96.3492,
-          "R2": 0.6501,
-          "R2_log": 0.8427,
+          "RMSE": 457.32,
+          "MAE": 95.5517,
+          "R2": 0.6642,
+          "R2_log": 0.849,
           "train_rows": 156043,
           "val_rows": 1370,
           "test_rows": 7261,
-          "best_iteration": 129
+          "best_iteration": 177
         },
         {
           "label": "VarC INMET-e F2(test=2024)",
@@ -1171,14 +1171,14 @@
           "test_years": [
             2024
           ],
-          "RMSE": 3053.16,
-          "MAE": 469.5308,
-          "R2": 0.3836,
-          "R2_log": 0.9146,
+          "RMSE": 3085.35,
+          "MAE": 461.161,
+          "R2": 0.3705,
+          "R2_log": 0.9191,
           "train_rows": 163304,
           "val_rows": 1370,
           "test_rows": 7124,
-          "best_iteration": 356
+          "best_iteration": 425
         },
         {
           "label": "VarC INMET-e F3(test=2025)",
@@ -1211,14 +1211,14 @@
           "test_years": [
             2025
           ],
-          "RMSE": 302.95,
-          "MAE": 70.3102,
-          "R2": 0.8522,
-          "R2_log": 0.9,
+          "RMSE": 326.27,
+          "MAE": 71.5732,
+          "R2": 0.8286,
+          "R2_log": 0.9001,
           "train_rows": 170428,
           "val_rows": 1370,
           "test_rows": 7261,
-          "best_iteration": 120
+          "best_iteration": 206
         },
         {
           "label": "VarC INMET-e F4(test=2026)",
@@ -1252,24 +1252,24 @@
           "test_years": [
             2026
           ],
-          "RMSE": 165.67,
-          "MAE": 64.7016,
-          "R2": 0.7232,
-          "R2_log": 0.5634,
+          "RMSE": 165.75,
+          "MAE": 64.1484,
+          "R2": 0.723,
+          "R2_log": 0.5589,
           "train_rows": 177689,
           "val_rows": 1370,
           "test_rows": 1644,
-          "best_iteration": 80
+          "best_iteration": 98
         }
       ]
     }
   },
-  "tempo_total_s": 644.9,
+  "tempo_total_s": 758.8,
   "resumo_enriquecido": {
-    "mean_R2_log_A": 0.7934,
-    "mean_R2_log_B": 0.8075,
-    "mean_R2_log_C": 0.8052,
-    "delta_B_vs_A": 0.0141,
-    "delta_C_vs_A": 0.0118
+    "mean_R2_log_A": 0.7954,
+    "mean_R2_log_B": 0.8094,
+    "mean_R2_log_C": 0.8068,
+    "delta_B_vs_A": 0.014,
+    "delta_C_vs_A": 0.0114
   }
 }

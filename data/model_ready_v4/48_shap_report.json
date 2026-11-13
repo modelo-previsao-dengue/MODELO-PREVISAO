@@ -4,170 +4,170 @@
   "shap_top10_A": [
     {
       "feature": "notificacoes_lag_1w",
-      "shap_mean_abs_A": 1.0553510189056396
+      "shap_mean_abs_A": 1.054334044456482
     },
     {
       "feature": "qt_confirmados_provaveis",
-      "shap_mean_abs_A": 0.25704899430274963
+      "shap_mean_abs_A": 0.247530996799469
     },
     {
       "feature": "week_of_year_cos",
-      "shap_mean_abs_A": 0.21314699947834015
+      "shap_mean_abs_A": 0.19924700260162354
     },
     {
       "feature": "notificacoes_diff_1w",
-      "shap_mean_abs_A": 0.12623600661754608
+      "shap_mean_abs_A": 0.13086199760437012
     },
     {
       "feature": "week_of_year_sin",
-      "shap_mean_abs_A": 0.08398500084877014
+      "shap_mean_abs_A": 0.10328499972820282
     },
     {
       "feature": "notificacoes_pct_change_1w",
-      "shap_mean_abs_A": 0.0799190029501915
+      "shap_mean_abs_A": 0.08030600100755692
     },
     {
       "feature": "prop_confirmado_provavel",
-      "shap_mean_abs_A": 0.0408799983561039
+      "shap_mean_abs_A": 0.038426999002695084
     },
     {
       "feature": "notificacoes_media_movel_2_4w",
-      "shap_mean_abs_A": 0.04028499871492386
+      "shap_mean_abs_A": 0.038137998431921005
     },
     {
       "feature": "notificacoes_lag_3w",
-      "shap_mean_abs_A": 0.028015000745654106
+      "shap_mean_abs_A": 0.029596999287605286
     },
     {
       "feature": "qt_hospitalizados",
-      "shap_mean_abs_A": 0.02774300053715706
+      "shap_mean_abs_A": 0.029399000108242035
     }
   ],
   "shap_top10_B": [
     {
       "feature": "notificacoes_lag_1w",
-      "shap_mean_abs_B": 1.1529719829559326
+      "shap_mean_abs_B": 1.145656943321228
     },
     {
       "feature": "week_of_year_cos",
-      "shap_mean_abs_B": 0.26352599263191223
+      "shap_mean_abs_B": 0.26246899366378784
     },
     {
       "feature": "notificacoes_diff_1w",
-      "shap_mean_abs_B": 0.17420800030231476
+      "shap_mean_abs_B": 0.17467500269412994
     },
     {
       "feature": "qt_confirmados_provaveis",
-      "shap_mean_abs_B": 0.12344499677419662
+      "shap_mean_abs_B": 0.11765599995851517
     },
     {
       "feature": "notificacoes_media_movel_2_4w",
-      "shap_mean_abs_B": 0.10603199899196625
+      "shap_mean_abs_B": 0.1007009968161583
     },
     {
       "feature": "notificacoes_pct_change_1w",
-      "shap_mean_abs_B": 0.08990400284528732
+      "shap_mean_abs_B": 0.0896880030632019
     },
     {
       "feature": "notificacoes_lag_2w",
-      "shap_mean_abs_B": 0.08362399786710739
+      "shap_mean_abs_B": 0.08744899928569794
     },
     {
       "feature": "week_of_year_sin",
-      "shap_mean_abs_B": 0.050202999264001846
+      "shap_mean_abs_B": 0.05550599843263626
     },
     {
       "feature": "prop_confirmado_provavel",
-      "shap_mean_abs_B": 0.030997000634670258
+      "shap_mean_abs_B": 0.03047100082039833
     },
     {
       "feature": "notificacoes_lag_3w",
-      "shap_mean_abs_B": 0.02840599976480007
+      "shap_mean_abs_B": 0.03039800003170967
     }
   ],
   "gain_top10_A": [
     [
       "notificacoes_lag_1w",
-      596.34375
+      654.3585815429688
     ],
     [
       "qt_confirmados_provaveis",
-      181.90345764160156
+      229.50094604492188
     ],
     [
       "notificacoes_lag_3w",
-      64.22209167480469
+      101.73332214355469
     ],
     [
       "notificacoes_media_movel_2_4w",
-      47.88161849975586
+      62.322505950927734
     ],
     [
       "notificacoes_diff_1w",
-      44.19549560546875
+      49.92156982421875
     ],
     [
       "qt_hospitalizados",
-      24.991395950317383
+      30.246978759765625
     ],
     [
       "notificacoes_lag_2w",
-      18.38373374938965
+      27.042522430419922
     ],
     [
       "week_of_year_cos",
-      17.195697784423828
+      19.897491455078125
     ],
     [
       "notificacoes_pct_change_1w",
-      14.794510841369629
+      19.680538177490234
     ],
     [
-      "prop_confirmado_provavel",
-      8.95681381225586
+      "week_of_year_sin",
+      10.77558422088623
     ]
   ],
   "gain_top10_B": [
     [
       "notificacoes_lag_1w",
-      1906.544189453125
+      1854.702880859375
     ],
     [
       "notificacoes_media_movel_2_4w",
-      515.5396728515625
-    ],
-    [
-      "notificacoes_lag_3w",
-      212.20469665527344
+      429.99810791015625
     ],
     [
       "qt_confirmados_provaveis",
-      193.71444702148438
+      181.05889892578125
     ],
     [
       "notificacoes_lag_2w",
-      187.98672485351562
+      177.85911560058594
+    ],
+    [
+      "notificacoes_lag_3w",
+      175.62940979003906
     ],
     [
       "notificacoes_diff_1w",
-      97.21973419189453
-    ],
-    [
-      "week_of_year_cos",
-      80.54971313476562
+      89.34174346923828
     ],
     [
       "is_zero_notification_week",
-      75.3717269897461
+      84.9239273071289
+    ],
+    [
+      "week_of_year_cos",
+      76.5943374633789
     ],
     [
       "notificacoes_pct_change_1w",
-      36.84455490112305
+      31.753217697143555
     ],
     [
       "notificacoes_media_movel_4_8w",
-      21.741804122924805
+      17.79224967956543
     ]
   ],
-  "tempo_total_s": 67.6
+  "tempo_total_s": 84.3
 }

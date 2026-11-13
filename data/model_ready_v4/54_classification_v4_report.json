@@ -59,129 +59,129 @@
         ]
       ],
       "best_iteration": 115,
-      "train_time_s": 54.8
+      "train_time_s": 11.5
     },
     "A_inmet_bruto": {
       "label": "Var A: INMET bruto",
       "n_features": 122,
       "n_train": 28633,
-      "accuracy": 0.5642,
-      "f1_macro": 0.4837,
-      "f1_weighted": 0.5676,
-      "auc_macro_ovr": 0.7709,
+      "accuracy": 0.5739,
+      "f1_macro": 0.4963,
+      "f1_weighted": 0.5763,
+      "auc_macro_ovr": 0.7794,
       "f1_per_class": {
-        "baixo": 0.7459,
-        "moderado": 0.3563,
-        "alto": 0.2509,
-        "surto": 0.5816
+        "baixo": 0.7479,
+        "moderado": 0.3351,
+        "alto": 0.265,
+        "surto": 0.6371
       },
       "precision_recall_per_class": {
         "baixo": {
-          "precision": 0.7252,
-          "recall": 0.7677
+          "precision": 0.7286,
+          "recall": 0.7682
         },
         "moderado": {
-          "precision": 0.3291,
-          "recall": 0.3884
+          "precision": 0.3292,
+          "recall": 0.3412
         },
         "alto": {
-          "precision": 0.2433,
-          "recall": 0.259
+          "precision": 0.2521,
+          "recall": 0.2794
         },
         "surto": {
-          "precision": 0.7727,
-          "recall": 0.4663
+          "precision": 0.7457,
+          "recall": 0.5561
         }
       },
       "confusion_matrix": [
         [
-          5783,
-          1438,
-          281,
-          31
+          5787,
+          1308,
+          393,
+          45
         ],
         [
-          1418,
-          1316,
-          564,
-          90
+          1412,
+          1156,
+          665,
+          155
         ],
         [
-          502,
-          773,
-          547,
-          290
+          481,
+          673,
+          590,
+          368
         ],
         [
-          271,
-          472,
-          856,
-          1397
+          263,
+          375,
+          692,
+          1666
         ]
       ],
-      "best_iteration": 282,
-      "train_time_s": 100.5
+      "best_iteration": 194,
+      "train_time_s": 19.1
     },
     "A_inmet_enriquecido": {
       "label": "Var A: INMET enriquecido",
       "n_features": 266,
       "n_train": 28633,
-      "accuracy": 0.5597,
-      "f1_macro": 0.4842,
-      "f1_weighted": 0.5648,
-      "auc_macro_ovr": 0.7684,
+      "accuracy": 0.5779,
+      "f1_macro": 0.5007,
+      "f1_weighted": 0.5797,
+      "auc_macro_ovr": 0.7797,
       "f1_per_class": {
-        "baixo": 0.7388,
-        "moderado": 0.3266,
-        "alto": 0.2596,
-        "surto": 0.6118
+        "baixo": 0.7497,
+        "moderado": 0.3338,
+        "alto": 0.2723,
+        "surto": 0.647
       },
       "precision_recall_per_class": {
         "baixo": {
-          "precision": 0.7278,
-          "recall": 0.7502
+          "precision": 0.7304,
+          "recall": 0.7701
         },
         "moderado": {
-          "precision": 0.3066,
-          "recall": 0.3495
+          "precision": 0.3269,
+          "recall": 0.3409
         },
         "alto": {
-          "precision": 0.25,
-          "recall": 0.2699
+          "precision": 0.2635,
+          "recall": 0.2817
         },
         "surto": {
-          "precision": 0.7376,
-          "recall": 0.5227
+          "precision": 0.7456,
+          "recall": 0.5714
         }
       },
       "confusion_matrix": [
         [
-          5651,
-          1520,
-          323,
-          39
+          5801,
+          1336,
+          345,
+          51
         ],
         [
-          1392,
-          1184,
-          664,
+          1396,
+          1155,
+          689,
           148
         ],
         [
-          495,
-          677,
-          570,
-          370
+          493,
+          639,
+          595,
+          385
         ],
         [
-          226,
-          481,
-          723,
-          1566
+          252,
+          403,
+          629,
+          1712
         ]
       ],
-      "best_iteration": 209,
-      "train_time_s": 164.8
+      "best_iteration": 272,
+      "train_time_s": 84.1
     },
     "B_sinan_only": {
       "label": "Var B: SINAN-only",
@@ -242,129 +242,129 @@
         ]
       ],
       "best_iteration": 762,
-      "train_time_s": 397.4
+      "train_time_s": 134.5
     },
     "B_inmet_bruto": {
       "label": "Var B: INMET bruto",
       "n_features": 122,
       "n_train": 157413,
-      "accuracy": 0.5928,
-      "f1_macro": 0.5769,
-      "f1_weighted": 0.5985,
-      "auc_macro_ovr": 0.8288,
+      "accuracy": 0.5984,
+      "f1_macro": 0.5788,
+      "f1_weighted": 0.6002,
+      "auc_macro_ovr": 0.8319,
       "f1_per_class": {
-        "baixo": 0.7117,
-        "moderado": 0.4708,
-        "alto": 0.3947,
-        "surto": 0.7305
+        "baixo": 0.7156,
+        "moderado": 0.4668,
+        "alto": 0.4033,
+        "surto": 0.7294
       },
       "precision_recall_per_class": {
         "baixo": {
-          "precision": 0.7335,
-          "recall": 0.6912
+          "precision": 0.7101,
+          "recall": 0.7212
         },
         "moderado": {
-          "precision": 0.4332,
-          "recall": 0.5156
+          "precision": 0.4445,
+          "recall": 0.4915
         },
         "alto": {
-          "precision": 0.397,
-          "recall": 0.3925
+          "precision": 0.416,
+          "recall": 0.3915
         },
         "surto": {
-          "precision": 0.7809,
-          "recall": 0.6862
+          "precision": 0.7716,
+          "recall": 0.6915
         }
       },
       "confusion_matrix": [
         [
-          3966,
-          1471,
-          260,
-          41
+          4138,
+          1338,
+          219,
+          43
         ],
         [
-          1023,
-          2097,
-          832,
-          115
+          1183,
+          1999,
+          749,
+          136
         ],
         [
-          285,
-          939,
-          1112,
-          497
+          333,
+          876,
+          1109,
+          515
         ],
         [
-          133,
-          334,
-          597,
-          2327
+          173,
+          284,
+          589,
+          2345
         ]
       ],
-      "best_iteration": 822,
-      "train_time_s": 357.5
+      "best_iteration": 974,
+      "train_time_s": 178.9
     },
     "B_inmet_enriquecido": {
       "label": "Var B: INMET enriquecido",
       "n_features": 266,
       "n_train": 157413,
-      "accuracy": 0.5974,
-      "f1_macro": 0.5778,
-      "f1_weighted": 0.602,
-      "auc_macro_ovr": 0.8295,
+      "accuracy": 0.6068,
+      "f1_macro": 0.5846,
+      "f1_weighted": 0.6075,
+      "auc_macro_ovr": 0.8353,
       "f1_per_class": {
-        "baixo": 0.7236,
-        "moderado": 0.4827,
-        "alto": 0.3804,
-        "surto": 0.7247
+        "baixo": 0.727,
+        "moderado": 0.4768,
+        "alto": 0.3967,
+        "surto": 0.7381
       },
       "precision_recall_per_class": {
         "baixo": {
-          "precision": 0.7535,
-          "recall": 0.6959
+          "precision": 0.7312,
+          "recall": 0.7229
         },
         "moderado": {
-          "precision": 0.4383,
-          "recall": 0.537
+          "precision": 0.4533,
+          "recall": 0.5028
         },
         "alto": {
-          "precision": 0.396,
-          "recall": 0.366
+          "precision": 0.4176,
+          "recall": 0.3777
         },
         "surto": {
-          "precision": 0.7551,
-          "recall": 0.6965
+          "precision": 0.7502,
+          "recall": 0.7263
         }
       },
       "confusion_matrix": [
         [
-          3993,
-          1489,
-          212,
-          44
+          4148,
+          1321,
+          227,
+          42
         ],
         [
-          962,
-          2184,
-          772,
-          149
+          1090,
+          2045,
+          761,
+          171
         ],
         [
-          244,
-          979,
-          1037,
-          573
+          295,
+          861,
+          1070,
+          607
         ],
         [
-          100,
-          331,
-          598,
-          2362
+          140,
+          284,
+          504,
+          2463
         ]
       ],
-      "best_iteration": 748,
-      "train_time_s": 645.6
+      "best_iteration": 900,
+      "train_time_s": 461.4
     },
     "C_sinan_only": {
       "label": "Var C: SINAN-only",
@@ -425,136 +425,136 @@
         ]
       ],
       "best_iteration": 697,
-      "train_time_s": 243.3
+      "train_time_s": 118.3
     },
     "C_inmet_bruto": {
       "label": "Var C: INMET bruto",
       "n_features": 122,
       "n_train": 157413,
-      "accuracy": 0.5897,
-      "f1_macro": 0.573,
-      "f1_weighted": 0.5948,
-      "auc_macro_ovr": 0.8288,
+      "accuracy": 0.6028,
+      "f1_macro": 0.5798,
+      "f1_weighted": 0.6029,
+      "auc_macro_ovr": 0.8335,
       "f1_per_class": {
-        "baixo": 0.7068,
-        "moderado": 0.4732,
-        "alto": 0.3894,
-        "surto": 0.7225
+        "baixo": 0.7234,
+        "moderado": 0.475,
+        "alto": 0.3924,
+        "surto": 0.7282
       },
       "precision_recall_per_class": {
         "baixo": {
-          "precision": 0.72,
-          "recall": 0.6941
+          "precision": 0.7087,
+          "recall": 0.7388
         },
         "moderado": {
-          "precision": 0.4348,
-          "recall": 0.5191
+          "precision": 0.455,
+          "recall": 0.4969
         },
         "alto": {
-          "precision": 0.3963,
-          "recall": 0.3826
+          "precision": 0.4139,
+          "recall": 0.3731
         },
         "surto": {
-          "precision": 0.7826,
-          "recall": 0.6709
+          "precision": 0.7687,
+          "recall": 0.6918
         }
       },
       "confusion_matrix": [
         [
-          3983,
-          1489,
-          228,
-          38
+          4239,
+          1237,
+          222,
+          40
         ],
         [
-          1067,
-          2111,
-          774,
-          115
+          1214,
+          2021,
+          691,
+          141
         ],
         [
-          320,
-          950,
-          1084,
-          479
+          351,
+          900,
+          1057,
+          525
         ],
         [
-          162,
-          305,
-          649,
-          2275
+          177,
+          284,
+          584,
+          2346
         ]
       ],
-      "best_iteration": 734,
-      "train_time_s": 160.6
+      "best_iteration": 729,
+      "train_time_s": 134.2
     },
     "C_inmet_enriquecido": {
       "label": "Var C: INMET enriquecido",
       "n_features": 266,
       "n_train": 157413,
-      "accuracy": 0.5997,
-      "f1_macro": 0.5781,
-      "f1_weighted": 0.6027,
-      "auc_macro_ovr": 0.833,
+      "accuracy": 0.6064,
+      "f1_macro": 0.5831,
+      "f1_weighted": 0.6058,
+      "auc_macro_ovr": 0.8361,
       "f1_per_class": {
-        "baixo": 0.7253,
-        "moderado": 0.4838,
-        "alto": 0.3755,
-        "surto": 0.7277
+        "baixo": 0.723,
+        "moderado": 0.4784,
+        "alto": 0.3924,
+        "surto": 0.7386
       },
       "precision_recall_per_class": {
         "baixo": {
-          "precision": 0.7391,
-          "recall": 0.7119
+          "precision": 0.7202,
+          "recall": 0.7259
         },
         "moderado": {
-          "precision": 0.4462,
-          "recall": 0.5284
+          "precision": 0.4552,
+          "recall": 0.5041
         },
         "alto": {
-          "precision": 0.3928,
-          "recall": 0.3597
+          "precision": 0.4234,
+          "recall": 0.3657
         },
         "surto": {
-          "precision": 0.7629,
-          "recall": 0.6957
+          "precision": 0.7493,
+          "recall": 0.7281
         }
       },
       "confusion_matrix": [
         [
-          4085,
-          1397,
-          211,
+          4165,
+          1322,
+          206,
           45
         ],
         [
-          1012,
-          2149,
-          781,
-          125
+          1148,
+          2050,
+          704,
+          165
         ],
         [
-          289,
-          962,
-          1019,
-          563
+          325,
+          856,
+          1036,
+          616
         ],
         [
-          141,
-          308,
-          583,
-          2359
+          145,
+          276,
+          501,
+          2469
         ]
       ],
-      "best_iteration": 744,
-      "train_time_s": 423.1
+      "best_iteration": 638,
+      "train_time_s": 351.6
     }
   },
-  "melhor_modelo_f1_macro": "C_inmet_enriquecido",
+  "melhor_modelo_f1_macro": "B_inmet_enriquecido",
   "conclusao": {
-    "f1_macro_B_enriquecido": 0.5778,
-    "auc_macro_B_enriquecido": 0.8295,
+    "f1_macro_B_enriquecido": 0.5846,
+    "auc_macro_B_enriquecido": 0.8353,
     "serie_completa_melhora_classificacao": true
   },
-  "tempo_total_s": 2554.3
+  "tempo_total_s": 1498.1
 }

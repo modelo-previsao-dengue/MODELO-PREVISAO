@@ -13,37 +13,37 @@
       "RMSE_log": 0.7276,
       "MAE": 275.6582,
       "best_iteration": 78,
-      "train_time_s": 4.2
+      "train_time_s": 4.4
     },
     "A_inmet_bruto": {
       "label": "Var A: INMET bruto",
       "n_features": 122,
       "n_train": 28633,
-      "R2_log": 0.8692,
-      "R2_log_bootstrap_mean": 0.8692,
-      "R2_log_CI95_lo": 0.8626,
-      "R2_log_CI95_hi": 0.8758,
-      "R2": 0.3615,
-      "RMSE": 2134.49,
-      "RMSE_log": 0.727,
-      "MAE": 259.0164,
-      "best_iteration": 273,
-      "train_time_s": 9.5
+      "R2_log": 0.8713,
+      "R2_log_bootstrap_mean": 0.8712,
+      "R2_log_CI95_lo": 0.8648,
+      "R2_log_CI95_hi": 0.8777,
+      "R2": 0.3398,
+      "RMSE": 2170.54,
+      "RMSE_log": 0.7213,
+      "MAE": 263.824,
+      "best_iteration": 196,
+      "train_time_s": 7.6
     },
     "A_inmet_enriquecido": {
       "label": "Var A: INMET enriquecido",
       "n_features": 266,
       "n_train": 28633,
-      "R2_log": 0.8723,
-      "R2_log_bootstrap_mean": 0.8721,
-      "R2_log_CI95_lo": 0.8661,
-      "R2_log_CI95_hi": 0.878,
-      "R2": 0.4035,
-      "RMSE": 2063.18,
-      "RMSE_log": 0.7185,
-      "MAE": 253.2747,
-      "best_iteration": 194,
-      "train_time_s": 28.1
+      "R2_log": 0.8741,
+      "R2_log_bootstrap_mean": 0.8739,
+      "R2_log_CI95_lo": 0.8681,
+      "R2_log_CI95_hi": 0.8797,
+      "R2": 0.3483,
+      "RMSE": 2156.51,
+      "RMSE_log": 0.7134,
+      "MAE": 263.0254,
+      "best_iteration": 196,
+      "train_time_s": 23.2
     },
     "B_sinan_only": {
       "label": "Var B: SINAN-only",
@@ -58,37 +58,37 @@
       "RMSE_log": 0.6904,
       "MAE": 256.9634,
       "best_iteration": 332,
-      "train_time_s": 19.0
+      "train_time_s": 16.2
     },
     "B_inmet_bruto": {
       "label": "Var B: INMET bruto",
       "n_features": 122,
       "n_train": 157413,
-      "R2_log": 0.8848,
-      "R2_log_bootstrap_mean": 0.8848,
-      "R2_log_CI95_lo": 0.8793,
-      "R2_log_CI95_hi": 0.8904,
-      "R2": 0.4786,
-      "RMSE": 1928.95,
-      "RMSE_log": 0.6824,
-      "MAE": 239.3846,
-      "best_iteration": 430,
-      "train_time_s": 26.9
+      "R2_log": 0.8853,
+      "R2_log_bootstrap_mean": 0.8854,
+      "R2_log_CI95_lo": 0.8799,
+      "R2_log_CI95_hi": 0.8909,
+      "R2": 0.4053,
+      "RMSE": 2060.07,
+      "RMSE_log": 0.6808,
+      "MAE": 248.3879,
+      "best_iteration": 348,
+      "train_time_s": 20.2
     },
     "B_inmet_enriquecido": {
       "label": "Var B: INMET enriquecido",
       "n_features": 266,
       "n_train": 157413,
-      "R2_log": 0.8878,
-      "R2_log_bootstrap_mean": 0.8877,
-      "R2_log_CI95_lo": 0.882,
-      "R2_log_CI95_hi": 0.8929,
-      "R2": 0.4337,
-      "RMSE": 2010.28,
-      "RMSE_log": 0.6734,
-      "MAE": 246.0395,
-      "best_iteration": 343,
-      "train_time_s": 63.0
+      "R2_log": 0.8895,
+      "R2_log_bootstrap_mean": 0.8894,
+      "R2_log_CI95_lo": 0.8838,
+      "R2_log_CI95_hi": 0.8944,
+      "R2": 0.41,
+      "RMSE": 2051.91,
+      "RMSE_log": 0.6682,
+      "MAE": 244.4166,
+      "best_iteration": 452,
+      "train_time_s": 70.5
     },
     "C_sinan_only": {
       "label": "Var C: SINAN-only",
@@ -103,73 +103,73 @@
       "RMSE_log": 0.6995,
       "MAE": 261.6764,
       "best_iteration": 283,
-      "train_time_s": 14.7
+      "train_time_s": 14.8
     },
     "C_inmet_bruto": {
       "label": "Var C: INMET bruto",
       "n_features": 122,
       "n_train": 157413,
-      "R2_log": 0.8835,
-      "R2_log_bootstrap_mean": 0.8835,
-      "R2_log_CI95_lo": 0.878,
-      "R2_log_CI95_hi": 0.8891,
-      "R2": 0.4608,
-      "RMSE": 1961.53,
-      "RMSE_log": 0.6862,
-      "MAE": 238.4845,
-      "best_iteration": 243,
-      "train_time_s": 15.6
+      "R2_log": 0.883,
+      "R2_log_bootstrap_mean": 0.8831,
+      "R2_log_CI95_lo": 0.8776,
+      "R2_log_CI95_hi": 0.8887,
+      "R2": 0.4211,
+      "RMSE": 2032.38,
+      "RMSE_log": 0.6876,
+      "MAE": 246.8122,
+      "best_iteration": 300,
+      "train_time_s": 18.8
     },
     "C_inmet_enriquecido": {
       "label": "Var C: INMET enriquecido",
       "n_features": 266,
       "n_train": 157413,
-      "R2_log": 0.887,
-      "R2_log_bootstrap_mean": 0.8869,
-      "R2_log_CI95_lo": 0.8812,
-      "R2_log_CI95_hi": 0.8924,
-      "R2": 0.4699,
-      "RMSE": 1944.84,
-      "RMSE_log": 0.6759,
-      "MAE": 236.9834,
-      "best_iteration": 585,
-      "train_time_s": 87.7
+      "R2_log": 0.8876,
+      "R2_log_bootstrap_mean": 0.8875,
+      "R2_log_CI95_lo": 0.8821,
+      "R2_log_CI95_hi": 0.8929,
+      "R2": 0.4033,
+      "RMSE": 2063.44,
+      "RMSE_log": 0.6741,
+      "MAE": 246.75,
+      "best_iteration": 517,
+      "train_time_s": 79.3
     }
   },
   "deltas_enriquecido": {
-    "B_vs_A": 0.0155,
-    "C_vs_A": 0.0147,
-    "C_vs_B": -0.0008
+    "B_vs_A": 0.0154,
+    "C_vs_A": 0.0135,
+    "C_vs_B": -0.0019
   },
   "testes_t": {
     "A_vs_B": {
-      "t_stat": 13.2404,
-      "p_value": 8.293077484404253e-40
+      "t_stat": 14.419,
+      "p_value": 7.717628109252483e-47
     },
     "A_vs_C": {
-      "t_stat": 15.808,
-      "p_value": 7.237420389777939e-56
+      "t_stat": 15.4174,
+      "p_value": 3.0127568829271067e-53
     },
     "B_vs_C": {
-      "t_stat": -1.5384,
-      "p_value": 0.12395985515650726
+      "t_stat": -4.1799,
+      "p_value": 2.9318602530832403e-05
     }
   },
   "bootstrap_diffs": {
     "A_vs_B": {
-      "mean_diff": 0.0155,
-      "CI95_lo": 0.0131,
-      "CI95_hi": 0.0178
+      "mean_diff": 0.0154,
+      "CI95_lo": 0.0133,
+      "CI95_hi": 0.0176
     },
     "A_vs_C": {
-      "mean_diff": 0.0147,
-      "CI95_lo": 0.0129,
-      "CI95_hi": 0.0165
+      "mean_diff": 0.0135,
+      "CI95_lo": 0.0117,
+      "CI95_hi": 0.0152
     },
     "B_vs_C": {
-      "mean_diff": -0.0008,
-      "CI95_lo": -0.0018,
-      "CI95_hi": 0.0002
+      "mean_diff": -0.002,
+      "CI95_lo": -0.0028,
+      "CI95_hi": -0.001
     }
   },
   "metricas_por_ano": [
@@ -197,43 +197,43 @@
     {
       "modelo": "Var A: INMET bruto",
       "ano": 2024,
-      "R2_log": 0.8928,
-      "RMSE": 3177.68,
+      "R2_log": 0.8963,
+      "RMSE": 3232.95,
       "n": 7124
     },
     {
       "modelo": "Var A: INMET bruto",
       "ano": 2025,
-      "R2_log": 0.8875,
-      "RMSE": 379.76,
+      "R2_log": 0.8899,
+      "RMSE": 372.78,
       "n": 7261
     },
     {
       "modelo": "Var A: INMET bruto",
       "ano": 2026,
-      "R2_log": 0.5409,
-      "RMSE": 168.04,
+      "R2_log": 0.5321,
+      "RMSE": 169.77,
       "n": 1644
     },
     {
       "modelo": "Var A: INMET enriquecido",
       "ano": 2024,
-      "R2_log": 0.897,
-      "RMSE": 3071.28,
+      "R2_log": 0.9014,
+      "RMSE": 3212.18,
       "n": 7124
     },
     {
       "modelo": "Var A: INMET enriquecido",
       "ano": 2025,
-      "R2_log": 0.8913,
-      "RMSE": 368.06,
+      "R2_log": 0.8908,
+      "RMSE": 368.61,
       "n": 7261
     },
     {
       "modelo": "Var A: INMET enriquecido",
       "ano": 2026,
-      "R2_log": 0.5338,
-      "RMSE": 171.64,
+      "R2_log": 0.5277,
+      "RMSE": 175.64,
       "n": 1644
     },
     {
@@ -260,43 +260,43 @@
     {
       "modelo": "Var B: INMET bruto",
       "ano": 2024,
-      "R2_log": 0.9146,
-      "RMSE": 2873.25,
+      "R2_log": 0.9149,
+      "RMSE": 3070.23,
       "n": 7124
     },
     {
       "modelo": "Var B: INMET bruto",
       "ano": 2025,
       "R2_log": 0.8959,
-      "RMSE": 324.5,
+      "RMSE": 337.95,
       "n": 7261
     },
     {
       "modelo": "Var B: INMET bruto",
       "ano": 2026,
-      "R2_log": 0.5514,
-      "RMSE": 197.06,
+      "R2_log": 0.5566,
+      "RMSE": 161.42,
       "n": 1644
     },
     {
       "modelo": "Var B: INMET enriquecido",
       "ano": 2024,
-      "R2_log": 0.9147,
-      "RMSE": 2995.29,
+      "R2_log": 0.918,
+      "RMSE": 3058.37,
       "n": 7124
     },
     {
       "modelo": "Var B: INMET enriquecido",
       "ano": 2025,
-      "R2_log": 0.9023,
-      "RMSE": 335.51,
+      "R2_log": 0.9003,
+      "RMSE": 333.79,
       "n": 7261
     },
     {
       "modelo": "Var B: INMET enriquecido",
       "ano": 2026,
-      "R2_log": 0.5619,
-      "RMSE": 164.69,
+      "R2_log": 0.5701,
+      "RMSE": 161.44,
       "n": 1644
     },
     {
@@ -323,43 +323,43 @@
     {
       "modelo": "Var C: INMET bruto",
       "ano": 2024,
-      "R2_log": 0.9129,
-      "RMSE": 2923.37,
+      "R2_log": 0.9124,
+      "RMSE": 3027.43,
       "n": 7124
     },
     {
       "modelo": "Var C: INMET bruto",
       "ano": 2025,
-      "R2_log": 0.8957,
-      "RMSE": 318.69,
+      "R2_log": 0.8943,
+      "RMSE": 346.14,
       "n": 7261
     },
     {
       "modelo": "Var C: INMET bruto",
       "ano": 2026,
-      "R2_log": 0.5475,
-      "RMSE": 180.59,
+      "R2_log": 0.5512,
+      "RMSE": 165.68,
       "n": 1644
     },
     {
       "modelo": "Var C: INMET enriquecido",
       "ano": 2024,
-      "R2_log": 0.9136,
-      "RMSE": 2897.1,
+      "R2_log": 0.9161,
+      "RMSE": 3076.24,
       "n": 7124
     },
     {
       "modelo": "Var C: INMET enriquecido",
       "ano": 2025,
-      "R2_log": 0.9023,
-      "RMSE": 328.27,
+      "R2_log": 0.8996,
+      "RMSE": 329.19,
       "n": 7261
     },
     {
       "modelo": "Var C: INMET enriquecido",
       "ano": 2026,
-      "R2_log": 0.5585,
-      "RMSE": 178.54,
+      "R2_log": 0.5609,
+      "RMSE": 164.98,
       "n": 1644
     }
   ],
@@ -367,128 +367,128 @@
     {
       "modelo": "Var A: SINAN-only",
       "flag_fonte_inmet": 0,
-      "R2_log": 0.862,
-      "RMSE": 88.11,
-      "n": 369
+      "R2_log": 0.7907,
+      "RMSE": 234.55,
+      "n": 1721
     },
     {
       "modelo": "Var A: SINAN-only",
       "flag_fonte_inmet": 1,
-      "R2_log": 0.8688,
-      "RMSE": 2238.51,
-      "n": 15660
+      "R2_log": 0.8702,
+      "RMSE": 2340.52,
+      "n": 14308
     },
     {
       "modelo": "Var A: INMET bruto",
       "flag_fonte_inmet": 0,
-      "R2_log": 0.8544,
-      "RMSE": 89.01,
-      "n": 369
+      "R2_log": 0.7918,
+      "RMSE": 191.1,
+      "n": 1721
     },
     {
       "modelo": "Var A: INMET bruto",
       "flag_fonte_inmet": 1,
-      "R2_log": 0.8692,
-      "RMSE": 2159.45,
-      "n": 15660
+      "R2_log": 0.8727,
+      "RMSE": 2296.41,
+      "n": 14308
     },
     {
       "modelo": "Var A: INMET enriquecido",
       "flag_fonte_inmet": 0,
-      "R2_log": 0.8567,
-      "RMSE": 82.99,
-      "n": 369
+      "R2_log": 0.7874,
+      "RMSE": 186.13,
+      "n": 1721
     },
     {
       "modelo": "Var A: INMET enriquecido",
       "flag_fonte_inmet": 1,
-      "R2_log": 0.8723,
-      "RMSE": 2087.31,
-      "n": 15660
+      "R2_log": 0.8762,
+      "RMSE": 2281.61,
+      "n": 14308
     },
     {
       "modelo": "Var B: SINAN-only",
       "flag_fonte_inmet": 0,
-      "R2_log": 0.8598,
-      "RMSE": 95.61,
-      "n": 369
+      "R2_log": 0.7957,
+      "RMSE": 146.45,
+      "n": 1721
     },
     {
       "modelo": "Var B: SINAN-only",
       "flag_fonte_inmet": 1,
-      "R2_log": 0.8823,
-      "RMSE": 2119.78,
-      "n": 15660
+      "R2_log": 0.8845,
+      "RMSE": 2217.15,
+      "n": 14308
     },
     {
       "modelo": "Var B: INMET bruto",
       "flag_fonte_inmet": 0,
-      "R2_log": 0.8544,
-      "RMSE": 100.71,
-      "n": 369
+      "R2_log": 0.7943,
+      "RMSE": 147.37,
+      "n": 1721
     },
     {
       "modelo": "Var B: INMET bruto",
       "flag_fonte_inmet": 1,
-      "R2_log": 0.8851,
-      "RMSE": 1951.48,
-      "n": 15660
+      "R2_log": 0.8883,
+      "RMSE": 2179.85,
+      "n": 14308
     },
     {
       "modelo": "Var B: INMET enriquecido",
       "flag_fonte_inmet": 0,
-      "R2_log": 0.8629,
-      "RMSE": 100.98,
-      "n": 369
+      "R2_log": 0.7878,
+      "RMSE": 154.18,
+      "n": 1721
     },
     {
       "modelo": "Var B: INMET enriquecido",
       "flag_fonte_inmet": 1,
-      "R2_log": 0.888,
-      "RMSE": 2033.77,
-      "n": 15660
+      "R2_log": 0.8936,
+      "RMSE": 2171.15,
+      "n": 14308
     },
     {
       "modelo": "Var C: SINAN-only",
       "flag_fonte_inmet": 0,
-      "R2_log": 0.856,
-      "RMSE": 97.5,
-      "n": 369
+      "R2_log": 0.7916,
+      "RMSE": 169.35,
+      "n": 1721
     },
     {
       "modelo": "Var C: SINAN-only",
       "flag_fonte_inmet": 1,
-      "R2_log": 0.8791,
-      "RMSE": 2160.34,
-      "n": 15660
+      "R2_log": 0.8813,
+      "RMSE": 2259.4,
+      "n": 14308
     },
     {
       "modelo": "Var C: INMET bruto",
       "flag_fonte_inmet": 0,
-      "R2_log": 0.8548,
-      "RMSE": 98.62,
-      "n": 369
+      "R2_log": 0.7915,
+      "RMSE": 168.59,
+      "n": 1721
     },
     {
       "modelo": "Var C: INMET bruto",
       "flag_fonte_inmet": 1,
-      "R2_log": 0.8838,
-      "RMSE": 1984.45,
-      "n": 15660
+      "R2_log": 0.8859,
+      "RMSE": 2150.34,
+      "n": 14308
     },
     {
       "modelo": "Var C: INMET enriquecido",
       "flag_fonte_inmet": 0,
-      "R2_log": 0.8621,
-      "RMSE": 86.79,
-      "n": 369
+      "R2_log": 0.7933,
+      "RMSE": 137.96,
+      "n": 1721
     },
     {
       "modelo": "Var C: INMET enriquecido",
       "flag_fonte_inmet": 1,
-      "R2_log": 0.8872,
-      "RMSE": 1967.57,
-      "n": 15660
+      "R2_log": 0.8909,
+      "RMSE": 2183.49,
+      "n": 14308
     }
   ],
   "conclusao": {
@@ -496,5 +496,5 @@
     "peso_recencia_ajuda": false,
     "melhor_variante": "B"
   },
-  "tempo_total_s": 275.7
+  "tempo_total_s": 261.9
 }

@@ -10,7 +10,8 @@ data/sinan/gold/*/analytics/cluster_assignments_profile_full/
 # Old pipeline versions (large)
 data/sinan/gold/sinan_tcc2_v1/
 
-# INMET pipeline - large data (parquet)
+# INMET pipeline - large data (parquet + raw ZIPs)
+data/inmet/raw/
 data/inmet/bronze/hourly/
 data/inmet/silver/
 data/inmet/gold/

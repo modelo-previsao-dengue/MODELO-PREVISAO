@@ -17,7 +17,7 @@
       "train_rows": 28633,
       "val_rows": 7261,
       "test_rows": 16029,
-      "cobertura_inmet_train": 0.4813,
+      "cobertura_inmet_train": 0.8936,
       "risk_dist_train": {
         "0": 0.5182,
         "1": 0.2381,
@@ -53,7 +53,7 @@
       "train_rows": 157413,
       "val_rows": 7261,
       "test_rows": 16029,
-      "cobertura_inmet_train": 0.6224,
+      "cobertura_inmet_train": 0.728,
       "risk_dist_train": {
         "0": 0.5188,
         "1": 0.2387,
@@ -89,7 +89,7 @@
       "train_rows": 157413,
       "val_rows": 7261,
       "test_rows": 16029,
-      "cobertura_inmet_train": 0.6224,
+      "cobertura_inmet_train": 0.728,
       "risk_dist_train": {
         "0": 0.5188,
         "1": 0.2387,
