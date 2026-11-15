@@ -1,0 +1,500 @@
+{
+  "conferencia_script46": {
+    "A_sinan_only": {
+      "R2_log_aqui": 0.8707,
+      "R2_log_script46": 0.869
+    },
+    "A_inmet_enriquecido": {
+      "R2_log_aqui": 0.8745,
+      "R2_log_script46": 0.8741
+    },
+    "B_sinan_only": {
+      "R2_log_aqui": 0.8821,
+      "R2_log_script46": 0.8821
+    },
+    "B_inmet_enriquecido": {
+      "R2_log_aqui": 0.8896,
+      "R2_log_script46": 0.8895
+    },
+    "C_inmet_enriquecido": {
+      "R2_log_aqui": 0.8875,
+      "R2_log_script46": 0.8876
+    }
+  },
+  "n_teste": 16029,
+  "teste_agregado": {
+    "persistencia": {
+      "R2_log": 0.8182,
+      "R2": 0.6677,
+      "MAE": 292.18,
+      "RMSE": 1539.86,
+      "previsto_total": 8383482,
+      "real_total": 8205535,
+      "topo5pct_cobertura": 0.929
+    },
+    "media_movel_4": {
+      "R2_log": 0.7656,
+      "R2": 0.4585,
+      "MAE": 381.54,
+      "RMSE": 1965.8,
+      "previsto_total": 8364553,
+      "real_total": 8205535,
+      "topo5pct_cobertura": 0.857
+    },
+    "sazonal": {
+      "R2_log": 0.3752,
+      "R2": -0.7158,
+      "MAE": 737.59,
+      "RMSE": 3499.05,
+      "previsto_total": 9222281,
+      "real_total": 8205535,
+      "topo5pct_cobertura": 0.433
+    },
+    "A_sinan_only": {
+      "R2_log": 0.8707,
+      "R2": 0.3449,
+      "MAE": 265.52,
+      "RMSE": 2162.1,
+      "previsto_total": 4880470,
+      "real_total": 8205535,
+      "topo5pct_cobertura": 0.455
+    },
+    "A_inmet_enriquecido": {
+      "R2_log": 0.8745,
+      "R2": 0.3522,
+      "MAE": 262.02,
+      "RMSE": 2150.03,
+      "previsto_total": 5076216,
+      "real_total": 8205535,
+      "topo5pct_cobertura": 0.475
+    },
+    "B_sinan_only": {
+      "R2_log": 0.8821,
+      "R2": 0.3844,
+      "MAE": 257.13,
+      "RMSE": 2095.97,
+      "previsto_total": 5138032,
+      "real_total": 8205535,
+      "topo5pct_cobertura": 0.505
+    },
+    "B_inmet_enriquecido": {
+      "R2_log": 0.8896,
+      "R2": 0.4116,
+      "MAE": 244.21,
+      "RMSE": 2049.08,
+      "previsto_total": 5395339,
+      "real_total": 8205535,
+      "topo5pct_cobertura": 0.535
+    },
+    "C_inmet_enriquecido": {
+      "R2_log": 0.8875,
+      "R2": 0.4031,
+      "MAE": 247.06,
+      "RMSE": 2063.81,
+      "previsto_total": 5341121,
+      "real_total": 8205535,
+      "topo5pct_cobertura": 0.525
+    }
+  },
+  "por_ano": [
+    {
+      "R2_log": 0.8393,
+      "R2": 0.6598,
+      "MAE": 530.87,
+      "RMSE": 2268.29,
+      "previsto_total": 6560720,
+      "real_total": 6438110,
+      "ano": 2024,
+      "modelo": "persistencia",
+      "topo5pct_cobertura": 0.898
+    },
+    {
+      "R2_log": 0.7635,
+      "R2": 0.4447,
+      "MAE": 700.84,
+      "RMSE": 2897.71,
+      "previsto_total": 6553276,
+      "real_total": 6438110,
+      "ano": 2024,
+      "modelo": "media_movel_4",
+      "topo5pct_cobertura": 0.808
+    },
+    {
+      "R2_log": 0.476,
+      "R2": 0.0741,
+      "MAE": 781.45,
+      "RMSE": 3741.87,
+      "previsto_total": 1822915,
+      "real_total": 6438110,
+      "ano": 2024,
+      "modelo": "sazonal",
+      "topo5pct_cobertura": 0.145
+    },
+    {
+      "R2_log": 0.8967,
+      "R2": 0.3146,
+      "MAE": 505.03,
+      "RMSE": 3219.47,
+      "previsto_total": 3326852,
+      "real_total": 6438110,
+      "ano": 2024,
+      "modelo": "A_sinan_only",
+      "topo5pct_cobertura": 0.355
+    },
+    {
+      "R2_log": 0.9018,
+      "R2": 0.3217,
+      "MAE": 496.66,
+      "RMSE": 3202.69,
+      "previsto_total": 3446217,
+      "real_total": 6438110,
+      "ano": 2024,
+      "modelo": "A_inmet_enriquecido",
+      "topo5pct_cobertura": 0.369
+    },
+    {
+      "R2_log": 0.9125,
+      "R2": 0.3547,
+      "MAE": 489.7,
+      "RMSE": 3123.71,
+      "previsto_total": 3570573,
+      "real_total": 6438110,
+      "ano": 2024,
+      "modelo": "B_sinan_only",
+      "topo5pct_cobertura": 0.402
+    },
+    {
+      "R2_log": 0.9181,
+      "R2": 0.3831,
+      "MAE": 464.36,
+      "RMSE": 3054.22,
+      "previsto_total": 3769463,
+      "real_total": 6438110,
+      "ano": 2024,
+      "modelo": "B_inmet_enriquecido",
+      "topo5pct_cobertura": 0.436
+    },
+    {
+      "R2_log": 0.9161,
+      "R2": 0.374,
+      "MAE": 469.54,
+      "RMSE": 3076.82,
+      "previsto_total": 3706459,
+      "real_total": 6438110,
+      "ano": 2024,
+      "modelo": "C_inmet_enriquecido",
+      "topo5pct_cobertura": 0.426
+    },
+    {
+      "R2_log": 0.8331,
+      "R2": 0.7138,
+      "MAE": 107.69,
+      "RMSE": 421.62,
+      "previsto_total": 1642300,
+      "real_total": 1545128,
+      "ano": 2025,
+      "modelo": "persistencia",
+      "topo5pct_cobertura": 0.984
+    },
+    {
+      "R2_log": 0.8024,
+      "R2": 0.5437,
+      "MAE": 137.06,
+      "RMSE": 532.39,
+      "previsto_total": 1659780,
+      "real_total": 1545128,
+      "ano": 2025,
+      "modelo": "media_movel_4",
+      "topo5pct_cobertura": 0.929
+    },
+    {
+      "R2_log": 0.2903,
+      "R2": -19.6847,
+      "MAE": 752.43,
+      "RMSE": 3584.33,
+      "previsto_total": 6493055,
+      "real_total": 1545128,
+      "ano": 2025,
+      "modelo": "sazonal",
+      "topo5pct_cobertura": 2.704
+    },
+    {
+      "R2_log": 0.8851,
+      "R2": 0.7687,
+      "MAE": 75.83,
+      "RMSE": 378.99,
+      "previsto_total": 1343394,
+      "real_total": 1545128,
+      "ano": 2025,
+      "modelo": "A_sinan_only",
+      "topo5pct_cobertura": 0.787
+    },
+    {
+      "R2_log": 0.891,
+      "R2": 0.7844,
+      "MAE": 75.83,
+      "RMSE": 365.97,
+      "previsto_total": 1408916,
+      "real_total": 1545128,
+      "ano": 2025,
+      "modelo": "A_inmet_enriquecido",
+      "topo5pct_cobertura": 0.841
+    },
+    {
+      "R2_log": 0.8899,
+      "R2": 0.8091,
+      "MAE": 72.88,
+      "RMSE": 344.38,
+      "previsto_total": 1360275,
+      "real_total": 1545128,
+      "ano": 2025,
+      "modelo": "B_sinan_only",
+      "topo5pct_cobertura": 0.825
+    },
+    {
+      "R2_log": 0.9002,
+      "R2": 0.8217,
+      "MAE": 69.44,
+      "RMSE": 332.82,
+      "previsto_total": 1402581,
+      "real_total": 1545128,
+      "ano": 2025,
+      "modelo": "B_inmet_enriquecido",
+      "topo5pct_cobertura": 0.852
+    },
+    {
+      "R2_log": 0.8996,
+      "R2": 0.8258,
+      "MAE": 70.29,
+      "RMSE": 328.92,
+      "previsto_total": 1408104,
+      "real_total": 1545128,
+      "ano": 2025,
+      "modelo": "C_inmet_enriquecido",
+      "topo5pct_cobertura": 0.855
+    },
+    {
+      "R2_log": 0.5026,
+      "R2": 0.6147,
+      "MAE": 72.72,
+      "RMSE": 195.47,
+      "previsto_total": 180462,
+      "real_total": 222297,
+      "ano": 2026,
+      "modelo": "persistencia",
+      "topo5pct_cobertura": 0.722
+    },
+    {
+      "R2_log": 0.4942,
+      "R2": 0.5986,
+      "MAE": 77.75,
+      "RMSE": 199.52,
+      "previsto_total": 151498,
+      "real_total": 222297,
+      "ano": 2026,
+      "modelo": "media_movel_4",
+      "topo5pct_cobertura": 0.595
+    },
+    {
+      "R2_log": -0.2606,
+      "R2": -18.726,
+      "MAE": 481.93,
+      "RMSE": 1398.69,
+      "previsto_total": 906311,
+      "real_total": 222297,
+      "ano": 2026,
+      "modelo": "sazonal",
+      "topo5pct_cobertura": 2.081
+    },
+    {
+      "R2_log": 0.5436,
+      "R2": 0.7109,
+      "MAE": 65.41,
+      "RMSE": 169.33,
+      "previsto_total": 210224,
+      "real_total": 222297,
+      "ano": 2026,
+      "modelo": "A_sinan_only",
+      "topo5pct_cobertura": 0.755
+    },
+    {
+      "R2_log": 0.529,
+      "R2": 0.6874,
+      "MAE": 67.63,
+      "RMSE": 176.07,
+      "previsto_total": 221083,
+      "real_total": 222297,
+      "ano": 2026,
+      "modelo": "A_inmet_enriquecido",
+      "topo5pct_cobertura": 0.788
+    },
+    {
+      "R2_log": 0.5592,
+      "R2": 0.7383,
+      "MAE": 63.06,
+      "RMSE": 161.12,
+      "previsto_total": 207183,
+      "real_total": 222297,
+      "ano": 2026,
+      "modelo": "B_sinan_only",
+      "topo5pct_cobertura": 0.784
+    },
+    {
+      "R2_log": 0.5708,
+      "R2": 0.7372,
+      "MAE": 62.15,
+      "RMSE": 161.44,
+      "previsto_total": 223295,
+      "real_total": 222297,
+      "ano": 2026,
+      "modelo": "B_inmet_enriquecido",
+      "topo5pct_cobertura": 0.856
+    },
+    {
+      "R2_log": 0.5604,
+      "R2": 0.7213,
+      "MAE": 63.68,
+      "RMSE": 166.26,
+      "previsto_total": 226558,
+      "real_total": 222297,
+      "ano": 2026,
+      "modelo": "C_inmet_enriquecido",
+      "topo5pct_cobertura": 0.861
+    }
+  ],
+  "momento_pico": {
+    "persistencia": {
+      "n_temporadas_com_surto": 179,
+      "erro_mediano_abs_semanas": 4.0,
+      "erro_medio_semanas": 2.87,
+      "dentro_2_semanas_pct": 3.9,
+      "pico_exato_pct": 1.1
+    },
+    "media_movel_4": {
+      "n_temporadas_com_surto": 179,
+      "erro_mediano_abs_semanas": 6.0,
+      "erro_medio_semanas": 4.14,
+      "dentro_2_semanas_pct": 2.2,
+      "pico_exato_pct": 0.6
+    },
+    "sazonal": {
+      "n_temporadas_com_surto": 179,
+      "erro_mediano_abs_semanas": 5.0,
+      "erro_medio_semanas": 9.34,
+      "dentro_2_semanas_pct": 30.7,
+      "pico_exato_pct": 9.5
+    },
+    "A_sinan_only": {
+      "n_temporadas_com_surto": 179,
+      "erro_mediano_abs_semanas": 3.0,
+      "erro_medio_semanas": -0.18,
+      "dentro_2_semanas_pct": 39.7,
+      "pico_exato_pct": 8.9
+    },
+    "A_inmet_enriquecido": {
+      "n_temporadas_com_surto": 179,
+      "erro_mediano_abs_semanas": 3.0,
+      "erro_medio_semanas": 0.08,
+      "dentro_2_semanas_pct": 38.0,
+      "pico_exato_pct": 8.4
+    },
+    "B_sinan_only": {
+      "n_temporadas_com_surto": 179,
+      "erro_mediano_abs_semanas": 3.0,
+      "erro_medio_semanas": -0.28,
+      "dentro_2_semanas_pct": 44.7,
+      "pico_exato_pct": 8.9
+    },
+    "B_inmet_enriquecido": {
+      "n_temporadas_com_surto": 179,
+      "erro_mediano_abs_semanas": 3.0,
+      "erro_medio_semanas": -0.16,
+      "dentro_2_semanas_pct": 48.0,
+      "pico_exato_pct": 12.8
+    },
+    "C_inmet_enriquecido": {
+      "n_temporadas_com_surto": 179,
+      "erro_mediano_abs_semanas": 3.0,
+      "erro_medio_semanas": 0.38,
+      "dentro_2_semanas_pct": 44.7,
+      "pico_exato_pct": 10.6
+    }
+  },
+  "direcao": {
+    "A_sinan_only": {
+      "n_variacoes_relevantes": 10367,
+      "modelo_acerto_pct": 78.3,
+      "tendencia_ingenua_acerto_pct": 55.5
+    },
+    "A_inmet_enriquecido": {
+      "n_variacoes_relevantes": 10367,
+      "modelo_acerto_pct": 80.0,
+      "tendencia_ingenua_acerto_pct": 55.5
+    },
+    "B_sinan_only": {
+      "n_variacoes_relevantes": 10367,
+      "modelo_acerto_pct": 79.7,
+      "tendencia_ingenua_acerto_pct": 55.5
+    },
+    "B_inmet_enriquecido": {
+      "n_variacoes_relevantes": 10367,
+      "modelo_acerto_pct": 82.0,
+      "tendencia_ingenua_acerto_pct": 55.5
+    },
+    "C_inmet_enriquecido": {
+      "n_variacoes_relevantes": 10367,
+      "modelo_acerto_pct": 81.7,
+      "tendencia_ingenua_acerto_pct": 55.5
+    }
+  },
+  "distrito_federal": {
+    "semanas_teste": 117,
+    "metricas": {
+      "persistencia": {
+        "R2_log": 0.862,
+        "R2": 0.6438,
+        "MAE": 1194.67,
+        "RMSE": 3147.77,
+        "previsto_total": 289837,
+        "real_total": 254853
+      },
+      "A_sinan_only": {
+        "R2_log": 0.7845,
+        "R2": 0.463,
+        "MAE": 1247.89,
+        "RMSE": 3864.74,
+        "previsto_total": 132464,
+        "real_total": 254853
+      },
+      "A_inmet_enriquecido": {
+        "R2_log": 0.7765,
+        "R2": 0.4832,
+        "MAE": 1267.53,
+        "RMSE": 3791.28,
+        "previsto_total": 150082,
+        "real_total": 254853
+      },
+      "B_sinan_only": {
+        "R2_log": 0.8473,
+        "R2": 0.5264,
+        "MAE": 1182.49,
+        "RMSE": 3629.41,
+        "previsto_total": 145960,
+        "real_total": 254853
+      },
+      "B_inmet_enriquecido": {
+        "R2_log": 0.8561,
+        "R2": 0.6944,
+        "MAE": 975.4,
+        "RMSE": 2915.58,
+        "previsto_total": 201269,
+        "real_total": 254853
+      }
+    },
+    "notificacoes_semana_t_por_ano": {
+      "2024": 277232,
+      "2025": 10705,
+      "2026": 1900
+    }
+  }
+}
