@@ -1,0 +1,574 @@
+{
+  "corte_ultimo_ano_semana": null,
+  "reproducao_script46": {
+    "A_sinan_only": {
+      "R2_log_aqui": 0.869,
+      "R2_log_script46": 0.869,
+      "best_iteration": 78
+    },
+    "A_inmet_enriquecido": {
+      "R2_log_aqui": 0.8741,
+      "R2_log_script46": 0.8741,
+      "best_iteration": 196
+    },
+    "B_sinan_only": {
+      "R2_log_aqui": 0.8821,
+      "R2_log_script46": 0.8821,
+      "best_iteration": 332
+    },
+    "B_inmet_enriquecido": {
+      "R2_log_aqui": 0.8895,
+      "R2_log_script46": 0.8895,
+      "best_iteration": 452
+    }
+  },
+  "teste_agregado": {
+    "persistencia": {
+      "R2_log": 0.8182,
+      "R2": 0.6677,
+      "MAE": 292.18,
+      "RMSE": 1539.86,
+      "previsto_total": 8383482.0,
+      "real_total": 8205535.0,
+      "topo5pct_cobertura": 0.929
+    },
+    "media_movel_4": {
+      "R2_log": 0.7656,
+      "R2": 0.4585,
+      "MAE": 381.54,
+      "RMSE": 1965.8,
+      "previsto_total": 8364553.25,
+      "real_total": 8205535.0,
+      "topo5pct_cobertura": 0.857
+    },
+    "sazonal": {
+      "R2_log": 0.3752,
+      "R2": -0.7158,
+      "MAE": 737.59,
+      "RMSE": 3499.05,
+      "previsto_total": 9222281.0,
+      "real_total": 8205535.0,
+      "topo5pct_cobertura": 0.433
+    },
+    "A_sinan_only": {
+      "R2_log": 0.869,
+      "R2": 0.3139,
+      "MAE": 275.66,
+      "RMSE": 2212.64,
+      "previsto_total": 4575029.101192102,
+      "real_total": 8205535.0,
+      "topo5pct_cobertura": 0.415
+    },
+    "A_inmet_enriquecido": {
+      "R2_log": 0.8741,
+      "R2": 0.3483,
+      "MAE": 263.03,
+      "RMSE": 2156.51,
+      "previsto_total": 5061487.475335449,
+      "real_total": 8205535.0,
+      "topo5pct_cobertura": 0.472
+    },
+    "B_sinan_only": {
+      "R2_log": 0.8821,
+      "R2": 0.3848,
+      "MAE": 256.96,
+      "RMSE": 2095.29,
+      "previsto_total": 5143662.13271413,
+      "real_total": 8205535.0,
+      "topo5pct_cobertura": 0.505
+    },
+    "B_inmet_enriquecido": {
+      "R2_log": 0.8895,
+      "R2": 0.41,
+      "MAE": 244.42,
+      "RMSE": 2051.91,
+      "previsto_total": 5396882.716341832,
+      "real_total": 8205535.0,
+      "topo5pct_cobertura": 0.535
+    }
+  },
+  "por_ano": [
+    {
+      "R2_log": 0.8393,
+      "R2": 0.6598,
+      "MAE": 530.87,
+      "RMSE": 2268.29,
+      "previsto_total": 6560720.0,
+      "real_total": 6438110.0,
+      "ano": 2024,
+      "modelo": "persistencia",
+      "topo5pct_cobertura": 0.898
+    },
+    {
+      "R2_log": 0.7635,
+      "R2": 0.4447,
+      "MAE": 700.84,
+      "RMSE": 2897.71,
+      "previsto_total": 6553276.0,
+      "real_total": 6438110.0,
+      "ano": 2024,
+      "modelo": "media_movel_4",
+      "topo5pct_cobertura": 0.808
+    },
+    {
+      "R2_log": 0.476,
+      "R2": 0.0741,
+      "MAE": 781.45,
+      "RMSE": 3741.87,
+      "previsto_total": 1822915.0,
+      "real_total": 6438110.0,
+      "ano": 2024,
+      "modelo": "sazonal",
+      "topo5pct_cobertura": 0.145
+    },
+    {
+      "R2_log": 0.8927,
+      "R2": 0.2832,
+      "MAE": 525.82,
+      "RMSE": 3292.43,
+      "previsto_total": 3094747.5675263703,
+      "real_total": 6438110.0,
+      "ano": 2024,
+      "modelo": "A_sinan_only",
+      "topo5pct_cobertura": 0.321
+    },
+    {
+      "R2_log": 0.9014,
+      "R2": 0.3177,
+      "MAE": 498.38,
+      "RMSE": 3212.18,
+      "previsto_total": 3428608.746305462,
+      "real_total": 6438110.0,
+      "ano": 2024,
+      "modelo": "A_inmet_enriquecido",
+      "topo5pct_cobertura": 0.366
+    },
+    {
+      "R2_log": 0.9125,
+      "R2": 0.3552,
+      "MAE": 489.26,
+      "RMSE": 3122.71,
+      "previsto_total": 3574188.109215662,
+      "real_total": 6438110.0,
+      "ano": 2024,
+      "modelo": "B_sinan_only",
+      "topo5pct_cobertura": 0.402
+    },
+    {
+      "R2_log": 0.918,
+      "R2": 0.3815,
+      "MAE": 464.71,
+      "RMSE": 3058.37,
+      "previsto_total": 3769626.963572353,
+      "real_total": 6438110.0,
+      "ano": 2024,
+      "modelo": "B_inmet_enriquecido",
+      "topo5pct_cobertura": 0.436
+    },
+    {
+      "R2_log": 0.8331,
+      "R2": 0.7138,
+      "MAE": 107.69,
+      "RMSE": 421.62,
+      "previsto_total": 1642300.0,
+      "real_total": 1545128.0,
+      "ano": 2025,
+      "modelo": "persistencia",
+      "topo5pct_cobertura": 0.984
+    },
+    {
+      "R2_log": 0.8024,
+      "R2": 0.5437,
+      "MAE": 137.06,
+      "RMSE": 532.39,
+      "previsto_total": 1659779.5,
+      "real_total": 1545128.0,
+      "ano": 2025,
+      "modelo": "media_movel_4",
+      "topo5pct_cobertura": 0.929
+    },
+    {
+      "R2_log": 0.2903,
+      "R2": -19.6847,
+      "MAE": 752.43,
+      "RMSE": 3584.33,
+      "previsto_total": 6493055.0,
+      "real_total": 1545128.0,
+      "ano": 2025,
+      "modelo": "sazonal",
+      "topo5pct_cobertura": 2.704
+    },
+    {
+      "R2_log": 0.8862,
+      "R2": 0.7336,
+      "MAE": 77.88,
+      "RMSE": 406.75,
+      "previsto_total": 1276955.8918987066,
+      "real_total": 1545128.0,
+      "ano": 2025,
+      "modelo": "A_sinan_only",
+      "topo5pct_cobertura": 0.731
+    },
+    {
+      "R2_log": 0.8908,
+      "R2": 0.7812,
+      "MAE": 76.33,
+      "RMSE": 368.61,
+      "previsto_total": 1410467.4975013025,
+      "real_total": 1545128.0,
+      "ano": 2025,
+      "modelo": "A_inmet_enriquecido",
+      "topo5pct_cobertura": 0.841
+    },
+    {
+      "R2_log": 0.89,
+      "R2": 0.8092,
+      "MAE": 72.96,
+      "RMSE": 344.21,
+      "previsto_total": 1360465.5999316052,
+      "real_total": 1545128.0,
+      "ano": 2025,
+      "modelo": "B_sinan_only",
+      "topo5pct_cobertura": 0.824
+    },
+    {
+      "R2_log": 0.9003,
+      "R2": 0.8206,
+      "MAE": 69.54,
+      "RMSE": 333.79,
+      "previsto_total": 1403876.555759021,
+      "real_total": 1545128.0,
+      "ano": 2025,
+      "modelo": "B_inmet_enriquecido",
+      "topo5pct_cobertura": 0.852
+    },
+    {
+      "R2_log": 0.5026,
+      "R2": 0.6147,
+      "MAE": 72.72,
+      "RMSE": 195.47,
+      "previsto_total": 180462.0,
+      "real_total": 222297.0,
+      "ano": 2026,
+      "modelo": "persistencia",
+      "topo5pct_cobertura": 0.722
+    },
+    {
+      "R2_log": 0.4942,
+      "R2": 0.5986,
+      "MAE": 77.75,
+      "RMSE": 199.52,
+      "previsto_total": 151497.75,
+      "real_total": 222297.0,
+      "ano": 2026,
+      "modelo": "media_movel_4",
+      "topo5pct_cobertura": 0.595
+    },
+    {
+      "R2_log": -0.2606,
+      "R2": -18.726,
+      "MAE": 481.93,
+      "RMSE": 1398.69,
+      "previsto_total": 906311.0,
+      "real_total": 222297.0,
+      "ano": 2026,
+      "modelo": "sazonal",
+      "topo5pct_cobertura": 2.081
+    },
+    {
+      "R2_log": 0.5453,
+      "R2": 0.7059,
+      "MAE": 65.11,
+      "RMSE": 170.78,
+      "previsto_total": 203325.641767025,
+      "real_total": 222297.0,
+      "ano": 2026,
+      "modelo": "A_sinan_only",
+      "topo5pct_cobertura": 0.717
+    },
+    {
+      "R2_log": 0.5277,
+      "R2": 0.6889,
+      "MAE": 67.74,
+      "RMSE": 175.64,
+      "previsto_total": 222411.2315286845,
+      "real_total": 222297.0,
+      "ano": 2026,
+      "modelo": "A_inmet_enriquecido",
+      "topo5pct_cobertura": 0.794
+    },
+    {
+      "R2_log": 0.5585,
+      "R2": 0.7374,
+      "MAE": 63.02,
+      "RMSE": 161.37,
+      "previsto_total": 209008.42356686294,
+      "real_total": 222297.0,
+      "ano": 2026,
+      "modelo": "B_sinan_only",
+      "topo5pct_cobertura": 0.79
+    },
+    {
+      "R2_log": 0.5701,
+      "R2": 0.7372,
+      "MAE": 62.19,
+      "RMSE": 161.44,
+      "previsto_total": 223379.19701045752,
+      "real_total": 222297.0,
+      "ano": 2026,
+      "modelo": "B_inmet_enriquecido",
+      "topo5pct_cobertura": 0.855
+    }
+  ],
+  "limiares_reproduzem_rotulo_B_pct": 100.0,
+  "momento": {
+    "persistencia": {
+      "n_temporadas_com_surto": 179,
+      "pico_erro_mediano_abs_semanas": 4.0,
+      "pico_erro_medio_semanas": 2.87,
+      "pico_dentro_2_semanas_pct": 3.9,
+      "pico_exato_pct": 1.1,
+      "entrada_risco_alto_n": 178,
+      "entrada_risco_alto_antecedencia_mediana": -1.0,
+      "entrada_risco_alto_no_prazo_ou_antes_pct": 46.1
+    },
+    "media_movel_4": {
+      "n_temporadas_com_surto": 179,
+      "pico_erro_mediano_abs_semanas": 6.0,
+      "pico_erro_medio_semanas": 4.14,
+      "pico_dentro_2_semanas_pct": 2.2,
+      "pico_exato_pct": 0.6,
+      "entrada_risco_alto_n": 178,
+      "entrada_risco_alto_antecedencia_mediana": -1.0,
+      "entrada_risco_alto_no_prazo_ou_antes_pct": 47.2
+    },
+    "sazonal": {
+      "n_temporadas_com_surto": 179,
+      "pico_erro_mediano_abs_semanas": 5.0,
+      "pico_erro_medio_semanas": 9.34,
+      "pico_dentro_2_semanas_pct": 30.7,
+      "pico_exato_pct": 9.5,
+      "entrada_risco_alto_n": 172,
+      "entrada_risco_alto_antecedencia_mediana": 0.0,
+      "entrada_risco_alto_no_prazo_ou_antes_pct": 67.4
+    },
+    "A_sinan_only": {
+      "n_temporadas_com_surto": 179,
+      "pico_erro_mediano_abs_semanas": 3.0,
+      "pico_erro_medio_semanas": 0.18,
+      "pico_dentro_2_semanas_pct": 39.1,
+      "pico_exato_pct": 8.9,
+      "entrada_risco_alto_n": 176,
+      "entrada_risco_alto_antecedencia_mediana": -1.0,
+      "entrada_risco_alto_no_prazo_ou_antes_pct": 35.8
+    },
+    "A_inmet_enriquecido": {
+      "n_temporadas_com_surto": 179,
+      "pico_erro_mediano_abs_semanas": 3.0,
+      "pico_erro_medio_semanas": -0.07,
+      "pico_dentro_2_semanas_pct": 38.5,
+      "pico_exato_pct": 8.4,
+      "entrada_risco_alto_n": 176,
+      "entrada_risco_alto_antecedencia_mediana": -1.0,
+      "entrada_risco_alto_no_prazo_ou_antes_pct": 36.4
+    },
+    "B_sinan_only": {
+      "n_temporadas_com_surto": 179,
+      "pico_erro_mediano_abs_semanas": 3.0,
+      "pico_erro_medio_semanas": -0.33,
+      "pico_dentro_2_semanas_pct": 44.1,
+      "pico_exato_pct": 9.5,
+      "entrada_risco_alto_n": 178,
+      "entrada_risco_alto_antecedencia_mediana": 0.0,
+      "entrada_risco_alto_no_prazo_ou_antes_pct": 71.3
+    },
+    "B_inmet_enriquecido": {
+      "n_temporadas_com_surto": 179,
+      "pico_erro_mediano_abs_semanas": 3.0,
+      "pico_erro_medio_semanas": -0.44,
+      "pico_dentro_2_semanas_pct": 48.6,
+      "pico_exato_pct": 12.8,
+      "entrada_risco_alto_n": 179,
+      "entrada_risco_alto_antecedencia_mediana": 0.0,
+      "entrada_risco_alto_no_prazo_ou_antes_pct": 73.2
+    }
+  },
+  "direcao": {
+    "A_sinan_only": {
+      "n_variacoes_relevantes": 10367,
+      "xgboost_acerto_pct": 78.2,
+      "tendencia_ingenua_acerto_pct": 55.5
+    },
+    "B_sinan_only": {
+      "n_variacoes_relevantes": 10367,
+      "xgboost_acerto_pct": 79.7,
+      "tendencia_ingenua_acerto_pct": 55.5
+    },
+    "B_inmet_enriquecido": {
+      "n_variacoes_relevantes": 10367,
+      "xgboost_acerto_pct": 82.0,
+      "tendencia_ingenua_acerto_pct": 55.5
+    }
+  },
+  "alertas_por_limiar": {
+    "persistencia": {
+      "F1_macro": 0.6503,
+      "F1_por_classe": [
+        0.7946,
+        0.5448,
+        0.4714,
+        0.7904
+      ]
+    },
+    "media_movel_4": {
+      "F1_macro": 0.6021,
+      "F1_por_classe": [
+        0.7683,
+        0.5057,
+        0.3961,
+        0.7381
+      ]
+    },
+    "sazonal": {
+      "F1_macro": 0.448,
+      "F1_por_classe": [
+        0.6652,
+        0.3469,
+        0.2526,
+        0.5273
+      ]
+    },
+    "A_sinan_only": {
+      "F1_macro": 0.4996,
+      "F1_por_classe": [
+        0.693,
+        0.3379,
+        0.2891,
+        0.6786
+      ]
+    },
+    "A_inmet_enriquecido": {
+      "F1_macro": 0.5179,
+      "F1_por_classe": [
+        0.7059,
+        0.3537,
+        0.3183,
+        0.6938
+      ]
+    },
+    "B_sinan_only": {
+      "F1_macro": 0.7044,
+      "F1_por_classe": [
+        0.8131,
+        0.5964,
+        0.5666,
+        0.8413
+      ]
+    },
+    "B_inmet_enriquecido": {
+      "F1_macro": 0.7171,
+      "F1_por_classe": [
+        0.8178,
+        0.614,
+        0.5865,
+        0.8503
+      ]
+    }
+  },
+  "blindness_B": {
+    "completo": {
+      "R2_log_sem_clima": 0.8821,
+      "R2_log_com_clima": 0.8895,
+      "delta": 0.0074,
+      "p_valor": 5.282275776942705e-32,
+      "R2_com_clima_escala_original": 0.41
+    },
+    "atraso_4w": {
+      "R2_log_sem_clima": 0.8788,
+      "R2_log_com_clima": 0.8857,
+      "delta": 0.0069,
+      "p_valor": 1.6959977762291264e-22,
+      "R2_com_clima_escala_original": 0.3655
+    },
+    "atraso_8w": {
+      "R2_log_sem_clima": 0.876,
+      "R2_log_com_clima": 0.882,
+      "delta": 0.006,
+      "p_valor": 1.31593799788655e-17,
+      "R2_com_clima_escala_original": 0.3929
+    },
+    "so_clima": {
+      "R2_log_sem_clima": -0.129,
+      "R2_log_com_clima": 0.3992,
+      "delta": 0.5282,
+      "p_valor": 0.0,
+      "R2_com_clima_escala_original": 0.021
+    }
+  },
+  "blindness_B_sementes": {
+    "completo": {
+      "sementes_1_2_3": [
+        0.8808,
+        0.8806,
+        0.8828
+      ],
+      "media": 0.8814
+    },
+    "atraso_4w": {
+      "sementes_1_2_3": [
+        0.8777,
+        0.8784,
+        0.8791
+      ],
+      "media": 0.8784
+    }
+  },
+  "distrito_federal": {
+    "semanas_teste": 117,
+    "metricas": {
+      "persistencia": {
+        "R2_log": 0.862,
+        "R2": 0.6438,
+        "MAE": 1194.67,
+        "RMSE": 3147.77,
+        "previsto_total": 289837.0,
+        "real_total": 254853.0
+      },
+      "A_sinan_only": {
+        "R2_log": 0.7722,
+        "R2": 0.4185,
+        "MAE": 1285.7,
+        "RMSE": 4021.58,
+        "previsto_total": 120722.68168258667,
+        "real_total": 254853.0
+      },
+      "B_sinan_only": {
+        "R2_log": 0.847,
+        "R2": 0.5291,
+        "MAE": 1177.5,
+        "RMSE": 3619.1,
+        "previsto_total": 146323.9903640747,
+        "real_total": 254853.0
+      },
+      "B_inmet_enriquecido": {
+        "R2_log": 0.855,
+        "R2": 0.6921,
+        "MAE": 981.23,
+        "RMSE": 2926.15,
+        "previsto_total": 201273.42058181763,
+        "real_total": 254853.0
+      }
+    },
+    "notificacoes_por_ano_semana_t": {
+      "2019": 44966.0,
+      "2020": 60364.0,
+      "2021": 22841.0,
+      "2022": 70027.0,
+      "2023": 40800.0,
+      "2024": 277232.0,
+      "2025": 10705.0,
+      "2026": 1900.0
+    }
+  },
+  "tempo_s": 1767.8
+}
