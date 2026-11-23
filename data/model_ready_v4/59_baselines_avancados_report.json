@@ -1,0 +1,156 @@
+{
+  "climatologia": {
+    "teste_agregado": {
+      "R2_log": 0.4306,
+      "R2": 0.0928,
+      "MAE": 458.8,
+      "RMSE": 2544.3
+    },
+    "teste_por_ano": {
+      "2024": {
+        "R2_log": 0.453,
+        "R2": 0.0701,
+        "MAE": 803.5,
+        "RMSE": 3750.0
+      },
+      "2025": {
+        "R2_log": 0.4702,
+        "R2": 0.2833,
+        "MAE": 173.0,
+        "RMSE": 667.2
+      },
+      "2026": {
+        "R2_log": -0.1916,
+        "R2": -1.1466,
+        "MAE": 226.9,
+        "RMSE": 461.4
+      }
+    }
+  },
+  "ridge_ar": {
+    "teste_agregado": {
+      "R2_log": 0.4556,
+      "R2": -9885.7491,
+      "MAE": 23947.0,
+      "RMSE": 265611.8
+    },
+    "teste_por_ano": {
+      "2024": {
+        "R2_log": 0.467,
+        "R2": -10146.8436,
+        "MAE": 51535.5,
+        "RMSE": 391735.6
+      },
+      "2025": {
+        "R2_log": 0.44,
+        "R2": -8339.3278,
+        "MAE": 2276.6,
+        "RMSE": 71973.9
+      },
+      "2026": {
+        "R2_log": 0.1975,
+        "R2": 0.1908,
+        "MAE": 108.4,
+        "RMSE": 283.3
+      }
+    },
+    "alpha": 1.0
+  },
+  "controle_regiao_semana": {
+    "teste_agregado": {
+      "R2_log": 0.2761,
+      "R2": 0.0003,
+      "MAE": 474.1,
+      "RMSE": 2670.9
+    },
+    "teste_por_ano": {
+      "2024": {
+        "R2_log": 0.1329,
+        "R2": -0.0214,
+        "MAE": 862.2,
+        "RMSE": 3930.2
+      },
+      "2025": {
+        "R2_log": 0.4178,
+        "R2": 0.0674,
+        "MAE": 179.1,
+        "RMSE": 761.1
+      },
+      "2026": {
+        "R2_log": 0.3422,
+        "R2": 0.3935,
+        "MAE": 95.7,
+        "RMSE": 245.2
+      }
+    }
+  },
+  "controle_regiao_semana_clima": {
+    "teste_agregado": {
+      "R2_log": 0.4409,
+      "R2": 0.0539,
+      "MAE": 447.9,
+      "RMSE": 2598.3
+    },
+    "teste_por_ano": {
+      "2024": {
+        "R2_log": 0.3988,
+        "R2": 0.0295,
+        "MAE": 817.2,
+        "RMSE": 3830.8
+      },
+      "2025": {
+        "R2_log": 0.5094,
+        "R2": 0.2106,
+        "MAE": 160.2,
+        "RMSE": 700.2
+      },
+      "2026": {
+        "R2_log": 0.171,
+        "R2": 0.3338,
+        "MAE": 118.6,
+        "RMSE": 257.0
+      }
+    }
+  },
+  "cobertura_climatica": {
+    "B_cobertura_alta_com_clima": {
+      "R2_log": 0.8867,
+      "R2": 0.4051,
+      "MAE": 249.6,
+      "RMSE": 2060.4,
+      "n_features": 203,
+      "n_train": 107271
+    },
+    "B_cobertura_alta_sem_clima": {
+      "R2_log": 0.8771,
+      "R2": 0.354,
+      "MAE": 267.3,
+      "RMSE": 2147.0,
+      "n_features": 47,
+      "n_train": 107271
+    },
+    "B_so_linhas_clima_com_clima": {
+      "R2_log": 0.8869,
+      "R2": 0.4284,
+      "MAE": 243.5,
+      "RMSE": 2019.6,
+      "n_features": 203,
+      "n_train": 114382
+    },
+    "B_so_linhas_clima_sem_clima": {
+      "R2_log": 0.8813,
+      "R2": 0.3803,
+      "MAE": 258.8,
+      "RMSE": 2102.8,
+      "n_features": 47,
+      "n_train": 114382
+    }
+  },
+  "interpretacao_so_clima": {
+    "R2_log_so_clima_script56": 0.3992,
+    "R2_log_controle_regiao_semana": 0.2761,
+    "R2_log_controle_regiao_semana_clima": 0.4409,
+    "conclusao": "Controle região+semana (0.2761) < só clima (0.3992): clima carrega sinal independente"
+  },
+  "tempo_total_s": 141.1
+}

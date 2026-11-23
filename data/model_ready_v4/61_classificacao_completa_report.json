@@ -1,0 +1,88 @@
+{
+  "classificacao": {
+    "persistencia": {
+      "F1_macro": 0.65,
+      "accuracy": 0.674,
+      "F1_por_classe": {
+        "baixo": 0.795,
+        "moderado": 0.545,
+        "alto": 0.471,
+        "surto": 0.79
+      }
+    },
+    "climatologia": {
+      "F1_macro": 0.385,
+      "accuracy": 0.386,
+      "F1_por_classe": {
+        "baixo": 0.489,
+        "moderado": 0.329,
+        "alto": 0.318,
+        "surto": 0.405
+      }
+    },
+    "regressao_realista": {
+      "F1_macro": 0.722,
+      "accuracy": 0.734,
+      "F1_por_classe": {
+        "baixo": 0.822,
+        "moderado": 0.629,
+        "alto": 0.589,
+        "surto": 0.848
+      }
+    },
+    "classificador_xgb_B": {
+      "F1_macro": 0.456,
+      "accuracy": 0.498,
+      "F1_por_classe": {
+        "baixo": 0.61,
+        "moderado": 0.306,
+        "alto": 0.289,
+        "surto": 0.617
+      }
+    }
+  },
+  "antecedencia": {
+    "n_temporadas": 384,
+    "n_surto": 384,
+    "modelo": {
+      "n_com_alerta": 332,
+      "mediana_semanas": 6.0,
+      "media_semanas": 8.8,
+      "p25": 4.0,
+      "p75": 10.0
+    },
+    "tendencia_observada": {
+      "n_com_alerta": 327,
+      "mediana_semanas": 7.0,
+      "media_semanas": 8.9
+    },
+    "nota_limitacao": "Definição de temporada com surto condiciona no desfecho observado. Documentar como limitação.",
+    "modelo_so_surtos": {
+      "n_com_alerta": 332,
+      "mediana_semanas": 6.0
+    }
+  },
+  "classificacao_sem_2026": {
+    "persistencia": {
+      "F1_macro": 0.66,
+      "accuracy": 0.688,
+      "F1_por_classe": {
+        "baixo": 0.805,
+        "moderado": 0.551,
+        "alto": 0.478,
+        "surto": 0.806
+      }
+    },
+    "regressao_realista": {
+      "F1_macro": 0.732,
+      "accuracy": 0.748,
+      "F1_por_classe": {
+        "baixo": 0.832,
+        "moderado": 0.637,
+        "alto": 0.598,
+        "surto": 0.864
+      }
+    }
+  },
+  "tempo_total_s": 38.7
+}
