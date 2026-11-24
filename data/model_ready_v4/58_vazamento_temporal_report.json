@@ -895,9 +895,12 @@
     }
   },
   "comparacao": {
-    "delta_R2_log_completo_vs_realista": 0.0005,
+    "delta_puro": 0.003,
+    "delta_puro_descricao": "completo (0.8891) vs realista_sem_notif_t (0.8861): Delta = 0.003. Este é o efeito real de remover as 61 features delayed.",
+    "delta_com_notificacoes": 0.0005,
+    "delta_com_notificacoes_descricao": "completo (0.8891) vs realista (0.8886): Delta = 0.0005. A adição de notificacoes_t compensa parte da perda das 61 features delayed.",
     "decisao": "marginal",
-    "descricao": "Queda de 0.0005 R²_log — vazamento é marginal. Reportar como limitação, manter completo como referência."
+    "descricao": "Queda de 0.003 R²_log ao remover as 61 features delayed (comparação pura). O Delta menor de 0.0005 no modelo realista deve-se à adição simultânea de notificacoes_t. Ambos os deltas são marginais."
   },
   "persistencia": {
     "teste_agregado": {

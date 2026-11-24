@@ -93,9 +93,9 @@ def predict(model, df, features):
     return np.expm1(np.maximum(pred_log, 0))
 
 
-def mase_per_mesoregion(test, pred, train):
-    """MASE por mesorregião: MAE_modelo / MAE_naive (naive = média do treino por mesorregião)."""
-    print("\n--- MASE por mesorregião ---")
+def mase_per_mesoregion_media(test, pred, train):
+    """MASE por mesorregião: MAE_modelo / MAE_media_treino."""
+    print("\n--- MASE vs média do treino (por mesorregião) ---")
     test_c = test.copy()
     test_c["pred"] = pred
 
@@ -127,27 +127,51 @@ def mase_per_mesoregion(test, pred, train):
         "pct_abaixo_1": round(float(np.mean(np.array(mase_vals) < 1.0) * 100), 1),
         "n_mesorregiao": len(mase_vals),
     }
-    print(f"  Mediana MASE={summary['mediana']} | {summary['pct_abaixo_1']}% abaixo de 1")
+    print(f"  Mediana MASE_media={summary['mediana']} | {summary['pct_abaixo_1']}% abaixo de 1")
     return results, summary
 
 
-def mase_per_mesoregion_persistence(test):
-    """MASE usando persistência (notificacoes semana t) como naive."""
-    print("\n--- MASE persistência por mesorregião ---")
+def mase_vs_persistencia(test, pred):
+    """MASE por mesorregião: MAE_modelo / MAE_persistência (denominador = persistência)."""
+    print("\n--- MASE vs persistência (por mesorregião) ---")
+    test_c = test.copy()
+    test_c["pred"] = pred
+
     results = {}
-    for meso, g in test.groupby("cod_mesorregiao"):
+    acima_1 = []
+    for meso, g in test_c.groupby("cod_mesorregiao"):
         y = g[TARGET].values
+        p = g["pred"].values
         p_pers = g["notificacoes"].values
+
+        mae_model = np.mean(np.abs(y - p))
         mae_pers = np.mean(np.abs(y - p_pers))
 
-        naive_mean = np.mean(y)
-        mae_naive = np.mean(np.abs(y - naive_mean))
-        mase = mae_pers / mae_naive if mae_naive > 0 else np.nan
-        results[int(meso)] = round(float(mase), 3) if not np.isnan(mase) else None
+        mase = mae_model / mae_pers if mae_pers > 0 else np.nan
+        results[int(meso)] = {
+            "MASE_vs_pers": round(float(mase), 3) if not np.isnan(mase) else None,
+            "MAE_modelo": round(float(mae_model), 1),
+            "MAE_persistencia": round(float(mae_pers), 1),
+            "n_obs": len(g),
+        }
+        if not np.isnan(mase) and mase >= 1.0:
+            acima_1.append(int(meso))
 
-    vals = [v for v in results.values() if v is not None]
-    print(f"  Mediana MASE persistência={np.median(vals):.3f}")
-    return results
+    mase_vals = [v["MASE_vs_pers"] for v in results.values() if v["MASE_vs_pers"] is not None]
+    summary = {
+        "mediana": round(float(np.median(mase_vals)), 3),
+        "media": round(float(np.mean(mase_vals)), 3),
+        "p25": round(float(np.percentile(mase_vals, 25)), 3),
+        "p75": round(float(np.percentile(mase_vals, 75)), 3),
+        "pct_abaixo_1": round(float(np.mean(np.array(mase_vals) < 1.0) * 100), 1),
+        "n_abaixo_1": int(np.sum(np.array(mase_vals) < 1.0)),
+        "n_mesorregiao": len(mase_vals),
+        "meso_acima_1": acima_1,
+    }
+    print(f"  Mediana MASE_pers={summary['mediana']} | {summary['n_abaixo_1']}/{summary['n_mesorregiao']} abaixo de 1 ({summary['pct_abaixo_1']}%)")
+    if acima_1:
+        print(f"  Mesorregiões com MASE_pers >= 1: {acima_1}")
+    return results, summary
 
 
 def diebold_mariano(test, pred_model, pred_baseline, h=4):
@@ -312,12 +336,11 @@ def main():
     report = {"realista_global": m_global}
 
     # US-007: MASE por mesorregião
-    mase_detail, mase_summary = mase_per_mesoregion(test, pred, train)
-    mase_pers = mase_per_mesoregion_persistence(test)
+    mase_media_detail, mase_media_summary = mase_per_mesoregion_media(test, pred, train)
+    mase_pers_detail, mase_pers_summary = mase_vs_persistencia(test, pred)
     report["mase"] = {
-        "summary": mase_summary,
-        "persistencia_mediana": round(float(np.median([v for v in mase_pers.values() if v is not None])), 3),
-        "por_mesorregiao": mase_detail,
+        "vs_persistencia": {"summary": mase_pers_summary, "por_mesorregiao": mase_pers_detail},
+        "vs_media_treino": {"summary": mase_media_summary, "por_mesorregiao": mase_media_detail},
     }
 
     # US-008: Diebold-Mariano

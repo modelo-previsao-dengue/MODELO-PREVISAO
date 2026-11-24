@@ -1,0 +1,41 @@
+{
+  "com_clima": {
+    "R2_log": 0.8886,
+    "n_features": 203
+  },
+  "sem_clima": {
+    "R2_log": 0.8806,
+    "n_features": 47
+  },
+  "delta_R2_log": 0.008,
+  "dm_pointwise": {
+    "DM_stat": 7.9095,
+    "p_value": 2.6645352591003757e-15,
+    "p_value_str": "0.0000",
+    "d_bar": 0.032231,
+    "h": 4,
+    "n": 16029,
+    "A_melhor": true
+  },
+  "dm_weekly_aggregate": {
+    "DM_stat": 3.8522,
+    "p_value": 0.00011705804330119918,
+    "p_value_str": "0.0001",
+    "n_semanas": 117,
+    "A_melhor": true
+  },
+  "bootstrap_blocos": {
+    "n_boot": 5000,
+    "n_blocks": 411,
+    "delta_R2_log": {
+      "mean": 0.008,
+      "median": 0.008,
+      "ci_95": [
+        0.006,
+        0.0101
+      ],
+      "pct_positivo": 100.0
+    }
+  },
+  "tempo_total_s": 491.2
+}

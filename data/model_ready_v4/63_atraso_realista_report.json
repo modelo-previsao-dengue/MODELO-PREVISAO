@@ -1,0 +1,71 @@
+{
+  "completo_realista": {
+    "com_clima": {
+      "R2_log": 0.8886,
+      "R2": 0.3947,
+      "MAE": 250.1,
+      "RMSE": 2078.3,
+      "n_features": 203
+    },
+    "sem_clima": {
+      "R2_log": 0.8806,
+      "R2": 0.3616,
+      "MAE": 262.8,
+      "RMSE": 2134.3,
+      "n_features": 47
+    },
+    "delta_clima": 0.008
+  },
+  "atraso_4w": {
+    "com_clima": {
+      "R2_log": 0.8842,
+      "R2": 0.3665,
+      "MAE": 262.5,
+      "RMSE": 2126.2,
+      "n_features": 196
+    },
+    "sem_clima": {
+      "R2_log": 0.8764,
+      "R2": 0.336,
+      "MAE": 272.5,
+      "RMSE": 2176.8,
+      "n_features": 40
+    },
+    "delta_clima": 0.0078
+  },
+  "atraso_8w": {
+    "com_clima": {
+      "R2_log": 0.8811,
+      "R2": 0.3583,
+      "MAE": 263.6,
+      "RMSE": 2139.8,
+      "n_features": 191
+    },
+    "sem_clima": {
+      "R2_log": 0.8738,
+      "R2": 0.3485,
+      "MAE": 268.3,
+      "RMSE": 2156.1,
+      "n_features": 35
+    },
+    "delta_clima": 0.0073
+  },
+  "so_clima": {
+    "com_clima": {
+      "R2_log": 0.412,
+      "R2": 0.0251,
+      "MAE": 459.0,
+      "RMSE": 2637.5,
+      "n_features": 158
+    },
+    "sem_clima": {
+      "R2_log": 0.0495,
+      "R2": -0.0299,
+      "MAE": 495.1,
+      "RMSE": 2710.9,
+      "n_features": 2
+    },
+    "delta_clima": 0.3625
+  },
+  "tempo_total_s": 263.4
+}

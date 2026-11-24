@@ -29,32 +29,32 @@
   },
   "ridge_ar": {
     "teste_agregado": {
-      "R2_log": 0.4556,
-      "R2": -9885.7491,
-      "MAE": 23947.0,
-      "RMSE": 265611.8
+      "R2_log": 0.8622,
+      "R2": 0.7879,
+      "MAE": 200.5,
+      "RMSE": 1230.3
     },
     "teste_por_ano": {
       "2024": {
-        "R2_log": 0.467,
-        "R2": -10146.8436,
-        "MAE": 51535.5,
-        "RMSE": 391735.6
+        "R2_log": 0.8851,
+        "R2": 0.7812,
+        "MAE": 361.8,
+        "RMSE": 1819.1
       },
       "2025": {
-        "R2_log": 0.44,
-        "R2": -8339.3278,
-        "MAE": 2276.6,
-        "RMSE": 71973.9
+        "R2_log": 0.8758,
+        "R2": 0.8586,
+        "MAE": 73.2,
+        "RMSE": 296.4
       },
       "2026": {
-        "R2_log": 0.1975,
-        "R2": 0.1908,
-        "MAE": 108.4,
-        "RMSE": 283.3
+        "R2_log": 0.5594,
+        "R2": 0.6924,
+        "MAE": 63.8,
+        "RMSE": 174.7
       }
     },
-    "alpha": 1.0
+    "alpha": 1000.0
   },
   "controle_regiao_semana": {
     "teste_agregado": {
@@ -152,5 +152,5 @@
     "R2_log_controle_regiao_semana_clima": 0.4409,
     "conclusao": "Controle região+semana (0.2761) < só clima (0.3992): clima carrega sinal independente"
   },
-  "tempo_total_s": 141.1
+  "tempo_total_s": 158.9
 }

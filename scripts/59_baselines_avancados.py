@@ -15,7 +15,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import xgboost as xgb
-from sklearn.linear_model import RidgeCV
+from sklearn.linear_model import Ridge
+from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -106,24 +107,42 @@ def climatologia(train, test):
 
 
 def ridge_ar(train, val, test, features):
-    """Ridge autorregressivo com features realistas em log1p."""
-    print("\n--- Ridge autorregressivo ---")
+    """Ridge autorregressivo com log1p nas contagens, StandardScaler e alpha no val temporal."""
+    print("\n--- Ridge autorregressivo (corrigido) ---")
     available = [f for f in features if f in train.columns]
-    print(f"  {len(available)} features")
+    count_cols = [i for i, f in enumerate(available) if f.startswith("notificacoes")]
+    print(f"  {len(available)} features ({len(count_cols)} contagens com log1p)")
 
-    X_train = train[available].fillna(0).values
+    X_train = train[available].fillna(0).values.copy()
     y_train = np.log1p(train[TARGET].values)
-    X_val = val[available].fillna(0).values
+    X_val = val[available].fillna(0).values.copy()
     y_val = np.log1p(val[TARGET].values)
-    X_test = test[available].fillna(0).values
+    X_test = test[available].fillna(0).values.copy()
 
-    model = RidgeCV(alphas=[0.01, 0.1, 1.0, 10.0, 100.0], cv=5)
+    for col_idx in count_cols:
+        X_train[:, col_idx] = np.log1p(np.maximum(X_train[:, col_idx], 0))
+        X_val[:, col_idx] = np.log1p(np.maximum(X_val[:, col_idx], 0))
+        X_test[:, col_idx] = np.log1p(np.maximum(X_test[:, col_idx], 0))
+
+    scaler = StandardScaler()
+    X_train = scaler.fit_transform(X_train)
+    X_val = scaler.transform(X_val)
+    X_test = scaler.transform(X_test)
+
+    alphas = [0.01, 0.1, 1.0, 10.0, 100.0, 1000.0]
+    best_alpha, best_r2_val = None, -np.inf
+    for alpha in alphas:
+        model = Ridge(alpha=alpha)
+        model.fit(X_train, y_train)
+        pred_val = model.predict(X_val)
+        r2_val = r2_score(y_val, pred_val)
+        print(f"    alpha={alpha}: R²_log val={r2_val:.4f}")
+        if r2_val > best_r2_val:
+            best_alpha, best_r2_val = alpha, r2_val
+
+    print(f"  Melhor alpha: {best_alpha} (R²_log val={best_r2_val:.4f})")
+    model = Ridge(alpha=best_alpha)
     model.fit(X_train, y_train)
-    print(f"  alpha escolhido: {model.alpha_}")
-
-    val_pred_log = model.predict(X_val)
-    val_r2 = r2_score(y_val, val_pred_log)
-    print(f"  R²_log validação: {val_r2:.4f}")
 
     pred_log = model.predict(X_test)
     pred_log = np.clip(pred_log, 0, 15)
@@ -132,7 +151,7 @@ def ridge_ar(train, val, test, features):
     m = metrics(test[TARGET].values, pred_raw)
     m_year = metrics_by_year(test, pred_raw)
     print(f"  R²_log={m['R2_log']} | R²={m['R2']} | MAE={m['MAE']}")
-    return pred_raw, m, m_year, model.alpha_
+    return pred_raw, m, m_year, best_alpha
 
 
 def controle_regiao_semana(train, val, test, include_clima=False):

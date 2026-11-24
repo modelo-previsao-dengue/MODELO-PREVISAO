@@ -60,7 +60,8 @@
     "modelo_so_surtos": {
       "n_com_alerta": 332,
       "mediana_semanas": 6.0
-    }
+    },
+    "interpretacao": "A tendência observada (mediana 7 semanas) detecta a subida antes do modelo (mediana 6 semanas). A antecedência do modelo NÃO é superior à da tendência observada nos dados históricos. Contudo, a tendência observada depende de dados da semana t que podem não estar consolidados em tempo real, enquanto o modelo usa apenas features disponíveis em tempo real (conjunto realista)."
   },
   "classificacao_sem_2026": {
     "persistencia": {
