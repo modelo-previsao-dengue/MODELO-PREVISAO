@@ -18,37 +18,37 @@
   },
   "atraso_4w": {
     "com_clima": {
-      "R2_log": 0.8842,
-      "R2": 0.3665,
-      "MAE": 262.5,
-      "RMSE": 2126.2,
-      "n_features": 196
+      "R2_log": 0.8529,
+      "R2": 0.2383,
+      "MAE": 328.1,
+      "RMSE": 2331.4,
+      "n_features": 195
     },
     "sem_clima": {
-      "R2_log": 0.8764,
-      "R2": 0.336,
-      "MAE": 272.5,
-      "RMSE": 2176.8,
-      "n_features": 40
+      "R2_log": 0.8452,
+      "R2": 0.2113,
+      "MAE": 336.4,
+      "RMSE": 2372.3,
+      "n_features": 39
     },
-    "delta_clima": 0.0078
+    "delta_clima": 0.0077
   },
   "atraso_8w": {
     "com_clima": {
-      "R2_log": 0.8811,
-      "R2": 0.3583,
-      "MAE": 263.6,
-      "RMSE": 2139.8,
-      "n_features": 191
+      "R2_log": 0.8261,
+      "R2": 0.1166,
+      "MAE": 370.9,
+      "RMSE": 2510.7,
+      "n_features": 190
     },
     "sem_clima": {
-      "R2_log": 0.8738,
-      "R2": 0.3485,
-      "MAE": 268.3,
-      "RMSE": 2156.1,
-      "n_features": 35
+      "R2_log": 0.8277,
+      "R2": 0.1163,
+      "MAE": 366.2,
+      "RMSE": 2511.1,
+      "n_features": 34
     },
-    "delta_clima": 0.0073
+    "delta_clima": -0.0016
   },
   "so_clima": {
     "com_clima": {
@@ -67,5 +67,5 @@
     },
     "delta_clima": 0.3625
   },
-  "tempo_total_s": 263.4
+  "tempo_total_s": 322.3
 }

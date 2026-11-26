@@ -33,6 +33,7 @@ TARGET = "notificacoes_t4"
 CLIMA_PREFIXES = ("rain_", "temp_", "humidity_", "pressure_", "wind_", "radiation_")
 
 BLIND_4W = [
+    "notificacoes",
     "notificacoes_lag_1w", "notificacoes_lag_2w", "notificacoes_lag_3w", "notificacoes_lag_4w",
     "notificacoes_diff_1w", "notificacoes_pct_change_1w", "notificacoes_media_movel_2_4w",
 ]
